@@ -14,16 +14,25 @@ const AnonymousForm = () => {
     setLoading(true);
 
     try {
+      // Generate random ID if needed
+      const generateId = () => {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let result = "";
+        for (let i = 0; i < 8; i++) {
+          result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+      };
+
+      const anonId = localStorage.getItem("anonId") || generateId();
+
       await axios.post("/api/consultations", {
         message,
         dropPoint,
-        anonId: localStorage.getItem("anonId") || crypto.randomUUID(),
+        anonId,
       });
 
-      localStorage.setItem(
-        "anonId",
-        localStorage.getItem("anonId") || crypto.randomUUID()
-      );
+      localStorage.setItem("anonId", anonId);
       setSubmitted(true);
     } catch (err) {
       alert("Submission failed. Please try again.");

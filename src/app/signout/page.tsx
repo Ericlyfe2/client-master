@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
+import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 
 export default function SignOutPage() {
   const [isLoggingOut, setIsLoggingOut] = useState(true);
@@ -32,7 +33,7 @@ export default function SignOutPage() {
   }, [logout, router]);
 
   return (
-    <AuthWrapper requireAuth={false}>
+    <ProtectedRoute>
       <div className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 flex items-center justify-center p-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -149,5 +150,6 @@ export default function SignOutPage() {
           )}
         </motion.div>
       </div>
-    );
-  }
+    </ProtectedRoute>
+  );
+}

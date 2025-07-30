@@ -1,5 +1,5 @@
 import { prisma } from "./prisma";
-import { ConsultationStatus } from "@prisma/client";
+import { ConsultationStatus } from "./prisma-client";
 
 export interface CreateConsultationData {
   userId: string;

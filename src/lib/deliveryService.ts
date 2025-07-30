@@ -1,5 +1,5 @@
 import { prisma } from "./prisma";
-import { DeliveryStatus } from "@prisma/client";
+import { DeliveryStatus } from "./prisma-client";
 
 export interface CreateDeliveryData {
   userId: string;

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/lib/prisma-client";
 
 const prisma = new PrismaClient();
 
@@ -7,15 +7,8 @@ const prisma = new PrismaClient();
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const {
-      type,
-      description,
-      symptoms,
-      medications,
-      allergies,
-      age,
-      gender,
-    } = body;
+    const { type, description, symptoms, medications, allergies, age, gender } =
+      body;
 
     // Validate required fields
     if (!type || !description) {
@@ -112,18 +105,12 @@ export async function GET(request: NextRequest) {
     });
 
     if (!session) {
-      return NextResponse.json(
-        { error: "Session not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Session not found" }, { status: 404 });
     }
 
     // Check if session is expired
     if (session.expiresAt < new Date()) {
-      return NextResponse.json(
-        { error: "Session expired" },
-        { status: 410 }
-      );
+      return NextResponse.json({ error: "Session expired" }, { status: 410 });
     }
 
     return NextResponse.json({

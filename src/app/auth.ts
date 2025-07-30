@@ -4,7 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import { signInSchema } from "@/app/lib/zod";
 import { verifyPassword } from "@/utils/password";
 import { getUserByUsername } from "@/utils/db";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/lib/prisma-client";
 
 const prisma = new PrismaClient();
 

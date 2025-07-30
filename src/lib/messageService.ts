@@ -1,5 +1,5 @@
 import { prisma } from "./prisma";
-import { MessageType } from "@prisma/client";
+import { MessageType } from "./prisma-client";
 
 export interface CreateMessageData {
   chatId: string;

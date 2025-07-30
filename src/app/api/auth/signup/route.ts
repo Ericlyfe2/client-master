@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { hashPassword } from "@/utils/password";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/lib/prisma-client";
 
 const prisma = new PrismaClient();
 

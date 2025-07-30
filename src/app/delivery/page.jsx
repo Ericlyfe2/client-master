@@ -23,7 +23,13 @@ export default function DeliveryPage() {
     // Get anonymous ID from localStorage
     let id = localStorage.getItem("anonId");
     if (!id) {
-      id = crypto.randomUUID();
+      // Generate random ID
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let result = "";
+      for (let i = 0; i < 8; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      id = result;
       localStorage.setItem("anonId", id);
     }
     setAnonId(id);

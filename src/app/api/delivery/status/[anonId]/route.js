@@ -36,7 +36,8 @@ export async function GET(request, { params }) {
         Date.now() + 2 * 60 * 60 * 1000
       ).toISOString(),
     });
-  } catch (_error: unknown) {
+  } catch (error) {
+    console.error("Delivery status error:", error);
     return NextResponse.json(
       { error: "Failed to fetch delivery status" },
       { status: 500 }

@@ -80,7 +80,7 @@ export const updateDeliveryStatus = async (anonId, status) => {
   }
 };
 
-export const getDeliveryHistory = async (anonId: string) => {
+export const getDeliveryHistory = async (anonId) => {
   try {
     await simulateApiDelay();
 
@@ -126,10 +126,20 @@ export const createDeliveryOrder = async (orderData) => {
     // const response = await axios.post('/api/delivery/orders', orderData);
     // return response.data;
 
+    // Generate random IDs
+    const generateId = (length) => {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    };
+
     return {
       success: true,
-      orderId: `SM-${crypto.randomUUID().slice(0, 8).toUpperCase()}`,
-      trackingCode: `TRK-${crypto.randomUUID().slice(0, 6).toUpperCase()}`,
+      orderId: `SM-${generateId(8)}`,
+      trackingCode: `TRK-${generateId(6)}`,
       estimatedDelivery: new Date(Date.now() + 2 * 60 * 60 * 1000),
     };
   } catch (error) {

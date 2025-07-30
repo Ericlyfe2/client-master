@@ -21,7 +21,7 @@ const mockDeliveryData = {
 const simulateApiDelay = () =>
   new Promise((resolve) => setTimeout(resolve, 1000 + Math.random() * 2000));
 
-export const getDeliveryStatus = async (_anonId: string) => {
+export const getDeliveryStatus = async (anonId) => {
   try {
     const response = await axios.get(`/api/delivery/status/${anonId}`);
     return response.data.status;
@@ -48,7 +48,7 @@ export const getDeliveryStatus = async (_anonId: string) => {
   }
 };
 
-export const getDeliveryLocation = async (anonId: string) => {
+export const getDeliveryLocation = async (anonId) => {
   try {
     const response = await axios.get(`/api/delivery/location/${anonId}`);
     return response.data.location;
@@ -65,7 +65,7 @@ export const getDeliveryLocation = async (anonId: string) => {
   }
 };
 
-export const updateDeliveryStatus = async (anonId: string, status: string) => {
+export const updateDeliveryStatus = async (anonId, status) => {
   try {
     await simulateApiDelay();
 
@@ -115,7 +115,7 @@ export const getDeliveryHistory = async (anonId: string) => {
   }
 };
 
-export const createDeliveryOrder = async (_orderData: unknown) => {
+export const createDeliveryOrder = async (orderData) => {
   try {
     await simulateApiDelay();
 

@@ -5,13 +5,28 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 
 const {
+  PrismaClientKnownRequestError,
+  PrismaClientUnknownRequestError,
+  PrismaClientRustPanicError,
+  PrismaClientInitializationError,
+  PrismaClientValidationError,
+  getPrismaClient,
+  sqltag,
+  empty,
+  join,
+  raw,
+  skip,
   Decimal,
+  Debug,
   objectEnumValues,
   makeStrictEnum,
+  Extensions,
+  warnOnce,
+  defineDmmfProperty,
   Public,
   getRuntime,
-  skip
-} = require('./runtime/index-browser.js')
+  createParam,
+} = require('./runtime/wasm-engine-edge.js')
 
 
 const Prisma = {}
@@ -20,79 +35,35 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.12.0
- * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
+ * Prisma Client JS version: 6.16.1
+ * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
  */
 Prisma.prismaVersion = {
-  client: "6.12.0",
-  engine: "8047c96bbd92db98a2abc7c9323ce77c02c89dbc"
+  client: "6.16.1",
+  engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
 }
 
-Prisma.PrismaClientKnownRequestError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientKnownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)};
-Prisma.PrismaClientUnknownRequestError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientUnknownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.PrismaClientRustPanicError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientRustPanicError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.PrismaClientInitializationError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientInitializationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.PrismaClientValidationError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientValidationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
+Prisma.PrismaClientUnknownRequestError = PrismaClientUnknownRequestError
+Prisma.PrismaClientRustPanicError = PrismaClientRustPanicError
+Prisma.PrismaClientInitializationError = PrismaClientInitializationError
+Prisma.PrismaClientValidationError = PrismaClientValidationError
 Prisma.Decimal = Decimal
 
 /**
  * Re-export of sql-template-tag
  */
-Prisma.sql = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`sqltag is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.empty = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`empty is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.join = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`join is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.raw = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`raw is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+Prisma.sql = sqltag
+Prisma.empty = empty
+Prisma.join = join
+Prisma.raw = raw
 Prisma.validator = Public.validator
 
 /**
 * Extensions
 */
-Prisma.getExtensionContext = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`Extensions.getExtensionContext is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.defineExtension = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`Extensions.defineExtension is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+Prisma.getExtensionContext = Extensions.getExtensionContext
+Prisma.defineExtension = Extensions.defineExtension
 
 /**
  * Shorthand utilities for JSON filtering
@@ -109,10 +80,11 @@ Prisma.NullTypes = {
 
 
 
+
+
 /**
  * Enums
  */
-
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
@@ -489,34 +461,75 @@ exports.Prisma.ModelName = {
   Shift: 'Shift',
   TimeOffRequest: 'TimeOffRequest'
 };
-
 /**
- * This is a stub Prisma Client that will error at runtime if called.
+ * Create the Client
  */
-class PrismaClient {
-  constructor() {
-    return new Proxy(this, {
-      get(target, prop) {
-        let message
-        const runtime = getRuntime()
-        if (runtime.isEdge) {
-          message = `PrismaClient is not configured to run in ${runtime.prettyName}. In order to run Prisma Client on edge runtime, either:
-- Use Prisma Accelerate: https://pris.ly/d/accelerate
-- Use Driver Adapters: https://pris.ly/d/driver-adapters
-`;
-        } else {
-          message = 'PrismaClient is unable to run in this browser environment, or has been bundled for the browser (running in `' + runtime.prettyName + '`).'
-        }
-
-        message += `
-If this is unexpected, please open an issue: https://pris.ly/prisma-prisma-bug-report`
-
-        throw new Error(message)
+const config = {
+  "generator": {
+    "name": "client",
+    "provider": {
+      "fromEnvVar": null,
+      "value": "prisma-client-js"
+    },
+    "output": {
+      "value": "C:\\Users\\Eric-SMITH-ASANTE\\Documents\\GitHub\\client-master\\src\\lib\\prisma-client",
+      "fromEnvVar": null
+    },
+    "config": {
+      "engineType": "library"
+    },
+    "binaryTargets": [
+      {
+        "fromEnvVar": null,
+        "value": "windows",
+        "native": true
       }
-    })
+    ],
+    "previewFeatures": [],
+    "sourceFilePath": "C:\\Users\\Eric-SMITH-ASANTE\\Documents\\GitHub\\client-master\\prisma\\schema.prisma",
+    "isCustomOutput": true
+  },
+  "relativeEnvPaths": {
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../../.env"
+  },
+  "relativePath": "../../../prisma",
+  "clientVersion": "6.16.1",
+  "engineVersion": "1c57fdcd7e44b29b9313256c76699e91c3ac3c43",
+  "datasourceNames": [
+    "db"
+  ],
+  "activeProvider": "postgresql",
+  "inlineDatasources": {
+    "db": {
+      "url": {
+        "fromEnvVar": "DATABASE_URL",
+        "value": null
+      }
+    }
+  },
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/lib/prisma-client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id            String   @id @default(cuid())\n  username      String   @unique\n  email         String   @unique\n  passwordHash  String\n  firstName     String\n  lastName      String\n  role          UserRole\n  organization  String?\n  pharmacyName  String?\n  licenseNumber String?\n  phone         String?\n  address       String?\n  city          String?\n  state         String?\n  zipCode       String?\n  isVerified    Boolean  @default(false)\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n\n  // Relations\n  consultations         Consultation[]\n  assignedConsultations Consultation[]  @relation(\"PharmacistConsultations\")\n  messages              Message[]\n  deliveries            Delivery[]\n  prescriptions         Prescription[]\n  orders                Order[]\n  inventoryItems        InventoryItem[]\n  settings              UserSettings?\n  staff                 Staff?\n\n  @@map(\"users\")\n}\n\nmodel Consultation {\n  id                   String             @id @default(cuid())\n  userId               String?\n  anonymousId          String? // For anonymous consultations\n  type                 String\n  status               ConsultationStatus @default(PENDING)\n  description          String?\n  symptoms             String?\n  medications          String?\n  allergies            String?\n  age                  Int?\n  gender               String?\n  isAnonymous          Boolean            @default(false)\n  assignedPharmacistId String?\n  assignedStaffId      String?\n  createdAt            DateTime           @default(now())\n  updatedAt            DateTime           @updatedAt\n\n  // Relations\n  user               User?          @relation(fields: [userId], references: [id], onDelete: Cascade)\n  assignedPharmacist User?          @relation(\"PharmacistConsultations\", fields: [assignedPharmacistId], references: [id])\n  assignedStaff      Staff?         @relation(\"StaffConsultations\", fields: [assignedStaffId], references: [id])\n  messages           Message[]\n  prescriptions      Prescription[]\n\n  @@map(\"consultations\")\n}\n\nmodel Message {\n  id               String      @id @default(cuid())\n  chatId           String\n  userId           String?\n  anonymousId      String?\n  content          String\n  type             MessageType @default(TEXT)\n  isFromPharmacist Boolean     @default(false)\n  createdAt        DateTime    @default(now())\n\n  // Relations\n  user         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)\n  consultation Consultation? @relation(fields: [chatId], references: [id], onDelete: Cascade)\n\n  @@map(\"messages\")\n}\n\nmodel Delivery {\n  id                String         @id @default(cuid())\n  userId            String?\n  anonymousId       String?\n  orderId           String?        @unique\n  status            DeliveryStatus @default(ORDER_CONFIRMED)\n  trackingNumber    String         @unique\n  estimatedDelivery DateTime?\n  actualDelivery    DateTime?\n  address           String\n  city              String\n  state             String\n  zipCode           String\n  dropPoint         String?\n  packageType       String         @default(\"DISCREET\")\n  isAnonymous       Boolean        @default(false)\n  createdAt         DateTime       @default(now())\n  updatedAt         DateTime       @updatedAt\n\n  // Relations\n  user  User?  @relation(fields: [userId], references: [id], onDelete: Cascade)\n  order Order? @relation(fields: [orderId], references: [id])\n\n  @@map(\"deliveries\")\n}\n\nmodel Medication {\n  id                String   @id @default(cuid())\n  name              String\n  genericName       String?\n  description       String?\n  dosageForm        String\n  strength          String\n  manufacturer      String\n  isPrescription    Boolean  @default(true)\n  isControlled      Boolean  @default(false)\n  requiresLicense   Boolean  @default(false)\n  sideEffects       String?\n  interactions      String?\n  contraindications String?\n  price             Decimal  @db.Decimal(10, 2)\n  isActive          Boolean  @default(true)\n  createdAt         DateTime @default(now())\n  updatedAt         DateTime @updatedAt\n\n  // Relations\n  inventoryItems InventoryItem[]\n  prescriptions  Prescription[]\n\n  @@map(\"medications\")\n}\n\nmodel InventoryItem {\n  id             String    @id @default(cuid())\n  medicationId   String\n  pharmacyId     String\n  quantity       Int\n  minQuantity    Int       @default(10)\n  maxQuantity    Int       @default(1000)\n  lotNumber      String?\n  expirationDate DateTime?\n  location       String?\n  isActive       Boolean   @default(true)\n  createdAt      DateTime  @default(now())\n  updatedAt      DateTime  @updatedAt\n\n  // Relations\n  medication Medication @relation(fields: [medicationId], references: [id])\n  pharmacy   User       @relation(fields: [pharmacyId], references: [id])\n\n  @@unique([medicationId, pharmacyId])\n  @@map(\"inventory_items\")\n}\n\nmodel Prescription {\n  id             String             @id @default(cuid())\n  consultationId String?\n  userId         String?\n  anonymousId    String?\n  medicationId   String\n  prescribedBy   String\n  dosage         String\n  frequency      String\n  duration       String\n  quantity       Int\n  refills        Int                @default(0)\n  instructions   String?\n  status         PrescriptionStatus @default(PENDING)\n  isAnonymous    Boolean            @default(false)\n  createdAt      DateTime           @default(now())\n  updatedAt      DateTime           @updatedAt\n\n  // Relations\n  consultation Consultation? @relation(fields: [consultationId], references: [id])\n  user         User?         @relation(fields: [userId], references: [id])\n  medication   Medication    @relation(fields: [medicationId], references: [id])\n  orders       Order[]\n\n  @@map(\"prescriptions\")\n}\n\nmodel Order {\n  id                  String        @id @default(cuid())\n  prescriptionId      String?\n  userId              String?\n  anonymousId         String?\n  orderNumber         String        @unique\n  status              OrderStatus   @default(PENDING)\n  totalAmount         Decimal       @db.Decimal(10, 2)\n  paymentStatus       PaymentStatus @default(PENDING)\n  paymentMethod       String?\n  isAnonymous         Boolean       @default(false)\n  specialInstructions String?\n  createdAt           DateTime      @default(now())\n  updatedAt           DateTime      @updatedAt\n\n  // Relations\n  prescription Prescription? @relation(fields: [prescriptionId], references: [id])\n  user         User?         @relation(fields: [userId], references: [id])\n  delivery     Delivery?\n\n  @@map(\"orders\")\n}\n\nmodel AnonymousSession {\n  id             String   @id @default(cuid())\n  sessionId      String   @unique\n  consultationId String?\n  orderId        String?\n  deliveryId     String?\n  expiresAt      DateTime\n  createdAt      DateTime @default(now())\n\n  @@map(\"anonymous_sessions\")\n}\n\nmodel UserSettings {\n  id         String @id @default(cuid())\n  userId     String @unique\n  theme      String @default(\"light\")\n  language   String @default(\"en\")\n  timezone   String @default(\"UTC\")\n  dateFormat String @default(\"MM/DD/YYYY\")\n\n  // Privacy settings\n  anonymousConsultations Boolean @default(true)\n  dataRetentionPeriod    String  @default(\"30\")\n  encryptionLevel        String  @default(\"aes256\")\n  autoDeleteChats        Boolean @default(true)\n  maskedDeliveryDefault  Boolean @default(true)\n\n  // Delivery settings\n  campusDropPoints   String[] @default([])\n  deliveryHoursStart String   @default(\"08:00\")\n  deliveryHoursEnd   String   @default(\"20:00\")\n  emergencyDelivery  Boolean  @default(true)\n  deliveryRadius     String   @default(\"5\")\n  trackingEnabled    Boolean  @default(true)\n\n  // Notification settings\n  newConsultations   Boolean @default(true)\n  urgentRequests     Boolean @default(true)\n  deliveryUpdates    Boolean @default(true)\n  systemAlerts       Boolean @default(true)\n  emailNotifications Boolean @default(true)\n  smsNotifications   Boolean @default(false)\n\n  // Security settings\n  twoFactorAuth            Boolean @default(false)\n  sessionTimeout           String  @default(\"30\")\n  ipWhitelist              String  @default(\"\")\n  auditLogging             Boolean @default(true)\n  suspiciousActivityAlerts Boolean @default(true)\n\n  // Consultation settings\n  maxActiveChats     String  @default(\"10\")\n  responseTimeTarget String  @default(\"15\")\n  autoAssignment     Boolean @default(true)\n  prioritizeUrgent   Boolean @default(true)\n  allowFileUploads   Boolean @default(true)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  // Relations\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@map(\"user_settings\")\n}\n\nmodel Staff {\n  id               String        @id @default(cuid())\n  userId           String        @unique\n  employeeId       String        @unique\n  position         StaffPosition\n  department       String\n  hireDate         DateTime\n  salary           Decimal?      @db.Decimal(10, 2)\n  isActive         Boolean       @default(true)\n  emergencyContact String?\n  emergencyPhone   String?\n  certifications   String[]\n  specializations  String[]\n  notes            String?\n  createdAt        DateTime      @default(now())\n  updatedAt        DateTime      @updatedAt\n\n  // Relations\n  user                  User             @relation(fields: [userId], references: [id], onDelete: Cascade)\n  schedules             StaffSchedule[]\n  assignedConsultations Consultation[]   @relation(\"StaffConsultations\")\n  shifts                Shift[]\n  timeOffRequests       TimeOffRequest[]\n\n  @@map(\"staff\")\n}\n\nmodel StaffSchedule {\n  id         String   @id @default(cuid())\n  staffId    String\n  dayOfWeek  Int // 0 = Sunday, 1 = Monday, etc.\n  startTime  String // Format: \"HH:MM\"\n  endTime    String // Format: \"HH:MM\"\n  breakStart String? // Format: \"HH:MM\"\n  breakEnd   String? // Format: \"HH:MM\"\n  isActive   Boolean  @default(true)\n  createdAt  DateTime @default(now())\n  updatedAt  DateTime @updatedAt\n\n  // Relations\n  staff Staff @relation(fields: [staffId], references: [id], onDelete: Cascade)\n\n  @@unique([staffId, dayOfWeek])\n  @@map(\"staff_schedules\")\n}\n\nmodel Shift {\n  id              String      @id @default(cuid())\n  staffId         String\n  date            DateTime\n  startTime       DateTime\n  endTime         DateTime\n  status          ShiftStatus @default(SCHEDULED)\n  notes           String?\n  actualStartTime DateTime?\n  actualEndTime   DateTime?\n  createdAt       DateTime    @default(now())\n  updatedAt       DateTime    @updatedAt\n\n  // Relations\n  staff Staff @relation(fields: [staffId], references: [id], onDelete: Cascade)\n\n  @@map(\"shifts\")\n}\n\nmodel TimeOffRequest {\n  id         String        @id @default(cuid())\n  staffId    String\n  startDate  DateTime\n  endDate    DateTime\n  reason     String\n  type       TimeOffType\n  status     TimeOffStatus @default(PENDING)\n  approvedBy String?\n  approvedAt DateTime?\n  notes      String?\n  createdAt  DateTime      @default(now())\n  updatedAt  DateTime      @updatedAt\n\n  // Relations\n  staff Staff @relation(fields: [staffId], references: [id], onDelete: Cascade)\n\n  @@map(\"time_off_requests\")\n}\n\nenum UserRole {\n  CLIENT\n  PHARMACY\n  ADMIN\n}\n\nenum ConsultationStatus {\n  PENDING\n  IN_PROGRESS\n  COMPLETED\n  CANCELLED\n}\n\nenum MessageType {\n  TEXT\n  IMAGE\n  FILE\n  SYSTEM\n}\n\nenum DeliveryStatus {\n  ORDER_CONFIRMED\n  PROCESSING\n  PACKAGED\n  IN_TRANSIT\n  OUT_FOR_DELIVERY\n  DELIVERED\n  CANCELLED\n}\n\nenum PrescriptionStatus {\n  PENDING\n  APPROVED\n  REJECTED\n  DISPENSED\n  EXPIRED\n}\n\nenum OrderStatus {\n  PENDING\n  CONFIRMED\n  PROCESSING\n  READY_FOR_PICKUP\n  SHIPPED\n  DELIVERED\n  CANCELLED\n}\n\nenum PaymentStatus {\n  PENDING\n  PAID\n  FAILED\n  REFUNDED\n}\n\nenum StaffPosition {\n  PHARMACIST\n  PHARMACY_TECHNICIAN\n  CASHIER\n  MANAGER\n  SUPERVISOR\n  INTERN\n  VOLUNTEER\n}\n\nenum ShiftStatus {\n  SCHEDULED\n  IN_PROGRESS\n  COMPLETED\n  CANCELLED\n  NO_SHOW\n}\n\nenum TimeOffType {\n  VACATION\n  SICK_LEAVE\n  PERSONAL_DAY\n  BEREAVEMENT\n  MATERNITY_PATERNITY\n  UNPAID_LEAVE\n  OTHER\n}\n\nenum TimeOffStatus {\n  PENDING\n  APPROVED\n  REJECTED\n  CANCELLED\n}\n",
+  "inlineSchemaHash": "09ff1ff9d16216dcad716bd2b506ded4a6204df8d1df1cd1ad26e2fa4c6ab2c7",
+  "copyEngine": false
+}
+config.dirname = '/'
+
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"passwordHash\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"UserRole\"},{\"name\":\"organization\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pharmacyName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"licenseNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"city\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"state\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"zipCode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isVerified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"consultations\",\"kind\":\"object\",\"type\":\"Consultation\",\"relationName\":\"ConsultationToUser\"},{\"name\":\"assignedConsultations\",\"kind\":\"object\",\"type\":\"Consultation\",\"relationName\":\"PharmacistConsultations\"},{\"name\":\"messages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"MessageToUser\"},{\"name\":\"deliveries\",\"kind\":\"object\",\"type\":\"Delivery\",\"relationName\":\"DeliveryToUser\"},{\"name\":\"prescriptions\",\"kind\":\"object\",\"type\":\"Prescription\",\"relationName\":\"PrescriptionToUser\"},{\"name\":\"orders\",\"kind\":\"object\",\"type\":\"Order\",\"relationName\":\"OrderToUser\"},{\"name\":\"inventoryItems\",\"kind\":\"object\",\"type\":\"InventoryItem\",\"relationName\":\"InventoryItemToUser\"},{\"name\":\"settings\",\"kind\":\"object\",\"type\":\"UserSettings\",\"relationName\":\"UserToUserSettings\"},{\"name\":\"staff\",\"kind\":\"object\",\"type\":\"Staff\",\"relationName\":\"StaffToUser\"}],\"dbName\":\"users\"},\"Consultation\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"anonymousId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"ConsultationStatus\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"symptoms\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"medications\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"allergies\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"age\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"gender\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isAnonymous\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"assignedPharmacistId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"assignedStaffId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ConsultationToUser\"},{\"name\":\"assignedPharmacist\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PharmacistConsultations\"},{\"name\":\"assignedStaff\",\"kind\":\"object\",\"type\":\"Staff\",\"relationName\":\"StaffConsultations\"},{\"name\":\"messages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"ConsultationToMessage\"},{\"name\":\"prescriptions\",\"kind\":\"object\",\"type\":\"Prescription\",\"relationName\":\"ConsultationToPrescription\"}],\"dbName\":\"consultations\"},\"Message\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"chatId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"anonymousId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"MessageType\"},{\"name\":\"isFromPharmacist\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"MessageToUser\"},{\"name\":\"consultation\",\"kind\":\"object\",\"type\":\"Consultation\",\"relationName\":\"ConsultationToMessage\"}],\"dbName\":\"messages\"},\"Delivery\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"anonymousId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"orderId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"DeliveryStatus\"},{\"name\":\"trackingNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"estimatedDelivery\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"actualDelivery\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"city\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"state\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"zipCode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"dropPoint\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"packageType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isAnonymous\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"DeliveryToUser\"},{\"name\":\"order\",\"kind\":\"object\",\"type\":\"Order\",\"relationName\":\"DeliveryToOrder\"}],\"dbName\":\"deliveries\"},\"Medication\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"genericName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"dosageForm\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"strength\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"manufacturer\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isPrescription\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"isControlled\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"requiresLicense\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"sideEffects\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"interactions\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contraindications\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"inventoryItems\",\"kind\":\"object\",\"type\":\"InventoryItem\",\"relationName\":\"InventoryItemToMedication\"},{\"name\":\"prescriptions\",\"kind\":\"object\",\"type\":\"Prescription\",\"relationName\":\"MedicationToPrescription\"}],\"dbName\":\"medications\"},\"InventoryItem\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"medicationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pharmacyId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quantity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"minQuantity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"maxQuantity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"lotNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expirationDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"medication\",\"kind\":\"object\",\"type\":\"Medication\",\"relationName\":\"InventoryItemToMedication\"},{\"name\":\"pharmacy\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"InventoryItemToUser\"}],\"dbName\":\"inventory_items\"},\"Prescription\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"consultationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"anonymousId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"medicationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"prescribedBy\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"dosage\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"frequency\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"duration\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quantity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"refills\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"instructions\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"PrescriptionStatus\"},{\"name\":\"isAnonymous\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"consultation\",\"kind\":\"object\",\"type\":\"Consultation\",\"relationName\":\"ConsultationToPrescription\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"PrescriptionToUser\"},{\"name\":\"medication\",\"kind\":\"object\",\"type\":\"Medication\",\"relationName\":\"MedicationToPrescription\"},{\"name\":\"orders\",\"kind\":\"object\",\"type\":\"Order\",\"relationName\":\"OrderToPrescription\"}],\"dbName\":\"prescriptions\"},\"Order\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"prescriptionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"anonymousId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"orderNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"OrderStatus\"},{\"name\":\"totalAmount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"paymentStatus\",\"kind\":\"enum\",\"type\":\"PaymentStatus\"},{\"name\":\"paymentMethod\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isAnonymous\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"specialInstructions\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"prescription\",\"kind\":\"object\",\"type\":\"Prescription\",\"relationName\":\"OrderToPrescription\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"OrderToUser\"},{\"name\":\"delivery\",\"kind\":\"object\",\"type\":\"Delivery\",\"relationName\":\"DeliveryToOrder\"}],\"dbName\":\"orders\"},\"AnonymousSession\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sessionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"consultationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"orderId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"deliveryId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"anonymous_sessions\"},\"UserSettings\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"theme\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"language\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"timezone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"dateFormat\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"anonymousConsultations\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"dataRetentionPeriod\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"encryptionLevel\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"autoDeleteChats\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"maskedDeliveryDefault\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"campusDropPoints\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"deliveryHoursStart\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"deliveryHoursEnd\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emergencyDelivery\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"deliveryRadius\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"trackingEnabled\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"newConsultations\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"urgentRequests\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"deliveryUpdates\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"systemAlerts\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"emailNotifications\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"smsNotifications\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"twoFactorAuth\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"sessionTimeout\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ipWhitelist\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"auditLogging\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"suspiciousActivityAlerts\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"maxActiveChats\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"responseTimeTarget\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"autoAssignment\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"prioritizeUrgent\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"allowFileUploads\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToUserSettings\"}],\"dbName\":\"user_settings\"},\"Staff\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"employeeId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"position\",\"kind\":\"enum\",\"type\":\"StaffPosition\"},{\"name\":\"department\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hireDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"salary\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"emergencyContact\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emergencyPhone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"certifications\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"specializations\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"StaffToUser\"},{\"name\":\"schedules\",\"kind\":\"object\",\"type\":\"StaffSchedule\",\"relationName\":\"StaffToStaffSchedule\"},{\"name\":\"assignedConsultations\",\"kind\":\"object\",\"type\":\"Consultation\",\"relationName\":\"StaffConsultations\"},{\"name\":\"shifts\",\"kind\":\"object\",\"type\":\"Shift\",\"relationName\":\"ShiftToStaff\"},{\"name\":\"timeOffRequests\",\"kind\":\"object\",\"type\":\"TimeOffRequest\",\"relationName\":\"StaffToTimeOffRequest\"}],\"dbName\":\"staff\"},\"StaffSchedule\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"staffId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"dayOfWeek\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"startTime\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"endTime\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"breakStart\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"breakEnd\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"staff\",\"kind\":\"object\",\"type\":\"Staff\",\"relationName\":\"StaffToStaffSchedule\"}],\"dbName\":\"staff_schedules\"},\"Shift\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"staffId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"startTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"endTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"ShiftStatus\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"actualStartTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"actualEndTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"staff\",\"kind\":\"object\",\"type\":\"Staff\",\"relationName\":\"ShiftToStaff\"}],\"dbName\":\"shifts\"},\"TimeOffRequest\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"staffId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"startDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"endDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"reason\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"TimeOffType\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"TimeOffStatus\"},{\"name\":\"approvedBy\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"approvedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"staff\",\"kind\":\"object\",\"type\":\"Staff\",\"relationName\":\"StaffToTimeOffRequest\"}],\"dbName\":\"time_off_requests\"}},\"enums\":{},\"types\":{}}")
+defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
+config.engineWasm = undefined
+config.compilerWasm = undefined
+
+config.injectableEdgeEnv = () => ({
+  parsed: {
+    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
   }
+})
+
+if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {
+  Debug.enable(typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined)
 }
 
+const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
-
 Object.assign(exports, Prisma)
+

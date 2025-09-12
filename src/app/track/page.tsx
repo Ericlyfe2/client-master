@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Common/Navigation";
 import { getAnonymousConsultationStatus } from "@/services/consultationService";
 
-export default function TrackConsultationPage() {
+function TrackConsultationContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sessionId, setSessionId] = useState(searchParams.get("sessionId") || "");
@@ -307,3 +307,11 @@ export default function TrackConsultationPage() {
     </div>
   );
 } 
+
+export default function TrackConsultationPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100" /> }>
+      <TrackConsultationContent />
+    </Suspense>
+  );
+}

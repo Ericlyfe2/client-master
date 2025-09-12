@@ -1,5 +1,41 @@
 
-export { auth as middleware } from "@/app/auth"
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+  
+  // Public routes that don't need authentication
+  const publicRoutes = [
+    '/',
+    '/auth',
+    '/signup', 
+    '/verify'
+  ]
+  
+  // Check if current path is a public route
+  const isPublicRoute = publicRoutes.some(route => 
+    pathname === route || pathname.startsWith(route + '/')
+  )
+  
+  if (isPublicRoute) {
+    return NextResponse.next()
+  }
+  
+  // Get the session token from cookies
+  const sessionToken = request.cookies.get('next-auth.session-token')?.value ||
+                      request.cookies.get('__Secure-next-auth.session-token')?.value
+  
+  // If no session token, redirect to auth
+  if (!sessionToken) {
+    const authUrl = new URL('/auth', request.url)
+    return NextResponse.redirect(authUrl)
+  }
+  
+  // If we have a token, allow the request to continue
+  // The actual token validation happens in the NextAuth API routes
+  return NextResponse.next()
+}
 
 export const config = {
   matcher: [
@@ -12,4 +48,4 @@ export const config = {
      */
     "/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
-};
+}

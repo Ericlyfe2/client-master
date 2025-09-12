@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { hashPassword } from "@/utils/password";
-import { PrismaClient } from "@/lib/prisma-client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 // Import the license verification function from the dedicated API
 async function verifyPharmacistLicense(

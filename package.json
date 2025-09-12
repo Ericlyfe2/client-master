@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "prisma generate && next build",
+    "build": "prisma generate --no-engine && next build",
     "start": "next start",
     "lint": "next lint",
     "setup": "node setup-env.js",
@@ -13,7 +13,7 @@
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "build:no-db": "next build",
-    "vercel-build": "prisma generate && next build"
+    "vercel-build": "prisma generate --no-engine && next build"
   },
   "dependencies": {
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",

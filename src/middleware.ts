@@ -1,30 +1,39 @@
 
-import { NextRequest, NextResponse } from 'next/server'
-import { getToken } from 'next-auth/jwt'
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-export async function middleware(req: NextRequest) {
-  const token = await getToken({ 
-    req, 
-    secret: process.env.NEXTAUTH_SECRET || "your-secret-key-here-change-in-production" 
-  })
-
-  const { pathname } = req.nextUrl
-
-  // Allow access to auth pages when not signed in
-  if (pathname.startsWith('/auth') || pathname.startsWith('/signup')) {
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+  
+  // Public routes that don't need authentication
+  const publicRoutes = [
+    '/',
+    '/auth',
+    '/signup', 
+    '/verify'
+  ]
+  
+  // Check if current path is a public route
+  const isPublicRoute = publicRoutes.some(route => 
+    pathname === route || pathname.startsWith(route + '/')
+  )
+  
+  if (isPublicRoute) {
     return NextResponse.next()
   }
-
-  // Allow access to public pages
-  if (pathname === '/' || pathname.startsWith('/verify')) {
-    return NextResponse.next()
+  
+  // Get the session token from cookies
+  const sessionToken = request.cookies.get('next-auth.session-token')?.value ||
+                      request.cookies.get('__Secure-next-auth.session-token')?.value
+  
+  // If no session token, redirect to auth
+  if (!sessionToken) {
+    const authUrl = new URL('/auth', request.url)
+    return NextResponse.redirect(authUrl)
   }
-
-  // Redirect to auth page if not authenticated for protected routes
-  if (!token) {
-    return NextResponse.redirect(new URL('/auth', req.url))
-  }
-
+  
+  // If we have a token, allow the request to continue
+  // The actual token validation happens in the NextAuth API routes
   return NextResponse.next()
 }
 
@@ -39,4 +48,4 @@ export const config = {
      */
     "/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
-};
+}

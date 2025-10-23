@@ -1,12 +1,8 @@
 import NextAuth, { DefaultSession } from "next-auth";
-import { ZodError } from "zod";
 import Credentials from "next-auth/providers/credentials";
-import { signInSchema } from "@/app/lib/zod";
 import { verifyPassword } from "@/utils/password";
 import { getUserByUsername } from "@/utils/db";
-import { PrismaClient } from "@/lib/prisma-client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 // Extend the built-in session types
 declare module "next-auth" {
@@ -28,10 +24,11 @@ declare module "next-auth" {
 }
 
 export const { handlers, auth } = NextAuth({
-  secret:
-    process.env.NEXTAUTH_SECRET || "your-secret-key-here-change-in-production",
+  secret: process.env.NEXTAUTH_SECRET || "your-secret-key-here-change-in-production",
+  debug: process.env.NODE_ENV === "development",
   providers: [
     Credentials({
+      name: "credentials",
       credentials: {
         username: {},
         email: {},
@@ -40,266 +37,237 @@ export const { handlers, auth } = NextAuth({
         role: {},
       },
       authorize: async (credentials) => {
-        try {
-          // Check if credentials exist
-          if (!credentials) {
-            console.error("No credentials provided");
-            return null;
+        console.log("🔐 NextAuth authorize called with credentials:", {
+          role: credentials?.role,
+          username: credentials?.username,
+          email: credentials?.email,
+          hasPassword: !!credentials?.password,
+          hasLicense: !!credentials?.licenseNumber
+        });
+
+        // Check if credentials exist
+        if (!credentials) {
+          console.error("❌ No credentials provided");
+          throw new Error("No credentials provided");
+        }
+
+        const { username, email, password, licenseNumber, role } = credentials;
+
+        // For development/testing, allow a simple login without database
+        if (
+          process.env.NODE_ENV === "development" &&
+          credentials.username === "admin" &&
+          credentials.password === "admin"
+        ) {
+          console.log("✅ Development admin login successful");
+          return {
+            id: "dev-admin",
+            username: "admin",
+            email: "admin@example.com",
+            role: "ADMIN",
+            name: "Development Admin",
+          };
+        }
+
+        // Handle different login types
+        if (role === "PHARMACY") {
+          console.log("💊 Processing pharmacist login");
+          
+          // Pharmacist login with email, password, and license number
+          if (!email || !password || !licenseNumber) {
+            const errorMsg = "Email, password, and license number required for pharmacist login";
+            console.error("❌", errorMsg);
+            throw new Error(errorMsg);
           }
 
-          // For development/testing, allow a simple login without database
-          if (
-            process.env.NODE_ENV === "development" &&
-            credentials.username === "admin" &&
-            credentials.password === "admin"
-          ) {
-            return {
-              id: "dev-admin",
-              username: "admin",
-              email: "admin@example.com",
-              role: "ADMIN",
-              name: "Development Admin",
-            };
+          const trimmedEmail = (email as string).trim();
+          const trimmedPassword = (password as string).trim();
+          const trimmedLicenseNumber = (licenseNumber as string).trim();
+
+          // Validate inputs
+          if (!trimmedEmail || !trimmedPassword || !trimmedLicenseNumber) {
+            throw new Error("Email, password, or license number is empty");
           }
 
-          const { username, email, password, licenseNumber, role } =
-            credentials;
+          // Get user from database by email
+          let dbUser;
+          try {
+            dbUser = await prisma.user.findFirst({
+              where: { email: trimmedEmail },
+            });
+            console.log("🔍 Database query result:", dbUser ? "User found" : "User not found");
+          } catch (error) {
+            console.error("❌ Database connection error:", error);
+            throw new Error("Database connection error");
+          }
 
-          // Handle different login types
-          if (role === "PHARMACY") {
-            // Pharmacist login with email, password, and license number
-            if (!email || !password || !licenseNumber) {
-              console.error(
-                "Email, password, and license number required for pharmacist login"
-              );
-              return null;
-            }
+          if (!dbUser) {
+            console.error("❌ Pharmacist not found for email:", trimmedEmail);
+            throw new Error("Pharmacist not found");
+          }
 
-            const trimmedEmail = (email as string).trim();
-            const trimmedPassword = (password as string).trim();
-            const trimmedLicenseNumber = (licenseNumber as string).trim();
+          // Verify the user is a pharmacist
+          if (dbUser.role !== "PHARMACY") {
+            console.error("❌ User is not a pharmacist, role:", dbUser.role);
+            throw new Error("User is not a pharmacist");
+          }
 
-            // Validate inputs
-            if (!trimmedEmail || !trimmedPassword || !trimmedLicenseNumber) {
-              console.error("Email, password, or license number is empty");
-              return null;
-            }
+          // Check if user is verified
+          if (dbUser.isVerified === false) {
+            console.error("❌ Pharmacist account not verified");
+            throw new Error("Pharmacist account not verified");
+          }
 
-            // Get user from database by email
-            let dbUser;
+          // Verify password
+          console.log("🔑 Verifying password for pharmacist:", dbUser.email);
+          const isValidPassword = await verifyPassword(
+            trimmedPassword,
+            dbUser.passwordHash!
+          );
+
+          if (!isValidPassword) {
+            console.error("❌ Invalid password for pharmacist:", dbUser.email);
+            throw new Error("Invalid password");
+          }
+          console.log("✅ Password verification successful for pharmacist:", dbUser.email);
+
+          // Check if license number matches stored license OR verify new license
+          if (dbUser.licenseNumber !== trimmedLicenseNumber) {
+            console.log("🔍 License number doesn't match, verifying new license");
             try {
-              dbUser = await prisma.user.findFirst({
-                where: { email: trimmedEmail },
-              });
-            } catch (error) {
-              console.error("Database connection error:", error);
-              return null;
-            }
-
-            if (!dbUser) {
-              console.error("Pharmacist not found");
-              return null;
-            }
-
-            // Verify the user is a pharmacist
-            if (dbUser.role !== "PHARMACY") {
-              console.error("User is not a pharmacist");
-              return null;
-            }
-
-            // Check if user is verified
-            if (dbUser.isVerified === false) {
-              console.error("Pharmacist account not verified");
-              return null;
-            }
-
-            // Verify password first
-            const isValidPassword = await verifyPassword(
-              trimmedPassword,
-              dbUser.passwordHash!
-            );
-
-            if (!isValidPassword) {
-              console.error("Invalid password");
-              return null;
-            }
-
-            // Check if license number matches stored license OR verify new license
-            if (dbUser.licenseNumber !== trimmedLicenseNumber) {
-              // License doesn't match stored license, verify if it's a valid new license
-              try {
-                const verificationResponse = await fetch(
-                  `${
-                    process.env.NEXTAUTH_URL || "http://localhost:3000"
-                  }/api/auth/verify-license`,
-                  {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      licenseNumber: trimmedLicenseNumber,
-                      email: trimmedEmail,
-                      isSignIn: true,
-                    }),
-                  }
-                );
-
-                const verificationData = await verificationResponse.json();
-
-                if (!verificationData.isValid) {
-                  console.error("Invalid license number provided");
-                  return null;
+              const verificationResponse = await fetch(
+                `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/api/auth/verify-license`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    licenseNumber: trimmedLicenseNumber,
+                    email: trimmedEmail,
+                    isSignIn: true,
+                  }),
                 }
+              );
 
-                // Update user's license number in database
-                await prisma.user.update({
-                  where: { id: dbUser.id },
-                  data: { licenseNumber: trimmedLicenseNumber },
-                });
+              const verificationData = await verificationResponse.json();
 
-                console.log(
-                  `Pharmacist ${trimmedEmail} updated license to ${trimmedLicenseNumber}`
-                );
-              } catch (error) {
-                console.error("License verification failed:", error);
-                return null;
+              if (!verificationData.isValid) {
+                console.error("❌ Invalid license number provided:", trimmedLicenseNumber);
+                throw new Error("Invalid license number provided");
               }
-            }
 
-            // Return pharmacist user object
-            const user = {
-              id: dbUser.id,
-              username: dbUser.username,
-              email: dbUser.email,
-              role: dbUser.role,
-              name: `${dbUser.firstName} ${dbUser.lastName}`,
-            };
+              // Update user's license number in database
+              await prisma.user.update({
+                where: { id: dbUser.id },
+                data: { licenseNumber: trimmedLicenseNumber },
+              });
 
-            console.log(`Pharmacist ${user.email} authenticated successfully`);
-            return user;
-          } else {
-            // Regular login with username and password
-            if (!username || !password) {
-              console.error("Username and password required for regular login");
-              return null;
-            }
-
-            // Validate input schema
-            const { username: validatedUsername, password: validatedPassword } =
-              await signInSchema.parseAsync(credentials);
-
-            // Trim whitespace from inputs
-            const trimmedUsername = validatedUsername.trim();
-            const trimmedPassword = validatedPassword.trim();
-
-            // Check for empty strings after trimming
-            if (!trimmedUsername || !trimmedPassword) {
-              console.error("Username or password is empty after trimming");
-              return null;
-            }
-
-            // Check username length
-            if (trimmedUsername.length < 3) {
-              console.error("Username too short");
-              return null;
-            }
-
-            if (trimmedUsername.length > 50) {
-              console.error("Username too long");
-              return null;
-            }
-
-            // Check password length
-            if (trimmedPassword.length < 6) {
-              console.error("Password too short");
-              return null;
-            }
-
-            if (trimmedPassword.length > 128) {
-              console.error("Password too long");
-              return null;
-            }
-
-            // Check for SQL injection patterns (basic check)
-            const sqlInjectionPatterns = [
-              /(\b(SELECT|INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|EXEC|UNION|SCRIPT)\b)/i,
-              /(--|\/\*|\*\/|;|'|"|`)/,
-              /(\b(OR|AND)\b\s+\d+\s*=\s*\d+)/i,
-            ];
-
-            for (const pattern of sqlInjectionPatterns) {
-              if (
-                pattern.test(trimmedUsername) ||
-                pattern.test(trimmedPassword)
-              ) {
-                console.error("Potential SQL injection detected");
-                return null;
-              }
-            }
-
-            // Get user from database by username
-            let dbUser;
-            try {
-              dbUser = await getUserByUsername(trimmedUsername);
+              console.log(`✅ Pharmacist ${trimmedEmail} updated license to ${trimmedLicenseNumber}`);
             } catch (error) {
-              console.error("Database connection error:", error);
-              return null;
+              console.error("❌ License verification failed:", error);
+              throw new Error("License verification failed");
             }
-
-            if (!dbUser) {
-              console.error("User not found");
-              return null;
-            }
-
-            // Check if user is verified (if required)
-            if (dbUser.isVerified === false) {
-              console.error("User account not verified");
-              return null;
-            }
-
-            // Verify password
-            const isValidPassword = await verifyPassword(
-              trimmedPassword,
-              dbUser.passwordHash!
-            );
-
-            if (!isValidPassword) {
-              console.error("Invalid password");
-              return null;
-            }
-
-            // Return user object without password hash
-            const user = {
-              id: dbUser.id,
-              username: dbUser.username,
-              email: dbUser.email,
-              role: dbUser.role,
-              name: dbUser.name,
-            };
-
-            // Validate returned user object
-            if (!user.id || !user.username || !user.role) {
-              console.error("Invalid user data returned");
-              return null;
-            }
-
-            console.log(`User ${user.username} authenticated successfully`);
-            return user;
-          }
-        } catch (error) {
-          if (error instanceof ZodError) {
-            console.error("Zod validation error:", error.message);
-            return null;
           }
 
-          if (error instanceof Error) {
-            console.error("Authentication error:", error.message);
-          } else {
-            console.error("Unknown authentication error:", error);
+          // Return pharmacist user object
+          const user = {
+            id: dbUser.id,
+            username: dbUser.username,
+            email: dbUser.email,
+            role: dbUser.role,
+            name: `${(dbUser as any).firstName} ${(dbUser as any).lastName}`,
+          };
+
+          console.log(`✅ Pharmacist ${user.email} authenticated successfully`);
+          return user;
+        } else {
+          console.log("👤 Processing regular user login (CLIENT/ADMIN)");
+          
+          // Regular login with username and password (CLIENT or ADMIN)
+          if (!username || !password) {
+            console.error("❌ Username and password required for regular login");
+            throw new Error("Username and password required for regular login");
           }
 
-          return null;
+          // Trim whitespace from inputs
+          const trimmedUsername = (username as string).trim();
+          const trimmedPassword = (password as string).trim();
+
+          // Check for empty strings after trimming
+          if (!trimmedUsername || !trimmedPassword) {
+            throw new Error("Username or password is empty");
+          }
+
+          // Basic validation
+          if (trimmedUsername.length < 3) {
+            throw new Error("Username too short");
+          }
+
+          if (trimmedUsername.length > 50) {
+            throw new Error("Username too long");
+          }
+
+          if (trimmedPassword.length < 6) {
+            throw new Error("Password too short");
+          }
+
+          if (trimmedPassword.length > 128) {
+            throw new Error("Password too long");
+          }
+
+          // Get user from database by username
+          let dbUser;
+          try {
+            dbUser = await getUserByUsername(trimmedUsername);
+            console.log("🔍 Database query result:", dbUser ? "User found" : "User not found");
+          } catch (error) {
+            console.error("❌ Database connection error:", error);
+            throw new Error("Database connection error");
+          }
+
+          if (!dbUser) {
+            console.error("❌ User not found for username:", trimmedUsername);
+            throw new Error("Invalid username or password");
+          }
+
+          // Check if user is verified (if required)
+          if (dbUser.isVerified === false) {
+            console.error("❌ Account not verified for user:", trimmedUsername);
+            throw new Error("Account not verified");
+          }
+
+          // Verify password
+          console.log("🔑 Verifying password for user:", dbUser.username);
+          const isValidPassword = await verifyPassword(
+            trimmedPassword,
+            dbUser.passwordHash!
+          );
+
+          if (!isValidPassword) {
+            console.error("❌ Invalid password for user:", dbUser.username);
+            throw new Error("Invalid username or password");
+          }
+          
+          console.log("✅ Password verification successful for user:", dbUser.username);
+
+          // Return user object without password hash
+          const user = {
+            id: dbUser.id,
+            username: dbUser.username,
+            email: dbUser.email,
+            role: dbUser.role,
+            name: dbUser.name || `${(dbUser as any).firstName} ${(dbUser as any).lastName}`,
+          };
+
+          // Validate returned user object
+          if (!user.id || !user.username || !user.role) {
+            console.error("❌ Invalid user data returned:", user);
+            throw new Error("Invalid user data");
+          }
+
+          console.log(`✅ User ${user.username} authenticated successfully`);
+          return user;
         }
       },
     }),

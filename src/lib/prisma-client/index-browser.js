@@ -20,11 +20,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.16.1
+ * Prisma Client JS version: 6.16.2
  * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
  */
 Prisma.prismaVersion = {
-  client: "6.16.1",
+  client: "6.16.2",
   engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
 }
 
@@ -122,9 +122,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  username: 'username',
   email: 'email',
-  passwordHash: 'passwordHash',
   firstName: 'firstName',
   lastName: 'lastName',
   role: 'role',
@@ -138,44 +136,44 @@ exports.Prisma.UserScalarFieldEnum = {
   zipCode: 'zipCode',
   isVerified: 'isVerified',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  passwordHash: 'passwordHash',
+  username: 'username'
 };
 
 exports.Prisma.ConsultationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  anonymousId: 'anonymousId',
   type: 'type',
   status: 'status',
   description: 'description',
-  symptoms: 'symptoms',
-  medications: 'medications',
-  allergies: 'allergies',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   age: 'age',
+  allergies: 'allergies',
+  anonymousId: 'anonymousId',
+  assignedPharmacistId: 'assignedPharmacistId',
   gender: 'gender',
   isAnonymous: 'isAnonymous',
-  assignedPharmacistId: 'assignedPharmacistId',
-  assignedStaffId: 'assignedStaffId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  medications: 'medications',
+  symptoms: 'symptoms',
+  assignedStaffId: 'assignedStaffId'
 };
 
 exports.Prisma.MessageScalarFieldEnum = {
   id: 'id',
   chatId: 'chatId',
   userId: 'userId',
-  anonymousId: 'anonymousId',
   content: 'content',
   type: 'type',
-  isFromPharmacist: 'isFromPharmacist',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  anonymousId: 'anonymousId',
+  isFromPharmacist: 'isFromPharmacist'
 };
 
 exports.Prisma.DeliveryScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  anonymousId: 'anonymousId',
-  orderId: 'orderId',
   status: 'status',
   trackingNumber: 'trackingNumber',
   estimatedDelivery: 'estimatedDelivery',
@@ -184,11 +182,13 @@ exports.Prisma.DeliveryScalarFieldEnum = {
   city: 'city',
   state: 'state',
   zipCode: 'zipCode',
-  dropPoint: 'dropPoint',
-  packageType: 'packageType',
-  isAnonymous: 'isAnonymous',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  anonymousId: 'anonymousId',
+  dropPoint: 'dropPoint',
+  isAnonymous: 'isAnonymous',
+  orderId: 'orderId',
+  packageType: 'packageType'
 };
 
 exports.Prisma.MedicationScalarFieldEnum = {

@@ -571,7 +571,7 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.16.1
+   * Prisma Client JS version: 6.16.2
    * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
    */
   export type PrismaVersion = {
@@ -2215,23 +2215,23 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    consultations: number
     assignedConsultations: number
-    messages: number
+    consultations: number
     deliveries: number
-    prescriptions: number
-    orders: number
     inventoryItems: number
+    messages: number
+    orders: number
+    prescriptions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    consultations?: boolean | UserCountOutputTypeCountConsultationsArgs
     assignedConsultations?: boolean | UserCountOutputTypeCountAssignedConsultationsArgs
-    messages?: boolean | UserCountOutputTypeCountMessagesArgs
+    consultations?: boolean | UserCountOutputTypeCountConsultationsArgs
     deliveries?: boolean | UserCountOutputTypeCountDeliveriesArgs
-    prescriptions?: boolean | UserCountOutputTypeCountPrescriptionsArgs
-    orders?: boolean | UserCountOutputTypeCountOrdersArgs
     inventoryItems?: boolean | UserCountOutputTypeCountInventoryItemsArgs
+    messages?: boolean | UserCountOutputTypeCountMessagesArgs
+    orders?: boolean | UserCountOutputTypeCountOrdersArgs
+    prescriptions?: boolean | UserCountOutputTypeCountPrescriptionsArgs
   }
 
   // Custom InputTypes
@@ -2248,13 +2248,6 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountConsultationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ConsultationWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountAssignedConsultationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ConsultationWhereInput
   }
@@ -2262,8 +2255,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MessageWhereInput
+  export type UserCountOutputTypeCountConsultationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConsultationWhereInput
   }
 
   /**
@@ -2276,8 +2269,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountPrescriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PrescriptionWhereInput
+  export type UserCountOutputTypeCountInventoryItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InventoryItemWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
   }
 
   /**
@@ -2290,8 +2290,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountInventoryItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: InventoryItemWhereInput
+  export type UserCountOutputTypeCountPrescriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrescriptionWhereInput
   }
 
 
@@ -2411,16 +2411,16 @@ export namespace Prisma {
    */
 
   export type StaffCountOutputType = {
-    schedules: number
     assignedConsultations: number
     shifts: number
+    schedules: number
     timeOffRequests: number
   }
 
   export type StaffCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    schedules?: boolean | StaffCountOutputTypeCountSchedulesArgs
     assignedConsultations?: boolean | StaffCountOutputTypeCountAssignedConsultationsArgs
     shifts?: boolean | StaffCountOutputTypeCountShiftsArgs
+    schedules?: boolean | StaffCountOutputTypeCountSchedulesArgs
     timeOffRequests?: boolean | StaffCountOutputTypeCountTimeOffRequestsArgs
   }
 
@@ -2438,13 +2438,6 @@ export namespace Prisma {
   /**
    * StaffCountOutputType without action
    */
-  export type StaffCountOutputTypeCountSchedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: StaffScheduleWhereInput
-  }
-
-  /**
-   * StaffCountOutputType without action
-   */
   export type StaffCountOutputTypeCountAssignedConsultationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ConsultationWhereInput
   }
@@ -2454,6 +2447,13 @@ export namespace Prisma {
    */
   export type StaffCountOutputTypeCountShiftsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ShiftWhereInput
+  }
+
+  /**
+   * StaffCountOutputType without action
+   */
+  export type StaffCountOutputTypeCountSchedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StaffScheduleWhereInput
   }
 
   /**
@@ -2480,9 +2480,7 @@ export namespace Prisma {
 
   export type UserMinAggregateOutputType = {
     id: string | null
-    username: string | null
     email: string | null
-    passwordHash: string | null
     firstName: string | null
     lastName: string | null
     role: $Enums.UserRole | null
@@ -2497,13 +2495,13 @@ export namespace Prisma {
     isVerified: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    passwordHash: string | null
+    username: string | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: string | null
-    username: string | null
     email: string | null
-    passwordHash: string | null
     firstName: string | null
     lastName: string | null
     role: $Enums.UserRole | null
@@ -2518,13 +2516,13 @@ export namespace Prisma {
     isVerified: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    passwordHash: string | null
+    username: string | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
-    username: number
     email: number
-    passwordHash: number
     firstName: number
     lastName: number
     role: number
@@ -2539,15 +2537,15 @@ export namespace Prisma {
     isVerified: number
     createdAt: number
     updatedAt: number
+    passwordHash: number
+    username: number
     _all: number
   }
 
 
   export type UserMinAggregateInputType = {
     id?: true
-    username?: true
     email?: true
-    passwordHash?: true
     firstName?: true
     lastName?: true
     role?: true
@@ -2562,13 +2560,13 @@ export namespace Prisma {
     isVerified?: true
     createdAt?: true
     updatedAt?: true
+    passwordHash?: true
+    username?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
-    username?: true
     email?: true
-    passwordHash?: true
     firstName?: true
     lastName?: true
     role?: true
@@ -2583,13 +2581,13 @@ export namespace Prisma {
     isVerified?: true
     createdAt?: true
     updatedAt?: true
+    passwordHash?: true
+    username?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
-    username?: true
     email?: true
-    passwordHash?: true
     firstName?: true
     lastName?: true
     role?: true
@@ -2604,6 +2602,8 @@ export namespace Prisma {
     isVerified?: true
     createdAt?: true
     updatedAt?: true
+    passwordHash?: true
+    username?: true
     _all?: true
   }
 
@@ -2681,9 +2681,7 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: string
-    username: string
     email: string
-    passwordHash: string
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -2698,6 +2696,8 @@ export namespace Prisma {
     isVerified: boolean
     createdAt: Date
     updatedAt: Date
+    passwordHash: string
+    username: string
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -2719,9 +2719,7 @@ export namespace Prisma {
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    username?: boolean
     email?: boolean
-    passwordHash?: boolean
     firstName?: boolean
     lastName?: boolean
     role?: boolean
@@ -2736,23 +2734,23 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    consultations?: boolean | User$consultationsArgs<ExtArgs>
+    passwordHash?: boolean
+    username?: boolean
     assignedConsultations?: boolean | User$assignedConsultationsArgs<ExtArgs>
-    messages?: boolean | User$messagesArgs<ExtArgs>
+    consultations?: boolean | User$consultationsArgs<ExtArgs>
     deliveries?: boolean | User$deliveriesArgs<ExtArgs>
-    prescriptions?: boolean | User$prescriptionsArgs<ExtArgs>
-    orders?: boolean | User$ordersArgs<ExtArgs>
     inventoryItems?: boolean | User$inventoryItemsArgs<ExtArgs>
-    settings?: boolean | User$settingsArgs<ExtArgs>
+    messages?: boolean | User$messagesArgs<ExtArgs>
+    orders?: boolean | User$ordersArgs<ExtArgs>
+    prescriptions?: boolean | User$prescriptionsArgs<ExtArgs>
     staff?: boolean | User$staffArgs<ExtArgs>
+    settings?: boolean | User$settingsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    username?: boolean
     email?: boolean
-    passwordHash?: boolean
     firstName?: boolean
     lastName?: boolean
     role?: boolean
@@ -2767,13 +2765,13 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    passwordHash?: boolean
+    username?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    username?: boolean
     email?: boolean
-    passwordHash?: boolean
     firstName?: boolean
     lastName?: boolean
     role?: boolean
@@ -2788,13 +2786,13 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    passwordHash?: boolean
+    username?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
-    username?: boolean
     email?: boolean
-    passwordHash?: boolean
     firstName?: boolean
     lastName?: boolean
     role?: boolean
@@ -2809,19 +2807,21 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    passwordHash?: boolean
+    username?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "passwordHash" | "firstName" | "lastName" | "role" | "organization" | "pharmacyName" | "licenseNumber" | "phone" | "address" | "city" | "state" | "zipCode" | "isVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstName" | "lastName" | "role" | "organization" | "pharmacyName" | "licenseNumber" | "phone" | "address" | "city" | "state" | "zipCode" | "isVerified" | "createdAt" | "updatedAt" | "passwordHash" | "username", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    consultations?: boolean | User$consultationsArgs<ExtArgs>
     assignedConsultations?: boolean | User$assignedConsultationsArgs<ExtArgs>
-    messages?: boolean | User$messagesArgs<ExtArgs>
+    consultations?: boolean | User$consultationsArgs<ExtArgs>
     deliveries?: boolean | User$deliveriesArgs<ExtArgs>
-    prescriptions?: boolean | User$prescriptionsArgs<ExtArgs>
-    orders?: boolean | User$ordersArgs<ExtArgs>
     inventoryItems?: boolean | User$inventoryItemsArgs<ExtArgs>
-    settings?: boolean | User$settingsArgs<ExtArgs>
+    messages?: boolean | User$messagesArgs<ExtArgs>
+    orders?: boolean | User$ordersArgs<ExtArgs>
+    prescriptions?: boolean | User$prescriptionsArgs<ExtArgs>
     staff?: boolean | User$staffArgs<ExtArgs>
+    settings?: boolean | User$settingsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2830,21 +2830,19 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      consultations: Prisma.$ConsultationPayload<ExtArgs>[]
       assignedConsultations: Prisma.$ConsultationPayload<ExtArgs>[]
-      messages: Prisma.$MessagePayload<ExtArgs>[]
+      consultations: Prisma.$ConsultationPayload<ExtArgs>[]
       deliveries: Prisma.$DeliveryPayload<ExtArgs>[]
-      prescriptions: Prisma.$PrescriptionPayload<ExtArgs>[]
-      orders: Prisma.$OrderPayload<ExtArgs>[]
       inventoryItems: Prisma.$InventoryItemPayload<ExtArgs>[]
-      settings: Prisma.$UserSettingsPayload<ExtArgs> | null
+      messages: Prisma.$MessagePayload<ExtArgs>[]
+      orders: Prisma.$OrderPayload<ExtArgs>[]
+      prescriptions: Prisma.$PrescriptionPayload<ExtArgs>[]
       staff: Prisma.$StaffPayload<ExtArgs> | null
+      settings: Prisma.$UserSettingsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      username: string
       email: string
-      passwordHash: string
       firstName: string
       lastName: string
       role: $Enums.UserRole
@@ -2859,6 +2857,8 @@ export namespace Prisma {
       isVerified: boolean
       createdAt: Date
       updatedAt: Date
+      passwordHash: string
+      username: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -3253,15 +3253,15 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    consultations<T extends User$consultationsArgs<ExtArgs> = {}>(args?: Subset<T, User$consultationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConsultationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     assignedConsultations<T extends User$assignedConsultationsArgs<ExtArgs> = {}>(args?: Subset<T, User$assignedConsultationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConsultationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    messages<T extends User$messagesArgs<ExtArgs> = {}>(args?: Subset<T, User$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    consultations<T extends User$consultationsArgs<ExtArgs> = {}>(args?: Subset<T, User$consultationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConsultationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     deliveries<T extends User$deliveriesArgs<ExtArgs> = {}>(args?: Subset<T, User$deliveriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    prescriptions<T extends User$prescriptionsArgs<ExtArgs> = {}>(args?: Subset<T, User$prescriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    orders<T extends User$ordersArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     inventoryItems<T extends User$inventoryItemsArgs<ExtArgs> = {}>(args?: Subset<T, User$inventoryItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    settings<T extends User$settingsArgs<ExtArgs> = {}>(args?: Subset<T, User$settingsArgs<ExtArgs>>): Prisma__UserSettingsClient<$Result.GetResult<Prisma.$UserSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    messages<T extends User$messagesArgs<ExtArgs> = {}>(args?: Subset<T, User$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    orders<T extends User$ordersArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    prescriptions<T extends User$prescriptionsArgs<ExtArgs> = {}>(args?: Subset<T, User$prescriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     staff<T extends User$staffArgs<ExtArgs> = {}>(args?: Subset<T, User$staffArgs<ExtArgs>>): Prisma__StaffClient<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    settings<T extends User$settingsArgs<ExtArgs> = {}>(args?: Subset<T, User$settingsArgs<ExtArgs>>): Prisma__UserSettingsClient<$Result.GetResult<Prisma.$UserSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3292,9 +3292,7 @@ export namespace Prisma {
    */
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
-    readonly username: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
-    readonly passwordHash: FieldRef<"User", 'String'>
     readonly firstName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'UserRole'>
@@ -3309,6 +3307,8 @@ export namespace Prisma {
     readonly isVerified: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly passwordHash: FieldRef<"User", 'String'>
+    readonly username: FieldRef<"User", 'String'>
   }
     
 
@@ -3697,30 +3697,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.consultations
-   */
-  export type User$consultationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Consultation
-     */
-    select?: ConsultationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Consultation
-     */
-    omit?: ConsultationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConsultationInclude<ExtArgs> | null
-    where?: ConsultationWhereInput
-    orderBy?: ConsultationOrderByWithRelationInput | ConsultationOrderByWithRelationInput[]
-    cursor?: ConsultationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ConsultationScalarFieldEnum | ConsultationScalarFieldEnum[]
-  }
-
-  /**
    * User.assignedConsultations
    */
   export type User$assignedConsultationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3745,27 +3721,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.messages
+   * User.consultations
    */
-  export type User$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$consultationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Message
+     * Select specific fields to fetch from the Consultation
      */
-    select?: MessageSelect<ExtArgs> | null
+    select?: ConsultationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Message
+     * Omit specific fields from the Consultation
      */
-    omit?: MessageOmit<ExtArgs> | null
+    omit?: ConsultationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MessageInclude<ExtArgs> | null
-    where?: MessageWhereInput
-    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
-    cursor?: MessageWhereUniqueInput
+    include?: ConsultationInclude<ExtArgs> | null
+    where?: ConsultationWhereInput
+    orderBy?: ConsultationOrderByWithRelationInput | ConsultationOrderByWithRelationInput[]
+    cursor?: ConsultationWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+    distinct?: ConsultationScalarFieldEnum | ConsultationScalarFieldEnum[]
   }
 
   /**
@@ -3793,27 +3769,51 @@ export namespace Prisma {
   }
 
   /**
-   * User.prescriptions
+   * User.inventoryItems
    */
-  export type User$prescriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$inventoryItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Prescription
+     * Select specific fields to fetch from the InventoryItem
      */
-    select?: PrescriptionSelect<ExtArgs> | null
+    select?: InventoryItemSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Prescription
+     * Omit specific fields from the InventoryItem
      */
-    omit?: PrescriptionOmit<ExtArgs> | null
+    omit?: InventoryItemOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PrescriptionInclude<ExtArgs> | null
-    where?: PrescriptionWhereInput
-    orderBy?: PrescriptionOrderByWithRelationInput | PrescriptionOrderByWithRelationInput[]
-    cursor?: PrescriptionWhereUniqueInput
+    include?: InventoryItemInclude<ExtArgs> | null
+    where?: InventoryItemWhereInput
+    orderBy?: InventoryItemOrderByWithRelationInput | InventoryItemOrderByWithRelationInput[]
+    cursor?: InventoryItemWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: PrescriptionScalarFieldEnum | PrescriptionScalarFieldEnum[]
+    distinct?: InventoryItemScalarFieldEnum | InventoryItemScalarFieldEnum[]
+  }
+
+  /**
+   * User.messages
+   */
+  export type User$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    cursor?: MessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
   }
 
   /**
@@ -3841,46 +3841,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.inventoryItems
+   * User.prescriptions
    */
-  export type User$inventoryItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$prescriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the InventoryItem
+     * Select specific fields to fetch from the Prescription
      */
-    select?: InventoryItemSelect<ExtArgs> | null
+    select?: PrescriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the InventoryItem
+     * Omit specific fields from the Prescription
      */
-    omit?: InventoryItemOmit<ExtArgs> | null
+    omit?: PrescriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: InventoryItemInclude<ExtArgs> | null
-    where?: InventoryItemWhereInput
-    orderBy?: InventoryItemOrderByWithRelationInput | InventoryItemOrderByWithRelationInput[]
-    cursor?: InventoryItemWhereUniqueInput
+    include?: PrescriptionInclude<ExtArgs> | null
+    where?: PrescriptionWhereInput
+    orderBy?: PrescriptionOrderByWithRelationInput | PrescriptionOrderByWithRelationInput[]
+    cursor?: PrescriptionWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: InventoryItemScalarFieldEnum | InventoryItemScalarFieldEnum[]
-  }
-
-  /**
-   * User.settings
-   */
-  export type User$settingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserSettings
-     */
-    select?: UserSettingsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserSettings
-     */
-    omit?: UserSettingsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserSettingsInclude<ExtArgs> | null
-    where?: UserSettingsWhereInput
+    distinct?: PrescriptionScalarFieldEnum | PrescriptionScalarFieldEnum[]
   }
 
   /**
@@ -3900,6 +3881,25 @@ export namespace Prisma {
      */
     include?: StaffInclude<ExtArgs> | null
     where?: StaffWhereInput
+  }
+
+  /**
+   * User.settings
+   */
+  export type User$settingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSettings
+     */
+    select?: UserSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSettings
+     */
+    omit?: UserSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSettingsInclude<ExtArgs> | null
+    where?: UserSettingsWhereInput
   }
 
   /**
@@ -3944,58 +3944,58 @@ export namespace Prisma {
   export type ConsultationMinAggregateOutputType = {
     id: string | null
     userId: string | null
-    anonymousId: string | null
     type: string | null
     status: $Enums.ConsultationStatus | null
     description: string | null
-    symptoms: string | null
-    medications: string | null
-    allergies: string | null
-    age: number | null
-    gender: string | null
-    isAnonymous: boolean | null
-    assignedPharmacistId: string | null
-    assignedStaffId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    age: number | null
+    allergies: string | null
+    anonymousId: string | null
+    assignedPharmacistId: string | null
+    gender: string | null
+    isAnonymous: boolean | null
+    medications: string | null
+    symptoms: string | null
+    assignedStaffId: string | null
   }
 
   export type ConsultationMaxAggregateOutputType = {
     id: string | null
     userId: string | null
-    anonymousId: string | null
     type: string | null
     status: $Enums.ConsultationStatus | null
     description: string | null
-    symptoms: string | null
-    medications: string | null
-    allergies: string | null
-    age: number | null
-    gender: string | null
-    isAnonymous: boolean | null
-    assignedPharmacistId: string | null
-    assignedStaffId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    age: number | null
+    allergies: string | null
+    anonymousId: string | null
+    assignedPharmacistId: string | null
+    gender: string | null
+    isAnonymous: boolean | null
+    medications: string | null
+    symptoms: string | null
+    assignedStaffId: string | null
   }
 
   export type ConsultationCountAggregateOutputType = {
     id: number
     userId: number
-    anonymousId: number
     type: number
     status: number
     description: number
-    symptoms: number
-    medications: number
-    allergies: number
-    age: number
-    gender: number
-    isAnonymous: number
-    assignedPharmacistId: number
-    assignedStaffId: number
     createdAt: number
     updatedAt: number
+    age: number
+    allergies: number
+    anonymousId: number
+    assignedPharmacistId: number
+    gender: number
+    isAnonymous: number
+    medications: number
+    symptoms: number
+    assignedStaffId: number
     _all: number
   }
 
@@ -4011,58 +4011,58 @@ export namespace Prisma {
   export type ConsultationMinAggregateInputType = {
     id?: true
     userId?: true
-    anonymousId?: true
     type?: true
     status?: true
     description?: true
-    symptoms?: true
-    medications?: true
-    allergies?: true
-    age?: true
-    gender?: true
-    isAnonymous?: true
-    assignedPharmacistId?: true
-    assignedStaffId?: true
     createdAt?: true
     updatedAt?: true
+    age?: true
+    allergies?: true
+    anonymousId?: true
+    assignedPharmacistId?: true
+    gender?: true
+    isAnonymous?: true
+    medications?: true
+    symptoms?: true
+    assignedStaffId?: true
   }
 
   export type ConsultationMaxAggregateInputType = {
     id?: true
     userId?: true
-    anonymousId?: true
     type?: true
     status?: true
     description?: true
-    symptoms?: true
-    medications?: true
-    allergies?: true
-    age?: true
-    gender?: true
-    isAnonymous?: true
-    assignedPharmacistId?: true
-    assignedStaffId?: true
     createdAt?: true
     updatedAt?: true
+    age?: true
+    allergies?: true
+    anonymousId?: true
+    assignedPharmacistId?: true
+    gender?: true
+    isAnonymous?: true
+    medications?: true
+    symptoms?: true
+    assignedStaffId?: true
   }
 
   export type ConsultationCountAggregateInputType = {
     id?: true
     userId?: true
-    anonymousId?: true
     type?: true
     status?: true
     description?: true
-    symptoms?: true
-    medications?: true
-    allergies?: true
-    age?: true
-    gender?: true
-    isAnonymous?: true
-    assignedPharmacistId?: true
-    assignedStaffId?: true
     createdAt?: true
     updatedAt?: true
+    age?: true
+    allergies?: true
+    anonymousId?: true
+    assignedPharmacistId?: true
+    gender?: true
+    isAnonymous?: true
+    medications?: true
+    symptoms?: true
+    assignedStaffId?: true
     _all?: true
   }
 
@@ -4155,20 +4155,20 @@ export namespace Prisma {
   export type ConsultationGroupByOutputType = {
     id: string
     userId: string | null
-    anonymousId: string | null
     type: string
     status: $Enums.ConsultationStatus
     description: string | null
-    symptoms: string | null
-    medications: string | null
-    allergies: string | null
-    age: number | null
-    gender: string | null
-    isAnonymous: boolean
-    assignedPharmacistId: string | null
-    assignedStaffId: string | null
     createdAt: Date
     updatedAt: Date
+    age: number | null
+    allergies: string | null
+    anonymousId: string | null
+    assignedPharmacistId: string | null
+    gender: string | null
+    isAnonymous: boolean
+    medications: string | null
+    symptoms: string | null
+    assignedStaffId: string | null
     _count: ConsultationCountAggregateOutputType | null
     _avg: ConsultationAvgAggregateOutputType | null
     _sum: ConsultationSumAggregateOutputType | null
@@ -4193,23 +4193,23 @@ export namespace Prisma {
   export type ConsultationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    anonymousId?: boolean
     type?: boolean
     status?: boolean
     description?: boolean
-    symptoms?: boolean
-    medications?: boolean
-    allergies?: boolean
-    age?: boolean
-    gender?: boolean
-    isAnonymous?: boolean
-    assignedPharmacistId?: boolean
-    assignedStaffId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Consultation$userArgs<ExtArgs>
+    age?: boolean
+    allergies?: boolean
+    anonymousId?: boolean
+    assignedPharmacistId?: boolean
+    gender?: boolean
+    isAnonymous?: boolean
+    medications?: boolean
+    symptoms?: boolean
+    assignedStaffId?: boolean
     assignedPharmacist?: boolean | Consultation$assignedPharmacistArgs<ExtArgs>
     assignedStaff?: boolean | Consultation$assignedStaffArgs<ExtArgs>
+    user?: boolean | Consultation$userArgs<ExtArgs>
     messages?: boolean | Consultation$messagesArgs<ExtArgs>
     prescriptions?: boolean | Consultation$prescriptionsArgs<ExtArgs>
     _count?: boolean | ConsultationCountOutputTypeDefaultArgs<ExtArgs>
@@ -4218,112 +4218,112 @@ export namespace Prisma {
   export type ConsultationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    anonymousId?: boolean
     type?: boolean
     status?: boolean
     description?: boolean
-    symptoms?: boolean
-    medications?: boolean
-    allergies?: boolean
-    age?: boolean
-    gender?: boolean
-    isAnonymous?: boolean
-    assignedPharmacistId?: boolean
-    assignedStaffId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Consultation$userArgs<ExtArgs>
+    age?: boolean
+    allergies?: boolean
+    anonymousId?: boolean
+    assignedPharmacistId?: boolean
+    gender?: boolean
+    isAnonymous?: boolean
+    medications?: boolean
+    symptoms?: boolean
+    assignedStaffId?: boolean
     assignedPharmacist?: boolean | Consultation$assignedPharmacistArgs<ExtArgs>
     assignedStaff?: boolean | Consultation$assignedStaffArgs<ExtArgs>
+    user?: boolean | Consultation$userArgs<ExtArgs>
   }, ExtArgs["result"]["consultation"]>
 
   export type ConsultationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    anonymousId?: boolean
     type?: boolean
     status?: boolean
     description?: boolean
-    symptoms?: boolean
-    medications?: boolean
-    allergies?: boolean
-    age?: boolean
-    gender?: boolean
-    isAnonymous?: boolean
-    assignedPharmacistId?: boolean
-    assignedStaffId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Consultation$userArgs<ExtArgs>
+    age?: boolean
+    allergies?: boolean
+    anonymousId?: boolean
+    assignedPharmacistId?: boolean
+    gender?: boolean
+    isAnonymous?: boolean
+    medications?: boolean
+    symptoms?: boolean
+    assignedStaffId?: boolean
     assignedPharmacist?: boolean | Consultation$assignedPharmacistArgs<ExtArgs>
     assignedStaff?: boolean | Consultation$assignedStaffArgs<ExtArgs>
+    user?: boolean | Consultation$userArgs<ExtArgs>
   }, ExtArgs["result"]["consultation"]>
 
   export type ConsultationSelectScalar = {
     id?: boolean
     userId?: boolean
-    anonymousId?: boolean
     type?: boolean
     status?: boolean
     description?: boolean
-    symptoms?: boolean
-    medications?: boolean
-    allergies?: boolean
-    age?: boolean
-    gender?: boolean
-    isAnonymous?: boolean
-    assignedPharmacistId?: boolean
-    assignedStaffId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    age?: boolean
+    allergies?: boolean
+    anonymousId?: boolean
+    assignedPharmacistId?: boolean
+    gender?: boolean
+    isAnonymous?: boolean
+    medications?: boolean
+    symptoms?: boolean
+    assignedStaffId?: boolean
   }
 
-  export type ConsultationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "anonymousId" | "type" | "status" | "description" | "symptoms" | "medications" | "allergies" | "age" | "gender" | "isAnonymous" | "assignedPharmacistId" | "assignedStaffId" | "createdAt" | "updatedAt", ExtArgs["result"]["consultation"]>
+  export type ConsultationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "status" | "description" | "createdAt" | "updatedAt" | "age" | "allergies" | "anonymousId" | "assignedPharmacistId" | "gender" | "isAnonymous" | "medications" | "symptoms" | "assignedStaffId", ExtArgs["result"]["consultation"]>
   export type ConsultationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Consultation$userArgs<ExtArgs>
     assignedPharmacist?: boolean | Consultation$assignedPharmacistArgs<ExtArgs>
     assignedStaff?: boolean | Consultation$assignedStaffArgs<ExtArgs>
+    user?: boolean | Consultation$userArgs<ExtArgs>
     messages?: boolean | Consultation$messagesArgs<ExtArgs>
     prescriptions?: boolean | Consultation$prescriptionsArgs<ExtArgs>
     _count?: boolean | ConsultationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ConsultationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Consultation$userArgs<ExtArgs>
     assignedPharmacist?: boolean | Consultation$assignedPharmacistArgs<ExtArgs>
     assignedStaff?: boolean | Consultation$assignedStaffArgs<ExtArgs>
+    user?: boolean | Consultation$userArgs<ExtArgs>
   }
   export type ConsultationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Consultation$userArgs<ExtArgs>
     assignedPharmacist?: boolean | Consultation$assignedPharmacistArgs<ExtArgs>
     assignedStaff?: boolean | Consultation$assignedStaffArgs<ExtArgs>
+    user?: boolean | Consultation$userArgs<ExtArgs>
   }
 
   export type $ConsultationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Consultation"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
       assignedPharmacist: Prisma.$UserPayload<ExtArgs> | null
       assignedStaff: Prisma.$StaffPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs> | null
       messages: Prisma.$MessagePayload<ExtArgs>[]
       prescriptions: Prisma.$PrescriptionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string | null
-      anonymousId: string | null
       type: string
       status: $Enums.ConsultationStatus
       description: string | null
-      symptoms: string | null
-      medications: string | null
-      allergies: string | null
-      age: number | null
-      gender: string | null
-      isAnonymous: boolean
-      assignedPharmacistId: string | null
-      assignedStaffId: string | null
       createdAt: Date
       updatedAt: Date
+      age: number | null
+      allergies: string | null
+      anonymousId: string | null
+      assignedPharmacistId: string | null
+      gender: string | null
+      isAnonymous: boolean
+      medications: string | null
+      symptoms: string | null
+      assignedStaffId: string | null
     }, ExtArgs["result"]["consultation"]>
     composites: {}
   }
@@ -4718,9 +4718,9 @@ export namespace Prisma {
    */
   export interface Prisma__ConsultationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends Consultation$userArgs<ExtArgs> = {}>(args?: Subset<T, Consultation$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     assignedPharmacist<T extends Consultation$assignedPharmacistArgs<ExtArgs> = {}>(args?: Subset<T, Consultation$assignedPharmacistArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     assignedStaff<T extends Consultation$assignedStaffArgs<ExtArgs> = {}>(args?: Subset<T, Consultation$assignedStaffArgs<ExtArgs>>): Prisma__StaffClient<$Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends Consultation$userArgs<ExtArgs> = {}>(args?: Subset<T, Consultation$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     messages<T extends Consultation$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Consultation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     prescriptions<T extends Consultation$prescriptionsArgs<ExtArgs> = {}>(args?: Subset<T, Consultation$prescriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -4754,20 +4754,20 @@ export namespace Prisma {
   interface ConsultationFieldRefs {
     readonly id: FieldRef<"Consultation", 'String'>
     readonly userId: FieldRef<"Consultation", 'String'>
-    readonly anonymousId: FieldRef<"Consultation", 'String'>
     readonly type: FieldRef<"Consultation", 'String'>
     readonly status: FieldRef<"Consultation", 'ConsultationStatus'>
     readonly description: FieldRef<"Consultation", 'String'>
-    readonly symptoms: FieldRef<"Consultation", 'String'>
-    readonly medications: FieldRef<"Consultation", 'String'>
-    readonly allergies: FieldRef<"Consultation", 'String'>
-    readonly age: FieldRef<"Consultation", 'Int'>
-    readonly gender: FieldRef<"Consultation", 'String'>
-    readonly isAnonymous: FieldRef<"Consultation", 'Boolean'>
-    readonly assignedPharmacistId: FieldRef<"Consultation", 'String'>
-    readonly assignedStaffId: FieldRef<"Consultation", 'String'>
     readonly createdAt: FieldRef<"Consultation", 'DateTime'>
     readonly updatedAt: FieldRef<"Consultation", 'DateTime'>
+    readonly age: FieldRef<"Consultation", 'Int'>
+    readonly allergies: FieldRef<"Consultation", 'String'>
+    readonly anonymousId: FieldRef<"Consultation", 'String'>
+    readonly assignedPharmacistId: FieldRef<"Consultation", 'String'>
+    readonly gender: FieldRef<"Consultation", 'String'>
+    readonly isAnonymous: FieldRef<"Consultation", 'Boolean'>
+    readonly medications: FieldRef<"Consultation", 'String'>
+    readonly symptoms: FieldRef<"Consultation", 'String'>
+    readonly assignedStaffId: FieldRef<"Consultation", 'String'>
   }
     
 
@@ -5164,25 +5164,6 @@ export namespace Prisma {
   }
 
   /**
-   * Consultation.user
-   */
-  export type Consultation$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
    * Consultation.assignedPharmacist
    */
   export type Consultation$assignedPharmacistArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5218,6 +5199,25 @@ export namespace Prisma {
      */
     include?: StaffInclude<ExtArgs> | null
     where?: StaffWhereInput
+  }
+
+  /**
+   * Consultation.user
+   */
+  export type Consultation$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -5301,33 +5301,33 @@ export namespace Prisma {
     id: string | null
     chatId: string | null
     userId: string | null
-    anonymousId: string | null
     content: string | null
     type: $Enums.MessageType | null
-    isFromPharmacist: boolean | null
     createdAt: Date | null
+    anonymousId: string | null
+    isFromPharmacist: boolean | null
   }
 
   export type MessageMaxAggregateOutputType = {
     id: string | null
     chatId: string | null
     userId: string | null
-    anonymousId: string | null
     content: string | null
     type: $Enums.MessageType | null
-    isFromPharmacist: boolean | null
     createdAt: Date | null
+    anonymousId: string | null
+    isFromPharmacist: boolean | null
   }
 
   export type MessageCountAggregateOutputType = {
     id: number
     chatId: number
     userId: number
-    anonymousId: number
     content: number
     type: number
-    isFromPharmacist: number
     createdAt: number
+    anonymousId: number
+    isFromPharmacist: number
     _all: number
   }
 
@@ -5336,33 +5336,33 @@ export namespace Prisma {
     id?: true
     chatId?: true
     userId?: true
-    anonymousId?: true
     content?: true
     type?: true
-    isFromPharmacist?: true
     createdAt?: true
+    anonymousId?: true
+    isFromPharmacist?: true
   }
 
   export type MessageMaxAggregateInputType = {
     id?: true
     chatId?: true
     userId?: true
-    anonymousId?: true
     content?: true
     type?: true
-    isFromPharmacist?: true
     createdAt?: true
+    anonymousId?: true
+    isFromPharmacist?: true
   }
 
   export type MessageCountAggregateInputType = {
     id?: true
     chatId?: true
     userId?: true
-    anonymousId?: true
     content?: true
     type?: true
-    isFromPharmacist?: true
     createdAt?: true
+    anonymousId?: true
+    isFromPharmacist?: true
     _all?: true
   }
 
@@ -5442,11 +5442,11 @@ export namespace Prisma {
     id: string
     chatId: string
     userId: string | null
-    anonymousId: string | null
     content: string
     type: $Enums.MessageType
-    isFromPharmacist: boolean
     createdAt: Date
+    anonymousId: string | null
+    isFromPharmacist: boolean
     _count: MessageCountAggregateOutputType | null
     _min: MessageMinAggregateOutputType | null
     _max: MessageMaxAggregateOutputType | null
@@ -5470,81 +5470,81 @@ export namespace Prisma {
     id?: boolean
     chatId?: boolean
     userId?: boolean
-    anonymousId?: boolean
     content?: boolean
     type?: boolean
-    isFromPharmacist?: boolean
     createdAt?: boolean
+    anonymousId?: boolean
+    isFromPharmacist?: boolean
+    consultation?: boolean | ConsultationDefaultArgs<ExtArgs>
     user?: boolean | Message$userArgs<ExtArgs>
-    consultation?: boolean | Message$consultationArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
 
   export type MessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     chatId?: boolean
     userId?: boolean
-    anonymousId?: boolean
     content?: boolean
     type?: boolean
-    isFromPharmacist?: boolean
     createdAt?: boolean
+    anonymousId?: boolean
+    isFromPharmacist?: boolean
+    consultation?: boolean | ConsultationDefaultArgs<ExtArgs>
     user?: boolean | Message$userArgs<ExtArgs>
-    consultation?: boolean | Message$consultationArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
 
   export type MessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     chatId?: boolean
     userId?: boolean
-    anonymousId?: boolean
     content?: boolean
     type?: boolean
-    isFromPharmacist?: boolean
     createdAt?: boolean
+    anonymousId?: boolean
+    isFromPharmacist?: boolean
+    consultation?: boolean | ConsultationDefaultArgs<ExtArgs>
     user?: boolean | Message$userArgs<ExtArgs>
-    consultation?: boolean | Message$consultationArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
 
   export type MessageSelectScalar = {
     id?: boolean
     chatId?: boolean
     userId?: boolean
-    anonymousId?: boolean
     content?: boolean
     type?: boolean
-    isFromPharmacist?: boolean
     createdAt?: boolean
+    anonymousId?: boolean
+    isFromPharmacist?: boolean
   }
 
-  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "chatId" | "userId" | "anonymousId" | "content" | "type" | "isFromPharmacist" | "createdAt", ExtArgs["result"]["message"]>
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "chatId" | "userId" | "content" | "type" | "createdAt" | "anonymousId" | "isFromPharmacist", ExtArgs["result"]["message"]>
   export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    consultation?: boolean | ConsultationDefaultArgs<ExtArgs>
     user?: boolean | Message$userArgs<ExtArgs>
-    consultation?: boolean | Message$consultationArgs<ExtArgs>
   }
   export type MessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    consultation?: boolean | ConsultationDefaultArgs<ExtArgs>
     user?: boolean | Message$userArgs<ExtArgs>
-    consultation?: boolean | Message$consultationArgs<ExtArgs>
   }
   export type MessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    consultation?: boolean | ConsultationDefaultArgs<ExtArgs>
     user?: boolean | Message$userArgs<ExtArgs>
-    consultation?: boolean | Message$consultationArgs<ExtArgs>
   }
 
   export type $MessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Message"
     objects: {
+      consultation: Prisma.$ConsultationPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs> | null
-      consultation: Prisma.$ConsultationPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       chatId: string
       userId: string | null
-      anonymousId: string | null
       content: string
       type: $Enums.MessageType
-      isFromPharmacist: boolean
       createdAt: Date
+      anonymousId: string | null
+      isFromPharmacist: boolean
     }, ExtArgs["result"]["message"]>
     composites: {}
   }
@@ -5939,8 +5939,8 @@ export namespace Prisma {
    */
   export interface Prisma__MessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    consultation<T extends ConsultationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConsultationDefaultArgs<ExtArgs>>): Prisma__ConsultationClient<$Result.GetResult<Prisma.$ConsultationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends Message$userArgs<ExtArgs> = {}>(args?: Subset<T, Message$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    consultation<T extends Message$consultationArgs<ExtArgs> = {}>(args?: Subset<T, Message$consultationArgs<ExtArgs>>): Prisma__ConsultationClient<$Result.GetResult<Prisma.$ConsultationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5973,11 +5973,11 @@ export namespace Prisma {
     readonly id: FieldRef<"Message", 'String'>
     readonly chatId: FieldRef<"Message", 'String'>
     readonly userId: FieldRef<"Message", 'String'>
-    readonly anonymousId: FieldRef<"Message", 'String'>
     readonly content: FieldRef<"Message", 'String'>
     readonly type: FieldRef<"Message", 'MessageType'>
-    readonly isFromPharmacist: FieldRef<"Message", 'Boolean'>
     readonly createdAt: FieldRef<"Message", 'DateTime'>
+    readonly anonymousId: FieldRef<"Message", 'String'>
+    readonly isFromPharmacist: FieldRef<"Message", 'Boolean'>
   }
     
 
@@ -6393,25 +6393,6 @@ export namespace Prisma {
   }
 
   /**
-   * Message.consultation
-   */
-  export type Message$consultationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Consultation
-     */
-    select?: ConsultationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Consultation
-     */
-    omit?: ConsultationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ConsultationInclude<ExtArgs> | null
-    where?: ConsultationWhereInput
-  }
-
-  /**
    * Message without action
    */
   export type MessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6443,8 +6424,6 @@ export namespace Prisma {
   export type DeliveryMinAggregateOutputType = {
     id: string | null
     userId: string | null
-    anonymousId: string | null
-    orderId: string | null
     status: $Enums.DeliveryStatus | null
     trackingNumber: string | null
     estimatedDelivery: Date | null
@@ -6453,18 +6432,18 @@ export namespace Prisma {
     city: string | null
     state: string | null
     zipCode: string | null
-    dropPoint: string | null
-    packageType: string | null
-    isAnonymous: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    anonymousId: string | null
+    dropPoint: string | null
+    isAnonymous: boolean | null
+    orderId: string | null
+    packageType: string | null
   }
 
   export type DeliveryMaxAggregateOutputType = {
     id: string | null
     userId: string | null
-    anonymousId: string | null
-    orderId: string | null
     status: $Enums.DeliveryStatus | null
     trackingNumber: string | null
     estimatedDelivery: Date | null
@@ -6473,18 +6452,18 @@ export namespace Prisma {
     city: string | null
     state: string | null
     zipCode: string | null
-    dropPoint: string | null
-    packageType: string | null
-    isAnonymous: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
+    anonymousId: string | null
+    dropPoint: string | null
+    isAnonymous: boolean | null
+    orderId: string | null
+    packageType: string | null
   }
 
   export type DeliveryCountAggregateOutputType = {
     id: number
     userId: number
-    anonymousId: number
-    orderId: number
     status: number
     trackingNumber: number
     estimatedDelivery: number
@@ -6493,11 +6472,13 @@ export namespace Prisma {
     city: number
     state: number
     zipCode: number
-    dropPoint: number
-    packageType: number
-    isAnonymous: number
     createdAt: number
     updatedAt: number
+    anonymousId: number
+    dropPoint: number
+    isAnonymous: number
+    orderId: number
+    packageType: number
     _all: number
   }
 
@@ -6505,8 +6486,6 @@ export namespace Prisma {
   export type DeliveryMinAggregateInputType = {
     id?: true
     userId?: true
-    anonymousId?: true
-    orderId?: true
     status?: true
     trackingNumber?: true
     estimatedDelivery?: true
@@ -6515,18 +6494,18 @@ export namespace Prisma {
     city?: true
     state?: true
     zipCode?: true
-    dropPoint?: true
-    packageType?: true
-    isAnonymous?: true
     createdAt?: true
     updatedAt?: true
+    anonymousId?: true
+    dropPoint?: true
+    isAnonymous?: true
+    orderId?: true
+    packageType?: true
   }
 
   export type DeliveryMaxAggregateInputType = {
     id?: true
     userId?: true
-    anonymousId?: true
-    orderId?: true
     status?: true
     trackingNumber?: true
     estimatedDelivery?: true
@@ -6535,18 +6514,18 @@ export namespace Prisma {
     city?: true
     state?: true
     zipCode?: true
-    dropPoint?: true
-    packageType?: true
-    isAnonymous?: true
     createdAt?: true
     updatedAt?: true
+    anonymousId?: true
+    dropPoint?: true
+    isAnonymous?: true
+    orderId?: true
+    packageType?: true
   }
 
   export type DeliveryCountAggregateInputType = {
     id?: true
     userId?: true
-    anonymousId?: true
-    orderId?: true
     status?: true
     trackingNumber?: true
     estimatedDelivery?: true
@@ -6555,11 +6534,13 @@ export namespace Prisma {
     city?: true
     state?: true
     zipCode?: true
-    dropPoint?: true
-    packageType?: true
-    isAnonymous?: true
     createdAt?: true
     updatedAt?: true
+    anonymousId?: true
+    dropPoint?: true
+    isAnonymous?: true
+    orderId?: true
+    packageType?: true
     _all?: true
   }
 
@@ -6638,8 +6619,6 @@ export namespace Prisma {
   export type DeliveryGroupByOutputType = {
     id: string
     userId: string | null
-    anonymousId: string | null
-    orderId: string | null
     status: $Enums.DeliveryStatus
     trackingNumber: string
     estimatedDelivery: Date | null
@@ -6648,11 +6627,13 @@ export namespace Prisma {
     city: string
     state: string
     zipCode: string
-    dropPoint: string | null
-    packageType: string
-    isAnonymous: boolean
     createdAt: Date
     updatedAt: Date
+    anonymousId: string | null
+    dropPoint: string | null
+    isAnonymous: boolean
+    orderId: string | null
+    packageType: string
     _count: DeliveryCountAggregateOutputType | null
     _min: DeliveryMinAggregateOutputType | null
     _max: DeliveryMaxAggregateOutputType | null
@@ -6675,8 +6656,6 @@ export namespace Prisma {
   export type DeliverySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    anonymousId?: boolean
-    orderId?: boolean
     status?: boolean
     trackingNumber?: boolean
     estimatedDelivery?: boolean
@@ -6685,20 +6664,20 @@ export namespace Prisma {
     city?: boolean
     state?: boolean
     zipCode?: boolean
-    dropPoint?: boolean
-    packageType?: boolean
-    isAnonymous?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Delivery$userArgs<ExtArgs>
+    anonymousId?: boolean
+    dropPoint?: boolean
+    isAnonymous?: boolean
+    orderId?: boolean
+    packageType?: boolean
     order?: boolean | Delivery$orderArgs<ExtArgs>
+    user?: boolean | Delivery$userArgs<ExtArgs>
   }, ExtArgs["result"]["delivery"]>
 
   export type DeliverySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    anonymousId?: boolean
-    orderId?: boolean
     status?: boolean
     trackingNumber?: boolean
     estimatedDelivery?: boolean
@@ -6707,20 +6686,20 @@ export namespace Prisma {
     city?: boolean
     state?: boolean
     zipCode?: boolean
-    dropPoint?: boolean
-    packageType?: boolean
-    isAnonymous?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Delivery$userArgs<ExtArgs>
+    anonymousId?: boolean
+    dropPoint?: boolean
+    isAnonymous?: boolean
+    orderId?: boolean
+    packageType?: boolean
     order?: boolean | Delivery$orderArgs<ExtArgs>
+    user?: boolean | Delivery$userArgs<ExtArgs>
   }, ExtArgs["result"]["delivery"]>
 
   export type DeliverySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    anonymousId?: boolean
-    orderId?: boolean
     status?: boolean
     trackingNumber?: boolean
     estimatedDelivery?: boolean
@@ -6729,20 +6708,20 @@ export namespace Prisma {
     city?: boolean
     state?: boolean
     zipCode?: boolean
-    dropPoint?: boolean
-    packageType?: boolean
-    isAnonymous?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Delivery$userArgs<ExtArgs>
+    anonymousId?: boolean
+    dropPoint?: boolean
+    isAnonymous?: boolean
+    orderId?: boolean
+    packageType?: boolean
     order?: boolean | Delivery$orderArgs<ExtArgs>
+    user?: boolean | Delivery$userArgs<ExtArgs>
   }, ExtArgs["result"]["delivery"]>
 
   export type DeliverySelectScalar = {
     id?: boolean
     userId?: boolean
-    anonymousId?: boolean
-    orderId?: boolean
     status?: boolean
     trackingNumber?: boolean
     estimatedDelivery?: boolean
@@ -6751,38 +6730,38 @@ export namespace Prisma {
     city?: boolean
     state?: boolean
     zipCode?: boolean
-    dropPoint?: boolean
-    packageType?: boolean
-    isAnonymous?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    anonymousId?: boolean
+    dropPoint?: boolean
+    isAnonymous?: boolean
+    orderId?: boolean
+    packageType?: boolean
   }
 
-  export type DeliveryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "anonymousId" | "orderId" | "status" | "trackingNumber" | "estimatedDelivery" | "actualDelivery" | "address" | "city" | "state" | "zipCode" | "dropPoint" | "packageType" | "isAnonymous" | "createdAt" | "updatedAt", ExtArgs["result"]["delivery"]>
+  export type DeliveryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "status" | "trackingNumber" | "estimatedDelivery" | "actualDelivery" | "address" | "city" | "state" | "zipCode" | "createdAt" | "updatedAt" | "anonymousId" | "dropPoint" | "isAnonymous" | "orderId" | "packageType", ExtArgs["result"]["delivery"]>
   export type DeliveryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Delivery$userArgs<ExtArgs>
     order?: boolean | Delivery$orderArgs<ExtArgs>
+    user?: boolean | Delivery$userArgs<ExtArgs>
   }
   export type DeliveryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Delivery$userArgs<ExtArgs>
     order?: boolean | Delivery$orderArgs<ExtArgs>
+    user?: boolean | Delivery$userArgs<ExtArgs>
   }
   export type DeliveryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Delivery$userArgs<ExtArgs>
     order?: boolean | Delivery$orderArgs<ExtArgs>
+    user?: boolean | Delivery$userArgs<ExtArgs>
   }
 
   export type $DeliveryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Delivery"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
       order: Prisma.$OrderPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string | null
-      anonymousId: string | null
-      orderId: string | null
       status: $Enums.DeliveryStatus
       trackingNumber: string
       estimatedDelivery: Date | null
@@ -6791,11 +6770,13 @@ export namespace Prisma {
       city: string
       state: string
       zipCode: string
-      dropPoint: string | null
-      packageType: string
-      isAnonymous: boolean
       createdAt: Date
       updatedAt: Date
+      anonymousId: string | null
+      dropPoint: string | null
+      isAnonymous: boolean
+      orderId: string | null
+      packageType: string
     }, ExtArgs["result"]["delivery"]>
     composites: {}
   }
@@ -7190,8 +7171,8 @@ export namespace Prisma {
    */
   export interface Prisma__DeliveryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends Delivery$userArgs<ExtArgs> = {}>(args?: Subset<T, Delivery$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     order<T extends Delivery$orderArgs<ExtArgs> = {}>(args?: Subset<T, Delivery$orderArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends Delivery$userArgs<ExtArgs> = {}>(args?: Subset<T, Delivery$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7223,8 +7204,6 @@ export namespace Prisma {
   interface DeliveryFieldRefs {
     readonly id: FieldRef<"Delivery", 'String'>
     readonly userId: FieldRef<"Delivery", 'String'>
-    readonly anonymousId: FieldRef<"Delivery", 'String'>
-    readonly orderId: FieldRef<"Delivery", 'String'>
     readonly status: FieldRef<"Delivery", 'DeliveryStatus'>
     readonly trackingNumber: FieldRef<"Delivery", 'String'>
     readonly estimatedDelivery: FieldRef<"Delivery", 'DateTime'>
@@ -7233,11 +7212,13 @@ export namespace Prisma {
     readonly city: FieldRef<"Delivery", 'String'>
     readonly state: FieldRef<"Delivery", 'String'>
     readonly zipCode: FieldRef<"Delivery", 'String'>
-    readonly dropPoint: FieldRef<"Delivery", 'String'>
-    readonly packageType: FieldRef<"Delivery", 'String'>
-    readonly isAnonymous: FieldRef<"Delivery", 'Boolean'>
     readonly createdAt: FieldRef<"Delivery", 'DateTime'>
     readonly updatedAt: FieldRef<"Delivery", 'DateTime'>
+    readonly anonymousId: FieldRef<"Delivery", 'String'>
+    readonly dropPoint: FieldRef<"Delivery", 'String'>
+    readonly isAnonymous: FieldRef<"Delivery", 'Boolean'>
+    readonly orderId: FieldRef<"Delivery", 'String'>
+    readonly packageType: FieldRef<"Delivery", 'String'>
   }
     
 
@@ -7634,25 +7615,6 @@ export namespace Prisma {
   }
 
   /**
-   * Delivery.user
-   */
-  export type Delivery$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
    * Delivery.order
    */
   export type Delivery$orderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7669,6 +7631,25 @@ export namespace Prisma {
      */
     include?: OrderInclude<ExtArgs> | null
     where?: OrderWhereInput
+  }
+
+  /**
+   * Delivery.user
+   */
+  export type Delivery$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -10467,10 +10448,10 @@ export namespace Prisma {
     isAnonymous?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    consultation?: boolean | Prescription$consultationArgs<ExtArgs>
-    user?: boolean | Prescription$userArgs<ExtArgs>
-    medication?: boolean | MedicationDefaultArgs<ExtArgs>
     orders?: boolean | Prescription$ordersArgs<ExtArgs>
+    consultation?: boolean | Prescription$consultationArgs<ExtArgs>
+    medication?: boolean | MedicationDefaultArgs<ExtArgs>
+    user?: boolean | Prescription$userArgs<ExtArgs>
     _count?: boolean | PrescriptionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["prescription"]>
 
@@ -10492,8 +10473,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     consultation?: boolean | Prescription$consultationArgs<ExtArgs>
-    user?: boolean | Prescription$userArgs<ExtArgs>
     medication?: boolean | MedicationDefaultArgs<ExtArgs>
+    user?: boolean | Prescription$userArgs<ExtArgs>
   }, ExtArgs["result"]["prescription"]>
 
   export type PrescriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10514,8 +10495,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     consultation?: boolean | Prescription$consultationArgs<ExtArgs>
-    user?: boolean | Prescription$userArgs<ExtArgs>
     medication?: boolean | MedicationDefaultArgs<ExtArgs>
+    user?: boolean | Prescription$userArgs<ExtArgs>
   }, ExtArgs["result"]["prescription"]>
 
   export type PrescriptionSelectScalar = {
@@ -10539,30 +10520,30 @@ export namespace Prisma {
 
   export type PrescriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "consultationId" | "userId" | "anonymousId" | "medicationId" | "prescribedBy" | "dosage" | "frequency" | "duration" | "quantity" | "refills" | "instructions" | "status" | "isAnonymous" | "createdAt" | "updatedAt", ExtArgs["result"]["prescription"]>
   export type PrescriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    consultation?: boolean | Prescription$consultationArgs<ExtArgs>
-    user?: boolean | Prescription$userArgs<ExtArgs>
-    medication?: boolean | MedicationDefaultArgs<ExtArgs>
     orders?: boolean | Prescription$ordersArgs<ExtArgs>
+    consultation?: boolean | Prescription$consultationArgs<ExtArgs>
+    medication?: boolean | MedicationDefaultArgs<ExtArgs>
+    user?: boolean | Prescription$userArgs<ExtArgs>
     _count?: boolean | PrescriptionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PrescriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     consultation?: boolean | Prescription$consultationArgs<ExtArgs>
-    user?: boolean | Prescription$userArgs<ExtArgs>
     medication?: boolean | MedicationDefaultArgs<ExtArgs>
+    user?: boolean | Prescription$userArgs<ExtArgs>
   }
   export type PrescriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     consultation?: boolean | Prescription$consultationArgs<ExtArgs>
-    user?: boolean | Prescription$userArgs<ExtArgs>
     medication?: boolean | MedicationDefaultArgs<ExtArgs>
+    user?: boolean | Prescription$userArgs<ExtArgs>
   }
 
   export type $PrescriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Prescription"
     objects: {
-      consultation: Prisma.$ConsultationPayload<ExtArgs> | null
-      user: Prisma.$UserPayload<ExtArgs> | null
-      medication: Prisma.$MedicationPayload<ExtArgs>
       orders: Prisma.$OrderPayload<ExtArgs>[]
+      consultation: Prisma.$ConsultationPayload<ExtArgs> | null
+      medication: Prisma.$MedicationPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10975,10 +10956,10 @@ export namespace Prisma {
    */
   export interface Prisma__PrescriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    consultation<T extends Prescription$consultationArgs<ExtArgs> = {}>(args?: Subset<T, Prescription$consultationArgs<ExtArgs>>): Prisma__ConsultationClient<$Result.GetResult<Prisma.$ConsultationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    user<T extends Prescription$userArgs<ExtArgs> = {}>(args?: Subset<T, Prescription$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    medication<T extends MedicationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MedicationDefaultArgs<ExtArgs>>): Prisma__MedicationClient<$Result.GetResult<Prisma.$MedicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     orders<T extends Prescription$ordersArgs<ExtArgs> = {}>(args?: Subset<T, Prescription$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    consultation<T extends Prescription$consultationArgs<ExtArgs> = {}>(args?: Subset<T, Prescription$consultationArgs<ExtArgs>>): Prisma__ConsultationClient<$Result.GetResult<Prisma.$ConsultationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    medication<T extends MedicationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MedicationDefaultArgs<ExtArgs>>): Prisma__MedicationClient<$Result.GetResult<Prisma.$MedicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends Prescription$userArgs<ExtArgs> = {}>(args?: Subset<T, Prescription$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11420,6 +11401,30 @@ export namespace Prisma {
   }
 
   /**
+   * Prescription.orders
+   */
+  export type Prescription$ordersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Order
+     */
+    select?: OrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Order
+     */
+    omit?: OrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderInclude<ExtArgs> | null
+    where?: OrderWhereInput
+    orderBy?: OrderOrderByWithRelationInput | OrderOrderByWithRelationInput[]
+    cursor?: OrderWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrderScalarFieldEnum | OrderScalarFieldEnum[]
+  }
+
+  /**
    * Prescription.consultation
    */
   export type Prescription$consultationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11455,30 +11460,6 @@ export namespace Prisma {
      */
     include?: UserInclude<ExtArgs> | null
     where?: UserWhereInput
-  }
-
-  /**
-   * Prescription.orders
-   */
-  export type Prescription$ordersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Order
-     */
-    select?: OrderSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Order
-     */
-    omit?: OrderOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OrderInclude<ExtArgs> | null
-    where?: OrderWhereInput
-    orderBy?: OrderOrderByWithRelationInput | OrderOrderByWithRelationInput[]
-    cursor?: OrderWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: OrderScalarFieldEnum | OrderScalarFieldEnum[]
   }
 
   /**
@@ -11762,9 +11743,9 @@ export namespace Prisma {
     specialInstructions?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    delivery?: boolean | Order$deliveryArgs<ExtArgs>
     prescription?: boolean | Order$prescriptionArgs<ExtArgs>
     user?: boolean | Order$userArgs<ExtArgs>
-    delivery?: boolean | Order$deliveryArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -11821,9 +11802,9 @@ export namespace Prisma {
 
   export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prescriptionId" | "userId" | "anonymousId" | "orderNumber" | "status" | "totalAmount" | "paymentStatus" | "paymentMethod" | "isAnonymous" | "specialInstructions" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    delivery?: boolean | Order$deliveryArgs<ExtArgs>
     prescription?: boolean | Order$prescriptionArgs<ExtArgs>
     user?: boolean | Order$userArgs<ExtArgs>
-    delivery?: boolean | Order$deliveryArgs<ExtArgs>
   }
   export type OrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     prescription?: boolean | Order$prescriptionArgs<ExtArgs>
@@ -11837,9 +11818,9 @@ export namespace Prisma {
   export type $OrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Order"
     objects: {
+      delivery: Prisma.$DeliveryPayload<ExtArgs> | null
       prescription: Prisma.$PrescriptionPayload<ExtArgs> | null
       user: Prisma.$UserPayload<ExtArgs> | null
-      delivery: Prisma.$DeliveryPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12249,9 +12230,9 @@ export namespace Prisma {
    */
   export interface Prisma__OrderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    delivery<T extends Order$deliveryArgs<ExtArgs> = {}>(args?: Subset<T, Order$deliveryArgs<ExtArgs>>): Prisma__DeliveryClient<$Result.GetResult<Prisma.$DeliveryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     prescription<T extends Order$prescriptionArgs<ExtArgs> = {}>(args?: Subset<T, Order$prescriptionArgs<ExtArgs>>): Prisma__PrescriptionClient<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     user<T extends Order$userArgs<ExtArgs> = {}>(args?: Subset<T, Order$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    delivery<T extends Order$deliveryArgs<ExtArgs> = {}>(args?: Subset<T, Order$deliveryArgs<ExtArgs>>): Prisma__DeliveryClient<$Result.GetResult<Prisma.$DeliveryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12690,6 +12671,25 @@ export namespace Prisma {
   }
 
   /**
+   * Order.delivery
+   */
+  export type Order$deliveryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Delivery
+     */
+    select?: DeliverySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Delivery
+     */
+    omit?: DeliveryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeliveryInclude<ExtArgs> | null
+    where?: DeliveryWhereInput
+  }
+
+  /**
    * Order.prescription
    */
   export type Order$prescriptionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12725,25 +12725,6 @@ export namespace Prisma {
      */
     include?: UserInclude<ExtArgs> | null
     where?: UserWhereInput
-  }
-
-  /**
-   * Order.delivery
-   */
-  export type Order$deliveryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Delivery
-     */
-    select?: DeliverySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Delivery
-     */
-    omit?: DeliveryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DeliveryInclude<ExtArgs> | null
-    where?: DeliveryWhereInput
   }
 
   /**
@@ -15500,10 +15481,10 @@ export namespace Prisma {
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    schedules?: boolean | Staff$schedulesArgs<ExtArgs>
     assignedConsultations?: boolean | Staff$assignedConsultationsArgs<ExtArgs>
     shifts?: boolean | Staff$shiftsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    schedules?: boolean | Staff$schedulesArgs<ExtArgs>
     timeOffRequests?: boolean | Staff$timeOffRequestsArgs<ExtArgs>
     _count?: boolean | StaffCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["staff"]>
@@ -15566,10 +15547,10 @@ export namespace Prisma {
 
   export type StaffOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "employeeId" | "position" | "department" | "hireDate" | "salary" | "isActive" | "emergencyContact" | "emergencyPhone" | "certifications" | "specializations" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["staff"]>
   export type StaffInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    schedules?: boolean | Staff$schedulesArgs<ExtArgs>
     assignedConsultations?: boolean | Staff$assignedConsultationsArgs<ExtArgs>
     shifts?: boolean | Staff$shiftsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    schedules?: boolean | Staff$schedulesArgs<ExtArgs>
     timeOffRequests?: boolean | Staff$timeOffRequestsArgs<ExtArgs>
     _count?: boolean | StaffCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -15583,10 +15564,10 @@ export namespace Prisma {
   export type $StaffPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Staff"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      schedules: Prisma.$StaffSchedulePayload<ExtArgs>[]
       assignedConsultations: Prisma.$ConsultationPayload<ExtArgs>[]
       shifts: Prisma.$ShiftPayload<ExtArgs>[]
+      user: Prisma.$UserPayload<ExtArgs>
+      schedules: Prisma.$StaffSchedulePayload<ExtArgs>[]
       timeOffRequests: Prisma.$TimeOffRequestPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -15999,10 +15980,10 @@ export namespace Prisma {
    */
   export interface Prisma__StaffClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    schedules<T extends Staff$schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Staff$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     assignedConsultations<T extends Staff$assignedConsultationsArgs<ExtArgs> = {}>(args?: Subset<T, Staff$assignedConsultationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConsultationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     shifts<T extends Staff$shiftsArgs<ExtArgs> = {}>(args?: Subset<T, Staff$shiftsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ShiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    schedules<T extends Staff$schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Staff$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StaffSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     timeOffRequests<T extends Staff$timeOffRequestsArgs<ExtArgs> = {}>(args?: Subset<T, Staff$timeOffRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeOffRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -16444,30 +16425,6 @@ export namespace Prisma {
   }
 
   /**
-   * Staff.schedules
-   */
-  export type Staff$schedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StaffSchedule
-     */
-    select?: StaffScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StaffSchedule
-     */
-    omit?: StaffScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StaffScheduleInclude<ExtArgs> | null
-    where?: StaffScheduleWhereInput
-    orderBy?: StaffScheduleOrderByWithRelationInput | StaffScheduleOrderByWithRelationInput[]
-    cursor?: StaffScheduleWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: StaffScheduleScalarFieldEnum | StaffScheduleScalarFieldEnum[]
-  }
-
-  /**
    * Staff.assignedConsultations
    */
   export type Staff$assignedConsultationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16513,6 +16470,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ShiftScalarFieldEnum | ShiftScalarFieldEnum[]
+  }
+
+  /**
+   * Staff.schedules
+   */
+  export type Staff$schedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StaffSchedule
+     */
+    select?: StaffScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StaffSchedule
+     */
+    omit?: StaffScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StaffScheduleInclude<ExtArgs> | null
+    where?: StaffScheduleWhereInput
+    orderBy?: StaffScheduleOrderByWithRelationInput | StaffScheduleOrderByWithRelationInput[]
+    cursor?: StaffScheduleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StaffScheduleScalarFieldEnum | StaffScheduleScalarFieldEnum[]
   }
 
   /**
@@ -20016,9 +19997,7 @@ export namespace Prisma {
 
   export const UserScalarFieldEnum: {
     id: 'id',
-    username: 'username',
     email: 'email',
-    passwordHash: 'passwordHash',
     firstName: 'firstName',
     lastName: 'lastName',
     role: 'role',
@@ -20032,7 +20011,9 @@ export namespace Prisma {
     zipCode: 'zipCode',
     isVerified: 'isVerified',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    passwordHash: 'passwordHash',
+    username: 'username'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -20041,20 +20022,20 @@ export namespace Prisma {
   export const ConsultationScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
-    anonymousId: 'anonymousId',
     type: 'type',
     status: 'status',
     description: 'description',
-    symptoms: 'symptoms',
-    medications: 'medications',
-    allergies: 'allergies',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     age: 'age',
+    allergies: 'allergies',
+    anonymousId: 'anonymousId',
+    assignedPharmacistId: 'assignedPharmacistId',
     gender: 'gender',
     isAnonymous: 'isAnonymous',
-    assignedPharmacistId: 'assignedPharmacistId',
-    assignedStaffId: 'assignedStaffId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    medications: 'medications',
+    symptoms: 'symptoms',
+    assignedStaffId: 'assignedStaffId'
   };
 
   export type ConsultationScalarFieldEnum = (typeof ConsultationScalarFieldEnum)[keyof typeof ConsultationScalarFieldEnum]
@@ -20064,11 +20045,11 @@ export namespace Prisma {
     id: 'id',
     chatId: 'chatId',
     userId: 'userId',
-    anonymousId: 'anonymousId',
     content: 'content',
     type: 'type',
-    isFromPharmacist: 'isFromPharmacist',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    anonymousId: 'anonymousId',
+    isFromPharmacist: 'isFromPharmacist'
   };
 
   export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
@@ -20077,8 +20058,6 @@ export namespace Prisma {
   export const DeliveryScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
-    anonymousId: 'anonymousId',
-    orderId: 'orderId',
     status: 'status',
     trackingNumber: 'trackingNumber',
     estimatedDelivery: 'estimatedDelivery',
@@ -20087,11 +20066,13 @@ export namespace Prisma {
     city: 'city',
     state: 'state',
     zipCode: 'zipCode',
-    dropPoint: 'dropPoint',
-    packageType: 'packageType',
-    isAnonymous: 'isAnonymous',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    anonymousId: 'anonymousId',
+    dropPoint: 'dropPoint',
+    isAnonymous: 'isAnonymous',
+    orderId: 'orderId',
+    packageType: 'packageType'
   };
 
   export type DeliveryScalarFieldEnum = (typeof DeliveryScalarFieldEnum)[keyof typeof DeliveryScalarFieldEnum]
@@ -20573,9 +20554,7 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
-    username?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
-    passwordHash?: StringFilter<"User"> | string
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
@@ -20590,22 +20569,22 @@ export namespace Prisma {
     isVerified?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    consultations?: ConsultationListRelationFilter
+    passwordHash?: StringFilter<"User"> | string
+    username?: StringFilter<"User"> | string
     assignedConsultations?: ConsultationListRelationFilter
-    messages?: MessageListRelationFilter
+    consultations?: ConsultationListRelationFilter
     deliveries?: DeliveryListRelationFilter
-    prescriptions?: PrescriptionListRelationFilter
-    orders?: OrderListRelationFilter
     inventoryItems?: InventoryItemListRelationFilter
-    settings?: XOR<UserSettingsNullableScalarRelationFilter, UserSettingsWhereInput> | null
+    messages?: MessageListRelationFilter
+    orders?: OrderListRelationFilter
+    prescriptions?: PrescriptionListRelationFilter
     staff?: XOR<StaffNullableScalarRelationFilter, StaffWhereInput> | null
+    settings?: XOR<UserSettingsNullableScalarRelationFilter, UserSettingsWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
-    username?: SortOrder
     email?: SortOrder
-    passwordHash?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     role?: SortOrder
@@ -20620,25 +20599,26 @@ export namespace Prisma {
     isVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    consultations?: ConsultationOrderByRelationAggregateInput
+    passwordHash?: SortOrder
+    username?: SortOrder
     assignedConsultations?: ConsultationOrderByRelationAggregateInput
-    messages?: MessageOrderByRelationAggregateInput
+    consultations?: ConsultationOrderByRelationAggregateInput
     deliveries?: DeliveryOrderByRelationAggregateInput
-    prescriptions?: PrescriptionOrderByRelationAggregateInput
-    orders?: OrderOrderByRelationAggregateInput
     inventoryItems?: InventoryItemOrderByRelationAggregateInput
-    settings?: UserSettingsOrderByWithRelationInput
+    messages?: MessageOrderByRelationAggregateInput
+    orders?: OrderOrderByRelationAggregateInput
+    prescriptions?: PrescriptionOrderByRelationAggregateInput
     staff?: StaffOrderByWithRelationInput
+    settings?: UserSettingsOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    username?: string
     email?: string
+    username?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    passwordHash?: StringFilter<"User"> | string
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
@@ -20653,22 +20633,21 @@ export namespace Prisma {
     isVerified?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    consultations?: ConsultationListRelationFilter
+    passwordHash?: StringFilter<"User"> | string
     assignedConsultations?: ConsultationListRelationFilter
-    messages?: MessageListRelationFilter
+    consultations?: ConsultationListRelationFilter
     deliveries?: DeliveryListRelationFilter
-    prescriptions?: PrescriptionListRelationFilter
-    orders?: OrderListRelationFilter
     inventoryItems?: InventoryItemListRelationFilter
-    settings?: XOR<UserSettingsNullableScalarRelationFilter, UserSettingsWhereInput> | null
+    messages?: MessageListRelationFilter
+    orders?: OrderListRelationFilter
+    prescriptions?: PrescriptionListRelationFilter
     staff?: XOR<StaffNullableScalarRelationFilter, StaffWhereInput> | null
-  }, "id" | "username" | "email">
+    settings?: XOR<UserSettingsNullableScalarRelationFilter, UserSettingsWhereInput> | null
+  }, "id" | "email" | "username">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
-    username?: SortOrder
     email?: SortOrder
-    passwordHash?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     role?: SortOrder
@@ -20683,6 +20662,8 @@ export namespace Prisma {
     isVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    passwordHash?: SortOrder
+    username?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -20693,9 +20674,7 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
-    username?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
-    passwordHash?: StringWithAggregatesFilter<"User"> | string
     firstName?: StringWithAggregatesFilter<"User"> | string
     lastName?: StringWithAggregatesFilter<"User"> | string
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
@@ -20710,6 +20689,8 @@ export namespace Prisma {
     isVerified?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    passwordHash?: StringWithAggregatesFilter<"User"> | string
+    username?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type ConsultationWhereInput = {
@@ -20718,23 +20699,23 @@ export namespace Prisma {
     NOT?: ConsultationWhereInput | ConsultationWhereInput[]
     id?: StringFilter<"Consultation"> | string
     userId?: StringNullableFilter<"Consultation"> | string | null
-    anonymousId?: StringNullableFilter<"Consultation"> | string | null
     type?: StringFilter<"Consultation"> | string
     status?: EnumConsultationStatusFilter<"Consultation"> | $Enums.ConsultationStatus
     description?: StringNullableFilter<"Consultation"> | string | null
-    symptoms?: StringNullableFilter<"Consultation"> | string | null
-    medications?: StringNullableFilter<"Consultation"> | string | null
-    allergies?: StringNullableFilter<"Consultation"> | string | null
-    age?: IntNullableFilter<"Consultation"> | number | null
-    gender?: StringNullableFilter<"Consultation"> | string | null
-    isAnonymous?: BoolFilter<"Consultation"> | boolean
-    assignedPharmacistId?: StringNullableFilter<"Consultation"> | string | null
-    assignedStaffId?: StringNullableFilter<"Consultation"> | string | null
     createdAt?: DateTimeFilter<"Consultation"> | Date | string
     updatedAt?: DateTimeFilter<"Consultation"> | Date | string
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    age?: IntNullableFilter<"Consultation"> | number | null
+    allergies?: StringNullableFilter<"Consultation"> | string | null
+    anonymousId?: StringNullableFilter<"Consultation"> | string | null
+    assignedPharmacistId?: StringNullableFilter<"Consultation"> | string | null
+    gender?: StringNullableFilter<"Consultation"> | string | null
+    isAnonymous?: BoolFilter<"Consultation"> | boolean
+    medications?: StringNullableFilter<"Consultation"> | string | null
+    symptoms?: StringNullableFilter<"Consultation"> | string | null
+    assignedStaffId?: StringNullableFilter<"Consultation"> | string | null
     assignedPharmacist?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     assignedStaff?: XOR<StaffNullableScalarRelationFilter, StaffWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     messages?: MessageListRelationFilter
     prescriptions?: PrescriptionListRelationFilter
   }
@@ -20742,23 +20723,23 @@ export namespace Prisma {
   export type ConsultationOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrderInput | SortOrder
-    anonymousId?: SortOrderInput | SortOrder
     type?: SortOrder
     status?: SortOrder
     description?: SortOrderInput | SortOrder
-    symptoms?: SortOrderInput | SortOrder
-    medications?: SortOrderInput | SortOrder
-    allergies?: SortOrderInput | SortOrder
-    age?: SortOrderInput | SortOrder
-    gender?: SortOrderInput | SortOrder
-    isAnonymous?: SortOrder
-    assignedPharmacistId?: SortOrderInput | SortOrder
-    assignedStaffId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
+    age?: SortOrderInput | SortOrder
+    allergies?: SortOrderInput | SortOrder
+    anonymousId?: SortOrderInput | SortOrder
+    assignedPharmacistId?: SortOrderInput | SortOrder
+    gender?: SortOrderInput | SortOrder
+    isAnonymous?: SortOrder
+    medications?: SortOrderInput | SortOrder
+    symptoms?: SortOrderInput | SortOrder
+    assignedStaffId?: SortOrderInput | SortOrder
     assignedPharmacist?: UserOrderByWithRelationInput
     assignedStaff?: StaffOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
     messages?: MessageOrderByRelationAggregateInput
     prescriptions?: PrescriptionOrderByRelationAggregateInput
   }
@@ -20769,23 +20750,23 @@ export namespace Prisma {
     OR?: ConsultationWhereInput[]
     NOT?: ConsultationWhereInput | ConsultationWhereInput[]
     userId?: StringNullableFilter<"Consultation"> | string | null
-    anonymousId?: StringNullableFilter<"Consultation"> | string | null
     type?: StringFilter<"Consultation"> | string
     status?: EnumConsultationStatusFilter<"Consultation"> | $Enums.ConsultationStatus
     description?: StringNullableFilter<"Consultation"> | string | null
-    symptoms?: StringNullableFilter<"Consultation"> | string | null
-    medications?: StringNullableFilter<"Consultation"> | string | null
-    allergies?: StringNullableFilter<"Consultation"> | string | null
-    age?: IntNullableFilter<"Consultation"> | number | null
-    gender?: StringNullableFilter<"Consultation"> | string | null
-    isAnonymous?: BoolFilter<"Consultation"> | boolean
-    assignedPharmacistId?: StringNullableFilter<"Consultation"> | string | null
-    assignedStaffId?: StringNullableFilter<"Consultation"> | string | null
     createdAt?: DateTimeFilter<"Consultation"> | Date | string
     updatedAt?: DateTimeFilter<"Consultation"> | Date | string
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    age?: IntNullableFilter<"Consultation"> | number | null
+    allergies?: StringNullableFilter<"Consultation"> | string | null
+    anonymousId?: StringNullableFilter<"Consultation"> | string | null
+    assignedPharmacistId?: StringNullableFilter<"Consultation"> | string | null
+    gender?: StringNullableFilter<"Consultation"> | string | null
+    isAnonymous?: BoolFilter<"Consultation"> | boolean
+    medications?: StringNullableFilter<"Consultation"> | string | null
+    symptoms?: StringNullableFilter<"Consultation"> | string | null
+    assignedStaffId?: StringNullableFilter<"Consultation"> | string | null
     assignedPharmacist?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     assignedStaff?: XOR<StaffNullableScalarRelationFilter, StaffWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     messages?: MessageListRelationFilter
     prescriptions?: PrescriptionListRelationFilter
   }, "id">
@@ -20793,20 +20774,20 @@ export namespace Prisma {
   export type ConsultationOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrderInput | SortOrder
-    anonymousId?: SortOrderInput | SortOrder
     type?: SortOrder
     status?: SortOrder
     description?: SortOrderInput | SortOrder
-    symptoms?: SortOrderInput | SortOrder
-    medications?: SortOrderInput | SortOrder
-    allergies?: SortOrderInput | SortOrder
-    age?: SortOrderInput | SortOrder
-    gender?: SortOrderInput | SortOrder
-    isAnonymous?: SortOrder
-    assignedPharmacistId?: SortOrderInput | SortOrder
-    assignedStaffId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    age?: SortOrderInput | SortOrder
+    allergies?: SortOrderInput | SortOrder
+    anonymousId?: SortOrderInput | SortOrder
+    assignedPharmacistId?: SortOrderInput | SortOrder
+    gender?: SortOrderInput | SortOrder
+    isAnonymous?: SortOrder
+    medications?: SortOrderInput | SortOrder
+    symptoms?: SortOrderInput | SortOrder
+    assignedStaffId?: SortOrderInput | SortOrder
     _count?: ConsultationCountOrderByAggregateInput
     _avg?: ConsultationAvgOrderByAggregateInput
     _max?: ConsultationMaxOrderByAggregateInput
@@ -20820,20 +20801,20 @@ export namespace Prisma {
     NOT?: ConsultationScalarWhereWithAggregatesInput | ConsultationScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Consultation"> | string
     userId?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
-    anonymousId?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
     type?: StringWithAggregatesFilter<"Consultation"> | string
     status?: EnumConsultationStatusWithAggregatesFilter<"Consultation"> | $Enums.ConsultationStatus
     description?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
-    symptoms?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
-    medications?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
-    allergies?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
-    age?: IntNullableWithAggregatesFilter<"Consultation"> | number | null
-    gender?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
-    isAnonymous?: BoolWithAggregatesFilter<"Consultation"> | boolean
-    assignedPharmacistId?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
-    assignedStaffId?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Consultation"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Consultation"> | Date | string
+    age?: IntNullableWithAggregatesFilter<"Consultation"> | number | null
+    allergies?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
+    anonymousId?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
+    assignedPharmacistId?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
+    gender?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
+    isAnonymous?: BoolWithAggregatesFilter<"Consultation"> | boolean
+    medications?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
+    symptoms?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
+    assignedStaffId?: StringNullableWithAggregatesFilter<"Consultation"> | string | null
   }
 
   export type MessageWhereInput = {
@@ -20843,26 +20824,26 @@ export namespace Prisma {
     id?: StringFilter<"Message"> | string
     chatId?: StringFilter<"Message"> | string
     userId?: StringNullableFilter<"Message"> | string | null
-    anonymousId?: StringNullableFilter<"Message"> | string | null
     content?: StringFilter<"Message"> | string
     type?: EnumMessageTypeFilter<"Message"> | $Enums.MessageType
-    isFromPharmacist?: BoolFilter<"Message"> | boolean
     createdAt?: DateTimeFilter<"Message"> | Date | string
+    anonymousId?: StringNullableFilter<"Message"> | string | null
+    isFromPharmacist?: BoolFilter<"Message"> | boolean
+    consultation?: XOR<ConsultationScalarRelationFilter, ConsultationWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    consultation?: XOR<ConsultationNullableScalarRelationFilter, ConsultationWhereInput> | null
   }
 
   export type MessageOrderByWithRelationInput = {
     id?: SortOrder
     chatId?: SortOrder
     userId?: SortOrderInput | SortOrder
-    anonymousId?: SortOrderInput | SortOrder
     content?: SortOrder
     type?: SortOrder
-    isFromPharmacist?: SortOrder
     createdAt?: SortOrder
-    user?: UserOrderByWithRelationInput
+    anonymousId?: SortOrderInput | SortOrder
+    isFromPharmacist?: SortOrder
     consultation?: ConsultationOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type MessageWhereUniqueInput = Prisma.AtLeast<{
@@ -20872,24 +20853,24 @@ export namespace Prisma {
     NOT?: MessageWhereInput | MessageWhereInput[]
     chatId?: StringFilter<"Message"> | string
     userId?: StringNullableFilter<"Message"> | string | null
-    anonymousId?: StringNullableFilter<"Message"> | string | null
     content?: StringFilter<"Message"> | string
     type?: EnumMessageTypeFilter<"Message"> | $Enums.MessageType
-    isFromPharmacist?: BoolFilter<"Message"> | boolean
     createdAt?: DateTimeFilter<"Message"> | Date | string
+    anonymousId?: StringNullableFilter<"Message"> | string | null
+    isFromPharmacist?: BoolFilter<"Message"> | boolean
+    consultation?: XOR<ConsultationScalarRelationFilter, ConsultationWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    consultation?: XOR<ConsultationNullableScalarRelationFilter, ConsultationWhereInput> | null
   }, "id">
 
   export type MessageOrderByWithAggregationInput = {
     id?: SortOrder
     chatId?: SortOrder
     userId?: SortOrderInput | SortOrder
-    anonymousId?: SortOrderInput | SortOrder
     content?: SortOrder
     type?: SortOrder
-    isFromPharmacist?: SortOrder
     createdAt?: SortOrder
+    anonymousId?: SortOrderInput | SortOrder
+    isFromPharmacist?: SortOrder
     _count?: MessageCountOrderByAggregateInput
     _max?: MessageMaxOrderByAggregateInput
     _min?: MessageMinOrderByAggregateInput
@@ -20902,11 +20883,11 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Message"> | string
     chatId?: StringWithAggregatesFilter<"Message"> | string
     userId?: StringNullableWithAggregatesFilter<"Message"> | string | null
-    anonymousId?: StringNullableWithAggregatesFilter<"Message"> | string | null
     content?: StringWithAggregatesFilter<"Message"> | string
     type?: EnumMessageTypeWithAggregatesFilter<"Message"> | $Enums.MessageType
-    isFromPharmacist?: BoolWithAggregatesFilter<"Message"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
+    anonymousId?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    isFromPharmacist?: BoolWithAggregatesFilter<"Message"> | boolean
   }
 
   export type DeliveryWhereInput = {
@@ -20915,8 +20896,6 @@ export namespace Prisma {
     NOT?: DeliveryWhereInput | DeliveryWhereInput[]
     id?: StringFilter<"Delivery"> | string
     userId?: StringNullableFilter<"Delivery"> | string | null
-    anonymousId?: StringNullableFilter<"Delivery"> | string | null
-    orderId?: StringNullableFilter<"Delivery"> | string | null
     status?: EnumDeliveryStatusFilter<"Delivery"> | $Enums.DeliveryStatus
     trackingNumber?: StringFilter<"Delivery"> | string
     estimatedDelivery?: DateTimeNullableFilter<"Delivery"> | Date | string | null
@@ -20925,20 +20904,20 @@ export namespace Prisma {
     city?: StringFilter<"Delivery"> | string
     state?: StringFilter<"Delivery"> | string
     zipCode?: StringFilter<"Delivery"> | string
-    dropPoint?: StringNullableFilter<"Delivery"> | string | null
-    packageType?: StringFilter<"Delivery"> | string
-    isAnonymous?: BoolFilter<"Delivery"> | boolean
     createdAt?: DateTimeFilter<"Delivery"> | Date | string
     updatedAt?: DateTimeFilter<"Delivery"> | Date | string
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    anonymousId?: StringNullableFilter<"Delivery"> | string | null
+    dropPoint?: StringNullableFilter<"Delivery"> | string | null
+    isAnonymous?: BoolFilter<"Delivery"> | boolean
+    orderId?: StringNullableFilter<"Delivery"> | string | null
+    packageType?: StringFilter<"Delivery"> | string
     order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type DeliveryOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrderInput | SortOrder
-    anonymousId?: SortOrderInput | SortOrder
-    orderId?: SortOrderInput | SortOrder
     status?: SortOrder
     trackingNumber?: SortOrder
     estimatedDelivery?: SortOrderInput | SortOrder
@@ -20947,24 +20926,25 @@ export namespace Prisma {
     city?: SortOrder
     state?: SortOrder
     zipCode?: SortOrder
-    dropPoint?: SortOrderInput | SortOrder
-    packageType?: SortOrder
-    isAnonymous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
+    anonymousId?: SortOrderInput | SortOrder
+    dropPoint?: SortOrderInput | SortOrder
+    isAnonymous?: SortOrder
+    orderId?: SortOrderInput | SortOrder
+    packageType?: SortOrder
     order?: OrderOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type DeliveryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    orderId?: string
     trackingNumber?: string
+    orderId?: string
     AND?: DeliveryWhereInput | DeliveryWhereInput[]
     OR?: DeliveryWhereInput[]
     NOT?: DeliveryWhereInput | DeliveryWhereInput[]
     userId?: StringNullableFilter<"Delivery"> | string | null
-    anonymousId?: StringNullableFilter<"Delivery"> | string | null
     status?: EnumDeliveryStatusFilter<"Delivery"> | $Enums.DeliveryStatus
     estimatedDelivery?: DateTimeNullableFilter<"Delivery"> | Date | string | null
     actualDelivery?: DateTimeNullableFilter<"Delivery"> | Date | string | null
@@ -20972,20 +20952,19 @@ export namespace Prisma {
     city?: StringFilter<"Delivery"> | string
     state?: StringFilter<"Delivery"> | string
     zipCode?: StringFilter<"Delivery"> | string
-    dropPoint?: StringNullableFilter<"Delivery"> | string | null
-    packageType?: StringFilter<"Delivery"> | string
-    isAnonymous?: BoolFilter<"Delivery"> | boolean
     createdAt?: DateTimeFilter<"Delivery"> | Date | string
     updatedAt?: DateTimeFilter<"Delivery"> | Date | string
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    anonymousId?: StringNullableFilter<"Delivery"> | string | null
+    dropPoint?: StringNullableFilter<"Delivery"> | string | null
+    isAnonymous?: BoolFilter<"Delivery"> | boolean
+    packageType?: StringFilter<"Delivery"> | string
     order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
-  }, "id" | "orderId" | "trackingNumber">
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id" | "trackingNumber" | "orderId">
 
   export type DeliveryOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrderInput | SortOrder
-    anonymousId?: SortOrderInput | SortOrder
-    orderId?: SortOrderInput | SortOrder
     status?: SortOrder
     trackingNumber?: SortOrder
     estimatedDelivery?: SortOrderInput | SortOrder
@@ -20994,11 +20973,13 @@ export namespace Prisma {
     city?: SortOrder
     state?: SortOrder
     zipCode?: SortOrder
-    dropPoint?: SortOrderInput | SortOrder
-    packageType?: SortOrder
-    isAnonymous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    anonymousId?: SortOrderInput | SortOrder
+    dropPoint?: SortOrderInput | SortOrder
+    isAnonymous?: SortOrder
+    orderId?: SortOrderInput | SortOrder
+    packageType?: SortOrder
     _count?: DeliveryCountOrderByAggregateInput
     _max?: DeliveryMaxOrderByAggregateInput
     _min?: DeliveryMinOrderByAggregateInput
@@ -21010,8 +20991,6 @@ export namespace Prisma {
     NOT?: DeliveryScalarWhereWithAggregatesInput | DeliveryScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Delivery"> | string
     userId?: StringNullableWithAggregatesFilter<"Delivery"> | string | null
-    anonymousId?: StringNullableWithAggregatesFilter<"Delivery"> | string | null
-    orderId?: StringNullableWithAggregatesFilter<"Delivery"> | string | null
     status?: EnumDeliveryStatusWithAggregatesFilter<"Delivery"> | $Enums.DeliveryStatus
     trackingNumber?: StringWithAggregatesFilter<"Delivery"> | string
     estimatedDelivery?: DateTimeNullableWithAggregatesFilter<"Delivery"> | Date | string | null
@@ -21020,11 +20999,13 @@ export namespace Prisma {
     city?: StringWithAggregatesFilter<"Delivery"> | string
     state?: StringWithAggregatesFilter<"Delivery"> | string
     zipCode?: StringWithAggregatesFilter<"Delivery"> | string
-    dropPoint?: StringNullableWithAggregatesFilter<"Delivery"> | string | null
-    packageType?: StringWithAggregatesFilter<"Delivery"> | string
-    isAnonymous?: BoolWithAggregatesFilter<"Delivery"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Delivery"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Delivery"> | Date | string
+    anonymousId?: StringNullableWithAggregatesFilter<"Delivery"> | string | null
+    dropPoint?: StringNullableWithAggregatesFilter<"Delivery"> | string | null
+    isAnonymous?: BoolWithAggregatesFilter<"Delivery"> | boolean
+    orderId?: StringNullableWithAggregatesFilter<"Delivery"> | string | null
+    packageType?: StringWithAggregatesFilter<"Delivery"> | string
   }
 
   export type MedicationWhereInput = {
@@ -21263,10 +21244,10 @@ export namespace Prisma {
     isAnonymous?: BoolFilter<"Prescription"> | boolean
     createdAt?: DateTimeFilter<"Prescription"> | Date | string
     updatedAt?: DateTimeFilter<"Prescription"> | Date | string
-    consultation?: XOR<ConsultationNullableScalarRelationFilter, ConsultationWhereInput> | null
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    medication?: XOR<MedicationScalarRelationFilter, MedicationWhereInput>
     orders?: OrderListRelationFilter
+    consultation?: XOR<ConsultationNullableScalarRelationFilter, ConsultationWhereInput> | null
+    medication?: XOR<MedicationScalarRelationFilter, MedicationWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type PrescriptionOrderByWithRelationInput = {
@@ -21286,10 +21267,10 @@ export namespace Prisma {
     isAnonymous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    consultation?: ConsultationOrderByWithRelationInput
-    user?: UserOrderByWithRelationInput
-    medication?: MedicationOrderByWithRelationInput
     orders?: OrderOrderByRelationAggregateInput
+    consultation?: ConsultationOrderByWithRelationInput
+    medication?: MedicationOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type PrescriptionWhereUniqueInput = Prisma.AtLeast<{
@@ -21312,10 +21293,10 @@ export namespace Prisma {
     isAnonymous?: BoolFilter<"Prescription"> | boolean
     createdAt?: DateTimeFilter<"Prescription"> | Date | string
     updatedAt?: DateTimeFilter<"Prescription"> | Date | string
-    consultation?: XOR<ConsultationNullableScalarRelationFilter, ConsultationWhereInput> | null
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    medication?: XOR<MedicationScalarRelationFilter, MedicationWhereInput>
     orders?: OrderListRelationFilter
+    consultation?: XOR<ConsultationNullableScalarRelationFilter, ConsultationWhereInput> | null
+    medication?: XOR<MedicationScalarRelationFilter, MedicationWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type PrescriptionOrderByWithAggregationInput = {
@@ -21381,9 +21362,9 @@ export namespace Prisma {
     specialInstructions?: StringNullableFilter<"Order"> | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
+    delivery?: XOR<DeliveryNullableScalarRelationFilter, DeliveryWhereInput> | null
     prescription?: XOR<PrescriptionNullableScalarRelationFilter, PrescriptionWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    delivery?: XOR<DeliveryNullableScalarRelationFilter, DeliveryWhereInput> | null
   }
 
   export type OrderOrderByWithRelationInput = {
@@ -21400,9 +21381,9 @@ export namespace Prisma {
     specialInstructions?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    delivery?: DeliveryOrderByWithRelationInput
     prescription?: PrescriptionOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
-    delivery?: DeliveryOrderByWithRelationInput
   }
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
@@ -21422,9 +21403,9 @@ export namespace Prisma {
     specialInstructions?: StringNullableFilter<"Order"> | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
+    delivery?: XOR<DeliveryNullableScalarRelationFilter, DeliveryWhereInput> | null
     prescription?: XOR<PrescriptionNullableScalarRelationFilter, PrescriptionWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    delivery?: XOR<DeliveryNullableScalarRelationFilter, DeliveryWhereInput> | null
   }, "id" | "orderNumber">
 
   export type OrderOrderByWithAggregationInput = {
@@ -21753,10 +21734,10 @@ export namespace Prisma {
     notes?: StringNullableFilter<"Staff"> | string | null
     createdAt?: DateTimeFilter<"Staff"> | Date | string
     updatedAt?: DateTimeFilter<"Staff"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    schedules?: StaffScheduleListRelationFilter
     assignedConsultations?: ConsultationListRelationFilter
     shifts?: ShiftListRelationFilter
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    schedules?: StaffScheduleListRelationFilter
     timeOffRequests?: TimeOffRequestListRelationFilter
   }
 
@@ -21776,10 +21757,10 @@ export namespace Prisma {
     notes?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-    schedules?: StaffScheduleOrderByRelationAggregateInput
     assignedConsultations?: ConsultationOrderByRelationAggregateInput
     shifts?: ShiftOrderByRelationAggregateInput
+    user?: UserOrderByWithRelationInput
+    schedules?: StaffScheduleOrderByRelationAggregateInput
     timeOffRequests?: TimeOffRequestOrderByRelationAggregateInput
   }
 
@@ -21802,10 +21783,10 @@ export namespace Prisma {
     notes?: StringNullableFilter<"Staff"> | string | null
     createdAt?: DateTimeFilter<"Staff"> | Date | string
     updatedAt?: DateTimeFilter<"Staff"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    schedules?: StaffScheduleListRelationFilter
     assignedConsultations?: ConsultationListRelationFilter
     shifts?: ShiftListRelationFilter
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    schedules?: StaffScheduleListRelationFilter
     timeOffRequests?: TimeOffRequestListRelationFilter
   }, "id" | "userId" | "employeeId">
 
@@ -22113,9 +22094,7 @@ export namespace Prisma {
 
   export type UserCreateInput = {
     id?: string
-    username: string
     email: string
-    passwordHash: string
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -22130,22 +22109,22 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    consultations?: ConsultationCreateNestedManyWithoutUserInput
+    passwordHash: string
+    username: string
     assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageCreateNestedManyWithoutUserInput
+    consultations?: ConsultationCreateNestedManyWithoutUserInput
     deliveries?: DeliveryCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
-    orders?: OrderCreateNestedManyWithoutUserInput
     inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
     staff?: StaffCreateNestedOneWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
-    username: string
     email: string
-    passwordHash: string
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -22160,22 +22139,22 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
+    passwordHash: string
+    username: string
     assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
     deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
-    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
     staff?: StaffUncheckedCreateNestedOneWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -22190,22 +22169,22 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUpdateManyWithoutUserNestedInput
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUpdateManyWithoutUserNestedInput
+    consultations?: ConsultationUpdateManyWithoutUserNestedInput
     deliveries?: DeliveryUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
     inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
     staff?: StaffUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -22220,22 +22199,22 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
     deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
     staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: string
-    username: string
     email: string
-    passwordHash: string
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -22250,13 +22229,13 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    passwordHash: string
+    username: string
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -22271,13 +22250,13 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -22292,25 +22271,27 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
   }
 
   export type ConsultationCreateInput = {
     id?: string
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutConsultationsInput
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
     assignedPharmacist?: UserCreateNestedOneWithoutAssignedConsultationsInput
     assignedStaff?: StaffCreateNestedOneWithoutAssignedConsultationsInput
+    user?: UserCreateNestedOneWithoutConsultationsInput
     messages?: MessageCreateNestedManyWithoutConsultationInput
     prescriptions?: PrescriptionCreateNestedManyWithoutConsultationInput
   }
@@ -22318,41 +22299,41 @@ export namespace Prisma {
   export type ConsultationUncheckedCreateInput = {
     id?: string
     userId?: string | null
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
-    assignedPharmacistId?: string | null
-    assignedStaffId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    assignedPharmacistId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
+    assignedStaffId?: string | null
     messages?: MessageUncheckedCreateNestedManyWithoutConsultationInput
     prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutConsultationInput
   }
 
   export type ConsultationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutConsultationsNestedInput
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
     assignedPharmacist?: UserUpdateOneWithoutAssignedConsultationsNestedInput
     assignedStaff?: StaffUpdateOneWithoutAssignedConsultationsNestedInput
+    user?: UserUpdateOneWithoutConsultationsNestedInput
     messages?: MessageUpdateManyWithoutConsultationNestedInput
     prescriptions?: PrescriptionUpdateManyWithoutConsultationNestedInput
   }
@@ -22360,20 +22341,20 @@ export namespace Prisma {
   export type ConsultationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
     messages?: MessageUncheckedUpdateManyWithoutConsultationNestedInput
     prescriptions?: PrescriptionUncheckedUpdateManyWithoutConsultationNestedInput
   }
@@ -22381,135 +22362,134 @@ export namespace Prisma {
   export type ConsultationCreateManyInput = {
     id?: string
     userId?: string | null
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
-    assignedPharmacistId?: string | null
-    assignedStaffId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    assignedPharmacistId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
+    assignedStaffId?: string | null
   }
 
   export type ConsultationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ConsultationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MessageCreateInput = {
     id?: string
-    anonymousId?: string | null
     content: string
     type?: $Enums.MessageType
-    isFromPharmacist?: boolean
     createdAt?: Date | string
+    anonymousId?: string | null
+    isFromPharmacist?: boolean
+    consultation: ConsultationCreateNestedOneWithoutMessagesInput
     user?: UserCreateNestedOneWithoutMessagesInput
-    consultation?: ConsultationCreateNestedOneWithoutMessagesInput
   }
 
   export type MessageUncheckedCreateInput = {
     id?: string
     chatId: string
     userId?: string | null
-    anonymousId?: string | null
     content: string
     type?: $Enums.MessageType
-    isFromPharmacist?: boolean
     createdAt?: Date | string
+    anonymousId?: string | null
+    isFromPharmacist?: boolean
   }
 
   export type MessageUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
+    consultation?: ConsultationUpdateOneRequiredWithoutMessagesNestedInput
     user?: UserUpdateOneWithoutMessagesNestedInput
-    consultation?: ConsultationUpdateOneWithoutMessagesNestedInput
   }
 
   export type MessageUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     chatId?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageCreateManyInput = {
     id?: string
     chatId: string
     userId?: string | null
-    anonymousId?: string | null
     content: string
     type?: $Enums.MessageType
-    isFromPharmacist?: boolean
     createdAt?: Date | string
+    anonymousId?: string | null
+    isFromPharmacist?: boolean
   }
 
   export type MessageUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     chatId?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type DeliveryCreateInput = {
     id?: string
-    anonymousId?: string | null
     status?: $Enums.DeliveryStatus
     trackingNumber: string
     estimatedDelivery?: Date | string | null
@@ -22518,20 +22498,19 @@ export namespace Prisma {
     city: string
     state: string
     zipCode: string
-    dropPoint?: string | null
-    packageType?: string
-    isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutDeliveriesInput
+    anonymousId?: string | null
+    dropPoint?: string | null
+    isAnonymous?: boolean
+    packageType?: string
     order?: OrderCreateNestedOneWithoutDeliveryInput
+    user?: UserCreateNestedOneWithoutDeliveriesInput
   }
 
   export type DeliveryUncheckedCreateInput = {
     id?: string
     userId?: string | null
-    anonymousId?: string | null
-    orderId?: string | null
     status?: $Enums.DeliveryStatus
     trackingNumber: string
     estimatedDelivery?: Date | string | null
@@ -22540,16 +22519,17 @@ export namespace Prisma {
     city: string
     state: string
     zipCode: string
-    dropPoint?: string | null
-    packageType?: string
-    isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    anonymousId?: string | null
+    dropPoint?: string | null
+    isAnonymous?: boolean
+    orderId?: string | null
+    packageType?: string
   }
 
   export type DeliveryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
     trackingNumber?: StringFieldUpdateOperationsInput | string
     estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22558,20 +22538,19 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
-    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    packageType?: StringFieldUpdateOperationsInput | string
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutDeliveriesNestedInput
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    packageType?: StringFieldUpdateOperationsInput | string
     order?: OrderUpdateOneWithoutDeliveryNestedInput
+    user?: UserUpdateOneWithoutDeliveriesNestedInput
   }
 
   export type DeliveryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    orderId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
     trackingNumber?: StringFieldUpdateOperationsInput | string
     estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22580,18 +22559,18 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
-    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    packageType?: StringFieldUpdateOperationsInput | string
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    orderId?: NullableStringFieldUpdateOperationsInput | string | null
+    packageType?: StringFieldUpdateOperationsInput | string
   }
 
   export type DeliveryCreateManyInput = {
     id?: string
     userId?: string | null
-    anonymousId?: string | null
-    orderId?: string | null
     status?: $Enums.DeliveryStatus
     trackingNumber: string
     estimatedDelivery?: Date | string | null
@@ -22600,16 +22579,17 @@ export namespace Prisma {
     city: string
     state: string
     zipCode: string
-    dropPoint?: string | null
-    packageType?: string
-    isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    anonymousId?: string | null
+    dropPoint?: string | null
+    isAnonymous?: boolean
+    orderId?: string | null
+    packageType?: string
   }
 
   export type DeliveryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
     trackingNumber?: StringFieldUpdateOperationsInput | string
     estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22618,18 +22598,17 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
-    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    packageType?: StringFieldUpdateOperationsInput | string
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    packageType?: StringFieldUpdateOperationsInput | string
   }
 
   export type DeliveryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    orderId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
     trackingNumber?: StringFieldUpdateOperationsInput | string
     estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22638,11 +22617,13 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
-    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    packageType?: StringFieldUpdateOperationsInput | string
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    orderId?: NullableStringFieldUpdateOperationsInput | string | null
+    packageType?: StringFieldUpdateOperationsInput | string
   }
 
   export type MedicationCreateInput = {
@@ -22910,10 +22891,10 @@ export namespace Prisma {
     isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    consultation?: ConsultationCreateNestedOneWithoutPrescriptionsInput
-    user?: UserCreateNestedOneWithoutPrescriptionsInput
-    medication: MedicationCreateNestedOneWithoutPrescriptionsInput
     orders?: OrderCreateNestedManyWithoutPrescriptionInput
+    consultation?: ConsultationCreateNestedOneWithoutPrescriptionsInput
+    medication: MedicationCreateNestedOneWithoutPrescriptionsInput
+    user?: UserCreateNestedOneWithoutPrescriptionsInput
   }
 
   export type PrescriptionUncheckedCreateInput = {
@@ -22950,10 +22931,10 @@ export namespace Prisma {
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultation?: ConsultationUpdateOneWithoutPrescriptionsNestedInput
-    user?: UserUpdateOneWithoutPrescriptionsNestedInput
-    medication?: MedicationUpdateOneRequiredWithoutPrescriptionsNestedInput
     orders?: OrderUpdateManyWithoutPrescriptionNestedInput
+    consultation?: ConsultationUpdateOneWithoutPrescriptionsNestedInput
+    medication?: MedicationUpdateOneRequiredWithoutPrescriptionsNestedInput
+    user?: UserUpdateOneWithoutPrescriptionsNestedInput
   }
 
   export type PrescriptionUncheckedUpdateInput = {
@@ -23042,9 +23023,9 @@ export namespace Prisma {
     specialInstructions?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    delivery?: DeliveryCreateNestedOneWithoutOrderInput
     prescription?: PrescriptionCreateNestedOneWithoutOrdersInput
     user?: UserCreateNestedOneWithoutOrdersInput
-    delivery?: DeliveryCreateNestedOneWithoutOrderInput
   }
 
   export type OrderUncheckedCreateInput = {
@@ -23076,9 +23057,9 @@ export namespace Prisma {
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivery?: DeliveryUpdateOneWithoutOrderNestedInput
     prescription?: PrescriptionUpdateOneWithoutOrdersNestedInput
     user?: UserUpdateOneWithoutOrdersNestedInput
-    delivery?: DeliveryUpdateOneWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
@@ -23494,10 +23475,10 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutStaffInput
-    schedules?: StaffScheduleCreateNestedManyWithoutStaffInput
     assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedStaffInput
     shifts?: ShiftCreateNestedManyWithoutStaffInput
+    user: UserCreateNestedOneWithoutStaffInput
+    schedules?: StaffScheduleCreateNestedManyWithoutStaffInput
     timeOffRequests?: TimeOffRequestCreateNestedManyWithoutStaffInput
   }
 
@@ -23517,9 +23498,9 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    schedules?: StaffScheduleUncheckedCreateNestedManyWithoutStaffInput
     assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedStaffInput
     shifts?: ShiftUncheckedCreateNestedManyWithoutStaffInput
+    schedules?: StaffScheduleUncheckedCreateNestedManyWithoutStaffInput
     timeOffRequests?: TimeOffRequestUncheckedCreateNestedManyWithoutStaffInput
   }
 
@@ -23538,10 +23519,10 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutStaffNestedInput
-    schedules?: StaffScheduleUpdateManyWithoutStaffNestedInput
     assignedConsultations?: ConsultationUpdateManyWithoutAssignedStaffNestedInput
     shifts?: ShiftUpdateManyWithoutStaffNestedInput
+    user?: UserUpdateOneRequiredWithoutStaffNestedInput
+    schedules?: StaffScheduleUpdateManyWithoutStaffNestedInput
     timeOffRequests?: TimeOffRequestUpdateManyWithoutStaffNestedInput
   }
 
@@ -23561,9 +23542,9 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schedules?: StaffScheduleUncheckedUpdateManyWithoutStaffNestedInput
     assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedStaffNestedInput
     shifts?: ShiftUncheckedUpdateManyWithoutStaffNestedInput
+    schedules?: StaffScheduleUncheckedUpdateManyWithoutStaffNestedInput
     timeOffRequests?: TimeOffRequestUncheckedUpdateManyWithoutStaffNestedInput
   }
 
@@ -23970,28 +23951,10 @@ export namespace Prisma {
     none?: ConsultationWhereInput
   }
 
-  export type MessageListRelationFilter = {
-    every?: MessageWhereInput
-    some?: MessageWhereInput
-    none?: MessageWhereInput
-  }
-
   export type DeliveryListRelationFilter = {
     every?: DeliveryWhereInput
     some?: DeliveryWhereInput
     none?: DeliveryWhereInput
-  }
-
-  export type PrescriptionListRelationFilter = {
-    every?: PrescriptionWhereInput
-    some?: PrescriptionWhereInput
-    none?: PrescriptionWhereInput
-  }
-
-  export type OrderListRelationFilter = {
-    every?: OrderWhereInput
-    some?: OrderWhereInput
-    none?: OrderWhereInput
   }
 
   export type InventoryItemListRelationFilter = {
@@ -24000,14 +23963,32 @@ export namespace Prisma {
     none?: InventoryItemWhereInput
   }
 
-  export type UserSettingsNullableScalarRelationFilter = {
-    is?: UserSettingsWhereInput | null
-    isNot?: UserSettingsWhereInput | null
+  export type MessageListRelationFilter = {
+    every?: MessageWhereInput
+    some?: MessageWhereInput
+    none?: MessageWhereInput
+  }
+
+  export type OrderListRelationFilter = {
+    every?: OrderWhereInput
+    some?: OrderWhereInput
+    none?: OrderWhereInput
+  }
+
+  export type PrescriptionListRelationFilter = {
+    every?: PrescriptionWhereInput
+    some?: PrescriptionWhereInput
+    none?: PrescriptionWhereInput
   }
 
   export type StaffNullableScalarRelationFilter = {
     is?: StaffWhereInput | null
     isNot?: StaffWhereInput | null
+  }
+
+  export type UserSettingsNullableScalarRelationFilter = {
+    is?: UserSettingsWhereInput | null
+    isNot?: UserSettingsWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -24019,19 +24000,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type MessageOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type DeliveryOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type PrescriptionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type OrderOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -24039,11 +24008,21 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type MessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OrderOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PrescriptionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
-    username?: SortOrder
     email?: SortOrder
-    passwordHash?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     role?: SortOrder
@@ -24058,13 +24037,13 @@ export namespace Prisma {
     isVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    passwordHash?: SortOrder
+    username?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
-    username?: SortOrder
     email?: SortOrder
-    passwordHash?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     role?: SortOrder
@@ -24079,13 +24058,13 @@ export namespace Prisma {
     isVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    passwordHash?: SortOrder
+    username?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
-    username?: SortOrder
     email?: SortOrder
-    passwordHash?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     role?: SortOrder
@@ -24100,6 +24079,8 @@ export namespace Prisma {
     isVerified?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    passwordHash?: SortOrder
+    username?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -24196,20 +24177,20 @@ export namespace Prisma {
   export type ConsultationCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    anonymousId?: SortOrder
     type?: SortOrder
     status?: SortOrder
     description?: SortOrder
-    symptoms?: SortOrder
-    medications?: SortOrder
-    allergies?: SortOrder
-    age?: SortOrder
-    gender?: SortOrder
-    isAnonymous?: SortOrder
-    assignedPharmacistId?: SortOrder
-    assignedStaffId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    age?: SortOrder
+    allergies?: SortOrder
+    anonymousId?: SortOrder
+    assignedPharmacistId?: SortOrder
+    gender?: SortOrder
+    isAnonymous?: SortOrder
+    medications?: SortOrder
+    symptoms?: SortOrder
+    assignedStaffId?: SortOrder
   }
 
   export type ConsultationAvgOrderByAggregateInput = {
@@ -24219,39 +24200,39 @@ export namespace Prisma {
   export type ConsultationMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    anonymousId?: SortOrder
     type?: SortOrder
     status?: SortOrder
     description?: SortOrder
-    symptoms?: SortOrder
-    medications?: SortOrder
-    allergies?: SortOrder
-    age?: SortOrder
-    gender?: SortOrder
-    isAnonymous?: SortOrder
-    assignedPharmacistId?: SortOrder
-    assignedStaffId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    age?: SortOrder
+    allergies?: SortOrder
+    anonymousId?: SortOrder
+    assignedPharmacistId?: SortOrder
+    gender?: SortOrder
+    isAnonymous?: SortOrder
+    medications?: SortOrder
+    symptoms?: SortOrder
+    assignedStaffId?: SortOrder
   }
 
   export type ConsultationMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    anonymousId?: SortOrder
     type?: SortOrder
     status?: SortOrder
     description?: SortOrder
-    symptoms?: SortOrder
-    medications?: SortOrder
-    allergies?: SortOrder
-    age?: SortOrder
-    gender?: SortOrder
-    isAnonymous?: SortOrder
-    assignedPharmacistId?: SortOrder
-    assignedStaffId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    age?: SortOrder
+    allergies?: SortOrder
+    anonymousId?: SortOrder
+    assignedPharmacistId?: SortOrder
+    gender?: SortOrder
+    isAnonymous?: SortOrder
+    medications?: SortOrder
+    symptoms?: SortOrder
+    assignedStaffId?: SortOrder
   }
 
   export type ConsultationSumOrderByAggregateInput = {
@@ -24291,42 +24272,42 @@ export namespace Prisma {
     not?: NestedEnumMessageTypeFilter<$PrismaModel> | $Enums.MessageType
   }
 
-  export type ConsultationNullableScalarRelationFilter = {
-    is?: ConsultationWhereInput | null
-    isNot?: ConsultationWhereInput | null
+  export type ConsultationScalarRelationFilter = {
+    is?: ConsultationWhereInput
+    isNot?: ConsultationWhereInput
   }
 
   export type MessageCountOrderByAggregateInput = {
     id?: SortOrder
     chatId?: SortOrder
     userId?: SortOrder
-    anonymousId?: SortOrder
     content?: SortOrder
     type?: SortOrder
-    isFromPharmacist?: SortOrder
     createdAt?: SortOrder
+    anonymousId?: SortOrder
+    isFromPharmacist?: SortOrder
   }
 
   export type MessageMaxOrderByAggregateInput = {
     id?: SortOrder
     chatId?: SortOrder
     userId?: SortOrder
-    anonymousId?: SortOrder
     content?: SortOrder
     type?: SortOrder
-    isFromPharmacist?: SortOrder
     createdAt?: SortOrder
+    anonymousId?: SortOrder
+    isFromPharmacist?: SortOrder
   }
 
   export type MessageMinOrderByAggregateInput = {
     id?: SortOrder
     chatId?: SortOrder
     userId?: SortOrder
-    anonymousId?: SortOrder
     content?: SortOrder
     type?: SortOrder
-    isFromPharmacist?: SortOrder
     createdAt?: SortOrder
+    anonymousId?: SortOrder
+    isFromPharmacist?: SortOrder
   }
 
   export type EnumMessageTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -24365,8 +24346,6 @@ export namespace Prisma {
   export type DeliveryCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    anonymousId?: SortOrder
-    orderId?: SortOrder
     status?: SortOrder
     trackingNumber?: SortOrder
     estimatedDelivery?: SortOrder
@@ -24375,18 +24354,18 @@ export namespace Prisma {
     city?: SortOrder
     state?: SortOrder
     zipCode?: SortOrder
-    dropPoint?: SortOrder
-    packageType?: SortOrder
-    isAnonymous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    anonymousId?: SortOrder
+    dropPoint?: SortOrder
+    isAnonymous?: SortOrder
+    orderId?: SortOrder
+    packageType?: SortOrder
   }
 
   export type DeliveryMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    anonymousId?: SortOrder
-    orderId?: SortOrder
     status?: SortOrder
     trackingNumber?: SortOrder
     estimatedDelivery?: SortOrder
@@ -24395,18 +24374,18 @@ export namespace Prisma {
     city?: SortOrder
     state?: SortOrder
     zipCode?: SortOrder
-    dropPoint?: SortOrder
-    packageType?: SortOrder
-    isAnonymous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    anonymousId?: SortOrder
+    dropPoint?: SortOrder
+    isAnonymous?: SortOrder
+    orderId?: SortOrder
+    packageType?: SortOrder
   }
 
   export type DeliveryMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    anonymousId?: SortOrder
-    orderId?: SortOrder
     status?: SortOrder
     trackingNumber?: SortOrder
     estimatedDelivery?: SortOrder
@@ -24415,11 +24394,13 @@ export namespace Prisma {
     city?: SortOrder
     state?: SortOrder
     zipCode?: SortOrder
-    dropPoint?: SortOrder
-    packageType?: SortOrder
-    isAnonymous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    anonymousId?: SortOrder
+    dropPoint?: SortOrder
+    isAnonymous?: SortOrder
+    orderId?: SortOrder
+    packageType?: SortOrder
   }
 
   export type EnumDeliveryStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -24647,6 +24628,11 @@ export namespace Prisma {
     not?: NestedEnumPrescriptionStatusFilter<$PrismaModel> | $Enums.PrescriptionStatus
   }
 
+  export type ConsultationNullableScalarRelationFilter = {
+    is?: ConsultationWhereInput | null
+    isNot?: ConsultationWhereInput | null
+  }
+
   export type PrescriptionCountOrderByAggregateInput = {
     id?: SortOrder
     consultationId?: SortOrder
@@ -24738,14 +24724,14 @@ export namespace Prisma {
     not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
   }
 
-  export type PrescriptionNullableScalarRelationFilter = {
-    is?: PrescriptionWhereInput | null
-    isNot?: PrescriptionWhereInput | null
-  }
-
   export type DeliveryNullableScalarRelationFilter = {
     is?: DeliveryWhereInput | null
     isNot?: DeliveryWhereInput | null
+  }
+
+  export type PrescriptionNullableScalarRelationFilter = {
+    is?: PrescriptionWhereInput | null
+    isNot?: PrescriptionWhereInput | null
   }
 
   export type OrderCountOrderByAggregateInput = {
@@ -24992,16 +24978,16 @@ export namespace Prisma {
     not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
   }
 
-  export type StaffScheduleListRelationFilter = {
-    every?: StaffScheduleWhereInput
-    some?: StaffScheduleWhereInput
-    none?: StaffScheduleWhereInput
-  }
-
   export type ShiftListRelationFilter = {
     every?: ShiftWhereInput
     some?: ShiftWhereInput
     none?: ShiftWhereInput
+  }
+
+  export type StaffScheduleListRelationFilter = {
+    every?: StaffScheduleWhereInput
+    some?: StaffScheduleWhereInput
+    none?: StaffScheduleWhereInput
   }
 
   export type TimeOffRequestListRelationFilter = {
@@ -25010,11 +24996,11 @@ export namespace Prisma {
     none?: TimeOffRequestWhereInput
   }
 
-  export type StaffScheduleOrderByRelationAggregateInput = {
+  export type ShiftOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type ShiftOrderByRelationAggregateInput = {
+  export type StaffScheduleOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -25301,13 +25287,6 @@ export namespace Prisma {
     _max?: NestedEnumTimeOffStatusFilter<$PrismaModel>
   }
 
-  export type ConsultationCreateNestedManyWithoutUserInput = {
-    create?: XOR<ConsultationCreateWithoutUserInput, ConsultationUncheckedCreateWithoutUserInput> | ConsultationCreateWithoutUserInput[] | ConsultationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ConsultationCreateOrConnectWithoutUserInput | ConsultationCreateOrConnectWithoutUserInput[]
-    createMany?: ConsultationCreateManyUserInputEnvelope
-    connect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
-  }
-
   export type ConsultationCreateNestedManyWithoutAssignedPharmacistInput = {
     create?: XOR<ConsultationCreateWithoutAssignedPharmacistInput, ConsultationUncheckedCreateWithoutAssignedPharmacistInput> | ConsultationCreateWithoutAssignedPharmacistInput[] | ConsultationUncheckedCreateWithoutAssignedPharmacistInput[]
     connectOrCreate?: ConsultationCreateOrConnectWithoutAssignedPharmacistInput | ConsultationCreateOrConnectWithoutAssignedPharmacistInput[]
@@ -25315,11 +25294,11 @@ export namespace Prisma {
     connect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
   }
 
-  export type MessageCreateNestedManyWithoutUserInput = {
-    create?: XOR<MessageCreateWithoutUserInput, MessageUncheckedCreateWithoutUserInput> | MessageCreateWithoutUserInput[] | MessageUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutUserInput | MessageCreateOrConnectWithoutUserInput[]
-    createMany?: MessageCreateManyUserInputEnvelope
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  export type ConsultationCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConsultationCreateWithoutUserInput, ConsultationUncheckedCreateWithoutUserInput> | ConsultationCreateWithoutUserInput[] | ConsultationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConsultationCreateOrConnectWithoutUserInput | ConsultationCreateOrConnectWithoutUserInput[]
+    createMany?: ConsultationCreateManyUserInputEnvelope
+    connect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
   }
 
   export type DeliveryCreateNestedManyWithoutUserInput = {
@@ -25329,11 +25308,18 @@ export namespace Prisma {
     connect?: DeliveryWhereUniqueInput | DeliveryWhereUniqueInput[]
   }
 
-  export type PrescriptionCreateNestedManyWithoutUserInput = {
-    create?: XOR<PrescriptionCreateWithoutUserInput, PrescriptionUncheckedCreateWithoutUserInput> | PrescriptionCreateWithoutUserInput[] | PrescriptionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PrescriptionCreateOrConnectWithoutUserInput | PrescriptionCreateOrConnectWithoutUserInput[]
-    createMany?: PrescriptionCreateManyUserInputEnvelope
-    connect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+  export type InventoryItemCreateNestedManyWithoutPharmacyInput = {
+    create?: XOR<InventoryItemCreateWithoutPharmacyInput, InventoryItemUncheckedCreateWithoutPharmacyInput> | InventoryItemCreateWithoutPharmacyInput[] | InventoryItemUncheckedCreateWithoutPharmacyInput[]
+    connectOrCreate?: InventoryItemCreateOrConnectWithoutPharmacyInput | InventoryItemCreateOrConnectWithoutPharmacyInput[]
+    createMany?: InventoryItemCreateManyPharmacyInputEnvelope
+    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+  }
+
+  export type MessageCreateNestedManyWithoutUserInput = {
+    create?: XOR<MessageCreateWithoutUserInput, MessageUncheckedCreateWithoutUserInput> | MessageCreateWithoutUserInput[] | MessageUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutUserInput | MessageCreateOrConnectWithoutUserInput[]
+    createMany?: MessageCreateManyUserInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
   export type OrderCreateNestedManyWithoutUserInput = {
@@ -25343,17 +25329,11 @@ export namespace Prisma {
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
   }
 
-  export type InventoryItemCreateNestedManyWithoutPharmacyInput = {
-    create?: XOR<InventoryItemCreateWithoutPharmacyInput, InventoryItemUncheckedCreateWithoutPharmacyInput> | InventoryItemCreateWithoutPharmacyInput[] | InventoryItemUncheckedCreateWithoutPharmacyInput[]
-    connectOrCreate?: InventoryItemCreateOrConnectWithoutPharmacyInput | InventoryItemCreateOrConnectWithoutPharmacyInput[]
-    createMany?: InventoryItemCreateManyPharmacyInputEnvelope
-    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
-  }
-
-  export type UserSettingsCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
-    connect?: UserSettingsWhereUniqueInput
+  export type PrescriptionCreateNestedManyWithoutUserInput = {
+    create?: XOR<PrescriptionCreateWithoutUserInput, PrescriptionUncheckedCreateWithoutUserInput> | PrescriptionCreateWithoutUserInput[] | PrescriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PrescriptionCreateOrConnectWithoutUserInput | PrescriptionCreateOrConnectWithoutUserInput[]
+    createMany?: PrescriptionCreateManyUserInputEnvelope
+    connect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
   }
 
   export type StaffCreateNestedOneWithoutUserInput = {
@@ -25362,11 +25342,10 @@ export namespace Prisma {
     connect?: StaffWhereUniqueInput
   }
 
-  export type ConsultationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<ConsultationCreateWithoutUserInput, ConsultationUncheckedCreateWithoutUserInput> | ConsultationCreateWithoutUserInput[] | ConsultationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ConsultationCreateOrConnectWithoutUserInput | ConsultationCreateOrConnectWithoutUserInput[]
-    createMany?: ConsultationCreateManyUserInputEnvelope
-    connect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
+  export type UserSettingsCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
+    connect?: UserSettingsWhereUniqueInput
   }
 
   export type ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput = {
@@ -25376,11 +25355,11 @@ export namespace Prisma {
     connect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
   }
 
-  export type MessageUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<MessageCreateWithoutUserInput, MessageUncheckedCreateWithoutUserInput> | MessageCreateWithoutUserInput[] | MessageUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutUserInput | MessageCreateOrConnectWithoutUserInput[]
-    createMany?: MessageCreateManyUserInputEnvelope
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  export type ConsultationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ConsultationCreateWithoutUserInput, ConsultationUncheckedCreateWithoutUserInput> | ConsultationCreateWithoutUserInput[] | ConsultationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConsultationCreateOrConnectWithoutUserInput | ConsultationCreateOrConnectWithoutUserInput[]
+    createMany?: ConsultationCreateManyUserInputEnvelope
+    connect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
   }
 
   export type DeliveryUncheckedCreateNestedManyWithoutUserInput = {
@@ -25390,11 +25369,18 @@ export namespace Prisma {
     connect?: DeliveryWhereUniqueInput | DeliveryWhereUniqueInput[]
   }
 
-  export type PrescriptionUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<PrescriptionCreateWithoutUserInput, PrescriptionUncheckedCreateWithoutUserInput> | PrescriptionCreateWithoutUserInput[] | PrescriptionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PrescriptionCreateOrConnectWithoutUserInput | PrescriptionCreateOrConnectWithoutUserInput[]
-    createMany?: PrescriptionCreateManyUserInputEnvelope
-    connect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+  export type InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput = {
+    create?: XOR<InventoryItemCreateWithoutPharmacyInput, InventoryItemUncheckedCreateWithoutPharmacyInput> | InventoryItemCreateWithoutPharmacyInput[] | InventoryItemUncheckedCreateWithoutPharmacyInput[]
+    connectOrCreate?: InventoryItemCreateOrConnectWithoutPharmacyInput | InventoryItemCreateOrConnectWithoutPharmacyInput[]
+    createMany?: InventoryItemCreateManyPharmacyInputEnvelope
+    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+  }
+
+  export type MessageUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MessageCreateWithoutUserInput, MessageUncheckedCreateWithoutUserInput> | MessageCreateWithoutUserInput[] | MessageUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutUserInput | MessageCreateOrConnectWithoutUserInput[]
+    createMany?: MessageCreateManyUserInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
   export type OrderUncheckedCreateNestedManyWithoutUserInput = {
@@ -25404,23 +25390,23 @@ export namespace Prisma {
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
   }
 
-  export type InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput = {
-    create?: XOR<InventoryItemCreateWithoutPharmacyInput, InventoryItemUncheckedCreateWithoutPharmacyInput> | InventoryItemCreateWithoutPharmacyInput[] | InventoryItemUncheckedCreateWithoutPharmacyInput[]
-    connectOrCreate?: InventoryItemCreateOrConnectWithoutPharmacyInput | InventoryItemCreateOrConnectWithoutPharmacyInput[]
-    createMany?: InventoryItemCreateManyPharmacyInputEnvelope
-    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
-  }
-
-  export type UserSettingsUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
-    connect?: UserSettingsWhereUniqueInput
+  export type PrescriptionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PrescriptionCreateWithoutUserInput, PrescriptionUncheckedCreateWithoutUserInput> | PrescriptionCreateWithoutUserInput[] | PrescriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PrescriptionCreateOrConnectWithoutUserInput | PrescriptionCreateOrConnectWithoutUserInput[]
+    createMany?: PrescriptionCreateManyUserInputEnvelope
+    connect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
   }
 
   export type StaffUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<StaffCreateWithoutUserInput, StaffUncheckedCreateWithoutUserInput>
     connectOrCreate?: StaffCreateOrConnectWithoutUserInput
     connect?: StaffWhereUniqueInput
+  }
+
+  export type UserSettingsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
+    connect?: UserSettingsWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -25443,20 +25429,6 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type ConsultationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ConsultationCreateWithoutUserInput, ConsultationUncheckedCreateWithoutUserInput> | ConsultationCreateWithoutUserInput[] | ConsultationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ConsultationCreateOrConnectWithoutUserInput | ConsultationCreateOrConnectWithoutUserInput[]
-    upsert?: ConsultationUpsertWithWhereUniqueWithoutUserInput | ConsultationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ConsultationCreateManyUserInputEnvelope
-    set?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
-    disconnect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
-    delete?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
-    connect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
-    update?: ConsultationUpdateWithWhereUniqueWithoutUserInput | ConsultationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ConsultationUpdateManyWithWhereWithoutUserInput | ConsultationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ConsultationScalarWhereInput | ConsultationScalarWhereInput[]
-  }
-
   export type ConsultationUpdateManyWithoutAssignedPharmacistNestedInput = {
     create?: XOR<ConsultationCreateWithoutAssignedPharmacistInput, ConsultationUncheckedCreateWithoutAssignedPharmacistInput> | ConsultationCreateWithoutAssignedPharmacistInput[] | ConsultationUncheckedCreateWithoutAssignedPharmacistInput[]
     connectOrCreate?: ConsultationCreateOrConnectWithoutAssignedPharmacistInput | ConsultationCreateOrConnectWithoutAssignedPharmacistInput[]
@@ -25471,18 +25443,18 @@ export namespace Prisma {
     deleteMany?: ConsultationScalarWhereInput | ConsultationScalarWhereInput[]
   }
 
-  export type MessageUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MessageCreateWithoutUserInput, MessageUncheckedCreateWithoutUserInput> | MessageCreateWithoutUserInput[] | MessageUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutUserInput | MessageCreateOrConnectWithoutUserInput[]
-    upsert?: MessageUpsertWithWhereUniqueWithoutUserInput | MessageUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MessageCreateManyUserInputEnvelope
-    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    update?: MessageUpdateWithWhereUniqueWithoutUserInput | MessageUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MessageUpdateManyWithWhereWithoutUserInput | MessageUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  export type ConsultationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConsultationCreateWithoutUserInput, ConsultationUncheckedCreateWithoutUserInput> | ConsultationCreateWithoutUserInput[] | ConsultationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConsultationCreateOrConnectWithoutUserInput | ConsultationCreateOrConnectWithoutUserInput[]
+    upsert?: ConsultationUpsertWithWhereUniqueWithoutUserInput | ConsultationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConsultationCreateManyUserInputEnvelope
+    set?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
+    disconnect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
+    delete?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
+    connect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
+    update?: ConsultationUpdateWithWhereUniqueWithoutUserInput | ConsultationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConsultationUpdateManyWithWhereWithoutUserInput | ConsultationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConsultationScalarWhereInput | ConsultationScalarWhereInput[]
   }
 
   export type DeliveryUpdateManyWithoutUserNestedInput = {
@@ -25499,18 +25471,32 @@ export namespace Prisma {
     deleteMany?: DeliveryScalarWhereInput | DeliveryScalarWhereInput[]
   }
 
-  export type PrescriptionUpdateManyWithoutUserNestedInput = {
-    create?: XOR<PrescriptionCreateWithoutUserInput, PrescriptionUncheckedCreateWithoutUserInput> | PrescriptionCreateWithoutUserInput[] | PrescriptionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PrescriptionCreateOrConnectWithoutUserInput | PrescriptionCreateOrConnectWithoutUserInput[]
-    upsert?: PrescriptionUpsertWithWhereUniqueWithoutUserInput | PrescriptionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: PrescriptionCreateManyUserInputEnvelope
-    set?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
-    disconnect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
-    delete?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
-    connect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
-    update?: PrescriptionUpdateWithWhereUniqueWithoutUserInput | PrescriptionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: PrescriptionUpdateManyWithWhereWithoutUserInput | PrescriptionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: PrescriptionScalarWhereInput | PrescriptionScalarWhereInput[]
+  export type InventoryItemUpdateManyWithoutPharmacyNestedInput = {
+    create?: XOR<InventoryItemCreateWithoutPharmacyInput, InventoryItemUncheckedCreateWithoutPharmacyInput> | InventoryItemCreateWithoutPharmacyInput[] | InventoryItemUncheckedCreateWithoutPharmacyInput[]
+    connectOrCreate?: InventoryItemCreateOrConnectWithoutPharmacyInput | InventoryItemCreateOrConnectWithoutPharmacyInput[]
+    upsert?: InventoryItemUpsertWithWhereUniqueWithoutPharmacyInput | InventoryItemUpsertWithWhereUniqueWithoutPharmacyInput[]
+    createMany?: InventoryItemCreateManyPharmacyInputEnvelope
+    set?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    disconnect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    delete?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    update?: InventoryItemUpdateWithWhereUniqueWithoutPharmacyInput | InventoryItemUpdateWithWhereUniqueWithoutPharmacyInput[]
+    updateMany?: InventoryItemUpdateManyWithWhereWithoutPharmacyInput | InventoryItemUpdateManyWithWhereWithoutPharmacyInput[]
+    deleteMany?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
+  }
+
+  export type MessageUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MessageCreateWithoutUserInput, MessageUncheckedCreateWithoutUserInput> | MessageCreateWithoutUserInput[] | MessageUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutUserInput | MessageCreateOrConnectWithoutUserInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutUserInput | MessageUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MessageCreateManyUserInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutUserInput | MessageUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutUserInput | MessageUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
   export type OrderUpdateManyWithoutUserNestedInput = {
@@ -25527,28 +25513,18 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
-  export type InventoryItemUpdateManyWithoutPharmacyNestedInput = {
-    create?: XOR<InventoryItemCreateWithoutPharmacyInput, InventoryItemUncheckedCreateWithoutPharmacyInput> | InventoryItemCreateWithoutPharmacyInput[] | InventoryItemUncheckedCreateWithoutPharmacyInput[]
-    connectOrCreate?: InventoryItemCreateOrConnectWithoutPharmacyInput | InventoryItemCreateOrConnectWithoutPharmacyInput[]
-    upsert?: InventoryItemUpsertWithWhereUniqueWithoutPharmacyInput | InventoryItemUpsertWithWhereUniqueWithoutPharmacyInput[]
-    createMany?: InventoryItemCreateManyPharmacyInputEnvelope
-    set?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
-    disconnect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
-    delete?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
-    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
-    update?: InventoryItemUpdateWithWhereUniqueWithoutPharmacyInput | InventoryItemUpdateWithWhereUniqueWithoutPharmacyInput[]
-    updateMany?: InventoryItemUpdateManyWithWhereWithoutPharmacyInput | InventoryItemUpdateManyWithWhereWithoutPharmacyInput[]
-    deleteMany?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
-  }
-
-  export type UserSettingsUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
-    upsert?: UserSettingsUpsertWithoutUserInput
-    disconnect?: UserSettingsWhereInput | boolean
-    delete?: UserSettingsWhereInput | boolean
-    connect?: UserSettingsWhereUniqueInput
-    update?: XOR<XOR<UserSettingsUpdateToOneWithWhereWithoutUserInput, UserSettingsUpdateWithoutUserInput>, UserSettingsUncheckedUpdateWithoutUserInput>
+  export type PrescriptionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PrescriptionCreateWithoutUserInput, PrescriptionUncheckedCreateWithoutUserInput> | PrescriptionCreateWithoutUserInput[] | PrescriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PrescriptionCreateOrConnectWithoutUserInput | PrescriptionCreateOrConnectWithoutUserInput[]
+    upsert?: PrescriptionUpsertWithWhereUniqueWithoutUserInput | PrescriptionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PrescriptionCreateManyUserInputEnvelope
+    set?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    disconnect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    delete?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    connect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    update?: PrescriptionUpdateWithWhereUniqueWithoutUserInput | PrescriptionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PrescriptionUpdateManyWithWhereWithoutUserInput | PrescriptionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PrescriptionScalarWhereInput | PrescriptionScalarWhereInput[]
   }
 
   export type StaffUpdateOneWithoutUserNestedInput = {
@@ -25561,18 +25537,14 @@ export namespace Prisma {
     update?: XOR<XOR<StaffUpdateToOneWithWhereWithoutUserInput, StaffUpdateWithoutUserInput>, StaffUncheckedUpdateWithoutUserInput>
   }
 
-  export type ConsultationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ConsultationCreateWithoutUserInput, ConsultationUncheckedCreateWithoutUserInput> | ConsultationCreateWithoutUserInput[] | ConsultationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ConsultationCreateOrConnectWithoutUserInput | ConsultationCreateOrConnectWithoutUserInput[]
-    upsert?: ConsultationUpsertWithWhereUniqueWithoutUserInput | ConsultationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ConsultationCreateManyUserInputEnvelope
-    set?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
-    disconnect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
-    delete?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
-    connect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
-    update?: ConsultationUpdateWithWhereUniqueWithoutUserInput | ConsultationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ConsultationUpdateManyWithWhereWithoutUserInput | ConsultationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ConsultationScalarWhereInput | ConsultationScalarWhereInput[]
+  export type UserSettingsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
+    upsert?: UserSettingsUpsertWithoutUserInput
+    disconnect?: UserSettingsWhereInput | boolean
+    delete?: UserSettingsWhereInput | boolean
+    connect?: UserSettingsWhereUniqueInput
+    update?: XOR<XOR<UserSettingsUpdateToOneWithWhereWithoutUserInput, UserSettingsUpdateWithoutUserInput>, UserSettingsUncheckedUpdateWithoutUserInput>
   }
 
   export type ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput = {
@@ -25589,18 +25561,18 @@ export namespace Prisma {
     deleteMany?: ConsultationScalarWhereInput | ConsultationScalarWhereInput[]
   }
 
-  export type MessageUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<MessageCreateWithoutUserInput, MessageUncheckedCreateWithoutUserInput> | MessageCreateWithoutUserInput[] | MessageUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: MessageCreateOrConnectWithoutUserInput | MessageCreateOrConnectWithoutUserInput[]
-    upsert?: MessageUpsertWithWhereUniqueWithoutUserInput | MessageUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: MessageCreateManyUserInputEnvelope
-    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-    update?: MessageUpdateWithWhereUniqueWithoutUserInput | MessageUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: MessageUpdateManyWithWhereWithoutUserInput | MessageUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  export type ConsultationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ConsultationCreateWithoutUserInput, ConsultationUncheckedCreateWithoutUserInput> | ConsultationCreateWithoutUserInput[] | ConsultationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ConsultationCreateOrConnectWithoutUserInput | ConsultationCreateOrConnectWithoutUserInput[]
+    upsert?: ConsultationUpsertWithWhereUniqueWithoutUserInput | ConsultationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ConsultationCreateManyUserInputEnvelope
+    set?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
+    disconnect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
+    delete?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
+    connect?: ConsultationWhereUniqueInput | ConsultationWhereUniqueInput[]
+    update?: ConsultationUpdateWithWhereUniqueWithoutUserInput | ConsultationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ConsultationUpdateManyWithWhereWithoutUserInput | ConsultationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ConsultationScalarWhereInput | ConsultationScalarWhereInput[]
   }
 
   export type DeliveryUncheckedUpdateManyWithoutUserNestedInput = {
@@ -25617,18 +25589,32 @@ export namespace Prisma {
     deleteMany?: DeliveryScalarWhereInput | DeliveryScalarWhereInput[]
   }
 
-  export type PrescriptionUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<PrescriptionCreateWithoutUserInput, PrescriptionUncheckedCreateWithoutUserInput> | PrescriptionCreateWithoutUserInput[] | PrescriptionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PrescriptionCreateOrConnectWithoutUserInput | PrescriptionCreateOrConnectWithoutUserInput[]
-    upsert?: PrescriptionUpsertWithWhereUniqueWithoutUserInput | PrescriptionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: PrescriptionCreateManyUserInputEnvelope
-    set?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
-    disconnect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
-    delete?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
-    connect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
-    update?: PrescriptionUpdateWithWhereUniqueWithoutUserInput | PrescriptionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: PrescriptionUpdateManyWithWhereWithoutUserInput | PrescriptionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: PrescriptionScalarWhereInput | PrescriptionScalarWhereInput[]
+  export type InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput = {
+    create?: XOR<InventoryItemCreateWithoutPharmacyInput, InventoryItemUncheckedCreateWithoutPharmacyInput> | InventoryItemCreateWithoutPharmacyInput[] | InventoryItemUncheckedCreateWithoutPharmacyInput[]
+    connectOrCreate?: InventoryItemCreateOrConnectWithoutPharmacyInput | InventoryItemCreateOrConnectWithoutPharmacyInput[]
+    upsert?: InventoryItemUpsertWithWhereUniqueWithoutPharmacyInput | InventoryItemUpsertWithWhereUniqueWithoutPharmacyInput[]
+    createMany?: InventoryItemCreateManyPharmacyInputEnvelope
+    set?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    disconnect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    delete?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
+    update?: InventoryItemUpdateWithWhereUniqueWithoutPharmacyInput | InventoryItemUpdateWithWhereUniqueWithoutPharmacyInput[]
+    updateMany?: InventoryItemUpdateManyWithWhereWithoutPharmacyInput | InventoryItemUpdateManyWithWhereWithoutPharmacyInput[]
+    deleteMany?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
+  }
+
+  export type MessageUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MessageCreateWithoutUserInput, MessageUncheckedCreateWithoutUserInput> | MessageCreateWithoutUserInput[] | MessageUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutUserInput | MessageCreateOrConnectWithoutUserInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutUserInput | MessageUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MessageCreateManyUserInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutUserInput | MessageUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutUserInput | MessageUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
   export type OrderUncheckedUpdateManyWithoutUserNestedInput = {
@@ -25645,28 +25631,18 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
-  export type InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput = {
-    create?: XOR<InventoryItemCreateWithoutPharmacyInput, InventoryItemUncheckedCreateWithoutPharmacyInput> | InventoryItemCreateWithoutPharmacyInput[] | InventoryItemUncheckedCreateWithoutPharmacyInput[]
-    connectOrCreate?: InventoryItemCreateOrConnectWithoutPharmacyInput | InventoryItemCreateOrConnectWithoutPharmacyInput[]
-    upsert?: InventoryItemUpsertWithWhereUniqueWithoutPharmacyInput | InventoryItemUpsertWithWhereUniqueWithoutPharmacyInput[]
-    createMany?: InventoryItemCreateManyPharmacyInputEnvelope
-    set?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
-    disconnect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
-    delete?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
-    connect?: InventoryItemWhereUniqueInput | InventoryItemWhereUniqueInput[]
-    update?: InventoryItemUpdateWithWhereUniqueWithoutPharmacyInput | InventoryItemUpdateWithWhereUniqueWithoutPharmacyInput[]
-    updateMany?: InventoryItemUpdateManyWithWhereWithoutPharmacyInput | InventoryItemUpdateManyWithWhereWithoutPharmacyInput[]
-    deleteMany?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
-  }
-
-  export type UserSettingsUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
-    upsert?: UserSettingsUpsertWithoutUserInput
-    disconnect?: UserSettingsWhereInput | boolean
-    delete?: UserSettingsWhereInput | boolean
-    connect?: UserSettingsWhereUniqueInput
-    update?: XOR<XOR<UserSettingsUpdateToOneWithWhereWithoutUserInput, UserSettingsUpdateWithoutUserInput>, UserSettingsUncheckedUpdateWithoutUserInput>
+  export type PrescriptionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PrescriptionCreateWithoutUserInput, PrescriptionUncheckedCreateWithoutUserInput> | PrescriptionCreateWithoutUserInput[] | PrescriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PrescriptionCreateOrConnectWithoutUserInput | PrescriptionCreateOrConnectWithoutUserInput[]
+    upsert?: PrescriptionUpsertWithWhereUniqueWithoutUserInput | PrescriptionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PrescriptionCreateManyUserInputEnvelope
+    set?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    disconnect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    delete?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    connect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    update?: PrescriptionUpdateWithWhereUniqueWithoutUserInput | PrescriptionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PrescriptionUpdateManyWithWhereWithoutUserInput | PrescriptionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PrescriptionScalarWhereInput | PrescriptionScalarWhereInput[]
   }
 
   export type StaffUncheckedUpdateOneWithoutUserNestedInput = {
@@ -25679,10 +25655,14 @@ export namespace Prisma {
     update?: XOR<XOR<StaffUpdateToOneWithWhereWithoutUserInput, StaffUpdateWithoutUserInput>, StaffUncheckedUpdateWithoutUserInput>
   }
 
-  export type UserCreateNestedOneWithoutConsultationsInput = {
-    create?: XOR<UserCreateWithoutConsultationsInput, UserUncheckedCreateWithoutConsultationsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutConsultationsInput
-    connect?: UserWhereUniqueInput
+  export type UserSettingsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSettingsCreateOrConnectWithoutUserInput
+    upsert?: UserSettingsUpsertWithoutUserInput
+    disconnect?: UserSettingsWhereInput | boolean
+    delete?: UserSettingsWhereInput | boolean
+    connect?: UserSettingsWhereUniqueInput
+    update?: XOR<XOR<UserSettingsUpdateToOneWithWhereWithoutUserInput, UserSettingsUpdateWithoutUserInput>, UserSettingsUncheckedUpdateWithoutUserInput>
   }
 
   export type UserCreateNestedOneWithoutAssignedConsultationsInput = {
@@ -25695,6 +25675,12 @@ export namespace Prisma {
     create?: XOR<StaffCreateWithoutAssignedConsultationsInput, StaffUncheckedCreateWithoutAssignedConsultationsInput>
     connectOrCreate?: StaffCreateOrConnectWithoutAssignedConsultationsInput
     connect?: StaffWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutConsultationsInput = {
+    create?: XOR<UserCreateWithoutConsultationsInput, UserUncheckedCreateWithoutConsultationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConsultationsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type MessageCreateNestedManyWithoutConsultationInput = {
@@ -25737,16 +25723,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type UserUpdateOneWithoutConsultationsNestedInput = {
-    create?: XOR<UserCreateWithoutConsultationsInput, UserUncheckedCreateWithoutConsultationsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutConsultationsInput
-    upsert?: UserUpsertWithoutConsultationsInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutConsultationsInput, UserUpdateWithoutConsultationsInput>, UserUncheckedUpdateWithoutConsultationsInput>
-  }
-
   export type UserUpdateOneWithoutAssignedConsultationsNestedInput = {
     create?: XOR<UserCreateWithoutAssignedConsultationsInput, UserUncheckedCreateWithoutAssignedConsultationsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAssignedConsultationsInput
@@ -25765,6 +25741,16 @@ export namespace Prisma {
     delete?: StaffWhereInput | boolean
     connect?: StaffWhereUniqueInput
     update?: XOR<XOR<StaffUpdateToOneWithWhereWithoutAssignedConsultationsInput, StaffUpdateWithoutAssignedConsultationsInput>, StaffUncheckedUpdateWithoutAssignedConsultationsInput>
+  }
+
+  export type UserUpdateOneWithoutConsultationsNestedInput = {
+    create?: XOR<UserCreateWithoutConsultationsInput, UserUncheckedCreateWithoutConsultationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutConsultationsInput
+    upsert?: UserUpsertWithoutConsultationsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutConsultationsInput, UserUpdateWithoutConsultationsInput>, UserUncheckedUpdateWithoutConsultationsInput>
   }
 
   export type MessageUpdateManyWithoutConsultationNestedInput = {
@@ -25823,20 +25809,28 @@ export namespace Prisma {
     deleteMany?: PrescriptionScalarWhereInput | PrescriptionScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutMessagesInput = {
-    create?: XOR<UserCreateWithoutMessagesInput, UserUncheckedCreateWithoutMessagesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutMessagesInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type ConsultationCreateNestedOneWithoutMessagesInput = {
     create?: XOR<ConsultationCreateWithoutMessagesInput, ConsultationUncheckedCreateWithoutMessagesInput>
     connectOrCreate?: ConsultationCreateOrConnectWithoutMessagesInput
     connect?: ConsultationWhereUniqueInput
   }
 
+  export type UserCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<UserCreateWithoutMessagesInput, UserUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMessagesInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type EnumMessageTypeFieldUpdateOperationsInput = {
     set?: $Enums.MessageType
+  }
+
+  export type ConsultationUpdateOneRequiredWithoutMessagesNestedInput = {
+    create?: XOR<ConsultationCreateWithoutMessagesInput, ConsultationUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ConsultationCreateOrConnectWithoutMessagesInput
+    upsert?: ConsultationUpsertWithoutMessagesInput
+    connect?: ConsultationWhereUniqueInput
+    update?: XOR<XOR<ConsultationUpdateToOneWithWhereWithoutMessagesInput, ConsultationUpdateWithoutMessagesInput>, ConsultationUncheckedUpdateWithoutMessagesInput>
   }
 
   export type UserUpdateOneWithoutMessagesNestedInput = {
@@ -25849,26 +25843,16 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMessagesInput, UserUpdateWithoutMessagesInput>, UserUncheckedUpdateWithoutMessagesInput>
   }
 
-  export type ConsultationUpdateOneWithoutMessagesNestedInput = {
-    create?: XOR<ConsultationCreateWithoutMessagesInput, ConsultationUncheckedCreateWithoutMessagesInput>
-    connectOrCreate?: ConsultationCreateOrConnectWithoutMessagesInput
-    upsert?: ConsultationUpsertWithoutMessagesInput
-    disconnect?: ConsultationWhereInput | boolean
-    delete?: ConsultationWhereInput | boolean
-    connect?: ConsultationWhereUniqueInput
-    update?: XOR<XOR<ConsultationUpdateToOneWithWhereWithoutMessagesInput, ConsultationUpdateWithoutMessagesInput>, ConsultationUncheckedUpdateWithoutMessagesInput>
+  export type OrderCreateNestedOneWithoutDeliveryInput = {
+    create?: XOR<OrderCreateWithoutDeliveryInput, OrderUncheckedCreateWithoutDeliveryInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutDeliveryInput
+    connect?: OrderWhereUniqueInput
   }
 
   export type UserCreateNestedOneWithoutDeliveriesInput = {
     create?: XOR<UserCreateWithoutDeliveriesInput, UserUncheckedCreateWithoutDeliveriesInput>
     connectOrCreate?: UserCreateOrConnectWithoutDeliveriesInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type OrderCreateNestedOneWithoutDeliveryInput = {
-    create?: XOR<OrderCreateWithoutDeliveryInput, OrderUncheckedCreateWithoutDeliveryInput>
-    connectOrCreate?: OrderCreateOrConnectWithoutDeliveryInput
-    connect?: OrderWhereUniqueInput
   }
 
   export type EnumDeliveryStatusFieldUpdateOperationsInput = {
@@ -25879,16 +25863,6 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type UserUpdateOneWithoutDeliveriesNestedInput = {
-    create?: XOR<UserCreateWithoutDeliveriesInput, UserUncheckedCreateWithoutDeliveriesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutDeliveriesInput
-    upsert?: UserUpsertWithoutDeliveriesInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDeliveriesInput, UserUpdateWithoutDeliveriesInput>, UserUncheckedUpdateWithoutDeliveriesInput>
-  }
-
   export type OrderUpdateOneWithoutDeliveryNestedInput = {
     create?: XOR<OrderCreateWithoutDeliveryInput, OrderUncheckedCreateWithoutDeliveryInput>
     connectOrCreate?: OrderCreateOrConnectWithoutDeliveryInput
@@ -25897,6 +25871,16 @@ export namespace Prisma {
     delete?: OrderWhereInput | boolean
     connect?: OrderWhereUniqueInput
     update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutDeliveryInput, OrderUpdateWithoutDeliveryInput>, OrderUncheckedUpdateWithoutDeliveryInput>
+  }
+
+  export type UserUpdateOneWithoutDeliveriesNestedInput = {
+    create?: XOR<UserCreateWithoutDeliveriesInput, UserUncheckedCreateWithoutDeliveriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDeliveriesInput
+    upsert?: UserUpsertWithoutDeliveriesInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDeliveriesInput, UserUpdateWithoutDeliveriesInput>, UserUncheckedUpdateWithoutDeliveriesInput>
   }
 
   export type InventoryItemCreateNestedManyWithoutMedicationInput = {
@@ -26027,16 +26011,17 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInventoryItemsInput, UserUpdateWithoutInventoryItemsInput>, UserUncheckedUpdateWithoutInventoryItemsInput>
   }
 
+  export type OrderCreateNestedManyWithoutPrescriptionInput = {
+    create?: XOR<OrderCreateWithoutPrescriptionInput, OrderUncheckedCreateWithoutPrescriptionInput> | OrderCreateWithoutPrescriptionInput[] | OrderUncheckedCreateWithoutPrescriptionInput[]
+    connectOrCreate?: OrderCreateOrConnectWithoutPrescriptionInput | OrderCreateOrConnectWithoutPrescriptionInput[]
+    createMany?: OrderCreateManyPrescriptionInputEnvelope
+    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+  }
+
   export type ConsultationCreateNestedOneWithoutPrescriptionsInput = {
     create?: XOR<ConsultationCreateWithoutPrescriptionsInput, ConsultationUncheckedCreateWithoutPrescriptionsInput>
     connectOrCreate?: ConsultationCreateOrConnectWithoutPrescriptionsInput
     connect?: ConsultationWhereUniqueInput
-  }
-
-  export type UserCreateNestedOneWithoutPrescriptionsInput = {
-    create?: XOR<UserCreateWithoutPrescriptionsInput, UserUncheckedCreateWithoutPrescriptionsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPrescriptionsInput
-    connect?: UserWhereUniqueInput
   }
 
   export type MedicationCreateNestedOneWithoutPrescriptionsInput = {
@@ -26045,11 +26030,10 @@ export namespace Prisma {
     connect?: MedicationWhereUniqueInput
   }
 
-  export type OrderCreateNestedManyWithoutPrescriptionInput = {
-    create?: XOR<OrderCreateWithoutPrescriptionInput, OrderUncheckedCreateWithoutPrescriptionInput> | OrderCreateWithoutPrescriptionInput[] | OrderUncheckedCreateWithoutPrescriptionInput[]
-    connectOrCreate?: OrderCreateOrConnectWithoutPrescriptionInput | OrderCreateOrConnectWithoutPrescriptionInput[]
-    createMany?: OrderCreateManyPrescriptionInputEnvelope
-    connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
+  export type UserCreateNestedOneWithoutPrescriptionsInput = {
+    create?: XOR<UserCreateWithoutPrescriptionsInput, UserUncheckedCreateWithoutPrescriptionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPrescriptionsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type OrderUncheckedCreateNestedManyWithoutPrescriptionInput = {
@@ -26061,34 +26045,6 @@ export namespace Prisma {
 
   export type EnumPrescriptionStatusFieldUpdateOperationsInput = {
     set?: $Enums.PrescriptionStatus
-  }
-
-  export type ConsultationUpdateOneWithoutPrescriptionsNestedInput = {
-    create?: XOR<ConsultationCreateWithoutPrescriptionsInput, ConsultationUncheckedCreateWithoutPrescriptionsInput>
-    connectOrCreate?: ConsultationCreateOrConnectWithoutPrescriptionsInput
-    upsert?: ConsultationUpsertWithoutPrescriptionsInput
-    disconnect?: ConsultationWhereInput | boolean
-    delete?: ConsultationWhereInput | boolean
-    connect?: ConsultationWhereUniqueInput
-    update?: XOR<XOR<ConsultationUpdateToOneWithWhereWithoutPrescriptionsInput, ConsultationUpdateWithoutPrescriptionsInput>, ConsultationUncheckedUpdateWithoutPrescriptionsInput>
-  }
-
-  export type UserUpdateOneWithoutPrescriptionsNestedInput = {
-    create?: XOR<UserCreateWithoutPrescriptionsInput, UserUncheckedCreateWithoutPrescriptionsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPrescriptionsInput
-    upsert?: UserUpsertWithoutPrescriptionsInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPrescriptionsInput, UserUpdateWithoutPrescriptionsInput>, UserUncheckedUpdateWithoutPrescriptionsInput>
-  }
-
-  export type MedicationUpdateOneRequiredWithoutPrescriptionsNestedInput = {
-    create?: XOR<MedicationCreateWithoutPrescriptionsInput, MedicationUncheckedCreateWithoutPrescriptionsInput>
-    connectOrCreate?: MedicationCreateOrConnectWithoutPrescriptionsInput
-    upsert?: MedicationUpsertWithoutPrescriptionsInput
-    connect?: MedicationWhereUniqueInput
-    update?: XOR<XOR<MedicationUpdateToOneWithWhereWithoutPrescriptionsInput, MedicationUpdateWithoutPrescriptionsInput>, MedicationUncheckedUpdateWithoutPrescriptionsInput>
   }
 
   export type OrderUpdateManyWithoutPrescriptionNestedInput = {
@@ -26105,6 +26061,34 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
+  export type ConsultationUpdateOneWithoutPrescriptionsNestedInput = {
+    create?: XOR<ConsultationCreateWithoutPrescriptionsInput, ConsultationUncheckedCreateWithoutPrescriptionsInput>
+    connectOrCreate?: ConsultationCreateOrConnectWithoutPrescriptionsInput
+    upsert?: ConsultationUpsertWithoutPrescriptionsInput
+    disconnect?: ConsultationWhereInput | boolean
+    delete?: ConsultationWhereInput | boolean
+    connect?: ConsultationWhereUniqueInput
+    update?: XOR<XOR<ConsultationUpdateToOneWithWhereWithoutPrescriptionsInput, ConsultationUpdateWithoutPrescriptionsInput>, ConsultationUncheckedUpdateWithoutPrescriptionsInput>
+  }
+
+  export type MedicationUpdateOneRequiredWithoutPrescriptionsNestedInput = {
+    create?: XOR<MedicationCreateWithoutPrescriptionsInput, MedicationUncheckedCreateWithoutPrescriptionsInput>
+    connectOrCreate?: MedicationCreateOrConnectWithoutPrescriptionsInput
+    upsert?: MedicationUpsertWithoutPrescriptionsInput
+    connect?: MedicationWhereUniqueInput
+    update?: XOR<XOR<MedicationUpdateToOneWithWhereWithoutPrescriptionsInput, MedicationUpdateWithoutPrescriptionsInput>, MedicationUncheckedUpdateWithoutPrescriptionsInput>
+  }
+
+  export type UserUpdateOneWithoutPrescriptionsNestedInput = {
+    create?: XOR<UserCreateWithoutPrescriptionsInput, UserUncheckedCreateWithoutPrescriptionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPrescriptionsInput
+    upsert?: UserUpsertWithoutPrescriptionsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPrescriptionsInput, UserUpdateWithoutPrescriptionsInput>, UserUncheckedUpdateWithoutPrescriptionsInput>
+  }
+
   export type OrderUncheckedUpdateManyWithoutPrescriptionNestedInput = {
     create?: XOR<OrderCreateWithoutPrescriptionInput, OrderUncheckedCreateWithoutPrescriptionInput> | OrderCreateWithoutPrescriptionInput[] | OrderUncheckedCreateWithoutPrescriptionInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutPrescriptionInput | OrderCreateOrConnectWithoutPrescriptionInput[]
@@ -26119,6 +26103,12 @@ export namespace Prisma {
     deleteMany?: OrderScalarWhereInput | OrderScalarWhereInput[]
   }
 
+  export type DeliveryCreateNestedOneWithoutOrderInput = {
+    create?: XOR<DeliveryCreateWithoutOrderInput, DeliveryUncheckedCreateWithoutOrderInput>
+    connectOrCreate?: DeliveryCreateOrConnectWithoutOrderInput
+    connect?: DeliveryWhereUniqueInput
+  }
+
   export type PrescriptionCreateNestedOneWithoutOrdersInput = {
     create?: XOR<PrescriptionCreateWithoutOrdersInput, PrescriptionUncheckedCreateWithoutOrdersInput>
     connectOrCreate?: PrescriptionCreateOrConnectWithoutOrdersInput
@@ -26129,12 +26119,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutOrdersInput, UserUncheckedCreateWithoutOrdersInput>
     connectOrCreate?: UserCreateOrConnectWithoutOrdersInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type DeliveryCreateNestedOneWithoutOrderInput = {
-    create?: XOR<DeliveryCreateWithoutOrderInput, DeliveryUncheckedCreateWithoutOrderInput>
-    connectOrCreate?: DeliveryCreateOrConnectWithoutOrderInput
-    connect?: DeliveryWhereUniqueInput
   }
 
   export type DeliveryUncheckedCreateNestedOneWithoutOrderInput = {
@@ -26149,6 +26133,16 @@ export namespace Prisma {
 
   export type EnumPaymentStatusFieldUpdateOperationsInput = {
     set?: $Enums.PaymentStatus
+  }
+
+  export type DeliveryUpdateOneWithoutOrderNestedInput = {
+    create?: XOR<DeliveryCreateWithoutOrderInput, DeliveryUncheckedCreateWithoutOrderInput>
+    connectOrCreate?: DeliveryCreateOrConnectWithoutOrderInput
+    upsert?: DeliveryUpsertWithoutOrderInput
+    disconnect?: DeliveryWhereInput | boolean
+    delete?: DeliveryWhereInput | boolean
+    connect?: DeliveryWhereUniqueInput
+    update?: XOR<XOR<DeliveryUpdateToOneWithWhereWithoutOrderInput, DeliveryUpdateWithoutOrderInput>, DeliveryUncheckedUpdateWithoutOrderInput>
   }
 
   export type PrescriptionUpdateOneWithoutOrdersNestedInput = {
@@ -26169,16 +26163,6 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOrdersInput, UserUpdateWithoutOrdersInput>, UserUncheckedUpdateWithoutOrdersInput>
-  }
-
-  export type DeliveryUpdateOneWithoutOrderNestedInput = {
-    create?: XOR<DeliveryCreateWithoutOrderInput, DeliveryUncheckedCreateWithoutOrderInput>
-    connectOrCreate?: DeliveryCreateOrConnectWithoutOrderInput
-    upsert?: DeliveryUpsertWithoutOrderInput
-    disconnect?: DeliveryWhereInput | boolean
-    delete?: DeliveryWhereInput | boolean
-    connect?: DeliveryWhereUniqueInput
-    update?: XOR<XOR<DeliveryUpdateToOneWithWhereWithoutOrderInput, DeliveryUpdateWithoutOrderInput>, DeliveryUncheckedUpdateWithoutOrderInput>
   }
 
   export type DeliveryUncheckedUpdateOneWithoutOrderNestedInput = {
@@ -26222,19 +26206,6 @@ export namespace Prisma {
     set: string[]
   }
 
-  export type UserCreateNestedOneWithoutStaffInput = {
-    create?: XOR<UserCreateWithoutStaffInput, UserUncheckedCreateWithoutStaffInput>
-    connectOrCreate?: UserCreateOrConnectWithoutStaffInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type StaffScheduleCreateNestedManyWithoutStaffInput = {
-    create?: XOR<StaffScheduleCreateWithoutStaffInput, StaffScheduleUncheckedCreateWithoutStaffInput> | StaffScheduleCreateWithoutStaffInput[] | StaffScheduleUncheckedCreateWithoutStaffInput[]
-    connectOrCreate?: StaffScheduleCreateOrConnectWithoutStaffInput | StaffScheduleCreateOrConnectWithoutStaffInput[]
-    createMany?: StaffScheduleCreateManyStaffInputEnvelope
-    connect?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
-  }
-
   export type ConsultationCreateNestedManyWithoutAssignedStaffInput = {
     create?: XOR<ConsultationCreateWithoutAssignedStaffInput, ConsultationUncheckedCreateWithoutAssignedStaffInput> | ConsultationCreateWithoutAssignedStaffInput[] | ConsultationUncheckedCreateWithoutAssignedStaffInput[]
     connectOrCreate?: ConsultationCreateOrConnectWithoutAssignedStaffInput | ConsultationCreateOrConnectWithoutAssignedStaffInput[]
@@ -26249,18 +26220,24 @@ export namespace Prisma {
     connect?: ShiftWhereUniqueInput | ShiftWhereUniqueInput[]
   }
 
+  export type UserCreateNestedOneWithoutStaffInput = {
+    create?: XOR<UserCreateWithoutStaffInput, UserUncheckedCreateWithoutStaffInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStaffInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type StaffScheduleCreateNestedManyWithoutStaffInput = {
+    create?: XOR<StaffScheduleCreateWithoutStaffInput, StaffScheduleUncheckedCreateWithoutStaffInput> | StaffScheduleCreateWithoutStaffInput[] | StaffScheduleUncheckedCreateWithoutStaffInput[]
+    connectOrCreate?: StaffScheduleCreateOrConnectWithoutStaffInput | StaffScheduleCreateOrConnectWithoutStaffInput[]
+    createMany?: StaffScheduleCreateManyStaffInputEnvelope
+    connect?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
+  }
+
   export type TimeOffRequestCreateNestedManyWithoutStaffInput = {
     create?: XOR<TimeOffRequestCreateWithoutStaffInput, TimeOffRequestUncheckedCreateWithoutStaffInput> | TimeOffRequestCreateWithoutStaffInput[] | TimeOffRequestUncheckedCreateWithoutStaffInput[]
     connectOrCreate?: TimeOffRequestCreateOrConnectWithoutStaffInput | TimeOffRequestCreateOrConnectWithoutStaffInput[]
     createMany?: TimeOffRequestCreateManyStaffInputEnvelope
     connect?: TimeOffRequestWhereUniqueInput | TimeOffRequestWhereUniqueInput[]
-  }
-
-  export type StaffScheduleUncheckedCreateNestedManyWithoutStaffInput = {
-    create?: XOR<StaffScheduleCreateWithoutStaffInput, StaffScheduleUncheckedCreateWithoutStaffInput> | StaffScheduleCreateWithoutStaffInput[] | StaffScheduleUncheckedCreateWithoutStaffInput[]
-    connectOrCreate?: StaffScheduleCreateOrConnectWithoutStaffInput | StaffScheduleCreateOrConnectWithoutStaffInput[]
-    createMany?: StaffScheduleCreateManyStaffInputEnvelope
-    connect?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
   }
 
   export type ConsultationUncheckedCreateNestedManyWithoutAssignedStaffInput = {
@@ -26275,6 +26252,13 @@ export namespace Prisma {
     connectOrCreate?: ShiftCreateOrConnectWithoutStaffInput | ShiftCreateOrConnectWithoutStaffInput[]
     createMany?: ShiftCreateManyStaffInputEnvelope
     connect?: ShiftWhereUniqueInput | ShiftWhereUniqueInput[]
+  }
+
+  export type StaffScheduleUncheckedCreateNestedManyWithoutStaffInput = {
+    create?: XOR<StaffScheduleCreateWithoutStaffInput, StaffScheduleUncheckedCreateWithoutStaffInput> | StaffScheduleCreateWithoutStaffInput[] | StaffScheduleUncheckedCreateWithoutStaffInput[]
+    connectOrCreate?: StaffScheduleCreateOrConnectWithoutStaffInput | StaffScheduleCreateOrConnectWithoutStaffInput[]
+    createMany?: StaffScheduleCreateManyStaffInputEnvelope
+    connect?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
   }
 
   export type TimeOffRequestUncheckedCreateNestedManyWithoutStaffInput = {
@@ -26306,28 +26290,6 @@ export namespace Prisma {
     push?: string | string[]
   }
 
-  export type UserUpdateOneRequiredWithoutStaffNestedInput = {
-    create?: XOR<UserCreateWithoutStaffInput, UserUncheckedCreateWithoutStaffInput>
-    connectOrCreate?: UserCreateOrConnectWithoutStaffInput
-    upsert?: UserUpsertWithoutStaffInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStaffInput, UserUpdateWithoutStaffInput>, UserUncheckedUpdateWithoutStaffInput>
-  }
-
-  export type StaffScheduleUpdateManyWithoutStaffNestedInput = {
-    create?: XOR<StaffScheduleCreateWithoutStaffInput, StaffScheduleUncheckedCreateWithoutStaffInput> | StaffScheduleCreateWithoutStaffInput[] | StaffScheduleUncheckedCreateWithoutStaffInput[]
-    connectOrCreate?: StaffScheduleCreateOrConnectWithoutStaffInput | StaffScheduleCreateOrConnectWithoutStaffInput[]
-    upsert?: StaffScheduleUpsertWithWhereUniqueWithoutStaffInput | StaffScheduleUpsertWithWhereUniqueWithoutStaffInput[]
-    createMany?: StaffScheduleCreateManyStaffInputEnvelope
-    set?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
-    disconnect?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
-    delete?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
-    connect?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
-    update?: StaffScheduleUpdateWithWhereUniqueWithoutStaffInput | StaffScheduleUpdateWithWhereUniqueWithoutStaffInput[]
-    updateMany?: StaffScheduleUpdateManyWithWhereWithoutStaffInput | StaffScheduleUpdateManyWithWhereWithoutStaffInput[]
-    deleteMany?: StaffScheduleScalarWhereInput | StaffScheduleScalarWhereInput[]
-  }
-
   export type ConsultationUpdateManyWithoutAssignedStaffNestedInput = {
     create?: XOR<ConsultationCreateWithoutAssignedStaffInput, ConsultationUncheckedCreateWithoutAssignedStaffInput> | ConsultationCreateWithoutAssignedStaffInput[] | ConsultationUncheckedCreateWithoutAssignedStaffInput[]
     connectOrCreate?: ConsultationCreateOrConnectWithoutAssignedStaffInput | ConsultationCreateOrConnectWithoutAssignedStaffInput[]
@@ -26356,6 +26318,28 @@ export namespace Prisma {
     deleteMany?: ShiftScalarWhereInput | ShiftScalarWhereInput[]
   }
 
+  export type UserUpdateOneRequiredWithoutStaffNestedInput = {
+    create?: XOR<UserCreateWithoutStaffInput, UserUncheckedCreateWithoutStaffInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStaffInput
+    upsert?: UserUpsertWithoutStaffInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStaffInput, UserUpdateWithoutStaffInput>, UserUncheckedUpdateWithoutStaffInput>
+  }
+
+  export type StaffScheduleUpdateManyWithoutStaffNestedInput = {
+    create?: XOR<StaffScheduleCreateWithoutStaffInput, StaffScheduleUncheckedCreateWithoutStaffInput> | StaffScheduleCreateWithoutStaffInput[] | StaffScheduleUncheckedCreateWithoutStaffInput[]
+    connectOrCreate?: StaffScheduleCreateOrConnectWithoutStaffInput | StaffScheduleCreateOrConnectWithoutStaffInput[]
+    upsert?: StaffScheduleUpsertWithWhereUniqueWithoutStaffInput | StaffScheduleUpsertWithWhereUniqueWithoutStaffInput[]
+    createMany?: StaffScheduleCreateManyStaffInputEnvelope
+    set?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
+    disconnect?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
+    delete?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
+    connect?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
+    update?: StaffScheduleUpdateWithWhereUniqueWithoutStaffInput | StaffScheduleUpdateWithWhereUniqueWithoutStaffInput[]
+    updateMany?: StaffScheduleUpdateManyWithWhereWithoutStaffInput | StaffScheduleUpdateManyWithWhereWithoutStaffInput[]
+    deleteMany?: StaffScheduleScalarWhereInput | StaffScheduleScalarWhereInput[]
+  }
+
   export type TimeOffRequestUpdateManyWithoutStaffNestedInput = {
     create?: XOR<TimeOffRequestCreateWithoutStaffInput, TimeOffRequestUncheckedCreateWithoutStaffInput> | TimeOffRequestCreateWithoutStaffInput[] | TimeOffRequestUncheckedCreateWithoutStaffInput[]
     connectOrCreate?: TimeOffRequestCreateOrConnectWithoutStaffInput | TimeOffRequestCreateOrConnectWithoutStaffInput[]
@@ -26368,20 +26352,6 @@ export namespace Prisma {
     update?: TimeOffRequestUpdateWithWhereUniqueWithoutStaffInput | TimeOffRequestUpdateWithWhereUniqueWithoutStaffInput[]
     updateMany?: TimeOffRequestUpdateManyWithWhereWithoutStaffInput | TimeOffRequestUpdateManyWithWhereWithoutStaffInput[]
     deleteMany?: TimeOffRequestScalarWhereInput | TimeOffRequestScalarWhereInput[]
-  }
-
-  export type StaffScheduleUncheckedUpdateManyWithoutStaffNestedInput = {
-    create?: XOR<StaffScheduleCreateWithoutStaffInput, StaffScheduleUncheckedCreateWithoutStaffInput> | StaffScheduleCreateWithoutStaffInput[] | StaffScheduleUncheckedCreateWithoutStaffInput[]
-    connectOrCreate?: StaffScheduleCreateOrConnectWithoutStaffInput | StaffScheduleCreateOrConnectWithoutStaffInput[]
-    upsert?: StaffScheduleUpsertWithWhereUniqueWithoutStaffInput | StaffScheduleUpsertWithWhereUniqueWithoutStaffInput[]
-    createMany?: StaffScheduleCreateManyStaffInputEnvelope
-    set?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
-    disconnect?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
-    delete?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
-    connect?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
-    update?: StaffScheduleUpdateWithWhereUniqueWithoutStaffInput | StaffScheduleUpdateWithWhereUniqueWithoutStaffInput[]
-    updateMany?: StaffScheduleUpdateManyWithWhereWithoutStaffInput | StaffScheduleUpdateManyWithWhereWithoutStaffInput[]
-    deleteMany?: StaffScheduleScalarWhereInput | StaffScheduleScalarWhereInput[]
   }
 
   export type ConsultationUncheckedUpdateManyWithoutAssignedStaffNestedInput = {
@@ -26410,6 +26380,20 @@ export namespace Prisma {
     update?: ShiftUpdateWithWhereUniqueWithoutStaffInput | ShiftUpdateWithWhereUniqueWithoutStaffInput[]
     updateMany?: ShiftUpdateManyWithWhereWithoutStaffInput | ShiftUpdateManyWithWhereWithoutStaffInput[]
     deleteMany?: ShiftScalarWhereInput | ShiftScalarWhereInput[]
+  }
+
+  export type StaffScheduleUncheckedUpdateManyWithoutStaffNestedInput = {
+    create?: XOR<StaffScheduleCreateWithoutStaffInput, StaffScheduleUncheckedCreateWithoutStaffInput> | StaffScheduleCreateWithoutStaffInput[] | StaffScheduleUncheckedCreateWithoutStaffInput[]
+    connectOrCreate?: StaffScheduleCreateOrConnectWithoutStaffInput | StaffScheduleCreateOrConnectWithoutStaffInput[]
+    upsert?: StaffScheduleUpsertWithWhereUniqueWithoutStaffInput | StaffScheduleUpsertWithWhereUniqueWithoutStaffInput[]
+    createMany?: StaffScheduleCreateManyStaffInputEnvelope
+    set?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
+    disconnect?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
+    delete?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
+    connect?: StaffScheduleWhereUniqueInput | StaffScheduleWhereUniqueInput[]
+    update?: StaffScheduleUpdateWithWhereUniqueWithoutStaffInput | StaffScheduleUpdateWithWhereUniqueWithoutStaffInput[]
+    updateMany?: StaffScheduleUpdateManyWithWhereWithoutStaffInput | StaffScheduleUpdateManyWithWhereWithoutStaffInput[]
+    deleteMany?: StaffScheduleScalarWhereInput | StaffScheduleScalarWhereInput[]
   }
 
   export type TimeOffRequestUncheckedUpdateManyWithoutStaffNestedInput = {
@@ -26922,72 +26906,22 @@ export namespace Prisma {
     _max?: NestedEnumTimeOffStatusFilter<$PrismaModel>
   }
 
-  export type ConsultationCreateWithoutUserInput = {
-    id?: string
-    anonymousId?: string | null
-    type: string
-    status?: $Enums.ConsultationStatus
-    description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    assignedPharmacist?: UserCreateNestedOneWithoutAssignedConsultationsInput
-    assignedStaff?: StaffCreateNestedOneWithoutAssignedConsultationsInput
-    messages?: MessageCreateNestedManyWithoutConsultationInput
-    prescriptions?: PrescriptionCreateNestedManyWithoutConsultationInput
-  }
-
-  export type ConsultationUncheckedCreateWithoutUserInput = {
-    id?: string
-    anonymousId?: string | null
-    type: string
-    status?: $Enums.ConsultationStatus
-    description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
-    assignedPharmacistId?: string | null
-    assignedStaffId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: MessageUncheckedCreateNestedManyWithoutConsultationInput
-    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutConsultationInput
-  }
-
-  export type ConsultationCreateOrConnectWithoutUserInput = {
-    where: ConsultationWhereUniqueInput
-    create: XOR<ConsultationCreateWithoutUserInput, ConsultationUncheckedCreateWithoutUserInput>
-  }
-
-  export type ConsultationCreateManyUserInputEnvelope = {
-    data: ConsultationCreateManyUserInput | ConsultationCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type ConsultationCreateWithoutAssignedPharmacistInput = {
     id?: string
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutConsultationsInput
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
     assignedStaff?: StaffCreateNestedOneWithoutAssignedConsultationsInput
+    user?: UserCreateNestedOneWithoutConsultationsInput
     messages?: MessageCreateNestedManyWithoutConsultationInput
     prescriptions?: PrescriptionCreateNestedManyWithoutConsultationInput
   }
@@ -26995,19 +26929,19 @@ export namespace Prisma {
   export type ConsultationUncheckedCreateWithoutAssignedPharmacistInput = {
     id?: string
     userId?: string | null
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
-    assignedStaffId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
+    assignedStaffId?: string | null
     messages?: MessageUncheckedCreateNestedManyWithoutConsultationInput
     prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutConsultationInput
   }
@@ -27022,39 +26956,58 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type MessageCreateWithoutUserInput = {
+  export type ConsultationCreateWithoutUserInput = {
     id?: string
-    anonymousId?: string | null
-    content: string
-    type?: $Enums.MessageType
-    isFromPharmacist?: boolean
+    type: string
+    status?: $Enums.ConsultationStatus
+    description?: string | null
     createdAt?: Date | string
-    consultation?: ConsultationCreateNestedOneWithoutMessagesInput
+    updatedAt?: Date | string
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
+    assignedPharmacist?: UserCreateNestedOneWithoutAssignedConsultationsInput
+    assignedStaff?: StaffCreateNestedOneWithoutAssignedConsultationsInput
+    messages?: MessageCreateNestedManyWithoutConsultationInput
+    prescriptions?: PrescriptionCreateNestedManyWithoutConsultationInput
   }
 
-  export type MessageUncheckedCreateWithoutUserInput = {
+  export type ConsultationUncheckedCreateWithoutUserInput = {
     id?: string
-    chatId: string
-    anonymousId?: string | null
-    content: string
-    type?: $Enums.MessageType
-    isFromPharmacist?: boolean
+    type: string
+    status?: $Enums.ConsultationStatus
+    description?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    assignedPharmacistId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
+    assignedStaffId?: string | null
+    messages?: MessageUncheckedCreateNestedManyWithoutConsultationInput
+    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutConsultationInput
   }
 
-  export type MessageCreateOrConnectWithoutUserInput = {
-    where: MessageWhereUniqueInput
-    create: XOR<MessageCreateWithoutUserInput, MessageUncheckedCreateWithoutUserInput>
+  export type ConsultationCreateOrConnectWithoutUserInput = {
+    where: ConsultationWhereUniqueInput
+    create: XOR<ConsultationCreateWithoutUserInput, ConsultationUncheckedCreateWithoutUserInput>
   }
 
-  export type MessageCreateManyUserInputEnvelope = {
-    data: MessageCreateManyUserInput | MessageCreateManyUserInput[]
+  export type ConsultationCreateManyUserInputEnvelope = {
+    data: ConsultationCreateManyUserInput | ConsultationCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
   export type DeliveryCreateWithoutUserInput = {
     id?: string
-    anonymousId?: string | null
     status?: $Enums.DeliveryStatus
     trackingNumber: string
     estimatedDelivery?: Date | string | null
@@ -27063,18 +27016,17 @@ export namespace Prisma {
     city: string
     state: string
     zipCode: string
-    dropPoint?: string | null
-    packageType?: string
-    isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    anonymousId?: string | null
+    dropPoint?: string | null
+    isAnonymous?: boolean
+    packageType?: string
     order?: OrderCreateNestedOneWithoutDeliveryInput
   }
 
   export type DeliveryUncheckedCreateWithoutUserInput = {
     id?: string
-    anonymousId?: string | null
-    orderId?: string | null
     status?: $Enums.DeliveryStatus
     trackingNumber: string
     estimatedDelivery?: Date | string | null
@@ -27083,11 +27035,13 @@ export namespace Prisma {
     city: string
     state: string
     zipCode: string
-    dropPoint?: string | null
-    packageType?: string
-    isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    anonymousId?: string | null
+    dropPoint?: string | null
+    isAnonymous?: boolean
+    orderId?: string | null
+    packageType?: string
   }
 
   export type DeliveryCreateOrConnectWithoutUserInput = {
@@ -27097,96 +27051,6 @@ export namespace Prisma {
 
   export type DeliveryCreateManyUserInputEnvelope = {
     data: DeliveryCreateManyUserInput | DeliveryCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PrescriptionCreateWithoutUserInput = {
-    id?: string
-    anonymousId?: string | null
-    prescribedBy: string
-    dosage: string
-    frequency: string
-    duration: string
-    quantity: number
-    refills?: number
-    instructions?: string | null
-    status?: $Enums.PrescriptionStatus
-    isAnonymous?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    consultation?: ConsultationCreateNestedOneWithoutPrescriptionsInput
-    medication: MedicationCreateNestedOneWithoutPrescriptionsInput
-    orders?: OrderCreateNestedManyWithoutPrescriptionInput
-  }
-
-  export type PrescriptionUncheckedCreateWithoutUserInput = {
-    id?: string
-    consultationId?: string | null
-    anonymousId?: string | null
-    medicationId: string
-    prescribedBy: string
-    dosage: string
-    frequency: string
-    duration: string
-    quantity: number
-    refills?: number
-    instructions?: string | null
-    status?: $Enums.PrescriptionStatus
-    isAnonymous?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    orders?: OrderUncheckedCreateNestedManyWithoutPrescriptionInput
-  }
-
-  export type PrescriptionCreateOrConnectWithoutUserInput = {
-    where: PrescriptionWhereUniqueInput
-    create: XOR<PrescriptionCreateWithoutUserInput, PrescriptionUncheckedCreateWithoutUserInput>
-  }
-
-  export type PrescriptionCreateManyUserInputEnvelope = {
-    data: PrescriptionCreateManyUserInput | PrescriptionCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type OrderCreateWithoutUserInput = {
-    id?: string
-    anonymousId?: string | null
-    orderNumber: string
-    status?: $Enums.OrderStatus
-    totalAmount: Decimal | DecimalJsLike | number | string
-    paymentStatus?: $Enums.PaymentStatus
-    paymentMethod?: string | null
-    isAnonymous?: boolean
-    specialInstructions?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    prescription?: PrescriptionCreateNestedOneWithoutOrdersInput
-    delivery?: DeliveryCreateNestedOneWithoutOrderInput
-  }
-
-  export type OrderUncheckedCreateWithoutUserInput = {
-    id?: string
-    prescriptionId?: string | null
-    anonymousId?: string | null
-    orderNumber: string
-    status?: $Enums.OrderStatus
-    totalAmount: Decimal | DecimalJsLike | number | string
-    paymentStatus?: $Enums.PaymentStatus
-    paymentMethod?: string | null
-    isAnonymous?: boolean
-    specialInstructions?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    delivery?: DeliveryUncheckedCreateNestedOneWithoutOrderInput
-  }
-
-  export type OrderCreateOrConnectWithoutUserInput = {
-    where: OrderWhereUniqueInput
-    create: XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput>
-  }
-
-  export type OrderCreateManyUserInputEnvelope = {
-    data: OrderCreateManyUserInput | OrderCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -27226,6 +27090,173 @@ export namespace Prisma {
   export type InventoryItemCreateManyPharmacyInputEnvelope = {
     data: InventoryItemCreateManyPharmacyInput | InventoryItemCreateManyPharmacyInput[]
     skipDuplicates?: boolean
+  }
+
+  export type MessageCreateWithoutUserInput = {
+    id?: string
+    content: string
+    type?: $Enums.MessageType
+    createdAt?: Date | string
+    anonymousId?: string | null
+    isFromPharmacist?: boolean
+    consultation: ConsultationCreateNestedOneWithoutMessagesInput
+  }
+
+  export type MessageUncheckedCreateWithoutUserInput = {
+    id?: string
+    chatId: string
+    content: string
+    type?: $Enums.MessageType
+    createdAt?: Date | string
+    anonymousId?: string | null
+    isFromPharmacist?: boolean
+  }
+
+  export type MessageCreateOrConnectWithoutUserInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutUserInput, MessageUncheckedCreateWithoutUserInput>
+  }
+
+  export type MessageCreateManyUserInputEnvelope = {
+    data: MessageCreateManyUserInput | MessageCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OrderCreateWithoutUserInput = {
+    id?: string
+    anonymousId?: string | null
+    orderNumber: string
+    status?: $Enums.OrderStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    paymentStatus?: $Enums.PaymentStatus
+    paymentMethod?: string | null
+    isAnonymous?: boolean
+    specialInstructions?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    delivery?: DeliveryCreateNestedOneWithoutOrderInput
+    prescription?: PrescriptionCreateNestedOneWithoutOrdersInput
+  }
+
+  export type OrderUncheckedCreateWithoutUserInput = {
+    id?: string
+    prescriptionId?: string | null
+    anonymousId?: string | null
+    orderNumber: string
+    status?: $Enums.OrderStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    paymentStatus?: $Enums.PaymentStatus
+    paymentMethod?: string | null
+    isAnonymous?: boolean
+    specialInstructions?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    delivery?: DeliveryUncheckedCreateNestedOneWithoutOrderInput
+  }
+
+  export type OrderCreateOrConnectWithoutUserInput = {
+    where: OrderWhereUniqueInput
+    create: XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput>
+  }
+
+  export type OrderCreateManyUserInputEnvelope = {
+    data: OrderCreateManyUserInput | OrderCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PrescriptionCreateWithoutUserInput = {
+    id?: string
+    anonymousId?: string | null
+    prescribedBy: string
+    dosage: string
+    frequency: string
+    duration: string
+    quantity: number
+    refills?: number
+    instructions?: string | null
+    status?: $Enums.PrescriptionStatus
+    isAnonymous?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orders?: OrderCreateNestedManyWithoutPrescriptionInput
+    consultation?: ConsultationCreateNestedOneWithoutPrescriptionsInput
+    medication: MedicationCreateNestedOneWithoutPrescriptionsInput
+  }
+
+  export type PrescriptionUncheckedCreateWithoutUserInput = {
+    id?: string
+    consultationId?: string | null
+    anonymousId?: string | null
+    medicationId: string
+    prescribedBy: string
+    dosage: string
+    frequency: string
+    duration: string
+    quantity: number
+    refills?: number
+    instructions?: string | null
+    status?: $Enums.PrescriptionStatus
+    isAnonymous?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orders?: OrderUncheckedCreateNestedManyWithoutPrescriptionInput
+  }
+
+  export type PrescriptionCreateOrConnectWithoutUserInput = {
+    where: PrescriptionWhereUniqueInput
+    create: XOR<PrescriptionCreateWithoutUserInput, PrescriptionUncheckedCreateWithoutUserInput>
+  }
+
+  export type PrescriptionCreateManyUserInputEnvelope = {
+    data: PrescriptionCreateManyUserInput | PrescriptionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StaffCreateWithoutUserInput = {
+    id?: string
+    employeeId: string
+    position: $Enums.StaffPosition
+    department: string
+    hireDate: Date | string
+    salary?: Decimal | DecimalJsLike | number | string | null
+    isActive?: boolean
+    emergencyContact?: string | null
+    emergencyPhone?: string | null
+    certifications?: StaffCreatecertificationsInput | string[]
+    specializations?: StaffCreatespecializationsInput | string[]
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedStaffInput
+    shifts?: ShiftCreateNestedManyWithoutStaffInput
+    schedules?: StaffScheduleCreateNestedManyWithoutStaffInput
+    timeOffRequests?: TimeOffRequestCreateNestedManyWithoutStaffInput
+  }
+
+  export type StaffUncheckedCreateWithoutUserInput = {
+    id?: string
+    employeeId: string
+    position: $Enums.StaffPosition
+    department: string
+    hireDate: Date | string
+    salary?: Decimal | DecimalJsLike | number | string | null
+    isActive?: boolean
+    emergencyContact?: string | null
+    emergencyPhone?: string | null
+    certifications?: StaffCreatecertificationsInput | string[]
+    specializations?: StaffCreatespecializationsInput | string[]
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedStaffInput
+    shifts?: ShiftUncheckedCreateNestedManyWithoutStaffInput
+    schedules?: StaffScheduleUncheckedCreateNestedManyWithoutStaffInput
+    timeOffRequests?: TimeOffRequestUncheckedCreateNestedManyWithoutStaffInput
+  }
+
+  export type StaffCreateOrConnectWithoutUserInput = {
+    where: StaffWhereUniqueInput
+    create: XOR<StaffCreateWithoutUserInput, StaffUncheckedCreateWithoutUserInput>
   }
 
   export type UserSettingsCreateWithoutUserInput = {
@@ -27307,51 +27338,42 @@ export namespace Prisma {
     create: XOR<UserSettingsCreateWithoutUserInput, UserSettingsUncheckedCreateWithoutUserInput>
   }
 
-  export type StaffCreateWithoutUserInput = {
-    id?: string
-    employeeId: string
-    position: $Enums.StaffPosition
-    department: string
-    hireDate: Date | string
-    salary?: Decimal | DecimalJsLike | number | string | null
-    isActive?: boolean
-    emergencyContact?: string | null
-    emergencyPhone?: string | null
-    certifications?: StaffCreatecertificationsInput | string[]
-    specializations?: StaffCreatespecializationsInput | string[]
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    schedules?: StaffScheduleCreateNestedManyWithoutStaffInput
-    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedStaffInput
-    shifts?: ShiftCreateNestedManyWithoutStaffInput
-    timeOffRequests?: TimeOffRequestCreateNestedManyWithoutStaffInput
+  export type ConsultationUpsertWithWhereUniqueWithoutAssignedPharmacistInput = {
+    where: ConsultationWhereUniqueInput
+    update: XOR<ConsultationUpdateWithoutAssignedPharmacistInput, ConsultationUncheckedUpdateWithoutAssignedPharmacistInput>
+    create: XOR<ConsultationCreateWithoutAssignedPharmacistInput, ConsultationUncheckedCreateWithoutAssignedPharmacistInput>
   }
 
-  export type StaffUncheckedCreateWithoutUserInput = {
-    id?: string
-    employeeId: string
-    position: $Enums.StaffPosition
-    department: string
-    hireDate: Date | string
-    salary?: Decimal | DecimalJsLike | number | string | null
-    isActive?: boolean
-    emergencyContact?: string | null
-    emergencyPhone?: string | null
-    certifications?: StaffCreatecertificationsInput | string[]
-    specializations?: StaffCreatespecializationsInput | string[]
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    schedules?: StaffScheduleUncheckedCreateNestedManyWithoutStaffInput
-    assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedStaffInput
-    shifts?: ShiftUncheckedCreateNestedManyWithoutStaffInput
-    timeOffRequests?: TimeOffRequestUncheckedCreateNestedManyWithoutStaffInput
+  export type ConsultationUpdateWithWhereUniqueWithoutAssignedPharmacistInput = {
+    where: ConsultationWhereUniqueInput
+    data: XOR<ConsultationUpdateWithoutAssignedPharmacistInput, ConsultationUncheckedUpdateWithoutAssignedPharmacistInput>
   }
 
-  export type StaffCreateOrConnectWithoutUserInput = {
-    where: StaffWhereUniqueInput
-    create: XOR<StaffCreateWithoutUserInput, StaffUncheckedCreateWithoutUserInput>
+  export type ConsultationUpdateManyWithWhereWithoutAssignedPharmacistInput = {
+    where: ConsultationScalarWhereInput
+    data: XOR<ConsultationUpdateManyMutationInput, ConsultationUncheckedUpdateManyWithoutAssignedPharmacistInput>
+  }
+
+  export type ConsultationScalarWhereInput = {
+    AND?: ConsultationScalarWhereInput | ConsultationScalarWhereInput[]
+    OR?: ConsultationScalarWhereInput[]
+    NOT?: ConsultationScalarWhereInput | ConsultationScalarWhereInput[]
+    id?: StringFilter<"Consultation"> | string
+    userId?: StringNullableFilter<"Consultation"> | string | null
+    type?: StringFilter<"Consultation"> | string
+    status?: EnumConsultationStatusFilter<"Consultation"> | $Enums.ConsultationStatus
+    description?: StringNullableFilter<"Consultation"> | string | null
+    createdAt?: DateTimeFilter<"Consultation"> | Date | string
+    updatedAt?: DateTimeFilter<"Consultation"> | Date | string
+    age?: IntNullableFilter<"Consultation"> | number | null
+    allergies?: StringNullableFilter<"Consultation"> | string | null
+    anonymousId?: StringNullableFilter<"Consultation"> | string | null
+    assignedPharmacistId?: StringNullableFilter<"Consultation"> | string | null
+    gender?: StringNullableFilter<"Consultation"> | string | null
+    isAnonymous?: BoolFilter<"Consultation"> | boolean
+    medications?: StringNullableFilter<"Consultation"> | string | null
+    symptoms?: StringNullableFilter<"Consultation"> | string | null
+    assignedStaffId?: StringNullableFilter<"Consultation"> | string | null
   }
 
   export type ConsultationUpsertWithWhereUniqueWithoutUserInput = {
@@ -27370,42 +27392,77 @@ export namespace Prisma {
     data: XOR<ConsultationUpdateManyMutationInput, ConsultationUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type ConsultationScalarWhereInput = {
-    AND?: ConsultationScalarWhereInput | ConsultationScalarWhereInput[]
-    OR?: ConsultationScalarWhereInput[]
-    NOT?: ConsultationScalarWhereInput | ConsultationScalarWhereInput[]
-    id?: StringFilter<"Consultation"> | string
-    userId?: StringNullableFilter<"Consultation"> | string | null
-    anonymousId?: StringNullableFilter<"Consultation"> | string | null
-    type?: StringFilter<"Consultation"> | string
-    status?: EnumConsultationStatusFilter<"Consultation"> | $Enums.ConsultationStatus
-    description?: StringNullableFilter<"Consultation"> | string | null
-    symptoms?: StringNullableFilter<"Consultation"> | string | null
-    medications?: StringNullableFilter<"Consultation"> | string | null
-    allergies?: StringNullableFilter<"Consultation"> | string | null
-    age?: IntNullableFilter<"Consultation"> | number | null
-    gender?: StringNullableFilter<"Consultation"> | string | null
-    isAnonymous?: BoolFilter<"Consultation"> | boolean
-    assignedPharmacistId?: StringNullableFilter<"Consultation"> | string | null
-    assignedStaffId?: StringNullableFilter<"Consultation"> | string | null
-    createdAt?: DateTimeFilter<"Consultation"> | Date | string
-    updatedAt?: DateTimeFilter<"Consultation"> | Date | string
+  export type DeliveryUpsertWithWhereUniqueWithoutUserInput = {
+    where: DeliveryWhereUniqueInput
+    update: XOR<DeliveryUpdateWithoutUserInput, DeliveryUncheckedUpdateWithoutUserInput>
+    create: XOR<DeliveryCreateWithoutUserInput, DeliveryUncheckedCreateWithoutUserInput>
   }
 
-  export type ConsultationUpsertWithWhereUniqueWithoutAssignedPharmacistInput = {
-    where: ConsultationWhereUniqueInput
-    update: XOR<ConsultationUpdateWithoutAssignedPharmacistInput, ConsultationUncheckedUpdateWithoutAssignedPharmacistInput>
-    create: XOR<ConsultationCreateWithoutAssignedPharmacistInput, ConsultationUncheckedCreateWithoutAssignedPharmacistInput>
+  export type DeliveryUpdateWithWhereUniqueWithoutUserInput = {
+    where: DeliveryWhereUniqueInput
+    data: XOR<DeliveryUpdateWithoutUserInput, DeliveryUncheckedUpdateWithoutUserInput>
   }
 
-  export type ConsultationUpdateWithWhereUniqueWithoutAssignedPharmacistInput = {
-    where: ConsultationWhereUniqueInput
-    data: XOR<ConsultationUpdateWithoutAssignedPharmacistInput, ConsultationUncheckedUpdateWithoutAssignedPharmacistInput>
+  export type DeliveryUpdateManyWithWhereWithoutUserInput = {
+    where: DeliveryScalarWhereInput
+    data: XOR<DeliveryUpdateManyMutationInput, DeliveryUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type ConsultationUpdateManyWithWhereWithoutAssignedPharmacistInput = {
-    where: ConsultationScalarWhereInput
-    data: XOR<ConsultationUpdateManyMutationInput, ConsultationUncheckedUpdateManyWithoutAssignedPharmacistInput>
+  export type DeliveryScalarWhereInput = {
+    AND?: DeliveryScalarWhereInput | DeliveryScalarWhereInput[]
+    OR?: DeliveryScalarWhereInput[]
+    NOT?: DeliveryScalarWhereInput | DeliveryScalarWhereInput[]
+    id?: StringFilter<"Delivery"> | string
+    userId?: StringNullableFilter<"Delivery"> | string | null
+    status?: EnumDeliveryStatusFilter<"Delivery"> | $Enums.DeliveryStatus
+    trackingNumber?: StringFilter<"Delivery"> | string
+    estimatedDelivery?: DateTimeNullableFilter<"Delivery"> | Date | string | null
+    actualDelivery?: DateTimeNullableFilter<"Delivery"> | Date | string | null
+    address?: StringFilter<"Delivery"> | string
+    city?: StringFilter<"Delivery"> | string
+    state?: StringFilter<"Delivery"> | string
+    zipCode?: StringFilter<"Delivery"> | string
+    createdAt?: DateTimeFilter<"Delivery"> | Date | string
+    updatedAt?: DateTimeFilter<"Delivery"> | Date | string
+    anonymousId?: StringNullableFilter<"Delivery"> | string | null
+    dropPoint?: StringNullableFilter<"Delivery"> | string | null
+    isAnonymous?: BoolFilter<"Delivery"> | boolean
+    orderId?: StringNullableFilter<"Delivery"> | string | null
+    packageType?: StringFilter<"Delivery"> | string
+  }
+
+  export type InventoryItemUpsertWithWhereUniqueWithoutPharmacyInput = {
+    where: InventoryItemWhereUniqueInput
+    update: XOR<InventoryItemUpdateWithoutPharmacyInput, InventoryItemUncheckedUpdateWithoutPharmacyInput>
+    create: XOR<InventoryItemCreateWithoutPharmacyInput, InventoryItemUncheckedCreateWithoutPharmacyInput>
+  }
+
+  export type InventoryItemUpdateWithWhereUniqueWithoutPharmacyInput = {
+    where: InventoryItemWhereUniqueInput
+    data: XOR<InventoryItemUpdateWithoutPharmacyInput, InventoryItemUncheckedUpdateWithoutPharmacyInput>
+  }
+
+  export type InventoryItemUpdateManyWithWhereWithoutPharmacyInput = {
+    where: InventoryItemScalarWhereInput
+    data: XOR<InventoryItemUpdateManyMutationInput, InventoryItemUncheckedUpdateManyWithoutPharmacyInput>
+  }
+
+  export type InventoryItemScalarWhereInput = {
+    AND?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
+    OR?: InventoryItemScalarWhereInput[]
+    NOT?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
+    id?: StringFilter<"InventoryItem"> | string
+    medicationId?: StringFilter<"InventoryItem"> | string
+    pharmacyId?: StringFilter<"InventoryItem"> | string
+    quantity?: IntFilter<"InventoryItem"> | number
+    minQuantity?: IntFilter<"InventoryItem"> | number
+    maxQuantity?: IntFilter<"InventoryItem"> | number
+    lotNumber?: StringNullableFilter<"InventoryItem"> | string | null
+    expirationDate?: DateTimeNullableFilter<"InventoryItem"> | Date | string | null
+    location?: StringNullableFilter<"InventoryItem"> | string | null
+    isActive?: BoolFilter<"InventoryItem"> | boolean
+    createdAt?: DateTimeFilter<"InventoryItem"> | Date | string
+    updatedAt?: DateTimeFilter<"InventoryItem"> | Date | string
   }
 
   export type MessageUpsertWithWhereUniqueWithoutUserInput = {
@@ -27431,50 +27488,46 @@ export namespace Prisma {
     id?: StringFilter<"Message"> | string
     chatId?: StringFilter<"Message"> | string
     userId?: StringNullableFilter<"Message"> | string | null
-    anonymousId?: StringNullableFilter<"Message"> | string | null
     content?: StringFilter<"Message"> | string
     type?: EnumMessageTypeFilter<"Message"> | $Enums.MessageType
-    isFromPharmacist?: BoolFilter<"Message"> | boolean
     createdAt?: DateTimeFilter<"Message"> | Date | string
+    anonymousId?: StringNullableFilter<"Message"> | string | null
+    isFromPharmacist?: BoolFilter<"Message"> | boolean
   }
 
-  export type DeliveryUpsertWithWhereUniqueWithoutUserInput = {
-    where: DeliveryWhereUniqueInput
-    update: XOR<DeliveryUpdateWithoutUserInput, DeliveryUncheckedUpdateWithoutUserInput>
-    create: XOR<DeliveryCreateWithoutUserInput, DeliveryUncheckedCreateWithoutUserInput>
+  export type OrderUpsertWithWhereUniqueWithoutUserInput = {
+    where: OrderWhereUniqueInput
+    update: XOR<OrderUpdateWithoutUserInput, OrderUncheckedUpdateWithoutUserInput>
+    create: XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput>
   }
 
-  export type DeliveryUpdateWithWhereUniqueWithoutUserInput = {
-    where: DeliveryWhereUniqueInput
-    data: XOR<DeliveryUpdateWithoutUserInput, DeliveryUncheckedUpdateWithoutUserInput>
+  export type OrderUpdateWithWhereUniqueWithoutUserInput = {
+    where: OrderWhereUniqueInput
+    data: XOR<OrderUpdateWithoutUserInput, OrderUncheckedUpdateWithoutUserInput>
   }
 
-  export type DeliveryUpdateManyWithWhereWithoutUserInput = {
-    where: DeliveryScalarWhereInput
-    data: XOR<DeliveryUpdateManyMutationInput, DeliveryUncheckedUpdateManyWithoutUserInput>
+  export type OrderUpdateManyWithWhereWithoutUserInput = {
+    where: OrderScalarWhereInput
+    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type DeliveryScalarWhereInput = {
-    AND?: DeliveryScalarWhereInput | DeliveryScalarWhereInput[]
-    OR?: DeliveryScalarWhereInput[]
-    NOT?: DeliveryScalarWhereInput | DeliveryScalarWhereInput[]
-    id?: StringFilter<"Delivery"> | string
-    userId?: StringNullableFilter<"Delivery"> | string | null
-    anonymousId?: StringNullableFilter<"Delivery"> | string | null
-    orderId?: StringNullableFilter<"Delivery"> | string | null
-    status?: EnumDeliveryStatusFilter<"Delivery"> | $Enums.DeliveryStatus
-    trackingNumber?: StringFilter<"Delivery"> | string
-    estimatedDelivery?: DateTimeNullableFilter<"Delivery"> | Date | string | null
-    actualDelivery?: DateTimeNullableFilter<"Delivery"> | Date | string | null
-    address?: StringFilter<"Delivery"> | string
-    city?: StringFilter<"Delivery"> | string
-    state?: StringFilter<"Delivery"> | string
-    zipCode?: StringFilter<"Delivery"> | string
-    dropPoint?: StringNullableFilter<"Delivery"> | string | null
-    packageType?: StringFilter<"Delivery"> | string
-    isAnonymous?: BoolFilter<"Delivery"> | boolean
-    createdAt?: DateTimeFilter<"Delivery"> | Date | string
-    updatedAt?: DateTimeFilter<"Delivery"> | Date | string
+  export type OrderScalarWhereInput = {
+    AND?: OrderScalarWhereInput | OrderScalarWhereInput[]
+    OR?: OrderScalarWhereInput[]
+    NOT?: OrderScalarWhereInput | OrderScalarWhereInput[]
+    id?: StringFilter<"Order"> | string
+    prescriptionId?: StringNullableFilter<"Order"> | string | null
+    userId?: StringNullableFilter<"Order"> | string | null
+    anonymousId?: StringNullableFilter<"Order"> | string | null
+    orderNumber?: StringFilter<"Order"> | string
+    status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+    totalAmount?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string
+    paymentStatus?: EnumPaymentStatusFilter<"Order"> | $Enums.PaymentStatus
+    paymentMethod?: StringNullableFilter<"Order"> | string | null
+    isAnonymous?: BoolFilter<"Order"> | boolean
+    specialInstructions?: StringNullableFilter<"Order"> | string | null
+    createdAt?: DateTimeFilter<"Order"> | Date | string
+    updatedAt?: DateTimeFilter<"Order"> | Date | string
   }
 
   export type PrescriptionUpsertWithWhereUniqueWithoutUserInput = {
@@ -27515,73 +27568,57 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Prescription"> | Date | string
   }
 
-  export type OrderUpsertWithWhereUniqueWithoutUserInput = {
-    where: OrderWhereUniqueInput
-    update: XOR<OrderUpdateWithoutUserInput, OrderUncheckedUpdateWithoutUserInput>
-    create: XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput>
+  export type StaffUpsertWithoutUserInput = {
+    update: XOR<StaffUpdateWithoutUserInput, StaffUncheckedUpdateWithoutUserInput>
+    create: XOR<StaffCreateWithoutUserInput, StaffUncheckedCreateWithoutUserInput>
+    where?: StaffWhereInput
   }
 
-  export type OrderUpdateWithWhereUniqueWithoutUserInput = {
-    where: OrderWhereUniqueInput
-    data: XOR<OrderUpdateWithoutUserInput, OrderUncheckedUpdateWithoutUserInput>
+  export type StaffUpdateToOneWithWhereWithoutUserInput = {
+    where?: StaffWhereInput
+    data: XOR<StaffUpdateWithoutUserInput, StaffUncheckedUpdateWithoutUserInput>
   }
 
-  export type OrderUpdateManyWithWhereWithoutUserInput = {
-    where: OrderScalarWhereInput
-    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutUserInput>
+  export type StaffUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeId?: StringFieldUpdateOperationsInput | string
+    position?: EnumStaffPositionFieldUpdateOperationsInput | $Enums.StaffPosition
+    department?: StringFieldUpdateOperationsInput | string
+    hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    certifications?: StaffUpdatecertificationsInput | string[]
+    specializations?: StaffUpdatespecializationsInput | string[]
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignedConsultations?: ConsultationUpdateManyWithoutAssignedStaffNestedInput
+    shifts?: ShiftUpdateManyWithoutStaffNestedInput
+    schedules?: StaffScheduleUpdateManyWithoutStaffNestedInput
+    timeOffRequests?: TimeOffRequestUpdateManyWithoutStaffNestedInput
   }
 
-  export type OrderScalarWhereInput = {
-    AND?: OrderScalarWhereInput | OrderScalarWhereInput[]
-    OR?: OrderScalarWhereInput[]
-    NOT?: OrderScalarWhereInput | OrderScalarWhereInput[]
-    id?: StringFilter<"Order"> | string
-    prescriptionId?: StringNullableFilter<"Order"> | string | null
-    userId?: StringNullableFilter<"Order"> | string | null
-    anonymousId?: StringNullableFilter<"Order"> | string | null
-    orderNumber?: StringFilter<"Order"> | string
-    status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
-    totalAmount?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string
-    paymentStatus?: EnumPaymentStatusFilter<"Order"> | $Enums.PaymentStatus
-    paymentMethod?: StringNullableFilter<"Order"> | string | null
-    isAnonymous?: BoolFilter<"Order"> | boolean
-    specialInstructions?: StringNullableFilter<"Order"> | string | null
-    createdAt?: DateTimeFilter<"Order"> | Date | string
-    updatedAt?: DateTimeFilter<"Order"> | Date | string
-  }
-
-  export type InventoryItemUpsertWithWhereUniqueWithoutPharmacyInput = {
-    where: InventoryItemWhereUniqueInput
-    update: XOR<InventoryItemUpdateWithoutPharmacyInput, InventoryItemUncheckedUpdateWithoutPharmacyInput>
-    create: XOR<InventoryItemCreateWithoutPharmacyInput, InventoryItemUncheckedCreateWithoutPharmacyInput>
-  }
-
-  export type InventoryItemUpdateWithWhereUniqueWithoutPharmacyInput = {
-    where: InventoryItemWhereUniqueInput
-    data: XOR<InventoryItemUpdateWithoutPharmacyInput, InventoryItemUncheckedUpdateWithoutPharmacyInput>
-  }
-
-  export type InventoryItemUpdateManyWithWhereWithoutPharmacyInput = {
-    where: InventoryItemScalarWhereInput
-    data: XOR<InventoryItemUpdateManyMutationInput, InventoryItemUncheckedUpdateManyWithoutPharmacyInput>
-  }
-
-  export type InventoryItemScalarWhereInput = {
-    AND?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
-    OR?: InventoryItemScalarWhereInput[]
-    NOT?: InventoryItemScalarWhereInput | InventoryItemScalarWhereInput[]
-    id?: StringFilter<"InventoryItem"> | string
-    medicationId?: StringFilter<"InventoryItem"> | string
-    pharmacyId?: StringFilter<"InventoryItem"> | string
-    quantity?: IntFilter<"InventoryItem"> | number
-    minQuantity?: IntFilter<"InventoryItem"> | number
-    maxQuantity?: IntFilter<"InventoryItem"> | number
-    lotNumber?: StringNullableFilter<"InventoryItem"> | string | null
-    expirationDate?: DateTimeNullableFilter<"InventoryItem"> | Date | string | null
-    location?: StringNullableFilter<"InventoryItem"> | string | null
-    isActive?: BoolFilter<"InventoryItem"> | boolean
-    createdAt?: DateTimeFilter<"InventoryItem"> | Date | string
-    updatedAt?: DateTimeFilter<"InventoryItem"> | Date | string
+  export type StaffUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeId?: StringFieldUpdateOperationsInput | string
+    position?: EnumStaffPositionFieldUpdateOperationsInput | $Enums.StaffPosition
+    department?: StringFieldUpdateOperationsInput | string
+    hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
+    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    certifications?: StaffUpdatecertificationsInput | string[]
+    specializations?: StaffUpdatespecializationsInput | string[]
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedStaffNestedInput
+    shifts?: ShiftUncheckedUpdateManyWithoutStaffNestedInput
+    schedules?: StaffScheduleUncheckedUpdateManyWithoutStaffNestedInput
+    timeOffRequests?: TimeOffRequestUncheckedUpdateManyWithoutStaffNestedInput
   }
 
   export type UserSettingsUpsertWithoutUserInput = {
@@ -27669,127 +27706,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type StaffUpsertWithoutUserInput = {
-    update: XOR<StaffUpdateWithoutUserInput, StaffUncheckedUpdateWithoutUserInput>
-    create: XOR<StaffCreateWithoutUserInput, StaffUncheckedCreateWithoutUserInput>
-    where?: StaffWhereInput
-  }
-
-  export type StaffUpdateToOneWithWhereWithoutUserInput = {
-    where?: StaffWhereInput
-    data: XOR<StaffUpdateWithoutUserInput, StaffUncheckedUpdateWithoutUserInput>
-  }
-
-  export type StaffUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    employeeId?: StringFieldUpdateOperationsInput | string
-    position?: EnumStaffPositionFieldUpdateOperationsInput | $Enums.StaffPosition
-    department?: StringFieldUpdateOperationsInput | string
-    hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
-    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
-    certifications?: StaffUpdatecertificationsInput | string[]
-    specializations?: StaffUpdatespecializationsInput | string[]
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schedules?: StaffScheduleUpdateManyWithoutStaffNestedInput
-    assignedConsultations?: ConsultationUpdateManyWithoutAssignedStaffNestedInput
-    shifts?: ShiftUpdateManyWithoutStaffNestedInput
-    timeOffRequests?: TimeOffRequestUpdateManyWithoutStaffNestedInput
-  }
-
-  export type StaffUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    employeeId?: StringFieldUpdateOperationsInput | string
-    position?: EnumStaffPositionFieldUpdateOperationsInput | $Enums.StaffPosition
-    department?: StringFieldUpdateOperationsInput | string
-    hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    salary?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    emergencyContact?: NullableStringFieldUpdateOperationsInput | string | null
-    emergencyPhone?: NullableStringFieldUpdateOperationsInput | string | null
-    certifications?: StaffUpdatecertificationsInput | string[]
-    specializations?: StaffUpdatespecializationsInput | string[]
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schedules?: StaffScheduleUncheckedUpdateManyWithoutStaffNestedInput
-    assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedStaffNestedInput
-    shifts?: ShiftUncheckedUpdateManyWithoutStaffNestedInput
-    timeOffRequests?: TimeOffRequestUncheckedUpdateManyWithoutStaffNestedInput
-  }
-
-  export type UserCreateWithoutConsultationsInput = {
-    id?: string
-    username: string
-    email: string
-    passwordHash: string
-    firstName: string
-    lastName: string
-    role: $Enums.UserRole
-    organization?: string | null
-    pharmacyName?: string | null
-    licenseNumber?: string | null
-    phone?: string | null
-    address?: string | null
-    city?: string | null
-    state?: string | null
-    zipCode?: string | null
-    isVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageCreateNestedManyWithoutUserInput
-    deliveries?: DeliveryCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
-    orders?: OrderCreateNestedManyWithoutUserInput
-    inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    staff?: StaffCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutConsultationsInput = {
-    id?: string
-    username: string
-    email: string
-    passwordHash: string
-    firstName: string
-    lastName: string
-    role: $Enums.UserRole
-    organization?: string | null
-    pharmacyName?: string | null
-    licenseNumber?: string | null
-    phone?: string | null
-    address?: string | null
-    city?: string | null
-    state?: string | null
-    zipCode?: string | null
-    isVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
-    deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
-    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
-    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    staff?: StaffUncheckedCreateNestedOneWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutConsultationsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutConsultationsInput, UserUncheckedCreateWithoutConsultationsInput>
-  }
-
   export type UserCreateWithoutAssignedConsultationsInput = {
     id?: string
-    username: string
     email: string
-    passwordHash: string
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -27804,21 +27723,21 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    passwordHash: string
+    username: string
     consultations?: ConsultationCreateNestedManyWithoutUserInput
-    messages?: MessageCreateNestedManyWithoutUserInput
     deliveries?: DeliveryCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
-    orders?: OrderCreateNestedManyWithoutUserInput
     inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
     staff?: StaffCreateNestedOneWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAssignedConsultationsInput = {
     id?: string
-    username: string
     email: string
-    passwordHash: string
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -27833,14 +27752,16 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    passwordHash: string
+    username: string
     consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
-    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
     deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
-    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
     staff?: StaffUncheckedCreateNestedOneWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAssignedConsultationsInput = {
@@ -27863,9 +27784,9 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    shifts?: ShiftCreateNestedManyWithoutStaffInput
     user: UserCreateNestedOneWithoutStaffInput
     schedules?: StaffScheduleCreateNestedManyWithoutStaffInput
-    shifts?: ShiftCreateNestedManyWithoutStaffInput
     timeOffRequests?: TimeOffRequestCreateNestedManyWithoutStaffInput
   }
 
@@ -27885,8 +27806,8 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    schedules?: StaffScheduleUncheckedCreateNestedManyWithoutStaffInput
     shifts?: ShiftUncheckedCreateNestedManyWithoutStaffInput
+    schedules?: StaffScheduleUncheckedCreateNestedManyWithoutStaffInput
     timeOffRequests?: TimeOffRequestUncheckedCreateNestedManyWithoutStaffInput
   }
 
@@ -27895,24 +27816,87 @@ export namespace Prisma {
     create: XOR<StaffCreateWithoutAssignedConsultationsInput, StaffUncheckedCreateWithoutAssignedConsultationsInput>
   }
 
+  export type UserCreateWithoutConsultationsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    organization?: string | null
+    pharmacyName?: string | null
+    licenseNumber?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    isVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    passwordHash: string
+    username: string
+    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
+    deliveries?: DeliveryCreateNestedManyWithoutUserInput
+    inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
+    messages?: MessageCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
+    staff?: StaffCreateNestedOneWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutConsultationsInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    organization?: string | null
+    pharmacyName?: string | null
+    licenseNumber?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    isVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    passwordHash: string
+    username: string
+    assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
+    deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
+    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
+    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
+    staff?: StaffUncheckedCreateNestedOneWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutConsultationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutConsultationsInput, UserUncheckedCreateWithoutConsultationsInput>
+  }
+
   export type MessageCreateWithoutConsultationInput = {
     id?: string
-    anonymousId?: string | null
     content: string
     type?: $Enums.MessageType
-    isFromPharmacist?: boolean
     createdAt?: Date | string
+    anonymousId?: string | null
+    isFromPharmacist?: boolean
     user?: UserCreateNestedOneWithoutMessagesInput
   }
 
   export type MessageUncheckedCreateWithoutConsultationInput = {
     id?: string
     userId?: string | null
-    anonymousId?: string | null
     content: string
     type?: $Enums.MessageType
-    isFromPharmacist?: boolean
     createdAt?: Date | string
+    anonymousId?: string | null
+    isFromPharmacist?: boolean
   }
 
   export type MessageCreateOrConnectWithoutConsultationInput = {
@@ -27939,9 +27923,9 @@ export namespace Prisma {
     isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutPrescriptionsInput
-    medication: MedicationCreateNestedOneWithoutPrescriptionsInput
     orders?: OrderCreateNestedManyWithoutPrescriptionInput
+    medication: MedicationCreateNestedOneWithoutPrescriptionsInput
+    user?: UserCreateNestedOneWithoutPrescriptionsInput
   }
 
   export type PrescriptionUncheckedCreateWithoutConsultationInput = {
@@ -27973,75 +27957,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserUpsertWithoutConsultationsInput = {
-    update: XOR<UserUpdateWithoutConsultationsInput, UserUncheckedUpdateWithoutConsultationsInput>
-    create: XOR<UserCreateWithoutConsultationsInput, UserUncheckedCreateWithoutConsultationsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutConsultationsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutConsultationsInput, UserUncheckedUpdateWithoutConsultationsInput>
-  }
-
-  export type UserUpdateWithoutConsultationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
-    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUpdateManyWithoutUserNestedInput
-    deliveries?: DeliveryUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
-    inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    staff?: StaffUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutConsultationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
-    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
-    deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
-    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
-  }
-
   export type UserUpsertWithoutAssignedConsultationsInput = {
     update: XOR<UserUpdateWithoutAssignedConsultationsInput, UserUncheckedUpdateWithoutAssignedConsultationsInput>
     create: XOR<UserCreateWithoutAssignedConsultationsInput, UserUncheckedCreateWithoutAssignedConsultationsInput>
@@ -28055,9 +27970,7 @@ export namespace Prisma {
 
   export type UserUpdateWithoutAssignedConsultationsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -28072,21 +27985,21 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     consultations?: ConsultationUpdateManyWithoutUserNestedInput
-    messages?: MessageUpdateManyWithoutUserNestedInput
     deliveries?: DeliveryUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
     inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
     staff?: StaffUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedConsultationsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -28101,14 +28014,16 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
     deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
     staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type StaffUpsertWithoutAssignedConsultationsInput = {
@@ -28137,9 +28052,9 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shifts?: ShiftUpdateManyWithoutStaffNestedInput
     user?: UserUpdateOneRequiredWithoutStaffNestedInput
     schedules?: StaffScheduleUpdateManyWithoutStaffNestedInput
-    shifts?: ShiftUpdateManyWithoutStaffNestedInput
     timeOffRequests?: TimeOffRequestUpdateManyWithoutStaffNestedInput
   }
 
@@ -28159,9 +28074,78 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schedules?: StaffScheduleUncheckedUpdateManyWithoutStaffNestedInput
     shifts?: ShiftUncheckedUpdateManyWithoutStaffNestedInput
+    schedules?: StaffScheduleUncheckedUpdateManyWithoutStaffNestedInput
     timeOffRequests?: TimeOffRequestUncheckedUpdateManyWithoutStaffNestedInput
+  }
+
+  export type UserUpsertWithoutConsultationsInput = {
+    update: XOR<UserUpdateWithoutConsultationsInput, UserUncheckedUpdateWithoutConsultationsInput>
+    create: XOR<UserCreateWithoutConsultationsInput, UserUncheckedCreateWithoutConsultationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutConsultationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutConsultationsInput, UserUncheckedUpdateWithoutConsultationsInput>
+  }
+
+  export type UserUpdateWithoutConsultationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
+    deliveries?: DeliveryUpdateManyWithoutUserNestedInput
+    inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
+    messages?: MessageUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
+    staff?: StaffUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutConsultationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
+    deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
+    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
+    staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type MessageUpsertWithWhereUniqueWithoutConsultationInput = {
@@ -28196,106 +28180,43 @@ export namespace Prisma {
     data: XOR<PrescriptionUpdateManyMutationInput, PrescriptionUncheckedUpdateManyWithoutConsultationInput>
   }
 
-  export type UserCreateWithoutMessagesInput = {
-    id?: string
-    username: string
-    email: string
-    passwordHash: string
-    firstName: string
-    lastName: string
-    role: $Enums.UserRole
-    organization?: string | null
-    pharmacyName?: string | null
-    licenseNumber?: string | null
-    phone?: string | null
-    address?: string | null
-    city?: string | null
-    state?: string | null
-    zipCode?: string | null
-    isVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    consultations?: ConsultationCreateNestedManyWithoutUserInput
-    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
-    deliveries?: DeliveryCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
-    orders?: OrderCreateNestedManyWithoutUserInput
-    inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    staff?: StaffCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutMessagesInput = {
-    id?: string
-    username: string
-    email: string
-    passwordHash: string
-    firstName: string
-    lastName: string
-    role: $Enums.UserRole
-    organization?: string | null
-    pharmacyName?: string | null
-    licenseNumber?: string | null
-    phone?: string | null
-    address?: string | null
-    city?: string | null
-    state?: string | null
-    zipCode?: string | null
-    isVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
-    assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
-    deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
-    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
-    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    staff?: StaffUncheckedCreateNestedOneWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutMessagesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutMessagesInput, UserUncheckedCreateWithoutMessagesInput>
-  }
-
   export type ConsultationCreateWithoutMessagesInput = {
     id?: string
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutConsultationsInput
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
     assignedPharmacist?: UserCreateNestedOneWithoutAssignedConsultationsInput
     assignedStaff?: StaffCreateNestedOneWithoutAssignedConsultationsInput
+    user?: UserCreateNestedOneWithoutConsultationsInput
     prescriptions?: PrescriptionCreateNestedManyWithoutConsultationInput
   }
 
   export type ConsultationUncheckedCreateWithoutMessagesInput = {
     id?: string
     userId?: string | null
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
-    assignedPharmacistId?: string | null
-    assignedStaffId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    assignedPharmacistId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
+    assignedStaffId?: string | null
     prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutConsultationInput
   }
 
@@ -28304,73 +28225,67 @@ export namespace Prisma {
     create: XOR<ConsultationCreateWithoutMessagesInput, ConsultationUncheckedCreateWithoutMessagesInput>
   }
 
-  export type UserUpsertWithoutMessagesInput = {
-    update: XOR<UserUpdateWithoutMessagesInput, UserUncheckedUpdateWithoutMessagesInput>
+  export type UserCreateWithoutMessagesInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    organization?: string | null
+    pharmacyName?: string | null
+    licenseNumber?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    isVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    passwordHash: string
+    username: string
+    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
+    consultations?: ConsultationCreateNestedManyWithoutUserInput
+    deliveries?: DeliveryCreateNestedManyWithoutUserInput
+    inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
+    staff?: StaffCreateNestedOneWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMessagesInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    organization?: string | null
+    pharmacyName?: string | null
+    licenseNumber?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    isVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    passwordHash: string
+    username: string
+    assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
+    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
+    deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
+    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
+    staff?: StaffUncheckedCreateNestedOneWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMessagesInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutMessagesInput, UserUncheckedCreateWithoutMessagesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutMessagesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutMessagesInput, UserUncheckedUpdateWithoutMessagesInput>
-  }
-
-  export type UserUpdateWithoutMessagesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
-    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUpdateManyWithoutUserNestedInput
-    assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
-    deliveries?: DeliveryUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
-    inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    staff?: StaffUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutMessagesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
-    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
-    assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
-    deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
-    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ConsultationUpsertWithoutMessagesInput = {
@@ -28386,105 +28301,111 @@ export namespace Prisma {
 
   export type ConsultationUpdateWithoutMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutConsultationsNestedInput
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
     assignedPharmacist?: UserUpdateOneWithoutAssignedConsultationsNestedInput
     assignedStaff?: StaffUpdateOneWithoutAssignedConsultationsNestedInput
+    user?: UserUpdateOneWithoutConsultationsNestedInput
     prescriptions?: PrescriptionUpdateManyWithoutConsultationNestedInput
   }
 
   export type ConsultationUncheckedUpdateWithoutMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
     prescriptions?: PrescriptionUncheckedUpdateManyWithoutConsultationNestedInput
   }
 
-  export type UserCreateWithoutDeliveriesInput = {
-    id?: string
-    username: string
-    email: string
-    passwordHash: string
-    firstName: string
-    lastName: string
-    role: $Enums.UserRole
-    organization?: string | null
-    pharmacyName?: string | null
-    licenseNumber?: string | null
-    phone?: string | null
-    address?: string | null
-    city?: string | null
-    state?: string | null
-    zipCode?: string | null
-    isVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    consultations?: ConsultationCreateNestedManyWithoutUserInput
-    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
-    orders?: OrderCreateNestedManyWithoutUserInput
-    inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    staff?: StaffCreateNestedOneWithoutUserInput
+  export type UserUpsertWithoutMessagesInput = {
+    update: XOR<UserUpdateWithoutMessagesInput, UserUncheckedUpdateWithoutMessagesInput>
+    create: XOR<UserCreateWithoutMessagesInput, UserUncheckedCreateWithoutMessagesInput>
+    where?: UserWhereInput
   }
 
-  export type UserUncheckedCreateWithoutDeliveriesInput = {
-    id?: string
-    username: string
-    email: string
-    passwordHash: string
-    firstName: string
-    lastName: string
-    role: $Enums.UserRole
-    organization?: string | null
-    pharmacyName?: string | null
-    licenseNumber?: string | null
-    phone?: string | null
-    address?: string | null
-    city?: string | null
-    state?: string | null
-    zipCode?: string | null
-    isVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
-    assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
-    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
-    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    staff?: StaffUncheckedCreateNestedOneWithoutUserInput
+  export type UserUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMessagesInput, UserUncheckedUpdateWithoutMessagesInput>
   }
 
-  export type UserCreateOrConnectWithoutDeliveriesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutDeliveriesInput, UserUncheckedCreateWithoutDeliveriesInput>
+  export type UserUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
+    consultations?: ConsultationUpdateManyWithoutUserNestedInput
+    deliveries?: DeliveryUpdateManyWithoutUserNestedInput
+    inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
+    staff?: StaffUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
+    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
+    deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
+    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
+    staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type OrderCreateWithoutDeliveryInput = {
@@ -28524,73 +28445,67 @@ export namespace Prisma {
     create: XOR<OrderCreateWithoutDeliveryInput, OrderUncheckedCreateWithoutDeliveryInput>
   }
 
-  export type UserUpsertWithoutDeliveriesInput = {
-    update: XOR<UserUpdateWithoutDeliveriesInput, UserUncheckedUpdateWithoutDeliveriesInput>
+  export type UserCreateWithoutDeliveriesInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    organization?: string | null
+    pharmacyName?: string | null
+    licenseNumber?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    isVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    passwordHash: string
+    username: string
+    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
+    consultations?: ConsultationCreateNestedManyWithoutUserInput
+    inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
+    messages?: MessageCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
+    staff?: StaffCreateNestedOneWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDeliveriesInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    organization?: string | null
+    pharmacyName?: string | null
+    licenseNumber?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    isVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    passwordHash: string
+    username: string
+    assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
+    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
+    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
+    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
+    staff?: StaffUncheckedCreateNestedOneWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDeliveriesInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutDeliveriesInput, UserUncheckedCreateWithoutDeliveriesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutDeliveriesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutDeliveriesInput, UserUncheckedUpdateWithoutDeliveriesInput>
-  }
-
-  export type UserUpdateWithoutDeliveriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
-    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUpdateManyWithoutUserNestedInput
-    assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
-    inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    staff?: StaffUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutDeliveriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
-    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
-    assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
-    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type OrderUpsertWithoutDeliveryInput = {
@@ -28634,6 +28549,75 @@ export namespace Prisma {
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutDeliveriesInput = {
+    update: XOR<UserUpdateWithoutDeliveriesInput, UserUncheckedUpdateWithoutDeliveriesInput>
+    create: XOR<UserCreateWithoutDeliveriesInput, UserUncheckedCreateWithoutDeliveriesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDeliveriesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDeliveriesInput, UserUncheckedUpdateWithoutDeliveriesInput>
+  }
+
+  export type UserUpdateWithoutDeliveriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
+    consultations?: ConsultationUpdateManyWithoutUserNestedInput
+    inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
+    messages?: MessageUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
+    staff?: StaffUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDeliveriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
+    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
+    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
+    staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type InventoryItemCreateWithoutMedicationInput = {
@@ -28688,9 +28672,9 @@ export namespace Prisma {
     isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    orders?: OrderCreateNestedManyWithoutPrescriptionInput
     consultation?: ConsultationCreateNestedOneWithoutPrescriptionsInput
     user?: UserCreateNestedOneWithoutPrescriptionsInput
-    orders?: OrderCreateNestedManyWithoutPrescriptionInput
   }
 
   export type PrescriptionUncheckedCreateWithoutMedicationInput = {
@@ -28803,9 +28787,7 @@ export namespace Prisma {
 
   export type UserCreateWithoutInventoryItemsInput = {
     id?: string
-    username: string
     email: string
-    passwordHash: string
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -28820,21 +28802,21 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    consultations?: ConsultationCreateNestedManyWithoutUserInput
+    passwordHash: string
+    username: string
     assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageCreateNestedManyWithoutUserInput
+    consultations?: ConsultationCreateNestedManyWithoutUserInput
     deliveries?: DeliveryCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
+    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
     staff?: StaffCreateNestedOneWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutInventoryItemsInput = {
     id?: string
-    username: string
     email: string
-    passwordHash: string
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -28849,14 +28831,16 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
+    passwordHash: string
+    username: string
     assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
     deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
     staff?: StaffUncheckedCreateNestedOneWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutInventoryItemsInput = {
@@ -28930,9 +28914,7 @@ export namespace Prisma {
 
   export type UserUpdateWithoutInventoryItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -28947,21 +28929,21 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUpdateManyWithoutUserNestedInput
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUpdateManyWithoutUserNestedInput
+    consultations?: ConsultationUpdateManyWithoutUserNestedInput
     deliveries?: DeliveryUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
     staff?: StaffUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInventoryItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -28976,122 +28958,103 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
     deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
     staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type OrderCreateWithoutPrescriptionInput = {
+    id?: string
+    anonymousId?: string | null
+    orderNumber: string
+    status?: $Enums.OrderStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    paymentStatus?: $Enums.PaymentStatus
+    paymentMethod?: string | null
+    isAnonymous?: boolean
+    specialInstructions?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    delivery?: DeliveryCreateNestedOneWithoutOrderInput
+    user?: UserCreateNestedOneWithoutOrdersInput
+  }
+
+  export type OrderUncheckedCreateWithoutPrescriptionInput = {
+    id?: string
+    userId?: string | null
+    anonymousId?: string | null
+    orderNumber: string
+    status?: $Enums.OrderStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    paymentStatus?: $Enums.PaymentStatus
+    paymentMethod?: string | null
+    isAnonymous?: boolean
+    specialInstructions?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    delivery?: DeliveryUncheckedCreateNestedOneWithoutOrderInput
+  }
+
+  export type OrderCreateOrConnectWithoutPrescriptionInput = {
+    where: OrderWhereUniqueInput
+    create: XOR<OrderCreateWithoutPrescriptionInput, OrderUncheckedCreateWithoutPrescriptionInput>
+  }
+
+  export type OrderCreateManyPrescriptionInputEnvelope = {
+    data: OrderCreateManyPrescriptionInput | OrderCreateManyPrescriptionInput[]
+    skipDuplicates?: boolean
   }
 
   export type ConsultationCreateWithoutPrescriptionsInput = {
     id?: string
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutConsultationsInput
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
     assignedPharmacist?: UserCreateNestedOneWithoutAssignedConsultationsInput
     assignedStaff?: StaffCreateNestedOneWithoutAssignedConsultationsInput
+    user?: UserCreateNestedOneWithoutConsultationsInput
     messages?: MessageCreateNestedManyWithoutConsultationInput
   }
 
   export type ConsultationUncheckedCreateWithoutPrescriptionsInput = {
     id?: string
     userId?: string | null
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
-    assignedPharmacistId?: string | null
-    assignedStaffId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    assignedPharmacistId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
+    assignedStaffId?: string | null
     messages?: MessageUncheckedCreateNestedManyWithoutConsultationInput
   }
 
   export type ConsultationCreateOrConnectWithoutPrescriptionsInput = {
     where: ConsultationWhereUniqueInput
     create: XOR<ConsultationCreateWithoutPrescriptionsInput, ConsultationUncheckedCreateWithoutPrescriptionsInput>
-  }
-
-  export type UserCreateWithoutPrescriptionsInput = {
-    id?: string
-    username: string
-    email: string
-    passwordHash: string
-    firstName: string
-    lastName: string
-    role: $Enums.UserRole
-    organization?: string | null
-    pharmacyName?: string | null
-    licenseNumber?: string | null
-    phone?: string | null
-    address?: string | null
-    city?: string | null
-    state?: string | null
-    zipCode?: string | null
-    isVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    consultations?: ConsultationCreateNestedManyWithoutUserInput
-    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageCreateNestedManyWithoutUserInput
-    deliveries?: DeliveryCreateNestedManyWithoutUserInput
-    orders?: OrderCreateNestedManyWithoutUserInput
-    inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-    staff?: StaffCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutPrescriptionsInput = {
-    id?: string
-    username: string
-    email: string
-    passwordHash: string
-    firstName: string
-    lastName: string
-    role: $Enums.UserRole
-    organization?: string | null
-    pharmacyName?: string | null
-    licenseNumber?: string | null
-    phone?: string | null
-    address?: string | null
-    city?: string | null
-    state?: string | null
-    zipCode?: string | null
-    isVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
-    assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
-    deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
-    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
-    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-    staff?: StaffUncheckedCreateNestedOneWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutPrescriptionsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutPrescriptionsInput, UserUncheckedCreateWithoutPrescriptionsInput>
   }
 
   export type MedicationCreateWithoutPrescriptionsInput = {
@@ -29141,46 +29104,83 @@ export namespace Prisma {
     create: XOR<MedicationCreateWithoutPrescriptionsInput, MedicationUncheckedCreateWithoutPrescriptionsInput>
   }
 
-  export type OrderCreateWithoutPrescriptionInput = {
+  export type UserCreateWithoutPrescriptionsInput = {
     id?: string
-    anonymousId?: string | null
-    orderNumber: string
-    status?: $Enums.OrderStatus
-    totalAmount: Decimal | DecimalJsLike | number | string
-    paymentStatus?: $Enums.PaymentStatus
-    paymentMethod?: string | null
-    isAnonymous?: boolean
-    specialInstructions?: string | null
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    organization?: string | null
+    pharmacyName?: string | null
+    licenseNumber?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutOrdersInput
-    delivery?: DeliveryCreateNestedOneWithoutOrderInput
+    passwordHash: string
+    username: string
+    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
+    consultations?: ConsultationCreateNestedManyWithoutUserInput
+    deliveries?: DeliveryCreateNestedManyWithoutUserInput
+    inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
+    messages?: MessageCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    staff?: StaffCreateNestedOneWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
   }
 
-  export type OrderUncheckedCreateWithoutPrescriptionInput = {
+  export type UserUncheckedCreateWithoutPrescriptionsInput = {
     id?: string
-    userId?: string | null
-    anonymousId?: string | null
-    orderNumber: string
-    status?: $Enums.OrderStatus
-    totalAmount: Decimal | DecimalJsLike | number | string
-    paymentStatus?: $Enums.PaymentStatus
-    paymentMethod?: string | null
-    isAnonymous?: boolean
-    specialInstructions?: string | null
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    organization?: string | null
+    pharmacyName?: string | null
+    licenseNumber?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    delivery?: DeliveryUncheckedCreateNestedOneWithoutOrderInput
+    passwordHash: string
+    username: string
+    assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
+    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
+    deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
+    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
+    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    staff?: StaffUncheckedCreateNestedOneWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
   }
 
-  export type OrderCreateOrConnectWithoutPrescriptionInput = {
+  export type UserCreateOrConnectWithoutPrescriptionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPrescriptionsInput, UserUncheckedCreateWithoutPrescriptionsInput>
+  }
+
+  export type OrderUpsertWithWhereUniqueWithoutPrescriptionInput = {
     where: OrderWhereUniqueInput
+    update: XOR<OrderUpdateWithoutPrescriptionInput, OrderUncheckedUpdateWithoutPrescriptionInput>
     create: XOR<OrderCreateWithoutPrescriptionInput, OrderUncheckedCreateWithoutPrescriptionInput>
   }
 
-  export type OrderCreateManyPrescriptionInputEnvelope = {
-    data: OrderCreateManyPrescriptionInput | OrderCreateManyPrescriptionInput[]
-    skipDuplicates?: boolean
+  export type OrderUpdateWithWhereUniqueWithoutPrescriptionInput = {
+    where: OrderWhereUniqueInput
+    data: XOR<OrderUpdateWithoutPrescriptionInput, OrderUncheckedUpdateWithoutPrescriptionInput>
+  }
+
+  export type OrderUpdateManyWithWhereWithoutPrescriptionInput = {
+    where: OrderScalarWhereInput
+    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutPrescriptionInput>
   }
 
   export type ConsultationUpsertWithoutPrescriptionsInput = {
@@ -29196,111 +29196,42 @@ export namespace Prisma {
 
   export type ConsultationUpdateWithoutPrescriptionsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutConsultationsNestedInput
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
     assignedPharmacist?: UserUpdateOneWithoutAssignedConsultationsNestedInput
     assignedStaff?: StaffUpdateOneWithoutAssignedConsultationsNestedInput
+    user?: UserUpdateOneWithoutConsultationsNestedInput
     messages?: MessageUpdateManyWithoutConsultationNestedInput
   }
 
   export type ConsultationUncheckedUpdateWithoutPrescriptionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
     assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutConsultationNestedInput
-  }
-
-  export type UserUpsertWithoutPrescriptionsInput = {
-    update: XOR<UserUpdateWithoutPrescriptionsInput, UserUncheckedUpdateWithoutPrescriptionsInput>
-    create: XOR<UserCreateWithoutPrescriptionsInput, UserUncheckedCreateWithoutPrescriptionsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutPrescriptionsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutPrescriptionsInput, UserUncheckedUpdateWithoutPrescriptionsInput>
-  }
-
-  export type UserUpdateWithoutPrescriptionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
-    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUpdateManyWithoutUserNestedInput
-    assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUpdateManyWithoutUserNestedInput
-    deliveries?: DeliveryUpdateManyWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
-    inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-    staff?: StaffUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutPrescriptionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
-    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
-    assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
-    deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
-    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-    staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type MedicationUpsertWithoutPrescriptionsInput = {
@@ -29356,20 +29287,116 @@ export namespace Prisma {
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutMedicationNestedInput
   }
 
-  export type OrderUpsertWithWhereUniqueWithoutPrescriptionInput = {
-    where: OrderWhereUniqueInput
-    update: XOR<OrderUpdateWithoutPrescriptionInput, OrderUncheckedUpdateWithoutPrescriptionInput>
-    create: XOR<OrderCreateWithoutPrescriptionInput, OrderUncheckedCreateWithoutPrescriptionInput>
+  export type UserUpsertWithoutPrescriptionsInput = {
+    update: XOR<UserUpdateWithoutPrescriptionsInput, UserUncheckedUpdateWithoutPrescriptionsInput>
+    create: XOR<UserCreateWithoutPrescriptionsInput, UserUncheckedCreateWithoutPrescriptionsInput>
+    where?: UserWhereInput
   }
 
-  export type OrderUpdateWithWhereUniqueWithoutPrescriptionInput = {
-    where: OrderWhereUniqueInput
-    data: XOR<OrderUpdateWithoutPrescriptionInput, OrderUncheckedUpdateWithoutPrescriptionInput>
+  export type UserUpdateToOneWithWhereWithoutPrescriptionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPrescriptionsInput, UserUncheckedUpdateWithoutPrescriptionsInput>
   }
 
-  export type OrderUpdateManyWithWhereWithoutPrescriptionInput = {
-    where: OrderScalarWhereInput
-    data: XOR<OrderUpdateManyMutationInput, OrderUncheckedUpdateManyWithoutPrescriptionInput>
+  export type UserUpdateWithoutPrescriptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
+    consultations?: ConsultationUpdateManyWithoutUserNestedInput
+    deliveries?: DeliveryUpdateManyWithoutUserNestedInput
+    inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
+    messages?: MessageUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    staff?: StaffUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPrescriptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
+    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
+    deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
+    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type DeliveryCreateWithoutOrderInput = {
+    id?: string
+    status?: $Enums.DeliveryStatus
+    trackingNumber: string
+    estimatedDelivery?: Date | string | null
+    actualDelivery?: Date | string | null
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    anonymousId?: string | null
+    dropPoint?: string | null
+    isAnonymous?: boolean
+    packageType?: string
+    user?: UserCreateNestedOneWithoutDeliveriesInput
+  }
+
+  export type DeliveryUncheckedCreateWithoutOrderInput = {
+    id?: string
+    userId?: string | null
+    status?: $Enums.DeliveryStatus
+    trackingNumber: string
+    estimatedDelivery?: Date | string | null
+    actualDelivery?: Date | string | null
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    anonymousId?: string | null
+    dropPoint?: string | null
+    isAnonymous?: boolean
+    packageType?: string
+  }
+
+  export type DeliveryCreateOrConnectWithoutOrderInput = {
+    where: DeliveryWhereUniqueInput
+    create: XOR<DeliveryCreateWithoutOrderInput, DeliveryUncheckedCreateWithoutOrderInput>
   }
 
   export type PrescriptionCreateWithoutOrdersInput = {
@@ -29387,8 +29414,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     consultation?: ConsultationCreateNestedOneWithoutPrescriptionsInput
-    user?: UserCreateNestedOneWithoutPrescriptionsInput
     medication: MedicationCreateNestedOneWithoutPrescriptionsInput
+    user?: UserCreateNestedOneWithoutPrescriptionsInput
   }
 
   export type PrescriptionUncheckedCreateWithoutOrdersInput = {
@@ -29417,9 +29444,7 @@ export namespace Prisma {
 
   export type UserCreateWithoutOrdersInput = {
     id?: string
-    username: string
     email: string
-    passwordHash: string
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -29434,21 +29459,21 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    consultations?: ConsultationCreateNestedManyWithoutUserInput
+    passwordHash: string
+    username: string
     assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageCreateNestedManyWithoutUserInput
+    consultations?: ConsultationCreateNestedManyWithoutUserInput
     deliveries?: DeliveryCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
     inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
+    messages?: MessageCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
     staff?: StaffCreateNestedOneWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOrdersInput = {
     id?: string
-    username: string
     email: string
-    passwordHash: string
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -29463,14 +29488,16 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
+    passwordHash: string
+    username: string
     assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
     deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
     staff?: StaffUncheckedCreateNestedOneWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOrdersInput = {
@@ -29478,47 +29505,53 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutOrdersInput, UserUncheckedCreateWithoutOrdersInput>
   }
 
-  export type DeliveryCreateWithoutOrderInput = {
-    id?: string
-    anonymousId?: string | null
-    status?: $Enums.DeliveryStatus
-    trackingNumber: string
-    estimatedDelivery?: Date | string | null
-    actualDelivery?: Date | string | null
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    dropPoint?: string | null
-    packageType?: string
-    isAnonymous?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutDeliveriesInput
-  }
-
-  export type DeliveryUncheckedCreateWithoutOrderInput = {
-    id?: string
-    userId?: string | null
-    anonymousId?: string | null
-    status?: $Enums.DeliveryStatus
-    trackingNumber: string
-    estimatedDelivery?: Date | string | null
-    actualDelivery?: Date | string | null
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    dropPoint?: string | null
-    packageType?: string
-    isAnonymous?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type DeliveryCreateOrConnectWithoutOrderInput = {
-    where: DeliveryWhereUniqueInput
+  export type DeliveryUpsertWithoutOrderInput = {
+    update: XOR<DeliveryUpdateWithoutOrderInput, DeliveryUncheckedUpdateWithoutOrderInput>
     create: XOR<DeliveryCreateWithoutOrderInput, DeliveryUncheckedCreateWithoutOrderInput>
+    where?: DeliveryWhereInput
+  }
+
+  export type DeliveryUpdateToOneWithWhereWithoutOrderInput = {
+    where?: DeliveryWhereInput
+    data: XOR<DeliveryUpdateWithoutOrderInput, DeliveryUncheckedUpdateWithoutOrderInput>
+  }
+
+  export type DeliveryUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    packageType?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneWithoutDeliveriesNestedInput
+  }
+
+  export type DeliveryUncheckedUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
+    trackingNumber?: StringFieldUpdateOperationsInput | string
+    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    packageType?: StringFieldUpdateOperationsInput | string
   }
 
   export type PrescriptionUpsertWithoutOrdersInput = {
@@ -29547,8 +29580,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     consultation?: ConsultationUpdateOneWithoutPrescriptionsNestedInput
-    user?: UserUpdateOneWithoutPrescriptionsNestedInput
     medication?: MedicationUpdateOneRequiredWithoutPrescriptionsNestedInput
+    user?: UserUpdateOneWithoutPrescriptionsNestedInput
   }
 
   export type PrescriptionUncheckedUpdateWithoutOrdersInput = {
@@ -29583,9 +29616,7 @@ export namespace Prisma {
 
   export type UserUpdateWithoutOrdersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -29600,21 +29631,21 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUpdateManyWithoutUserNestedInput
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUpdateManyWithoutUserNestedInput
+    consultations?: ConsultationUpdateManyWithoutUserNestedInput
     deliveries?: DeliveryUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
     inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+    messages?: MessageUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
     staff?: StaffUpdateOneWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
     id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -29629,70 +29660,21 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
     deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
     staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
-  }
-
-  export type DeliveryUpsertWithoutOrderInput = {
-    update: XOR<DeliveryUpdateWithoutOrderInput, DeliveryUncheckedUpdateWithoutOrderInput>
-    create: XOR<DeliveryCreateWithoutOrderInput, DeliveryUncheckedCreateWithoutOrderInput>
-    where?: DeliveryWhereInput
-  }
-
-  export type DeliveryUpdateToOneWithWhereWithoutOrderInput = {
-    where?: DeliveryWhereInput
-    data: XOR<DeliveryUpdateWithoutOrderInput, DeliveryUncheckedUpdateWithoutOrderInput>
-  }
-
-  export type DeliveryUpdateWithoutOrderInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
-    trackingNumber?: StringFieldUpdateOperationsInput | string
-    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    actualDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    packageType?: StringFieldUpdateOperationsInput | string
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutDeliveriesNestedInput
-  }
-
-  export type DeliveryUncheckedUpdateWithoutOrderInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
-    trackingNumber?: StringFieldUpdateOperationsInput | string
-    estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    actualDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    packageType?: StringFieldUpdateOperationsInput | string
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSettingsInput = {
     id?: string
-    username: string
     email: string
-    passwordHash: string
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -29707,21 +29689,21 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    consultations?: ConsultationCreateNestedManyWithoutUserInput
+    passwordHash: string
+    username: string
     assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageCreateNestedManyWithoutUserInput
+    consultations?: ConsultationCreateNestedManyWithoutUserInput
     deliveries?: DeliveryCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
-    orders?: OrderCreateNestedManyWithoutUserInput
     inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
+    messages?: MessageCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
     staff?: StaffCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSettingsInput = {
     id?: string
-    username: string
     email: string
-    passwordHash: string
     firstName: string
     lastName: string
     role: $Enums.UserRole
@@ -29736,13 +29718,15 @@ export namespace Prisma {
     isVerified?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
+    passwordHash: string
+    username: string
     assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
     deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
-    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
+    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
     staff?: StaffUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -29764,9 +29748,7 @@ export namespace Prisma {
 
   export type UserUpdateWithoutSettingsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -29781,21 +29763,21 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUpdateManyWithoutUserNestedInput
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUpdateManyWithoutUserNestedInput
+    consultations?: ConsultationUpdateManyWithoutUserNestedInput
     deliveries?: DeliveryUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
     inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
+    messages?: MessageUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
     staff?: StaffUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSettingsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
@@ -29810,129 +29792,34 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
     assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
     deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
     staff?: StaffUncheckedUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutStaffInput = {
-    id?: string
-    username: string
-    email: string
-    passwordHash: string
-    firstName: string
-    lastName: string
-    role: $Enums.UserRole
-    organization?: string | null
-    pharmacyName?: string | null
-    licenseNumber?: string | null
-    phone?: string | null
-    address?: string | null
-    city?: string | null
-    state?: string | null
-    zipCode?: string | null
-    isVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    consultations?: ConsultationCreateNestedManyWithoutUserInput
-    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageCreateNestedManyWithoutUserInput
-    deliveries?: DeliveryCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
-    orders?: OrderCreateNestedManyWithoutUserInput
-    inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutStaffInput = {
-    id?: string
-    username: string
-    email: string
-    passwordHash: string
-    firstName: string
-    lastName: string
-    role: $Enums.UserRole
-    organization?: string | null
-    pharmacyName?: string | null
-    licenseNumber?: string | null
-    phone?: string | null
-    address?: string | null
-    city?: string | null
-    state?: string | null
-    zipCode?: string | null
-    isVerified?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
-    assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
-    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
-    deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
-    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
-    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
-    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
-    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutStaffInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutStaffInput, UserUncheckedCreateWithoutStaffInput>
-  }
-
-  export type StaffScheduleCreateWithoutStaffInput = {
-    id?: string
-    dayOfWeek: number
-    startTime: string
-    endTime: string
-    breakStart?: string | null
-    breakEnd?: string | null
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type StaffScheduleUncheckedCreateWithoutStaffInput = {
-    id?: string
-    dayOfWeek: number
-    startTime: string
-    endTime: string
-    breakStart?: string | null
-    breakEnd?: string | null
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type StaffScheduleCreateOrConnectWithoutStaffInput = {
-    where: StaffScheduleWhereUniqueInput
-    create: XOR<StaffScheduleCreateWithoutStaffInput, StaffScheduleUncheckedCreateWithoutStaffInput>
-  }
-
-  export type StaffScheduleCreateManyStaffInputEnvelope = {
-    data: StaffScheduleCreateManyStaffInput | StaffScheduleCreateManyStaffInput[]
-    skipDuplicates?: boolean
   }
 
   export type ConsultationCreateWithoutAssignedStaffInput = {
     id?: string
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutConsultationsInput
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
     assignedPharmacist?: UserCreateNestedOneWithoutAssignedConsultationsInput
+    user?: UserCreateNestedOneWithoutConsultationsInput
     messages?: MessageCreateNestedManyWithoutConsultationInput
     prescriptions?: PrescriptionCreateNestedManyWithoutConsultationInput
   }
@@ -29940,19 +29827,19 @@ export namespace Prisma {
   export type ConsultationUncheckedCreateWithoutAssignedStaffInput = {
     id?: string
     userId?: string | null
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
-    assignedPharmacistId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    assignedPharmacistId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
     messages?: MessageUncheckedCreateNestedManyWithoutConsultationInput
     prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutConsultationInput
   }
@@ -30003,6 +29890,103 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserCreateWithoutStaffInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    organization?: string | null
+    pharmacyName?: string | null
+    licenseNumber?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    isVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    passwordHash: string
+    username: string
+    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedPharmacistInput
+    consultations?: ConsultationCreateNestedManyWithoutUserInput
+    deliveries?: DeliveryCreateNestedManyWithoutUserInput
+    inventoryItems?: InventoryItemCreateNestedManyWithoutPharmacyInput
+    messages?: MessageCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionCreateNestedManyWithoutUserInput
+    settings?: UserSettingsCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutStaffInput = {
+    id?: string
+    email: string
+    firstName: string
+    lastName: string
+    role: $Enums.UserRole
+    organization?: string | null
+    pharmacyName?: string | null
+    licenseNumber?: string | null
+    phone?: string | null
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    isVerified?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    passwordHash: string
+    username: string
+    assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedPharmacistInput
+    consultations?: ConsultationUncheckedCreateNestedManyWithoutUserInput
+    deliveries?: DeliveryUncheckedCreateNestedManyWithoutUserInput
+    inventoryItems?: InventoryItemUncheckedCreateNestedManyWithoutPharmacyInput
+    messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutUserInput
+    settings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutStaffInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStaffInput, UserUncheckedCreateWithoutStaffInput>
+  }
+
+  export type StaffScheduleCreateWithoutStaffInput = {
+    id?: string
+    dayOfWeek: number
+    startTime: string
+    endTime: string
+    breakStart?: string | null
+    breakEnd?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StaffScheduleUncheckedCreateWithoutStaffInput = {
+    id?: string
+    dayOfWeek: number
+    startTime: string
+    endTime: string
+    breakStart?: string | null
+    breakEnd?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StaffScheduleCreateOrConnectWithoutStaffInput = {
+    where: StaffScheduleWhereUniqueInput
+    create: XOR<StaffScheduleCreateWithoutStaffInput, StaffScheduleUncheckedCreateWithoutStaffInput>
+  }
+
+  export type StaffScheduleCreateManyStaffInputEnvelope = {
+    data: StaffScheduleCreateManyStaffInput | StaffScheduleCreateManyStaffInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TimeOffRequestCreateWithoutStaffInput = {
     id?: string
     startDate: Date | string
@@ -30039,107 +30023,6 @@ export namespace Prisma {
   export type TimeOffRequestCreateManyStaffInputEnvelope = {
     data: TimeOffRequestCreateManyStaffInput | TimeOffRequestCreateManyStaffInput[]
     skipDuplicates?: boolean
-  }
-
-  export type UserUpsertWithoutStaffInput = {
-    update: XOR<UserUpdateWithoutStaffInput, UserUncheckedUpdateWithoutStaffInput>
-    create: XOR<UserCreateWithoutStaffInput, UserUncheckedCreateWithoutStaffInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutStaffInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutStaffInput, UserUncheckedUpdateWithoutStaffInput>
-  }
-
-  export type UserUpdateWithoutStaffInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
-    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUpdateManyWithoutUserNestedInput
-    assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUpdateManyWithoutUserNestedInput
-    deliveries?: DeliveryUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
-    inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutStaffInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
-    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
-    assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
-    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
-    deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
-    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
-    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
-    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
-  }
-
-  export type StaffScheduleUpsertWithWhereUniqueWithoutStaffInput = {
-    where: StaffScheduleWhereUniqueInput
-    update: XOR<StaffScheduleUpdateWithoutStaffInput, StaffScheduleUncheckedUpdateWithoutStaffInput>
-    create: XOR<StaffScheduleCreateWithoutStaffInput, StaffScheduleUncheckedCreateWithoutStaffInput>
-  }
-
-  export type StaffScheduleUpdateWithWhereUniqueWithoutStaffInput = {
-    where: StaffScheduleWhereUniqueInput
-    data: XOR<StaffScheduleUpdateWithoutStaffInput, StaffScheduleUncheckedUpdateWithoutStaffInput>
-  }
-
-  export type StaffScheduleUpdateManyWithWhereWithoutStaffInput = {
-    where: StaffScheduleScalarWhereInput
-    data: XOR<StaffScheduleUpdateManyMutationInput, StaffScheduleUncheckedUpdateManyWithoutStaffInput>
-  }
-
-  export type StaffScheduleScalarWhereInput = {
-    AND?: StaffScheduleScalarWhereInput | StaffScheduleScalarWhereInput[]
-    OR?: StaffScheduleScalarWhereInput[]
-    NOT?: StaffScheduleScalarWhereInput | StaffScheduleScalarWhereInput[]
-    id?: StringFilter<"StaffSchedule"> | string
-    staffId?: StringFilter<"StaffSchedule"> | string
-    dayOfWeek?: IntFilter<"StaffSchedule"> | number
-    startTime?: StringFilter<"StaffSchedule"> | string
-    endTime?: StringFilter<"StaffSchedule"> | string
-    breakStart?: StringNullableFilter<"StaffSchedule"> | string | null
-    breakEnd?: StringNullableFilter<"StaffSchedule"> | string | null
-    isActive?: BoolFilter<"StaffSchedule"> | boolean
-    createdAt?: DateTimeFilter<"StaffSchedule"> | Date | string
-    updatedAt?: DateTimeFilter<"StaffSchedule"> | Date | string
   }
 
   export type ConsultationUpsertWithWhereUniqueWithoutAssignedStaffInput = {
@@ -30191,6 +30074,107 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Shift"> | Date | string
   }
 
+  export type UserUpsertWithoutStaffInput = {
+    update: XOR<UserUpdateWithoutStaffInput, UserUncheckedUpdateWithoutStaffInput>
+    create: XOR<UserCreateWithoutStaffInput, UserUncheckedCreateWithoutStaffInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStaffInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStaffInput, UserUncheckedUpdateWithoutStaffInput>
+  }
+
+  export type UserUpdateWithoutStaffInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    assignedConsultations?: ConsultationUpdateManyWithoutAssignedPharmacistNestedInput
+    consultations?: ConsultationUpdateManyWithoutUserNestedInput
+    deliveries?: DeliveryUpdateManyWithoutUserNestedInput
+    inventoryItems?: InventoryItemUpdateManyWithoutPharmacyNestedInput
+    messages?: MessageUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutStaffInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    pharmacyName?: NullableStringFieldUpdateOperationsInput | string | null
+    licenseNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedPharmacistNestedInput
+    consultations?: ConsultationUncheckedUpdateManyWithoutUserNestedInput
+    deliveries?: DeliveryUncheckedUpdateManyWithoutUserNestedInput
+    inventoryItems?: InventoryItemUncheckedUpdateManyWithoutPharmacyNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    prescriptions?: PrescriptionUncheckedUpdateManyWithoutUserNestedInput
+    settings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type StaffScheduleUpsertWithWhereUniqueWithoutStaffInput = {
+    where: StaffScheduleWhereUniqueInput
+    update: XOR<StaffScheduleUpdateWithoutStaffInput, StaffScheduleUncheckedUpdateWithoutStaffInput>
+    create: XOR<StaffScheduleCreateWithoutStaffInput, StaffScheduleUncheckedCreateWithoutStaffInput>
+  }
+
+  export type StaffScheduleUpdateWithWhereUniqueWithoutStaffInput = {
+    where: StaffScheduleWhereUniqueInput
+    data: XOR<StaffScheduleUpdateWithoutStaffInput, StaffScheduleUncheckedUpdateWithoutStaffInput>
+  }
+
+  export type StaffScheduleUpdateManyWithWhereWithoutStaffInput = {
+    where: StaffScheduleScalarWhereInput
+    data: XOR<StaffScheduleUpdateManyMutationInput, StaffScheduleUncheckedUpdateManyWithoutStaffInput>
+  }
+
+  export type StaffScheduleScalarWhereInput = {
+    AND?: StaffScheduleScalarWhereInput | StaffScheduleScalarWhereInput[]
+    OR?: StaffScheduleScalarWhereInput[]
+    NOT?: StaffScheduleScalarWhereInput | StaffScheduleScalarWhereInput[]
+    id?: StringFilter<"StaffSchedule"> | string
+    staffId?: StringFilter<"StaffSchedule"> | string
+    dayOfWeek?: IntFilter<"StaffSchedule"> | number
+    startTime?: StringFilter<"StaffSchedule"> | string
+    endTime?: StringFilter<"StaffSchedule"> | string
+    breakStart?: StringNullableFilter<"StaffSchedule"> | string | null
+    breakEnd?: StringNullableFilter<"StaffSchedule"> | string | null
+    isActive?: BoolFilter<"StaffSchedule"> | boolean
+    createdAt?: DateTimeFilter<"StaffSchedule"> | Date | string
+    updatedAt?: DateTimeFilter<"StaffSchedule"> | Date | string
+  }
+
   export type TimeOffRequestUpsertWithWhereUniqueWithoutStaffInput = {
     where: TimeOffRequestWhereUniqueInput
     update: XOR<TimeOffRequestUpdateWithoutStaffInput, TimeOffRequestUncheckedUpdateWithoutStaffInput>
@@ -30240,9 +30224,9 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutStaffInput
     assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedStaffInput
     shifts?: ShiftCreateNestedManyWithoutStaffInput
+    user: UserCreateNestedOneWithoutStaffInput
     timeOffRequests?: TimeOffRequestCreateNestedManyWithoutStaffInput
   }
 
@@ -30298,9 +30282,9 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutStaffNestedInput
     assignedConsultations?: ConsultationUpdateManyWithoutAssignedStaffNestedInput
     shifts?: ShiftUpdateManyWithoutStaffNestedInput
+    user?: UserUpdateOneRequiredWithoutStaffNestedInput
     timeOffRequests?: TimeOffRequestUpdateManyWithoutStaffNestedInput
   }
 
@@ -30340,9 +30324,9 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedStaffInput
     user: UserCreateNestedOneWithoutStaffInput
     schedules?: StaffScheduleCreateNestedManyWithoutStaffInput
-    assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedStaffInput
     timeOffRequests?: TimeOffRequestCreateNestedManyWithoutStaffInput
   }
 
@@ -30362,8 +30346,8 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    schedules?: StaffScheduleUncheckedCreateNestedManyWithoutStaffInput
     assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedStaffInput
+    schedules?: StaffScheduleUncheckedCreateNestedManyWithoutStaffInput
     timeOffRequests?: TimeOffRequestUncheckedCreateNestedManyWithoutStaffInput
   }
 
@@ -30398,9 +30382,9 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignedConsultations?: ConsultationUpdateManyWithoutAssignedStaffNestedInput
     user?: UserUpdateOneRequiredWithoutStaffNestedInput
     schedules?: StaffScheduleUpdateManyWithoutStaffNestedInput
-    assignedConsultations?: ConsultationUpdateManyWithoutAssignedStaffNestedInput
     timeOffRequests?: TimeOffRequestUpdateManyWithoutStaffNestedInput
   }
 
@@ -30420,8 +30404,8 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schedules?: StaffScheduleUncheckedUpdateManyWithoutStaffNestedInput
     assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedStaffNestedInput
+    schedules?: StaffScheduleUncheckedUpdateManyWithoutStaffNestedInput
     timeOffRequests?: TimeOffRequestUncheckedUpdateManyWithoutStaffNestedInput
   }
 
@@ -30440,10 +30424,10 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutStaffInput
-    schedules?: StaffScheduleCreateNestedManyWithoutStaffInput
     assignedConsultations?: ConsultationCreateNestedManyWithoutAssignedStaffInput
     shifts?: ShiftCreateNestedManyWithoutStaffInput
+    user: UserCreateNestedOneWithoutStaffInput
+    schedules?: StaffScheduleCreateNestedManyWithoutStaffInput
   }
 
   export type StaffUncheckedCreateWithoutTimeOffRequestsInput = {
@@ -30462,9 +30446,9 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    schedules?: StaffScheduleUncheckedCreateNestedManyWithoutStaffInput
     assignedConsultations?: ConsultationUncheckedCreateNestedManyWithoutAssignedStaffInput
     shifts?: ShiftUncheckedCreateNestedManyWithoutStaffInput
+    schedules?: StaffScheduleUncheckedCreateNestedManyWithoutStaffInput
   }
 
   export type StaffCreateOrConnectWithoutTimeOffRequestsInput = {
@@ -30498,10 +30482,10 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutStaffNestedInput
-    schedules?: StaffScheduleUpdateManyWithoutStaffNestedInput
     assignedConsultations?: ConsultationUpdateManyWithoutAssignedStaffNestedInput
     shifts?: ShiftUpdateManyWithoutStaffNestedInput
+    user?: UserUpdateOneRequiredWithoutStaffNestedInput
+    schedules?: StaffScheduleUpdateManyWithoutStaffNestedInput
   }
 
   export type StaffUncheckedUpdateWithoutTimeOffRequestsInput = {
@@ -30520,61 +30504,49 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schedules?: StaffScheduleUncheckedUpdateManyWithoutStaffNestedInput
     assignedConsultations?: ConsultationUncheckedUpdateManyWithoutAssignedStaffNestedInput
     shifts?: ShiftUncheckedUpdateManyWithoutStaffNestedInput
-  }
-
-  export type ConsultationCreateManyUserInput = {
-    id?: string
-    anonymousId?: string | null
-    type: string
-    status?: $Enums.ConsultationStatus
-    description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
-    assignedPharmacistId?: string | null
-    assignedStaffId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    schedules?: StaffScheduleUncheckedUpdateManyWithoutStaffNestedInput
   }
 
   export type ConsultationCreateManyAssignedPharmacistInput = {
     id?: string
     userId?: string | null
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
-    assignedStaffId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
+    assignedStaffId?: string | null
   }
 
-  export type MessageCreateManyUserInput = {
+  export type ConsultationCreateManyUserInput = {
     id?: string
-    chatId: string
-    anonymousId?: string | null
-    content: string
-    type?: $Enums.MessageType
-    isFromPharmacist?: boolean
+    type: string
+    status?: $Enums.ConsultationStatus
+    description?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    assignedPharmacistId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
+    assignedStaffId?: string | null
   }
 
   export type DeliveryCreateManyUserInput = {
     id?: string
-    anonymousId?: string | null
-    orderId?: string | null
     status?: $Enums.DeliveryStatus
     trackingNumber: string
     estimatedDelivery?: Date | string | null
@@ -30583,9 +30555,50 @@ export namespace Prisma {
     city: string
     state: string
     zipCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    anonymousId?: string | null
     dropPoint?: string | null
-    packageType?: string
     isAnonymous?: boolean
+    orderId?: string | null
+    packageType?: string
+  }
+
+  export type InventoryItemCreateManyPharmacyInput = {
+    id?: string
+    medicationId: string
+    quantity: number
+    minQuantity?: number
+    maxQuantity?: number
+    lotNumber?: string | null
+    expirationDate?: Date | string | null
+    location?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageCreateManyUserInput = {
+    id?: string
+    chatId: string
+    content: string
+    type?: $Enums.MessageType
+    createdAt?: Date | string
+    anonymousId?: string | null
+    isFromPharmacist?: boolean
+  }
+
+  export type OrderCreateManyUserInput = {
+    id?: string
+    prescriptionId?: string | null
+    anonymousId?: string | null
+    orderNumber: string
+    status?: $Enums.OrderStatus
+    totalAmount: Decimal | DecimalJsLike | number | string
+    paymentStatus?: $Enums.PaymentStatus
+    paymentMethod?: string | null
+    isAnonymous?: boolean
+    specialInstructions?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -30608,49 +30621,78 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type OrderCreateManyUserInput = {
-    id?: string
-    prescriptionId?: string | null
-    anonymousId?: string | null
-    orderNumber: string
-    status?: $Enums.OrderStatus
-    totalAmount: Decimal | DecimalJsLike | number | string
-    paymentStatus?: $Enums.PaymentStatus
-    paymentMethod?: string | null
-    isAnonymous?: boolean
-    specialInstructions?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type ConsultationUpdateWithoutAssignedPharmacistInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedStaff?: StaffUpdateOneWithoutAssignedConsultationsNestedInput
+    user?: UserUpdateOneWithoutConsultationsNestedInput
+    messages?: MessageUpdateManyWithoutConsultationNestedInput
+    prescriptions?: PrescriptionUpdateManyWithoutConsultationNestedInput
   }
 
-  export type InventoryItemCreateManyPharmacyInput = {
-    id?: string
-    medicationId: string
-    quantity: number
-    minQuantity?: number
-    maxQuantity?: number
-    lotNumber?: string | null
-    expirationDate?: Date | string | null
-    location?: string | null
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type ConsultationUncheckedUpdateWithoutAssignedPharmacistInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
+    messages?: MessageUncheckedUpdateManyWithoutConsultationNestedInput
+    prescriptions?: PrescriptionUncheckedUpdateManyWithoutConsultationNestedInput
+  }
+
+  export type ConsultationUncheckedUpdateManyWithoutAssignedPharmacistInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ConsultationUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
     assignedPharmacist?: UserUpdateOneWithoutAssignedConsultationsNestedInput
     assignedStaff?: StaffUpdateOneWithoutAssignedConsultationsNestedInput
     messages?: MessageUpdateManyWithoutConsultationNestedInput
@@ -30659,133 +30701,44 @@ export namespace Prisma {
 
   export type ConsultationUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
     messages?: MessageUncheckedUpdateManyWithoutConsultationNestedInput
     prescriptions?: PrescriptionUncheckedUpdateManyWithoutConsultationNestedInput
   }
 
   export type ConsultationUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ConsultationUpdateWithoutAssignedPharmacistInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: StringFieldUpdateOperationsInput | string
-    status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableStringFieldUpdateOperationsInput | string | null
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutConsultationsNestedInput
-    assignedStaff?: StaffUpdateOneWithoutAssignedConsultationsNestedInput
-    messages?: MessageUpdateManyWithoutConsultationNestedInput
-    prescriptions?: PrescriptionUpdateManyWithoutConsultationNestedInput
-  }
-
-  export type ConsultationUncheckedUpdateWithoutAssignedPharmacistInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: StringFieldUpdateOperationsInput | string
-    status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
     medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: MessageUncheckedUpdateManyWithoutConsultationNestedInput
-    prescriptions?: PrescriptionUncheckedUpdateManyWithoutConsultationNestedInput
-  }
-
-  export type ConsultationUncheckedUpdateManyWithoutAssignedPharmacistInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: StringFieldUpdateOperationsInput | string
-    status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     assignedStaffId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MessageUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: StringFieldUpdateOperationsInput | string
-    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultation?: ConsultationUpdateOneWithoutMessagesNestedInput
-  }
-
-  export type MessageUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    chatId?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: StringFieldUpdateOperationsInput | string
-    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MessageUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    chatId?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    content?: StringFieldUpdateOperationsInput | string
-    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeliveryUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
     trackingNumber?: StringFieldUpdateOperationsInput | string
     estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -30794,18 +30747,17 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
-    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    packageType?: StringFieldUpdateOperationsInput | string
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    packageType?: StringFieldUpdateOperationsInput | string
     order?: OrderUpdateOneWithoutDeliveryNestedInput
   }
 
   export type DeliveryUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    orderId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
     trackingNumber?: StringFieldUpdateOperationsInput | string
     estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -30814,17 +30766,17 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
-    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
-    packageType?: StringFieldUpdateOperationsInput | string
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    orderId?: NullableStringFieldUpdateOperationsInput | string | null
+    packageType?: StringFieldUpdateOperationsInput | string
   }
 
   export type DeliveryUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    orderId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumDeliveryStatusFieldUpdateOperationsInput | $Enums.DeliveryStatus
     trackingNumber?: StringFieldUpdateOperationsInput | string
     estimatedDelivery?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -30833,114 +30785,13 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     dropPoint?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    orderId?: NullableStringFieldUpdateOperationsInput | string | null
     packageType?: StringFieldUpdateOperationsInput | string
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PrescriptionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    prescribedBy?: StringFieldUpdateOperationsInput | string
-    dosage?: StringFieldUpdateOperationsInput | string
-    frequency?: StringFieldUpdateOperationsInput | string
-    duration?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    refills?: IntFieldUpdateOperationsInput | number
-    instructions?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumPrescriptionStatusFieldUpdateOperationsInput | $Enums.PrescriptionStatus
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    consultation?: ConsultationUpdateOneWithoutPrescriptionsNestedInput
-    medication?: MedicationUpdateOneRequiredWithoutPrescriptionsNestedInput
-    orders?: OrderUpdateManyWithoutPrescriptionNestedInput
-  }
-
-  export type PrescriptionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    consultationId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    medicationId?: StringFieldUpdateOperationsInput | string
-    prescribedBy?: StringFieldUpdateOperationsInput | string
-    dosage?: StringFieldUpdateOperationsInput | string
-    frequency?: StringFieldUpdateOperationsInput | string
-    duration?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    refills?: IntFieldUpdateOperationsInput | number
-    instructions?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumPrescriptionStatusFieldUpdateOperationsInput | $Enums.PrescriptionStatus
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    orders?: OrderUncheckedUpdateManyWithoutPrescriptionNestedInput
-  }
-
-  export type PrescriptionUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    consultationId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    medicationId?: StringFieldUpdateOperationsInput | string
-    prescribedBy?: StringFieldUpdateOperationsInput | string
-    dosage?: StringFieldUpdateOperationsInput | string
-    frequency?: StringFieldUpdateOperationsInput | string
-    duration?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    refills?: IntFieldUpdateOperationsInput | number
-    instructions?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: EnumPrescriptionStatusFieldUpdateOperationsInput | $Enums.PrescriptionStatus
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OrderUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    orderNumber?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    prescription?: PrescriptionUpdateOneWithoutOrdersNestedInput
-    delivery?: DeliveryUpdateOneWithoutOrderNestedInput
-  }
-
-  export type OrderUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    prescriptionId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    orderNumber?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    delivery?: DeliveryUncheckedUpdateOneWithoutOrderNestedInput
-  }
-
-  export type OrderUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    prescriptionId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
-    orderNumber?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
-    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InventoryItemUpdateWithoutPharmacyInput = {
@@ -30985,14 +30836,147 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type MessageUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
+    consultation?: ConsultationUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type MessageUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chatId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MessageUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chatId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type OrderUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivery?: DeliveryUpdateOneWithoutOrderNestedInput
+    prescription?: PrescriptionUpdateOneWithoutOrdersNestedInput
+  }
+
+  export type OrderUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    prescriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    delivery?: DeliveryUncheckedUpdateOneWithoutOrderNestedInput
+  }
+
+  export type OrderUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    prescriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    orderNumber?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentMethod?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrescriptionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    prescribedBy?: StringFieldUpdateOperationsInput | string
+    dosage?: StringFieldUpdateOperationsInput | string
+    frequency?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    refills?: IntFieldUpdateOperationsInput | number
+    instructions?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPrescriptionStatusFieldUpdateOperationsInput | $Enums.PrescriptionStatus
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orders?: OrderUpdateManyWithoutPrescriptionNestedInput
+    consultation?: ConsultationUpdateOneWithoutPrescriptionsNestedInput
+    medication?: MedicationUpdateOneRequiredWithoutPrescriptionsNestedInput
+  }
+
+  export type PrescriptionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    consultationId?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    medicationId?: StringFieldUpdateOperationsInput | string
+    prescribedBy?: StringFieldUpdateOperationsInput | string
+    dosage?: StringFieldUpdateOperationsInput | string
+    frequency?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    refills?: IntFieldUpdateOperationsInput | number
+    instructions?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPrescriptionStatusFieldUpdateOperationsInput | $Enums.PrescriptionStatus
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orders?: OrderUncheckedUpdateManyWithoutPrescriptionNestedInput
+  }
+
+  export type PrescriptionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    consultationId?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    medicationId?: StringFieldUpdateOperationsInput | string
+    prescribedBy?: StringFieldUpdateOperationsInput | string
+    dosage?: StringFieldUpdateOperationsInput | string
+    frequency?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    refills?: IntFieldUpdateOperationsInput | number
+    instructions?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPrescriptionStatusFieldUpdateOperationsInput | $Enums.PrescriptionStatus
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type MessageCreateManyConsultationInput = {
     id?: string
     userId?: string | null
-    anonymousId?: string | null
     content: string
     type?: $Enums.MessageType
-    isFromPharmacist?: boolean
     createdAt?: Date | string
+    anonymousId?: string | null
+    isFromPharmacist?: boolean
   }
 
   export type PrescriptionCreateManyConsultationInput = {
@@ -31015,32 +30999,32 @@ export namespace Prisma {
 
   export type MessageUpdateWithoutConsultationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneWithoutMessagesNestedInput
   }
 
   export type MessageUncheckedUpdateWithoutConsultationInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageUncheckedUpdateManyWithoutConsultationInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    isFromPharmacist?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PrescriptionUpdateWithoutConsultationInput = {
@@ -31057,9 +31041,9 @@ export namespace Prisma {
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutPrescriptionsNestedInput
-    medication?: MedicationUpdateOneRequiredWithoutPrescriptionsNestedInput
     orders?: OrderUpdateManyWithoutPrescriptionNestedInput
+    medication?: MedicationUpdateOneRequiredWithoutPrescriptionsNestedInput
+    user?: UserUpdateOneWithoutPrescriptionsNestedInput
   }
 
   export type PrescriptionUncheckedUpdateWithoutConsultationInput = {
@@ -31187,9 +31171,9 @@ export namespace Prisma {
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orders?: OrderUpdateManyWithoutPrescriptionNestedInput
     consultation?: ConsultationUpdateOneWithoutPrescriptionsNestedInput
     user?: UserUpdateOneWithoutPrescriptionsNestedInput
-    orders?: OrderUpdateManyWithoutPrescriptionNestedInput
   }
 
   export type PrescriptionUncheckedUpdateWithoutMedicationInput = {
@@ -31256,8 +31240,8 @@ export namespace Prisma {
     specialInstructions?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutOrdersNestedInput
     delivery?: DeliveryUpdateOneWithoutOrderNestedInput
+    user?: UserUpdateOneWithoutOrdersNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutPrescriptionInput = {
@@ -31291,34 +31275,22 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type StaffScheduleCreateManyStaffInput = {
-    id?: string
-    dayOfWeek: number
-    startTime: string
-    endTime: string
-    breakStart?: string | null
-    breakEnd?: string | null
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type ConsultationCreateManyAssignedStaffInput = {
     id?: string
     userId?: string | null
-    anonymousId?: string | null
     type: string
     status?: $Enums.ConsultationStatus
     description?: string | null
-    symptoms?: string | null
-    medications?: string | null
-    allergies?: string | null
-    age?: number | null
-    gender?: string | null
-    isAnonymous?: boolean
-    assignedPharmacistId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    age?: number | null
+    allergies?: string | null
+    anonymousId?: string | null
+    assignedPharmacistId?: string | null
+    gender?: string | null
+    isAnonymous?: boolean
+    medications?: string | null
+    symptoms?: string | null
   }
 
   export type ShiftCreateManyStaffInput = {
@@ -31330,6 +31302,18 @@ export namespace Prisma {
     notes?: string | null
     actualStartTime?: Date | string | null
     actualEndTime?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StaffScheduleCreateManyStaffInput = {
+    id?: string
+    dayOfWeek: number
+    startTime: string
+    endTime: string
+    breakStart?: string | null
+    breakEnd?: string | null
+    isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31348,58 +31332,22 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type StaffScheduleUpdateWithoutStaffInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
-    breakStart?: NullableStringFieldUpdateOperationsInput | string | null
-    breakEnd?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type StaffScheduleUncheckedUpdateWithoutStaffInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
-    breakStart?: NullableStringFieldUpdateOperationsInput | string | null
-    breakEnd?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type StaffScheduleUncheckedUpdateManyWithoutStaffInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: IntFieldUpdateOperationsInput | number
-    startTime?: StringFieldUpdateOperationsInput | string
-    endTime?: StringFieldUpdateOperationsInput | string
-    breakStart?: NullableStringFieldUpdateOperationsInput | string | null
-    breakEnd?: NullableStringFieldUpdateOperationsInput | string | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type ConsultationUpdateWithoutAssignedStaffInput = {
     id?: StringFieldUpdateOperationsInput | string
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutConsultationsNestedInput
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
     assignedPharmacist?: UserUpdateOneWithoutAssignedConsultationsNestedInput
+    user?: UserUpdateOneWithoutConsultationsNestedInput
     messages?: MessageUpdateManyWithoutConsultationNestedInput
     prescriptions?: PrescriptionUpdateManyWithoutConsultationNestedInput
   }
@@ -31407,19 +31355,19 @@ export namespace Prisma {
   export type ConsultationUncheckedUpdateWithoutAssignedStaffInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
     messages?: MessageUncheckedUpdateManyWithoutConsultationNestedInput
     prescriptions?: PrescriptionUncheckedUpdateManyWithoutConsultationNestedInput
   }
@@ -31427,19 +31375,19 @@ export namespace Prisma {
   export type ConsultationUncheckedUpdateManyWithoutAssignedStaffInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
-    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
     status?: EnumConsultationStatusFieldUpdateOperationsInput | $Enums.ConsultationStatus
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
-    medications?: NullableStringFieldUpdateOperationsInput | string | null
-    allergies?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableStringFieldUpdateOperationsInput | string | null
-    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
-    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    allergies?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedPharmacistId?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableStringFieldUpdateOperationsInput | string | null
+    isAnonymous?: BoolFieldUpdateOperationsInput | boolean
+    medications?: NullableStringFieldUpdateOperationsInput | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ShiftUpdateWithoutStaffInput = {
@@ -31477,6 +31425,42 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     actualStartTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualEndTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StaffScheduleUpdateWithoutStaffInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: IntFieldUpdateOperationsInput | number
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    breakStart?: NullableStringFieldUpdateOperationsInput | string | null
+    breakEnd?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StaffScheduleUncheckedUpdateWithoutStaffInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: IntFieldUpdateOperationsInput | number
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    breakStart?: NullableStringFieldUpdateOperationsInput | string | null
+    breakEnd?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StaffScheduleUncheckedUpdateManyWithoutStaffInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: IntFieldUpdateOperationsInput | number
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    breakStart?: NullableStringFieldUpdateOperationsInput | string | null
+    breakEnd?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

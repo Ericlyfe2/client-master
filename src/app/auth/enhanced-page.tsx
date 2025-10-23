@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
@@ -44,20 +44,21 @@ export default function EnhancedAuthPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
-  // Redirect if already authenticated
-  if (session?.user) {
-    const dashboardPath =
-      session.user.role === "ADMIN"
-        ? "/admin"
-        : session.user.role === "PHARMACY"
-        ? "/pharmacy-dashboard"
-        : "/client-dashboard";
-    router.push(dashboardPath);
-    return null;
-  }
+  // Redirect if already authenticated (run in effect to avoid updating Router during render)
+  useEffect(() => {
+    if (status === "authenticated" && session?.user) {
+      const dashboardPath =
+        session.user.role === "ADMIN"
+          ? "/admin"
+          : session.user.role === "PHARMACY"
+          ? "/pharmacy-dashboard"
+          : "/client-dashboard";
+      router.replace(dashboardPath);
+    }
+  }, [status, session, router]);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -140,11 +141,14 @@ export default function EnhancedAuthPage() {
         const result = await signIn("credentials", {
           username: formData.username,
           password: formData.password,
+          role: userType,
           redirect: false,
         });
 
         if (result?.error) {
           setErrors({ general: "Invalid username or password" });
+        } else if (result?.ok) {
+          // Successful login - redirect will be handled by the redirect logic above
         }
       } else {
         const signupData = {
@@ -175,6 +179,7 @@ export default function EnhancedAuthPage() {
           const result = await signIn("credentials", {
             username: formData.username,
             password: formData.password,
+            role: userType,
             redirect: false,
           });
 
@@ -183,6 +188,8 @@ export default function EnhancedAuthPage() {
               general:
                 "Account created but login failed. Please try logging in.",
             });
+          } else if (result?.ok) {
+            // Successful signup and login - redirect will be handled by the useEffect above
           }
         }
       }

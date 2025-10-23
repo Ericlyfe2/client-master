@@ -43,9 +43,11 @@ export function useAuth() {
   };
 
   // Handle redirects in useEffect to avoid render-time navigation
+  // Only redirect if we're not already on the auth page to prevent loops
   useEffect(() => {
-    if (!isLoading) {
-      if (!isAuthenticated) {
+    if (!isLoading && !isAuthenticated) {
+      const currentPath = window.location.pathname;
+      if (currentPath !== "/auth" && currentPath !== "/signup" && currentPath !== "/") {
         router.push("/auth");
       }
     }

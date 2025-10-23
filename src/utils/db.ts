@@ -1,6 +1,4 @@
-import { PrismaClient } from "@/lib/prisma-client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export interface User {
   id: string;

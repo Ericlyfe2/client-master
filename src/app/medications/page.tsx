@@ -28,21 +28,20 @@ export default function MedicationsPage() {
   });
 
   useEffect(() => {
+    const fetchMedications = async () => {
+      try {
+        setLoading(true);
+        const response = await getMedications(filters as unknown as Parameters<typeof getMedications>[0]);
+        setMedications(response.medications);
+        setPagination(response.pagination);
+      } catch (error) {
+        console.error("Error fetching medications:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchMedications();
   }, [filters]);
-
-  const fetchMedications = async () => {
-    try {
-      setLoading(true);
-      const response = await getMedications(filters as unknown as Parameters<typeof getMedications>[0]);
-      setMedications(response.medications);
-      setPagination(response.pagination);
-    } catch (error) {
-      console.error("Error fetching medications:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleFilterChange = (key: string, value: string | number) => {
     setFilters(prev => ({

@@ -17,6 +17,13 @@ service cloud.firestore {
     // Default: deny all other access. No data should be stored in Firestore
     // that requires broader rules — use PostgreSQL (via Next.js API routes)
     // for all app data.
+    // Live delivery GPS. Courier writes their device position; the student
+    // (often anonymous) reads it. Open for now — tighten with Auth + a Cloud
+    // Function TTL to purge finished deliveries before production.
+    match /deliveryLocations/{deliveryId} {
+      allow read, write: if true;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

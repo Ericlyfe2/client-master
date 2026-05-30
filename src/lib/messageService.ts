@@ -50,7 +50,7 @@ export const createMessage = async (
     });
 
     return message;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to create message");
   }
 };
@@ -104,7 +104,7 @@ export const getMessagesByChatId = async (
     });
 
     return messages;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get messages");
   }
 };
@@ -129,7 +129,7 @@ export const getMessagesByUser = async (userId: string): Promise<Message[]> => {
     });
 
     return messages;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get user messages");
   }
 };
@@ -159,7 +159,7 @@ export const updateMessage = async (
     });
 
     return message;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to update message");
   }
 };
@@ -170,7 +170,7 @@ export const deleteMessage = async (messageId: string): Promise<void> => {
     await prisma.message.delete({
       where: { id: messageId },
     });
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to delete message");
   }
 };
@@ -181,7 +181,7 @@ export const deleteChatMessages = async (chatId: string): Promise<void> => {
     await prisma.message.deleteMany({
       where: { chatId },
     });
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to delete chat messages");
   }
 };
@@ -208,7 +208,7 @@ export const getRecentMessages = async (
     });
 
     return messages.reverse(); // Return in chronological order
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get recent messages");
   }
 };
@@ -224,7 +224,7 @@ export const getMessageStats = async () => {
     });
 
     return stats;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get message statistics");
   }
 };

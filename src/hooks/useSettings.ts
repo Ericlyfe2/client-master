@@ -176,7 +176,7 @@ export function useSettings() {
     } finally {
       setLoading(false);
     }
-  }, [session, status]);
+  }, [session, status, defaultSettings]);
 
   // Update settings
   const updateSettings = useCallback(
@@ -248,7 +248,7 @@ export function useSettings() {
     } finally {
       setSaving(false);
     }
-  }, [session]);
+  }, [session, defaultSettings]);
 
   // Update a specific setting
   const updateSetting = useCallback(

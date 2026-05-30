@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Common/Navigation";
@@ -14,7 +14,7 @@ function TrackConsultationContent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleTrack = async () => {
+  const handleTrack = useCallback(async () => {
     if (!sessionId.trim()) {
       setError("Please enter a session ID");
       return;
@@ -36,13 +36,13 @@ function TrackConsultationContent() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [sessionId]);
 
   useEffect(() => {
     if (sessionId) {
       handleTrack();
     }
-  }, []);
+  }, [sessionId, handleTrack]);
 
   const getStatusColor = (status: string) => {
     switch (status) {

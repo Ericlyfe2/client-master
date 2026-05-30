@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { motion } from "framer-motion";
 import {
@@ -200,19 +200,7 @@ export default function StaffManagementPage() {
     notes: "",
   });
 
-  // Load data based on active tab
-  useEffect(() => {
-    if (status === "loading") return;
-    
-    if (!session?.user) {
-      setLoading(false);
-      return;
-    }
-
-    loadTabData();
-  }, [session, status, activeTab]);
-
-  const loadTabData = async () => {
+  const loadTabData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -237,7 +225,19 @@ export default function StaffManagementPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [activeTab]);
+
+  // Load data based on active tab
+  useEffect(() => {
+    if (status === "loading") return;
+
+    if (!session?.user) {
+      setLoading(false);
+      return;
+    }
+
+    loadTabData();
+  }, [session, status, loadTabData]);
 
   const loadStaff = async () => {
     const response = await fetch("/api/staff");
@@ -517,7 +517,7 @@ export default function StaffManagementPage() {
                           </p>
                         )}
                         <p className="text-gray-600">
-                          Status:{" "}STATUSSCHED
+                          Status:{" "}
                           <span
                             className={`px-2 py-1 rounded-full text-xs ${
                               schedule.isActive

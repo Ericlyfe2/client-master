@@ -50,7 +50,7 @@ export const createConsultation = async (
     });
 
     return consultation;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to create consultation");
   }
 };
@@ -104,7 +104,7 @@ export const getConsultationsByUser = async (
     });
 
     return consultations;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get consultations");
   }
 };
@@ -128,7 +128,7 @@ export const getAllConsultations = async (): Promise<Consultation[]> => {
     });
 
     return consultations;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get consultations");
   }
 };
@@ -156,7 +156,7 @@ export const updateConsultationStatus = async (
     });
 
     return consultation;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to update consultation status");
   }
 };
@@ -186,7 +186,7 @@ export const updateConsultation = async (
     });
 
     return consultation;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to update consultation");
   }
 };
@@ -199,7 +199,7 @@ export const deleteConsultation = async (
     await prisma.consultation.delete({
       where: { id: consultationId },
     });
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to delete consultation");
   }
 };
@@ -226,7 +226,7 @@ export const getConsultationsByStatus = async (
     });
 
     return consultations;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get consultations by status");
   }
 };
@@ -242,7 +242,7 @@ export const getConsultationStats = async () => {
     });
 
     return stats;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get consultation statistics");
   }
 };

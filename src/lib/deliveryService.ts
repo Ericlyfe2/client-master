@@ -72,7 +72,7 @@ export const createDelivery = async (
     });
 
     return delivery;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to create delivery");
   }
 };
@@ -153,7 +153,7 @@ export const getDeliveriesByUser = async (
     });
 
     return deliveries;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get user deliveries");
   }
 };
@@ -177,7 +177,7 @@ export const getAllDeliveries = async (): Promise<Delivery[]> => {
     });
 
     return deliveries;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get deliveries");
   }
 };
@@ -208,7 +208,7 @@ export const updateDeliveryStatus = async (
     });
 
     return delivery;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to update delivery status");
   }
 };
@@ -241,7 +241,7 @@ export const updateDelivery = async (
     });
 
     return delivery;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to update delivery");
   }
 };
@@ -252,7 +252,7 @@ export const deleteDelivery = async (deliveryId: string): Promise<void> => {
     await prisma.delivery.delete({
       where: { id: deliveryId },
     });
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to delete delivery");
   }
 };
@@ -279,7 +279,7 @@ export const getDeliveriesByStatus = async (
     });
 
     return deliveries;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get deliveries by status");
   }
 };
@@ -295,7 +295,7 @@ export const getDeliveryStats = async () => {
     });
 
     return stats;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get delivery statistics");
   }
 };
@@ -324,7 +324,7 @@ export const getPendingDeliveries = async (): Promise<Delivery[]> => {
     });
 
     return deliveries;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get pending deliveries");
   }
 };

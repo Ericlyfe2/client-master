@@ -137,7 +137,15 @@ export default function DeliveryPage() {
                     </p>
                   </div>
                   <div className="p-4">
-                    <DeliveryMap location={deliveryData?.location} />
+                    <DeliveryMap deliveryId={anonId} dropPoint={deliveryData?.dropPoint} />
+                    <a
+                      href={`/deliver/${anonId}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 inline-block text-xs text-orange-700 dark:text-orange-300 underline"
+                    >
+                      Courier: open GPS sharing for this delivery →
+                    </a>
                   </div>
                 </div>
 

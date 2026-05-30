@@ -30,7 +30,7 @@ const mockUser = {
   email: "test@example.com",
   firstName: "John",
   lastName: "Doe",
-  role: "CLIENT",
+  role: "CLIENT" as const,
   organization: "Test University",
   pharmacyName: null,
   licenseNumber: null,

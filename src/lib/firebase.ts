@@ -8,15 +8,18 @@ import {
 import { getRemoteConfig } from "firebase/remote-config";
 import { setLogLevel } from "firebase/app";
 
-// Firebase configuration
+// Firebase configuration (values from env so they can differ per environment).
+// The keys are prefixed NEXT_PUBLIC_ so Next.js inlines them at build time for
+// the browser bundle. API key alone is not a secret — it is restricted by
+// Firebase App Check + Firestore Security Rules + Cloud Function enforcement.
 const firebaseConfig = {
-  apiKey: "AIzaSyCeDbAQUHkfZgXXVp_wIx5qMo154QFsqzc",
-  authDomain: "safemeds-a8faf.firebaseapp.com",
-  projectId: "safemeds-a8faf",
-  storageBucket: "safemeds-a8faf.firebasestorage.app",
-  messagingSenderId: "853443893707",
-  appId: "1:853443893707:web:055d30ebe1df817c1c3e4e",
-  measurementId: "G-YZ067WQHJX",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

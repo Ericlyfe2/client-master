@@ -243,7 +243,7 @@ export const updateUserProfile = async (
     // Return user profile without password
     const { passwordHash: _, ...userProfile } = user;
     return userProfile;
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to update user profile");
   }
 };
@@ -304,7 +304,7 @@ export const verifyEmail = async (userId: string): Promise<void> => {
       where: { id: userId },
       data: { isVerified: true },
     });
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to verify email");
   }
 };
@@ -315,7 +315,7 @@ export const deleteUser = async (userId: string): Promise<void> => {
     await prisma.user.delete({
       where: { id: userId },
     });
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to delete user account");
   }
 };
@@ -329,7 +329,7 @@ export const getAllUsers = async (): Promise<UserProfile[]> => {
 
     // Return user profiles without passwords
     return users.map(({ passwordHash: _, ...user }) => user);
-  } catch (error: unknown) {
+  } catch (_error: unknown) {
     throw new Error("Failed to get users");
   }
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
@@ -31,11 +31,7 @@ export default function OrdersPage() {
     averageOrderValue: 0,
   });
 
-  useEffect(() => {
-    fetchOrders();
-  }, [filters]);
-
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
     try {
       setLoading(true);
       const response = await getOrders(filters);
@@ -47,7 +43,11 @@ export default function OrdersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
+
+  useEffect(() => {
+    fetchOrders();
+  }, [fetchOrders]);
 
   const handleFilterChange = (key: string, value: string | number) => {
     setFilters(prev => ({

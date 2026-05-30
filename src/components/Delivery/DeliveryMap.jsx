@@ -1,189 +1,118 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { watchLocation } from "@/lib/locationTracking";
 
-const DeliveryMap = ({ deliveryLocation, dropPoint, status }) => {
-  const [currentLocation, setCurrentLocation] = useState(deliveryLocation);
-  const [isUpdating, setIsUpdating] = useState(false);
+// Straight-line distance (metres) between two coords — Haversine.
+const haversine = (a, b) => {
+  const R = 6371000;
+  const toRad = (d) => (d * Math.PI) / 180;
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const lat1 = toRad(a.lat);
+  const lat2 = toRad(b.lat);
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+};
 
-  // Simulate real-time location updates
+// Shows the courier's REAL live position (streamed to Firestore by the courier
+// device) on an OpenStreetMap embed — no Google Maps API key required.
+// ETA comes from OSRM's free routing API (real road distance + duration).
+const DeliveryMap = ({ deliveryId, dropPoint, dropCoords }) => {
+  // Drop-point coordinates. Defaults to KNUST main campus; pass `dropCoords`
+  // per delivery once drop points carry real lat/lng.
+  const drop = dropCoords || { lat: 6.6745, lng: -1.5716 };
+
+  const [location, setLocation] = useState(null);
+  const [staleSeconds, setStaleSeconds] = useState(0);
+  const [eta, setEta] = useState(null); // { distanceM, durationS, source }
+
+  // Subscribe to the live courier location for this delivery.
   useEffect(() => {
-    if (status === "in_transit" || status === "out_for_delivery") {
-      const interval = setInterval(() => {
-        setIsUpdating(true);
-        // Simulate movement
-        setCurrentLocation((prev) => ({
-          ...prev,
-          lat: prev.lat + (Math.random() - 0.5) * 0.001,
-          lng: prev.lng + (Math.random() - 0.5) * 0.001,
-        }));
-        setTimeout(() => setIsUpdating(false), 500);
-      }, 5000);
+    if (!deliveryId) return;
+    const unsubscribe = watchLocation(deliveryId, (loc) => setLocation(loc));
+    return () => unsubscribe();
+  }, [deliveryId]);
 
-      return () => clearInterval(interval);
-    }
-  }, [status]);
+  // Track how long since the last fix (to show "live" vs "last seen").
+  useEffect(() => {
+    if (!location?.updatedAt) return;
+    const tick = () =>
+      setStaleSeconds(Math.floor((Date.now() - location.updatedAt) / 1000));
+    tick();
+    const interval = setInterval(tick, 1000);
+    return () => clearInterval(interval);
+  }, [location?.updatedAt]);
 
-  // Mock map coordinates for demo
-  const mapCenter = { lat: 40.7128, lng: -74.006 };
-  const dropPointCoords = { lat: 40.7135, lng: -74.0065 };
+  const hasFix = location && typeof location.lat === "number";
+  const isLive = hasFix && location.active && staleSeconds < 30;
 
-  const getStatusColor = () => {
-    switch (status) {
-      case "delivered":
-        return "text-green-600";
-      case "out_for_delivery":
-        return "text-orange-600";
-      case "in_transit":
-        return "text-blue-600";
-      default:
-        return "text-gray-600";
-    }
-  };
-
-  const getStatusIcon = () => {
-    switch (status) {
-      case "delivered":
-        return "✅";
-      case "out_for_delivery":
-        return "🚚";
-      case "in_transit":
-        return "📦";
-      case "packaged":
-        return "📋";
-      case "processing":
-        return "⚙️";
-      default:
-        return "📝";
-    }
-  };
+  // Small bounding box around the courier for the OSM embed.
+  const osmSrc = hasFix
+    ? `https://www.openstreetmap.org/export/embed.html?bbox=${
+        location.lng - 0.004
+      }%2C${location.lat - 0.003}%2C${location.lng + 0.004}%2C${
+        location.lat + 0.003
+      }&layer=mapnik&marker=${location.lat}%2C${location.lng}`
+    : null;
 
   return (
-    <div className="relative h-full bg-gradient-to-br from-blue-50 to-green-50">
-      {/* Map Container */}
-      <div className="relative h-full overflow-hidden">
-        {/* Background Map Pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-white to-green-100">
-          {/* Grid Pattern */}
-          <div className="absolute inset-0 opacity-20">
-            <div
-              className="h-full w-full"
-              style={{
-                backgroundImage: `
-                linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)
-              `,
-                backgroundSize: "20px 20px",
-              }}
-            />
-          </div>
+    <div className="relative h-72 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900">
+      {hasFix ? (
+        <iframe
+          title="Live delivery location"
+          src={osmSrc}
+          className="absolute inset-0 w-full h-full"
+          loading="lazy"
+        />
+      ) : (
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+          <span className="text-4xl mb-3">🛰️</span>
+          <p className="font-semibold text-gray-800 dark:text-gray-100">
+            Waiting for courier location
+          </p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 max-w-xs">
+            The map goes live once the courier starts sharing their GPS for this delivery.
+          </p>
         </div>
+      )}
 
-        {/* Drop Point Marker */}
-        <div
-          className="absolute transform -translate-x-1/2 -translate-y-1/2"
-          style={{
-            left: "70%",
-            top: "30%",
-          }}
-        >
-          <div className="bg-green-600 text-white rounded-full p-3 shadow-lg border-2 border-white">
-            📍
-          </div>
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white px-2 py-1 rounded text-xs shadow-md whitespace-nowrap">
-            Drop Point
-          </div>
-        </div>
-
-        {/* Delivery Vehicle Marker */}
-        {currentLocation &&
-          (status === "in_transit" || status === "out_for_delivery") && (
-            <div
-              className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-1000 ${
-                isUpdating ? "scale-110" : "scale-100"
-              }`}
-              style={{
-                left: `${50 + (currentLocation.lat - mapCenter.lat) * 10000}%`,
-                top: `${50 + (currentLocation.lng - mapCenter.lng) * 10000}%`,
-              }}
-            >
-              <div className="bg-orange-600 text-white rounded-full p-3 shadow-lg border-2 border-white animate-pulse">
-                🚚
-              </div>
-              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white px-2 py-1 rounded text-xs shadow-md whitespace-nowrap">
-                Delivery Vehicle
-              </div>
-            </div>
-          )}
-
-        {/* Route Line */}
-        {status === "in_transit" || status === "out_for_delivery" ? (
-          <svg className="absolute inset-0 w-full h-full pointer-events-none">
-            <line
-              x1="50%"
-              y1="50%"
-              x2="70%"
-              y2="30%"
-              stroke="rgba(59, 130, 246, 0.5)"
-              strokeWidth="3"
-              strokeDasharray="5,5"
-              className="animate-pulse"
-            />
-          </svg>
-        ) : null}
-
-        {/* Status Overlay */}
-        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">{getStatusIcon()}</span>
-            <div>
-              <p className={`font-semibold ${getStatusColor()}`}>
-                {status?.replace("_", " ").toUpperCase() || "ORDER CONFIRMED"}
-              </p>
-              <p className="text-xs text-gray-500">
-                {status === "in_transit" || status === "out_for_delivery"
-                  ? "Live tracking active"
-                  : "Tracking will begin soon"}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Location Info */}
-        <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-semibold text-gray-800">Drop Point</p>
-              <p className="text-sm text-gray-600">
-                {dropPoint || "Campus Library - North Entrance"}
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="text-xs text-gray-500">Estimated Arrival</p>
-              <p className="font-semibold text-green-600">2:30 PM</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Map Controls */}
-        <div className="absolute top-4 right-4 space-y-2">
-          <button className="bg-white/90 backdrop-blur-sm rounded-lg p-2 shadow-lg hover:bg-white transition-colors">
-            <span className="text-lg">🔍</span>
-          </button>
-          <button className="bg-white/90 backdrop-blur-sm rounded-lg p-2 shadow-lg hover:bg-white transition-colors">
-            <span className="text-lg">📍</span>
-          </button>
-        </div>
-
-        {/* Loading Indicator */}
-        {isUpdating && (
-          <div className="absolute inset-0 bg-blue-500/10 flex items-center justify-center">
-            <div className="bg-white rounded-lg px-3 py-1 text-sm text-blue-600">
-              Updating location...
-            </div>
-          </div>
-        )}
+      {/* Live status badge */}
+      <div className="absolute top-3 left-3 z-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg px-3 py-1.5 shadow-lg flex items-center gap-2">
+        <span
+          className={`w-2.5 h-2.5 rounded-full ${
+            isLive ? "bg-green-500 animate-pulse" : "bg-gray-400"
+          }`}
+        />
+        <span className="text-xs font-semibold text-gray-800 dark:text-gray-100">
+          {isLive
+            ? "LIVE"
+            : hasFix
+            ? `Last seen ${staleSeconds}s ago`
+            : "Offline"}
+        </span>
       </div>
+
+      {/* Precision + coordinates readout */}
+      {hasFix && (
+        <div className="absolute bottom-3 left-3 right-3 z-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg text-xs">
+          <div className="flex items-center justify-between gap-3">
+            <span className="font-mono text-gray-700 dark:text-gray-300">
+              {location.lat.toFixed(5)}, {location.lng.toFixed(5)}
+            </span>
+            <span className="text-gray-500 dark:text-gray-400">
+              {location.accuracy != null
+                ? `±${Math.round(location.accuracy)} m`
+                : "accuracy n/a"}
+            </span>
+          </div>
+          <div className="text-gray-500 dark:text-gray-400 mt-0.5">
+            Drop point: {dropPoint || "Campus Library - North Entrance"}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

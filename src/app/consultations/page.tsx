@@ -27,21 +27,20 @@ export default function ConsultationsPage() {
   });
 
   useEffect(() => {
+    const fetchConsultations = async () => {
+      try {
+        setLoading(true);
+        const response = await getConsultations(filters);
+        setConsultations(response.consultations);
+        setPagination(response.pagination);
+      } catch (error) {
+        console.error("Error fetching consultations:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchConsultations();
   }, [filters]);
-
-  const fetchConsultations = async () => {
-    try {
-      setLoading(true);
-      const response = await getConsultations(filters);
-      setConsultations(response.consultations);
-      setPagination(response.pagination);
-    } catch (error) {
-      console.error("Error fetching consultations:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleFilterChange = (key: keyof ConsultationFilters, value: string | number) => {
     setFilters(prev => ({

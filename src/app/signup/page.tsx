@@ -693,7 +693,20 @@ export default function SignupPage() {
 
           {isSuccess && (
             <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400 px-4 py-3 rounded-lg">
-              ✅ Account created successfully! Redirecting to your dashboard...
+              <p>✅ Account created successfully! Redirecting to your dashboard...</p>
+              {userType === "PHARMACY" && (
+                <p className="mt-2 text-sm">
+                  After logging in, please{" "}
+                  <button
+                    type="button"
+                    onClick={() => router.push("/verify-license")}
+                    className="text-green-600 dark:text-green-300 underline font-medium hover:text-green-700 dark:hover:text-green-200 cursor-pointer"
+                  >
+                    verify your pharmacy license
+                  </button>{" "}
+                  to start providing consultations.
+                </p>
+              )}
             </div>
           )}
 

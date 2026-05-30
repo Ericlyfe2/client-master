@@ -8,6 +8,15 @@ const Navbar = () => {
         SafeMeds
       </Link>
       <div className="space-x-4">
+        <Link href="/about" className="hover:text-blue-500">
+          About
+        </Link>
+        <Link href="/contact" className="hover:text-blue-500">
+          Contact
+        </Link>
+        <Link href="/legal" className="hover:text-blue-500">
+          Legal
+        </Link>
         <Link href="/consult" className="hover:text-blue-500">
           Consult
         </Link>

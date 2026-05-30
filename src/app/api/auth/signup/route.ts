@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { hashPassword } from "@/utils/password";
 import { prisma } from "@/lib/prisma";
+import { LEGAL_VERSION } from "@/lib/legal";
 
 // Import the license verification function from the dedicated API
 async function verifyPharmacistLicense(
@@ -46,6 +47,8 @@ export async function POST(request: NextRequest) {
       city,
       state,
       zipCode,
+      termsAccepted,
+      termsVersion,
     } = body;
 
     console.log("🚀 Signup request received:", {
@@ -63,6 +66,17 @@ export async function POST(request: NextRequest) {
       console.error("❌ Missing required fields:", { username: !!username, email: !!email, password: !!password, firstName: !!firstName, lastName: !!lastName, role: !!role });
       return NextResponse.json(
         { error: "All required fields must be provided" },
+        { status: 400 }
+      );
+    }
+
+    // Legal consent is mandatory — record acceptance server-side, never trust UI alone
+    if (!termsAccepted) {
+      return NextResponse.json(
+        {
+          error:
+            "You must accept the Terms of Service, Privacy Policy, and HIPAA Statement to create an account",
+        },
         { status: 400 }
       );
     }
@@ -148,6 +162,8 @@ export async function POST(request: NextRequest) {
         state: state || null,
         zipCode: zipCode || null,
         isVerified,
+        termsAcceptedAt: new Date(),
+        termsVersion: termsVersion || LEGAL_VERSION,
       },
       select: {
         id: true,

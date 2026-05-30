@@ -76,17 +76,17 @@ export default function AnonymousConsultationPage() {
 
   if (step === 2) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-purple-100">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
         <Navigation title="Anonymous Consultation" userRole="client" />
         
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-2xl shadow-lg p-8 text-center"
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 text-center"
           >
             <div className="text-6xl mb-6">✅</div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Consultation Submitted Successfully!
             </h1>
             <p className="text-lg text-gray-600 mb-8">
@@ -138,21 +138,21 @@ export default function AnonymousConsultationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-purple-100">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-purple-100 dark:from-gray-900 dark:to-gray-800">
       <Navigation title="Anonymous Consultation" userRole="client" />
       
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl shadow-lg p-8"
+          className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8"
         >
           <div className="text-center mb-8">
             <div className="text-6xl mb-4">🔒</div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               Anonymous Health Consultation
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 dark:text-gray-300">
               Submit your health inquiry anonymously. A licensed pharmacist will review and respond to your concerns.
             </p>
           </div>
@@ -160,7 +160,7 @@ export default function AnonymousConsultationPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Consultation Type */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                 Consultation Type *
               </label>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -178,11 +178,11 @@ export default function AnonymousConsultationPage() {
                     className={`p-4 rounded-xl border-2 transition-all ${
                       formData.type === type.value
                         ? "border-purple-500 bg-purple-50"
-                        : "border-gray-200 hover:border-purple-300"
+                        : "border-gray-200 dark:border-gray-600 hover:border-purple-300"
                     }`}
                   >
                     <div className="text-2xl mb-2">{type.icon}</div>
-                    <div className="font-medium text-gray-900">{type.label}</div>
+                    <div className="font-medium text-gray-900 dark:text-white">{type.label}</div>
                   </button>
                 ))}
               </div>
@@ -190,7 +190,7 @@ export default function AnonymousConsultationPage() {
 
             {/* Description */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Describe your health concern *
               </label>
               <textarea
@@ -198,7 +198,7 @@ export default function AnonymousConsultationPage() {
                 value={formData.description}
                 onChange={handleInputChange}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 placeholder="Please describe your symptoms, concerns, or questions in detail..."
                 required
               />
@@ -206,7 +206,7 @@ export default function AnonymousConsultationPage() {
 
             {/* Symptoms */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Current Symptoms
               </label>
               <textarea
@@ -214,14 +214,14 @@ export default function AnonymousConsultationPage() {
                 value={formData.symptoms}
                 onChange={handleInputChange}
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 placeholder="List any symptoms you're experiencing..."
               />
             </div>
 
             {/* Current Medications */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Current Medications
               </label>
               <textarea
@@ -229,14 +229,14 @@ export default function AnonymousConsultationPage() {
                 value={formData.medications}
                 onChange={handleInputChange}
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 placeholder="List any medications you're currently taking..."
               />
             </div>
 
             {/* Allergies */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Known Allergies
               </label>
               <textarea
@@ -244,7 +244,7 @@ export default function AnonymousConsultationPage() {
                 value={formData.allergies}
                 onChange={handleInputChange}
                 rows={2}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 placeholder="List any known allergies to medications or substances..."
               />
             </div>
@@ -252,7 +252,7 @@ export default function AnonymousConsultationPage() {
             {/* Age and Gender */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Age
                 </label>
                 <input
@@ -262,19 +262,19 @@ export default function AnonymousConsultationPage() {
                   onChange={handleInputChange}
                   min="13"
                   max="100"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="Your age"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Gender
                 </label>
                 <select
                   name="gender"
                   value={formData.gender}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">Select gender</option>
                   <option value="male">Male</option>

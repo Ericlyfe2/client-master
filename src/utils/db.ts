@@ -4,6 +4,8 @@ export interface User {
   id: string;
   username: string;
   email?: string;
+  firstName: string;
+  lastName: string;
   role: "ADMIN" | "CLIENT" | "PHARMACY";
   name?: string;
   passwordHash?: string;

@@ -79,13 +79,13 @@ export default function ClientDashboard() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-white rounded-xl shadow-lg p-6 border border-blue-200 hover:shadow-xl transition-all duration-300"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-blue-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
             >
               <div className="text-3xl mb-4">💬</div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                 Chat with Pharmacist
               </h3>
-              <p className="text-gray-600 text-sm mb-4">
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                 Get instant consultation and medication advice from licensed
                 pharmacists.
               </p>
@@ -102,13 +102,13 @@ export default function ClientDashboard() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-white rounded-xl shadow-lg p-6 border border-blue-200 hover:shadow-xl transition-all duration-300"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-blue-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
             >
               <div className="text-3xl mb-4">📦</div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                 Track Deliveries
               </h3>
-              <p className="text-gray-600 text-sm mb-4">
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                 Monitor your medication deliveries in real-time with live
                 tracking.
               </p>
@@ -125,13 +125,13 @@ export default function ClientDashboard() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-white rounded-xl shadow-lg p-6 border border-blue-200 hover:shadow-xl transition-all duration-300"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-blue-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
             >
               <div className="text-3xl mb-4">📋</div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                 Consultations
               </h3>
-              <p className="text-gray-600 text-sm mb-4">
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                 Schedule and manage your healthcare consultations with
                 specialists.
               </p>
@@ -148,58 +148,13 @@ export default function ClientDashboard() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-white rounded-xl shadow-lg p-6 border border-blue-200 hover:shadow-xl transition-all duration-300"
-            >
-              <div className="text-3xl mb-4">📊</div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                Analytics
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                View detailed analytics and reports about your healthcare
-                activities.
-              </p>
-              <button
-                onClick={() => router.push("/analytics")}
-                className="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors"
-              >
-                View Analytics
-              </button>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-              whileHover={{ scale: 1.02 }}
-              className="bg-white rounded-xl shadow-lg p-6 border border-blue-200 hover:shadow-xl transition-all duration-300"
-            >
-              <div className="text-3xl mb-4">👥</div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                User Management
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Manage team members and their access to the platform.
-              </p>
-              <button
-                onClick={() => router.push("/users")}
-                className="bg-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-600 transition-colors"
-              >
-                Manage Users
-              </button>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              whileHover={{ scale: 1.02 }}
-              className="bg-white rounded-xl shadow-lg p-6 border border-blue-200 hover:shadow-xl transition-all duration-300"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-blue-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
             >
               <div className="text-3xl mb-4">⚙️</div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
                 Settings
               </h3>
-              <p className="text-gray-600 text-sm mb-4">
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                 Configure your account settings and preferences.
               </p>
               <button

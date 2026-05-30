@@ -12,11 +12,11 @@ export interface CreateDeliveryData {
 
 export interface Delivery {
   id: string;
-  userId: string;
+  userId: string | null;
   status: DeliveryStatus;
   trackingNumber: string;
-  estimatedDelivery?: Date;
-  actualDelivery?: Date;
+  estimatedDelivery?: Date | null;
+  actualDelivery?: Date | null;
   address: string;
   city: string;
   state: string;
@@ -29,7 +29,7 @@ export interface Delivery {
     lastName: string;
     email: string;
     role: string;
-  };
+  } | null;
 }
 
 // Generate tracking number

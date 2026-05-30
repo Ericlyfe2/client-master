@@ -34,7 +34,7 @@ export default function SignOutPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -48,10 +48,10 @@ export default function SignOutPage() {
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                 className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full mx-auto mb-6"
               />
-              <h1 className="text-2xl font-bold text-gray-800 mb-4">
+              <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
                 Signing Out...
               </h1>
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
                 Goodbye, {user?.name || user?.username}! We&apos;re signing you
                 out securely.
               </p>
@@ -87,7 +87,7 @@ export default function SignOutPage() {
               <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl">⚠️</span>
               </div>
-              <h1 className="text-2xl font-bold text-gray-800 mb-4">
+              <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
                 Sign Out Error
               </h1>
               <p className="text-red-600 mb-6">{error}</p>
@@ -120,7 +120,7 @@ export default function SignOutPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-2xl font-bold text-gray-800 mb-4"
+                className="text-2xl font-bold text-gray-800 dark:text-white mb-4"
               >
                 Successfully Signed Out
               </motion.h1>
@@ -128,7 +128,7 @@ export default function SignOutPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-gray-600 mb-6"
+                className="text-gray-600 dark:text-gray-300 mb-6"
               >
                 You have been securely signed out of your SafeMeds account.
                 Redirecting you to the login page...

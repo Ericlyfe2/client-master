@@ -11,7 +11,7 @@ export interface CreateMessageData {
 export interface Message {
   id: string;
   chatId: string;
-  userId: string;
+  userId: string | null;
   content: string;
   type: MessageType;
   createdAt: Date;
@@ -21,7 +21,7 @@ export interface Message {
     lastName: string;
     email: string;
     role: string;
-  };
+  } | null;
 }
 
 // Create a new message

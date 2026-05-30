@@ -24,7 +24,7 @@ declare module "next-auth" {
 }
 
 export const { handlers, auth } = NextAuth({
-  secret: process.env.NEXTAUTH_SECRET || "your-secret-key-here-change-in-production",
+  secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
   providers: [
     Credentials({
@@ -37,47 +37,31 @@ export const { handlers, auth } = NextAuth({
         role: {},
       },
       authorize: async (credentials) => {
-        console.log("🔐 NextAuth authorize called with credentials:", {
-          role: credentials?.role,
-          username: credentials?.username,
-          email: credentials?.email,
-          hasPassword: !!credentials?.password,
-          hasLicense: !!credentials?.licenseNumber
-        });
+        if (process.env.NODE_ENV === "development") {
+          console.log("NextAuth authorize called with credentials:", {
+            role: credentials?.role,
+            username: credentials?.username,
+            email: credentials?.email,
+            hasPassword: !!credentials?.password,
+            hasLicense: !!credentials?.licenseNumber
+          });
+        }
 
         // Check if credentials exist
         if (!credentials) {
-          console.error("❌ No credentials provided");
+          console.error("No credentials provided");
           throw new Error("No credentials provided");
         }
 
         const { username, email, password, licenseNumber, role } = credentials;
 
-        // For development/testing, allow a simple login without database
-        if (
-          process.env.NODE_ENV === "development" &&
-          credentials.username === "admin" &&
-          credentials.password === "admin"
-        ) {
-          console.log("✅ Development admin login successful");
-          return {
-            id: "dev-admin",
-            username: "admin",
-            email: "admin@example.com",
-            role: "ADMIN",
-            name: "Development Admin",
-          };
-        }
-
         // Handle different login types
         if (role === "PHARMACY") {
-          console.log("💊 Processing pharmacist login");
+          if (process.env.NODE_ENV === "development") console.log("Processing pharmacist login");
           
           // Pharmacist login with email, password, and license number
           if (!email || !password || !licenseNumber) {
-            const errorMsg = "Email, password, and license number required for pharmacist login";
-            console.error("❌", errorMsg);
-            throw new Error(errorMsg);
+            throw new Error("Email, password, and license number required for pharmacist login");
           }
 
           const trimmedEmail = (email as string).trim();
@@ -95,45 +79,41 @@ export const { handlers, auth } = NextAuth({
             dbUser = await prisma.user.findFirst({
               where: { email: trimmedEmail },
             });
-            console.log("🔍 Database query result:", dbUser ? "User found" : "User not found");
+            if (process.env.NODE_ENV === "development") console.log("Database query result:", dbUser ? "User found" : "User not found");
           } catch (error) {
-            console.error("❌ Database connection error:", error);
+            console.error("Database connection error:", error);
             throw new Error("Database connection error");
           }
 
           if (!dbUser) {
-            console.error("❌ Pharmacist not found for email:", trimmedEmail);
             throw new Error("Pharmacist not found");
           }
 
           // Verify the user is a pharmacist
           if (dbUser.role !== "PHARMACY") {
-            console.error("❌ User is not a pharmacist, role:", dbUser.role);
             throw new Error("User is not a pharmacist");
           }
 
           // Check if user is verified
           if (dbUser.isVerified === false) {
-            console.error("❌ Pharmacist account not verified");
             throw new Error("Pharmacist account not verified");
           }
 
           // Verify password
-          console.log("🔑 Verifying password for pharmacist:", dbUser.email);
+          if (process.env.NODE_ENV === "development") console.log("Verifying password for pharmacist:", dbUser.email);
           const isValidPassword = await verifyPassword(
             trimmedPassword,
             dbUser.passwordHash!
           );
 
           if (!isValidPassword) {
-            console.error("❌ Invalid password for pharmacist:", dbUser.email);
             throw new Error("Invalid password");
           }
-          console.log("✅ Password verification successful for pharmacist:", dbUser.email);
+          if (process.env.NODE_ENV === "development") console.log("Password verification successful for pharmacist:", dbUser.email);
 
           // Check if license number matches stored license OR verify new license
           if (dbUser.licenseNumber !== trimmedLicenseNumber) {
-            console.log("🔍 License number doesn't match, verifying new license");
+            if (process.env.NODE_ENV === "development") console.log("License number doesn't match, verifying new license");
             try {
               const verificationResponse = await fetch(
                 `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/api/auth/verify-license`,
@@ -153,7 +133,7 @@ export const { handlers, auth } = NextAuth({
               const verificationData = await verificationResponse.json();
 
               if (!verificationData.isValid) {
-                console.error("❌ Invalid license number provided:", trimmedLicenseNumber);
+                console.error("Invalid license number provided:", trimmedLicenseNumber);
                 throw new Error("Invalid license number provided");
               }
 
@@ -163,9 +143,9 @@ export const { handlers, auth } = NextAuth({
                 data: { licenseNumber: trimmedLicenseNumber },
               });
 
-              console.log(`✅ Pharmacist ${trimmedEmail} updated license to ${trimmedLicenseNumber}`);
+              if (process.env.NODE_ENV === "development") console.log(`Pharmacist ${trimmedEmail} updated license to ${trimmedLicenseNumber}`);
             } catch (error) {
-              console.error("❌ License verification failed:", error);
+              console.error("License verification failed:", error);
               throw new Error("License verification failed");
             }
           }
@@ -176,17 +156,16 @@ export const { handlers, auth } = NextAuth({
             username: dbUser.username,
             email: dbUser.email,
             role: dbUser.role,
-            name: `${(dbUser as any).firstName} ${(dbUser as any).lastName}`,
+            name: `${dbUser.firstName} ${dbUser.lastName}`,
           };
 
-          console.log(`✅ Pharmacist ${user.email} authenticated successfully`);
+          if (process.env.NODE_ENV === "development") console.log(`Pharmacist ${user.email} authenticated successfully`);
           return user;
         } else {
-          console.log("👤 Processing regular user login (CLIENT/ADMIN)");
+          if (process.env.NODE_ENV === "development") console.log("Processing regular user login (CLIENT/ADMIN)");
           
           // Regular login with username and password (CLIENT or ADMIN)
           if (!username || !password) {
-            console.error("❌ Username and password required for regular login");
             throw new Error("Username and password required for regular login");
           }
 
@@ -220,36 +199,33 @@ export const { handlers, auth } = NextAuth({
           let dbUser;
           try {
             dbUser = await getUserByUsername(trimmedUsername);
-            console.log("🔍 Database query result:", dbUser ? "User found" : "User not found");
+            if (process.env.NODE_ENV === "development") console.log("Database query result:", dbUser ? "User found" : "User not found");
           } catch (error) {
-            console.error("❌ Database connection error:", error);
+            console.error("Database connection error:", error);
             throw new Error("Database connection error");
           }
 
           if (!dbUser) {
-            console.error("❌ User not found for username:", trimmedUsername);
             throw new Error("Invalid username or password");
           }
 
           // Check if user is verified (if required)
           if (dbUser.isVerified === false) {
-            console.error("❌ Account not verified for user:", trimmedUsername);
             throw new Error("Account not verified");
           }
 
           // Verify password
-          console.log("🔑 Verifying password for user:", dbUser.username);
+          if (process.env.NODE_ENV === "development") console.log("Verifying password for user:", dbUser.username);
           const isValidPassword = await verifyPassword(
             trimmedPassword,
             dbUser.passwordHash!
           );
 
           if (!isValidPassword) {
-            console.error("❌ Invalid password for user:", dbUser.username);
             throw new Error("Invalid username or password");
           }
           
-          console.log("✅ Password verification successful for user:", dbUser.username);
+          if (process.env.NODE_ENV === "development") console.log("Password verification successful for user:", dbUser.username);
 
           // Return user object without password hash
           const user = {
@@ -257,16 +233,16 @@ export const { handlers, auth } = NextAuth({
             username: dbUser.username,
             email: dbUser.email,
             role: dbUser.role,
-            name: dbUser.name || `${(dbUser as any).firstName} ${(dbUser as any).lastName}`,
+            name: dbUser.name || `${dbUser.firstName} ${dbUser.lastName}`,
           };
 
           // Validate returned user object
           if (!user.id || !user.username || !user.role) {
-            console.error("❌ Invalid user data returned:", user);
+            console.error("Invalid user data returned:", user);
             throw new Error("Invalid user data");
           }
 
-          console.log(`✅ User ${user.username} authenticated successfully`);
+          if (process.env.NODE_ENV === "development") console.log(`User ${user.username} authenticated successfully`);
           return user;
         }
       },

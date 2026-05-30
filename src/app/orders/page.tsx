@@ -116,7 +116,7 @@ export default function OrdersPage() {
 
   return (
     <ProtectedRoute allowedRoles={["PHARMACY", "ADMIN"]}>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800">
         <Navigation title="Order Management" userRole="pharmacy" />
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -126,10 +126,10 @@ export default function OrdersPage() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
               Order Management
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               Process and track medication orders and deliveries
             </p>
           </motion.div>
@@ -141,7 +141,7 @@ export default function OrdersPage() {
             transition={{ delay: 0.1 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
           >
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -149,15 +149,15 @@ export default function OrdersPage() {
                   </div>
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-500">Total Orders</p>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Orders</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white">
                     {statistics.totalOrders}
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
@@ -165,15 +165,15 @@ export default function OrdersPage() {
                   </div>
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-500">Total Revenue</p>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Revenue</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white">
                     {formatCurrency(statistics.totalRevenue)}
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
@@ -181,8 +181,8 @@ export default function OrdersPage() {
                   </div>
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-500">Average Order Value</p>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Average Order Value</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white">
                     {formatCurrency(statistics.averageOrderValue)}
                   </p>
                 </div>
@@ -195,17 +195,17 @@ export default function OrdersPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-xl shadow-lg p-6 mb-8"
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8"
           >
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Order Status
                 </label>
                 <select
                   value={filters.status}
                   onChange={(e) => handleFilterChange("status", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">All Statuses</option>
                   <option value="PENDING">Pending</option>
@@ -219,13 +219,13 @@ export default function OrdersPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Payment Status
                 </label>
                 <select
                   value={filters.paymentStatus}
                   onChange={(e) => handleFilterChange("paymentStatus", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">All Payment Statuses</option>
                   <option value="PENDING">Pending</option>
@@ -236,13 +236,13 @@ export default function OrdersPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Items per page
                 </label>
                 <select
                   value={filters.limit}
                   onChange={(e) => handleFilterChange("limit", parseInt(e.target.value))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value={20}>20</option>
                   <option value={50}>50</option>
@@ -266,20 +266,20 @@ export default function OrdersPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white rounded-xl shadow-lg overflow-hidden"
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden"
           >
             {loading ? (
               <div className="p-8 text-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
-                <p className="mt-4 text-gray-600">Loading orders...</p>
+                <p className="mt-4 text-gray-600 dark:text-gray-400">Loading orders...</p>
               </div>
             ) : orders.length === 0 ? (
               <div className="p-8 text-center">
                 <div className="text-4xl mb-4">📦</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                   No orders found
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400">
                   {filters.status || filters.paymentStatus
                     ? "Try adjusting your filters"
                     : "No orders have been placed yet"}
@@ -288,8 +288,8 @@ export default function OrdersPage() {
             ) : (
               <>
                 <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+                  <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead className="bg-gray-50 dark:bg-gray-700/50">
                       <tr>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Order Details
@@ -317,35 +317,35 @@ export default function OrdersPage() {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                       {orders.map((order) => (
                         <motion.tr
                           key={order.id}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           whileHover={{ backgroundColor: "#f9fafb" }}
-                          className="hover:bg-gray-50"
+                          className="hover:bg-gray-50 dark:hover:bg-gray-700/50"
                         >
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div>
-                              <div className="text-sm font-medium text-gray-900">
+                              <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
                                 {order.orderNumber}
                               </div>
-                              <div className="text-sm text-gray-500">
+                              <div className="text-sm text-gray-500 dark:text-gray-400">
                                 {order.isAnonymous ? "Anonymous Order" : "Regular Order"}
                               </div>
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div>
-                              <div className="text-sm font-medium text-gray-900">
+                              <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
                                 {order.isAnonymous
                                   ? "Anonymous Patient"
                                   : order.user
                                   ? `${order.user.firstName} ${order.user.lastName}`
                                   : "Unknown"}
                               </div>
-                              <div className="text-sm text-gray-500">
+                              <div className="text-sm text-gray-500 dark:text-gray-400">
                                 {order.isAnonymous
                                   ? `ID: ${order.anonymousId}`
                                   : order.user?.email}
@@ -355,22 +355,22 @@ export default function OrdersPage() {
                           <td className="px-6 py-4 whitespace-nowrap">
                             {order.prescription?.medication ? (
                               <div>
-                                <div className="text-sm font-medium text-gray-900">
+                                <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
                                   {order.prescription.medication.name}
                                 </div>
-                                <div className="text-sm text-gray-500">
+                                <div className="text-sm text-gray-500 dark:text-gray-400">
                                   {order.prescription.medication.strength} - {order.prescription.medication.dosageForm}
                                 </div>
-                                <div className="text-sm text-gray-500">
+                                <div className="text-sm text-gray-500 dark:text-gray-400">
                                   Qty: {order.prescription.quantity}
                                 </div>
                               </div>
                             ) : (
-                              <span className="text-sm text-gray-500">No prescription</span>
+                              <span className="text-sm text-gray-500 dark:text-gray-400">No prescription</span>
                             )}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm font-semibold text-gray-900">
+                            <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                               {formatCurrency(order.totalAmount)}
                             </div>
                           </td>
@@ -384,7 +384,7 @@ export default function OrdersPage() {
                               {order.paymentStatus}
                             </span>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                             {formatDate(order.createdAt)}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -396,7 +396,7 @@ export default function OrdersPage() {
                             </button>
                             {order.delivery && (
                               <button
-                                onClick={() => router.push(`/delivery/${order.delivery.id}`)}
+                                onClick={() => order.delivery && router.push(`/delivery/${order.delivery.id}`)}
                                 className="text-green-600 hover:text-green-900"
                               >
                                 Track Delivery

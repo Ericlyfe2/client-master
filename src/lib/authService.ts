@@ -29,14 +29,14 @@ export interface UserProfile {
   firstName: string;
   lastName: string;
   role: UserRole;
-  organization?: string;
-  pharmacyName?: string;
-  licenseNumber?: string;
-  phone?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  zipCode?: string;
+  organization: string | null;
+  pharmacyName: string | null;
+  licenseNumber: string | null;
+  phone: string | null;
+  address: string | null;
+  city: string | null;
+  state: string | null;
+  zipCode: string | null;
   isVerified: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -113,8 +113,9 @@ export const signUp = async (data: SignUpData): Promise<UserProfile> => {
     // Create user in database
     const user = await prisma.user.create({
       data: {
+        username: email.toLowerCase().split("@")[0],
         email: email.toLowerCase(),
-        password: hashedPassword,
+        passwordHash: hashedPassword,
         firstName: profileData.firstName.trim(),
         lastName: profileData.lastName.trim(),
         role: profileData.role,
@@ -131,7 +132,7 @@ export const signUp = async (data: SignUpData): Promise<UserProfile> => {
     });
 
     // Return user profile without password
-    const { password: _, ...userProfile } = user;
+    const { passwordHash: _, ...userProfile } = user;
     return userProfile;
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -166,13 +167,13 @@ export const signIn = async (data: SignInData): Promise<UserProfile> => {
     }
 
     // Verify password
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
     if (!isPasswordValid) {
       throw new Error("Incorrect password");
     }
 
     // Return user profile without password
-    const { password: _, ...userProfile } = user;
+    const { passwordHash: _, ...userProfile } = user;
     return userProfile;
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -196,7 +197,7 @@ export const getUserProfile = async (
     }
 
     // Return user profile without password
-    const { password: _, ...userProfile } = user;
+    const { passwordHash: _, ...userProfile } = user;
     return userProfile;
   } catch (error: unknown) {
     console.error("Error getting user profile:", error);
@@ -218,7 +219,7 @@ export const getUserProfileByEmail = async (
     }
 
     // Return user profile without password
-    const { password: _, ...userProfile } = user;
+    const { passwordHash: _, ...userProfile } = user;
     return userProfile;
   } catch (error: unknown) {
     console.error("Error getting user profile by email:", error);
@@ -240,7 +241,7 @@ export const updateUserProfile = async (
     });
 
     // Return user profile without password
-    const { password: _, ...userProfile } = user;
+    const { passwordHash: _, ...userProfile } = user;
     return userProfile;
   } catch (error: unknown) {
     throw new Error("Failed to update user profile");
@@ -266,7 +267,7 @@ export const changePassword = async (
     // Verify current password
     const isCurrentPasswordValid = await bcrypt.compare(
       currentPassword,
-      user.password
+      user.passwordHash
     );
     if (!isCurrentPasswordValid) {
       throw new Error("Current password is incorrect");
@@ -286,7 +287,7 @@ export const changePassword = async (
     // Update password
     await prisma.user.update({
       where: { id: userId },
-      data: { password: hashedNewPassword },
+      data: { passwordHash: hashedNewPassword },
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -327,7 +328,7 @@ export const getAllUsers = async (): Promise<UserProfile[]> => {
     });
 
     // Return user profiles without passwords
-    return users.map(({ password: _, ...user }) => user);
+    return users.map(({ passwordHash: _, ...user }) => user);
   } catch (error: unknown) {
     throw new Error("Failed to get users");
   }

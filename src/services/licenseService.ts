@@ -41,13 +41,14 @@ export const verifyLicense = async (
     });
 
     return response.data;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("License verification error:", error);
 
-    if (error.response?.data) {
+    const err = error as { response?: { data?: { error?: string } } };
+    if (err.response?.data) {
       return {
         isValid: false,
-        error: error.response.data.error || "License verification failed",
+        error: err.response.data.error || "License verification failed",
       };
     }
 
@@ -76,14 +77,15 @@ export const checkLicenseAvailability = async (
 
     const response = await axios.get(`/api/auth/verify-license?${params}`);
     return response.data;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("License availability check error:", error);
 
-    if (error.response?.data) {
+    const err = error as { response?: { data?: { error?: string } } };
+    if (err.response?.data) {
       return {
         isValid: false,
         available: false,
-        error: error.response.data.error || "License check failed",
+        error: err.response.data.error || "License check failed",
       };
     }
 

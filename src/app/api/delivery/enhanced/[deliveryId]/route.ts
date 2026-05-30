@@ -7,21 +7,21 @@ const prisma = new PrismaClient();
 // GET - Fetch delivery details and tracking information
 export async function GET(
   request: NextRequest,
-  { params }: { params: { deliveryId: string } }
+  { params }: { params: Promise<{ deliveryId: string }> }
 ) {
   try {
+    const { deliveryId } = await params;
     const { searchParams } = new URL(request.url);
     const anonymousId = searchParams.get("anonymousId");
     const session = await auth();
 
-    // Check if user is authenticated or has anonymous access
     if (!session?.user && !anonymousId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const delivery = await prisma.delivery.findFirst({
       where: {
-        id: params.deliveryId,
+        id: deliveryId,
         OR: [
           { userId: session?.user?.id },
           { anonymousId: anonymousId || undefined },
@@ -86,9 +86,10 @@ export async function GET(
 // PUT - Update delivery status (pharmacy/admin only)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { deliveryId: string } }
+  { params }: { params: Promise<{ deliveryId: string }> }
 ) {
   try {
+    const { deliveryId } = await params;
     const session = await auth();
 
     if (!session?.user || !["ADMIN", "PHARMACY"].includes(session.user.role)) {
@@ -99,7 +100,7 @@ export async function PUT(
     const { status, estimatedDelivery, actualDelivery, notes } = body;
 
     const delivery = await prisma.delivery.findUnique({
-      where: { id: params.deliveryId },
+      where: { id: deliveryId },
     });
 
     if (!delivery) {
@@ -110,7 +111,7 @@ export async function PUT(
     }
 
     const updatedDelivery = await prisma.delivery.update({
-      where: { id: params.deliveryId },
+      where: { id: deliveryId },
       data: {
         status,
         estimatedDelivery: estimatedDelivery

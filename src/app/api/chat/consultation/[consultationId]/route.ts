@@ -7,14 +7,14 @@ const prisma = new PrismaClient();
 // GET - Fetch consultation chat messages
 export async function GET(
   request: NextRequest,
-  { params }: { params: { consultationId: string } }
+  { params }: { params: Promise<{ consultationId: string }> }
 ) {
   try {
+    const { consultationId } = await params;
     const { searchParams } = new URL(request.url);
     const anonymousId = searchParams.get("anonymousId");
     const session = await auth();
 
-    // Check if user is authenticated or has anonymous access
     if (!session?.user && !anonymousId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -22,7 +22,7 @@ export async function GET(
     // Find consultation
     const consultation = await prisma.consultation.findFirst({
       where: {
-        id: params.consultationId,
+        id: consultationId,
         OR: [
           { userId: session?.user?.id },
           { anonymousId: anonymousId || undefined },
@@ -66,11 +66,13 @@ export async function GET(
           data: { assignedPharmacistId: session.user.id },
         });
         consultation.assignedPharmacistId = session.user.id;
-        consultation.assignedPharmacist = {
-          id: session.user.id,
-          firstName: session.user.firstName,
-          lastName: session.user.lastName,
-        };
+        const pharmacistUser = await prisma.user.findUnique({
+          where: { id: session.user.id },
+          select: { id: true, firstName: true, lastName: true },
+        });
+        if (pharmacistUser) {
+          consultation.assignedPharmacist = pharmacistUser;
+        }
       } else if (consultation.assignedPharmacistId !== session.user.id) {
         return NextResponse.json({ error: "Access denied" }, { status: 403 });
       }
@@ -79,7 +81,7 @@ export async function GET(
     // Fetch messages
     const messages = await prisma.message.findMany({
       where: {
-        chatId: params.consultationId,
+        chatId: consultationId,
       },
       include: {
         user: {
@@ -110,14 +112,14 @@ export async function GET(
 // POST - Send message in consultation chat
 export async function POST(
   request: NextRequest,
-  { params }: { params: { consultationId: string } }
+  { params }: { params: Promise<{ consultationId: string }> }
 ) {
   try {
+    const { consultationId } = await params;
     const { searchParams } = new URL(request.url);
     const anonymousId = searchParams.get("anonymousId");
     const session = await auth();
 
-    // Check if user is authenticated or has anonymous access
     if (!session?.user && !anonymousId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -135,7 +137,7 @@ export async function POST(
     // Find consultation
     const consultation = await prisma.consultation.findFirst({
       where: {
-        id: params.consultationId,
+        id: consultationId,
         OR: [
           { userId: session?.user?.id },
           { anonymousId: anonymousId || undefined },
@@ -172,7 +174,7 @@ export async function POST(
     // Create message
     const message = await prisma.message.create({
       data: {
-        chatId: params.consultationId,
+        chatId: consultationId,
         userId: session?.user?.id,
         anonymousId: anonymousId || undefined,
         content: content.trim(),

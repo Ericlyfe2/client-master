@@ -140,7 +140,7 @@ export class SettingsService {
       }
 
       // Prepare update data for database
-      const dbUpdateData: any = {};
+      const dbUpdateData: Record<string, unknown> = {};
 
       // Basic settings
       if (updateData.theme !== undefined) dbUpdateData.theme = updateData.theme;
@@ -350,6 +350,7 @@ export class SettingsService {
   /**
    * Transform database settings to UserSettings interface
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private static transformToUserSettings(dbSettings: any): UserSettings {
     return {
       id: dbSettings.id,

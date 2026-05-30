@@ -22,8 +22,8 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 
-// Set log level for the Firebase app (for debugging)
-setLogLevel("debug"); // This is correct - it's for the Firebase app
+// Set log level for the Firebase app
+if (process.env.NODE_ENV === "development") setLogLevel("debug");
 
 // Initialize Remote Config
 export const remoteConfig = getRemoteConfig(app);

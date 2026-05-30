@@ -46,6 +46,7 @@ export default function SettingsPage() {
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
   const [activeTab, setActiveTab] = useState("privacy");
+  const tabIds = ["privacy", "delivery", "notifications", "security", "consultation", "appearance"] as const;
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
 
@@ -138,17 +139,17 @@ export default function SettingsPage() {
     }
   };
 
-  const updateSetting = (category, key, value) => {
+  const updateSetting = (category: keyof typeof settings, key: string, value: unknown) => {
     setSettings((prev) => ({
       ...prev,
       [category]: {
-        ...prev[category],
+        ...(prev[category] as Record<string, unknown>),
         [key]: value,
       },
     }));
   };
 
-  const updateDeliveryHours = (type, value) => {
+  const updateDeliveryHours = (type: string, value: string) => {
     setSettings((prev) => ({
       ...prev,
       delivery: {
@@ -161,7 +162,7 @@ export default function SettingsPage() {
     }));
   };
 
-  const addDropPoint = (newPoint) => {
+  const addDropPoint = (newPoint: string) => {
     if (newPoint.trim()) {
       setSettings((prev) => ({
         ...prev,
@@ -173,7 +174,7 @@ export default function SettingsPage() {
     }
   };
 
-  const removeDropPoint = (index) => {
+  const removeDropPoint = (index: number) => {
     setSettings((prev) => ({
       ...prev,
       delivery: {
@@ -205,7 +206,7 @@ export default function SettingsPage() {
     { id: "appearance", label: "Appearance", icon: Settings },
   ];
 
-  const SectionHeader = ({ icon: Icon, title, subtitle, color }) => (
+  const SectionHeader = ({ icon: Icon, title, subtitle, color }: { icon: React.ComponentType<{ className?: string }>; title: string; subtitle: string; color: string }) => (
     <div className={`bg-${color}-50 dark:bg-${color}-900/20 border border-${color}-200 dark:border-${color}-700 rounded-lg p-4`}>
       <div className="flex items-center gap-2 mb-2">
         <Icon />
@@ -215,7 +216,7 @@ export default function SettingsPage() {
     </div>
   );
 
-  const LabeledCheckbox = ({ label, checked, onChange }) => (
+  const LabeledCheckbox = ({ label, checked, onChange }: { label: string; checked: boolean; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }) => (
     <div className="flex items-center justify-between">
       <label className="text-sm font-medium text-gray-800 dark:text-gray-200">
         {label}
@@ -229,7 +230,7 @@ export default function SettingsPage() {
     </div>
   );
 
-  const SelectInput = ({ label, value, onChange, options }) => (
+  const SelectInput = ({ label, value, onChange, options }: { label: string; value: string; onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void; options: { value: string; label: string }[] }) => (
     <div>
       <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
         {label}
@@ -239,7 +240,7 @@ export default function SettingsPage() {
         onChange={onChange}
         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
       >
-        {options.map((opt) => (
+              {options.map((opt: { value: string; label: string }) => (
           <option key={opt.value} value={opt.value}>
             {opt.label}
           </option>
@@ -248,7 +249,7 @@ export default function SettingsPage() {
     </div>
   );
 
-  const TextInput = ({ label, value, onChange, placeholder, type = "text" }) => (
+  const TextInput = ({ label, value, onChange, placeholder, type = "text" }: { label: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; placeholder?: string; type?: string }) => (
     <div>
       <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
         {label}
@@ -693,16 +694,16 @@ export default function SettingsPage() {
               <div className="space-y-3">
                 <div>
                   <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">Font Size</label>
-                  <select className="w-full px-2 py-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+                  <select defaultValue="Medium" className="w-full px-2 py-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
                     <option>Small</option>
-                    <option selected>Medium</option>
+                    <option>Medium</option>
                     <option>Large</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-sm text-gray-600 dark:text-gray-400 mb-1">Font Family</label>
-                  <select className="w-full px-2 py-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
-                    <option selected>System Default</option>
+                  <select defaultValue="System Default" className="w-full px-2 py-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+                    <option>System Default</option>
                     <option>Inter</option>
                     <option>Roboto</option>
                     <option>Open Sans</option>
@@ -770,7 +771,7 @@ export default function SettingsPage() {
 
           <main className="flex-1">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-              {renderTabComponent[activeTab]()}
+              {renderTabComponent[activeTab as keyof typeof renderTabComponent]()}
 
               <div className="flex justify-end mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <button

@@ -5,6 +5,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import ThemeToggle from "@/components/Common/ThemeToggle";
+import { LEGAL_VERSION } from "@/lib/legal";
 
 interface FormData {
   username: string;
@@ -51,6 +52,7 @@ export default function SignupPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isEmailChecking, setIsEmailChecking] = useState(false);
   const [isLicenseChecking, setIsLicenseChecking] = useState(false);
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -179,6 +181,11 @@ export default function SignupPage() {
       }
     }
 
+    // Terms validation
+    if (!agreeToTerms) {
+      newErrors.agreeToTerms = "You must agree to the Terms of Service, Privacy Policy, and HIPAA Statement to proceed";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -230,6 +237,8 @@ export default function SignupPage() {
         city: formData.city,
         state: formData.state,
         zipCode: formData.zipCode,
+        termsAccepted: agreeToTerms,
+        termsVersion: LEGAL_VERSION,
       };
 
       // Comprehensive debugging logs
@@ -632,6 +641,56 @@ export default function SignupPage() {
             </div>
           </div>
 
+          <div className="flex items-start my-4">
+            <div className="flex items-center h-5">
+              <input
+                id="agreeToTerms"
+                name="agreeToTerms"
+                type="checkbox"
+                checked={agreeToTerms}
+                onChange={(e) => {
+                  setAgreeToTerms(e.target.checked);
+                  if (errors.agreeToTerms) {
+                    setErrors((prev) => ({ ...prev, agreeToTerms: "" }));
+                  }
+                }}
+                className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 cursor-pointer"
+              />
+            </div>
+            <div className="ml-3 text-sm">
+              <label htmlFor="agreeToTerms" className="text-gray-700 dark:text-gray-300 cursor-pointer">
+                I agree to the{" "}
+                <button
+                  type="button"
+                  onClick={() => router.push("/legal?tab=terms")}
+                  className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline font-medium cursor-pointer"
+                >
+                  Terms of Service
+                </button>
+                ,{" "}
+                <button
+                  type="button"
+                  onClick={() => router.push("/legal?tab=privacy")}
+                  className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline font-medium cursor-pointer"
+                >
+                  Privacy Policy
+                </button>
+                , and{" "}
+                <button
+                  type="button"
+                  onClick={() => router.push("/legal?tab=hipaa")}
+                  className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 underline font-medium cursor-pointer"
+                >
+                  HIPAA & Health Security Statement
+                </button>
+                .
+              </label>
+              {errors.agreeToTerms && (
+                <p className="text-red-500 text-xs mt-1">{errors.agreeToTerms}</p>
+              )}
+            </div>
+          </div>
+
           {isSuccess && (
             <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400 px-4 py-3 rounded-lg">
               ✅ Account created successfully! Redirecting to your dashboard...
@@ -646,8 +705,12 @@ export default function SignupPage() {
 
           <button
             type="submit"
-            disabled={isLoading || isEmailChecking || isLicenseChecking}
-            className="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isLoading || isEmailChecking || isLicenseChecking || !agreeToTerms}
+            className={`w-full py-3 rounded-lg font-semibold transition-colors ${
+              agreeToTerms
+                ? "bg-blue-500 text-white hover:bg-blue-600"
+                : "bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed"
+            } disabled:opacity-60`}
           >
             {isLoading ? "Creating account..." : "Create Account"}
           </button>
@@ -668,8 +731,21 @@ export default function SignupPage() {
         {/* Privacy Notice */}
         <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
           <p className="text-sm text-blue-700 dark:text-blue-300">
-            🔒 Your privacy is our priority. All consultations and data are
-            encrypted and protected.
+            🔒 Your privacy is our priority. All consultations and data are encrypted (AES-256). Read our{" "}
+            <button
+              onClick={() => router.push("/legal?tab=privacy")}
+              className="underline hover:text-blue-800 dark:hover:text-blue-200 font-semibold cursor-pointer"
+            >
+              Privacy Policy
+            </button>{" "}
+            and{" "}
+            <button
+              onClick={() => router.push("/legal?tab=hipaa")}
+              className="underline hover:text-blue-800 dark:hover:text-blue-200 font-semibold cursor-pointer"
+            >
+              HIPAA Statement
+            </button>
+            .
             {userType === "PHARMACY" &&
               " License verification ensures only qualified pharmacists can provide consultations."}
           </p>

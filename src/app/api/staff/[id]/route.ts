@@ -14,9 +14,10 @@ async function getUserIdFromSession(): Promise<string | null> {
 // GET endpoint to retrieve a specific staff member
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const userId = await getUserIdFromSession();
     
     if (!userId) {
@@ -26,7 +27,7 @@ export async function GET(
       );
     }
 
-    const staff = await StaffService.getStaffById(params.id);
+    const staff = await StaffService.getStaffById(id);
 
     return NextResponse.json(staff);
   } catch (error) {
@@ -47,9 +48,10 @@ export async function GET(
 // PUT endpoint to update a staff member
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const userId = await getUserIdFromSession();
     
     if (!userId) {
@@ -61,7 +63,7 @@ export async function PUT(
 
     const body: UpdateStaffData = await request.json();
 
-    const staff = await StaffService.updateStaff(params.id, body);
+    const staff = await StaffService.updateStaff(id, body);
 
     return NextResponse.json(staff);
   } catch (error) {
@@ -82,9 +84,10 @@ export async function PUT(
 // DELETE endpoint to deactivate a staff member
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const userId = await getUserIdFromSession();
     
     if (!userId) {
@@ -94,7 +97,7 @@ export async function DELETE(
       );
     }
 
-    await StaffService.deactivateStaff(params.id);
+    await StaffService.deactivateStaff(id);
 
     return NextResponse.json({ message: "Staff member deactivated successfully" });
   } catch (error) {

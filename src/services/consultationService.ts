@@ -235,7 +235,7 @@ export const sendConsultationMessage = async (
 // Anonymous consultation tracking
 export const getAnonymousConsultationStatus = async (
   sessionId: string
-): Promise<any | null> => {
+): Promise<Record<string, unknown> | null> => {
   try {
     const response = await axios.get(
       `/api/consultations/anonymous?sessionId=${sessionId}`

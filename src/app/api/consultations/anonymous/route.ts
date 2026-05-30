@@ -82,26 +82,6 @@ export async function GET(request: NextRequest) {
     // Find session
     const session = await prisma.anonymousSession.findUnique({
       where: { sessionId },
-      include: {
-        consultation: {
-          include: {
-            messages: {
-              orderBy: { createdAt: "desc" },
-              take: 5,
-            },
-            prescriptions: {
-              include: {
-                medication: true,
-                orders: {
-                  include: {
-                    delivery: true,
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
     });
 
     if (!session) {
@@ -113,12 +93,33 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Session expired" }, { status: 410 });
     }
 
+    // Fetch consultation with details separately
+    const consultation = await prisma.consultation.findUnique({
+      where: { id: session.consultationId! },
+      include: {
+        messages: {
+          orderBy: { createdAt: "desc" },
+          take: 5,
+        },
+        prescriptions: {
+          include: {
+            medication: true,
+            orders: {
+              include: {
+                delivery: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
     return NextResponse.json({
       session: {
         id: session.id,
         sessionId: session.sessionId,
         expiresAt: session.expiresAt,
-        consultation: session.consultation,
+        consultation,
       },
     });
   } catch (error) {

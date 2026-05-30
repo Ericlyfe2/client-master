@@ -9,10 +9,10 @@ export interface CreateConsultationData {
 
 export interface Consultation {
   id: string;
-  userId: string;
+  userId: string | null;
   type: string;
   status: ConsultationStatus;
-  description?: string;
+  description?: string | null;
   createdAt: Date;
   updatedAt: Date;
   user?: {
@@ -21,7 +21,7 @@ export interface Consultation {
     lastName: string;
     email: string;
     role: string;
-  };
+  } | null;
 }
 
 // Create a new consultation

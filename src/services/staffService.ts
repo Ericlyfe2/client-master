@@ -1,4 +1,5 @@
 import { PrismaClient } from "@/lib/prisma-client";
+import type { StaffPosition, ShiftStatus, TimeOffType, TimeOffStatus } from "@/lib/prisma-client";
 
 const prisma = new PrismaClient();
 
@@ -9,19 +10,19 @@ export interface StaffMember {
   position: string;
   department: string;
   hireDate: Date;
-  salary?: number;
+  salary: number | null;
   isActive: boolean;
-  emergencyContact?: string;
-  emergencyPhone?: string;
+  emergencyContact: string | null;
+  emergencyPhone: string | null;
   certifications: string[];
   specializations: string[];
-  notes?: string;
+  notes: string | null;
   user: {
     id: string;
     firstName: string;
     lastName: string;
     email: string;
-    phone?: string;
+    phone: string | null;
   };
   createdAt: Date;
   updatedAt: Date;
@@ -118,6 +119,7 @@ export interface CreateScheduleData {
   endTime: string;
   breakStart?: string;
   breakEnd?: string;
+  isActive?: boolean;
 }
 
 export interface CreateShiftData {
@@ -135,6 +137,21 @@ export interface CreateTimeOffRequestData {
   reason: string;
   type: string;
   notes?: string;
+}
+
+export interface StaffAvailability {
+  id: string;
+  employeeId: string;
+  name: string;
+  position: string;
+  department: string;
+  hasSchedule: boolean;
+  schedule: object | null;
+  hasShift: boolean;
+  shift: object | null;
+  hasTimeOff: boolean;
+  timeOff: object | null;
+  isAvailable: boolean;
 }
 
 export class StaffService {
@@ -165,7 +182,7 @@ export class StaffService {
         data: {
           userId: data.userId,
           employeeId: data.employeeId,
-          position: data.position as any,
+          position: data.position as StaffPosition,
           department: data.department,
           hireDate: data.hireDate,
           salary: data.salary,
@@ -265,7 +282,7 @@ export class StaffService {
       const staff = await prisma.staff.update({
         where: { id: staffId },
         data: {
-          position: data.position as any,
+          position: data.position as StaffPosition,
           department: data.department,
           salary: data.salary,
           isActive: data.isActive,
@@ -457,7 +474,7 @@ export class StaffService {
       const shift = await prisma.shift.update({
         where: { id: shiftId },
         data: {
-          status: status as any,
+          status: status as ShiftStatus,
           actualStartTime,
           actualEndTime,
         },
@@ -495,7 +512,7 @@ export class StaffService {
           startDate: data.startDate,
           endDate: data.endDate,
           reason: data.reason,
-          type: data.type as any,
+          type: data.type as TimeOffType,
           notes: data.notes,
         },
         include: {
@@ -529,7 +546,7 @@ export class StaffService {
       const timeOffRequests = await prisma.timeOffRequest.findMany({
         where: {
           ...(staffId && { staffId }),
-          ...(status && { status: status as any }),
+          ...(status && { status: status as TimeOffStatus }),
         },
         include: {
           staff: {
@@ -571,7 +588,7 @@ export class StaffService {
       const timeOffRequest = await prisma.timeOffRequest.update({
         where: { id: requestId },
         data: {
-          status: status as any,
+          status: status as TimeOffStatus,
           approvedBy,
           approvedAt: new Date(),
           notes,
@@ -602,7 +619,7 @@ export class StaffService {
   /**
    * Get staff availability for a date
    */
-  static async getStaffAvailability(date: Date): Promise<any[]> {
+  static async getStaffAvailability(date: Date): Promise<StaffAvailability[]> {
     try {
       const dayOfWeek = date.getDay();
       const dateString = date.toISOString().split('T')[0];

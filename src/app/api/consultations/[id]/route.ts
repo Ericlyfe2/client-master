@@ -7,9 +7,10 @@ const prisma = new PrismaClient();
 // GET - Fetch specific consultation
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -17,7 +18,7 @@ export async function GET(
     }
 
     const consultation = await prisma.consultation.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         user: {
           select: {
@@ -66,9 +67,10 @@ export async function GET(
 // PUT - Update consultation (assign pharmacist, update status, etc.)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user) {
@@ -87,7 +89,7 @@ export async function PUT(
 
     // Check if consultation exists
     const existingConsultation = await prisma.consultation.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existingConsultation) {
@@ -99,7 +101,7 @@ export async function PUT(
 
     // Update consultation
     const updatedConsultation = await prisma.consultation.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         ...(status && { status }),
         ...(assignedPharmacistId && { assignedPharmacistId }),
@@ -152,9 +154,10 @@ export async function PUT(
 // DELETE - Delete consultation (admin only)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await auth();
 
     if (!session?.user || session.user.role !== "ADMIN") {
@@ -162,7 +165,7 @@ export async function DELETE(
     }
 
     await prisma.consultation.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({

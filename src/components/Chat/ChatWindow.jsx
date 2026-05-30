@@ -4,10 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import WelcomeMessage from "./WelcomeMessage";
+import VideoCall from "./VideoCall";
 
 const ChatWindow = ({ chatId, onMessageCountChange }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [isVideoCallActive, setIsVideoCallActive] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [pharmacistTyping, setPharmacistTyping] = useState(false);
@@ -181,7 +183,37 @@ const ChatWindow = ({ chatId, onMessageCountChange }) => {
   };
 
   return (
-    <div className="flex flex-col h-[70vh] bg-white">
+    <div className="flex flex-col h-[70vh] bg-white dark:bg-gray-900 relative">
+      <AnimatePresence>
+        {isVideoCallActive && (
+          <VideoCall
+            pharmacistName="Dr. Sarah Johnson, PharmD"
+            roomId={chatId}
+            useLiveSignaling={true}
+            role="caller"
+            callerName="Student (Patient)"
+            onEndCall={async (duration) => {
+              setIsVideoCallActive(false);
+              const systemMsg = {
+                text: `System: Video consultation with Dr. Sarah Johnson ended. Duration: ${duration}.`,
+                sender: "system",
+                timestamp: new Date().toISOString(),
+              };
+              setMessages((prev) => [...prev, systemMsg]);
+              try {
+                await axios.post(`/api/chat/${chatId}`, {
+                  content: systemMsg.text,
+                  type: "system",
+                  userId: "system",
+                });
+              } catch (err) {
+                console.error("Error saving system call message:", err);
+              }
+            }}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Chat Header */}
       <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white p-4">
         <div className="flex items-center justify-between">
@@ -196,11 +228,19 @@ const ChatWindow = ({ chatId, onMessageCountChange }) => {
               <p className="text-sm opacity-90">Licensed Pharmacist</p>
             </div>
           </div>
-          <div className="text-right">
-            <p className="text-sm opacity-90">Online</p>
-            <p className="text-xs opacity-75">
-              Usually responds in 2-3 minutes
-            </p>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setIsVideoCallActive(true)}
+              className="bg-white/10 hover:bg-white/20 px-3.5 py-2 rounded-xl transition-all flex items-center gap-2 font-semibold text-xs border border-white/15 cursor-pointer shadow-sm hover:shadow"
+            >
+              📹 <span className="hidden sm:inline">Start Video Call</span>
+            </button>
+            <div className="text-right">
+              <p className="text-sm opacity-90">Online</p>
+              <p className="text-xs opacity-75">
+                Usually responds in 2-3 minutes
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -208,7 +248,7 @@ const ChatWindow = ({ chatId, onMessageCountChange }) => {
       {/* Messages Area */}
       <div
         ref={chatRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-white"
+        className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800"
       >
         {/* Welcome Message for New Sessions */}
         {messages.length === 0 && <WelcomeMessage />}
@@ -221,47 +261,64 @@ const ChatWindow = ({ chatId, onMessageCountChange }) => {
                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                transition={{ duration: 0.3, delay: i * 0.1 }}
+                transition={{ duration: 0.18 }}
                 className={`flex ${
-                  msg.sender === "user" ? "justify-end" : "justify-start"
+                  msg.sender === "system"
+                    ? "justify-center w-full"
+                    : msg.sender === "user"
+                    ? "justify-end"
+                    : "justify-start"
                 }`}
               >
                 <div
-                  className={`max-w-[70%] ${
+                  className={`${
+                    msg.sender === "system"
+                      ? "max-w-[85%]"
+                      : "max-w-[70%]"
+                  } ${
                     msg.sender === "user" ? "order-2" : "order-1"
                   }`}
                 >
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.01 }}
                     className={`p-4 rounded-2xl shadow-sm ${
-                      msg.sender === "user"
+                      msg.sender === "system"
+                        ? "bg-slate-100/90 dark:bg-gray-800/80 text-slate-500 dark:text-gray-400 text-xs font-semibold border border-slate-200 dark:border-gray-700 text-center flex items-center justify-center gap-2"
+                        : msg.sender === "user"
                         ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white"
-                        : "bg-white border border-gray-200 text-gray-800"
+                        : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-100"
                     }`}
                   >
-                    <p className="text-sm leading-relaxed">{msg.text}</p>
-                    <p
-                      className={`text-xs mt-2 ${
-                        msg.sender === "user"
-                          ? "text-blue-100"
-                          : "text-gray-500"
-                      }`}
-                    >
-                      {formatTime(msg.timestamp)}
-                    </p>
+                    {msg.sender === "system" && <span className="text-base">📹</span>}
+                    <div>
+                      <p className="text-sm leading-relaxed">{msg.text}</p>
+                      {msg.sender !== "system" && (
+                        <p
+                          className={`text-xs mt-2 ${
+                            msg.sender === "user"
+                              ? "text-blue-100"
+                              : "text-gray-500"
+                          }`}
+                        >
+                          {formatTime(msg.timestamp)}
+                        </p>
+                      )}
+                    </div>
                   </motion.div>
                 </div>
 
                 {/* Avatar */}
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium ${
-                    msg.sender === "user"
-                      ? "bg-gradient-to-r from-blue-400 to-blue-500 order-1 ml-2"
-                      : "bg-gradient-to-r from-green-400 to-green-500 order-2 mr-2"
-                  }`}
-                >
-                  {msg.sender === "user" ? "U" : "P"}
-                </div>
+                {msg.sender !== "system" && (
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium ${
+                      msg.sender === "user"
+                        ? "bg-gradient-to-r from-blue-400 to-blue-500 order-1 ml-2"
+                        : "bg-gradient-to-r from-green-400 to-green-500 order-2 mr-2"
+                    }`}
+                  >
+                    {msg.sender === "user" ? "U" : "P"}
+                  </div>
+                )}
               </motion.div>
             ))}
         </AnimatePresence>
@@ -276,7 +333,7 @@ const ChatWindow = ({ chatId, onMessageCountChange }) => {
               className="flex justify-start"
             >
               <div className="order-1">
-                <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm">
+                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 shadow-sm">
                   <div className="flex items-center gap-2">
                     <div className="flex space-x-1">
                       <motion.div
@@ -307,7 +364,7 @@ const ChatWindow = ({ chatId, onMessageCountChange }) => {
                         className="w-2 h-2 bg-gray-400 rounded-full"
                       />
                     </div>
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
                       Pharmacist is typing...
                     </span>
                   </div>
@@ -322,7 +379,7 @@ const ChatWindow = ({ chatId, onMessageCountChange }) => {
       </div>
 
       {/* Input Area */}
-      <div className="border-t border-gray-200 p-4 bg-white">
+      <div className="border-t border-gray-200 dark:border-gray-700 p-4 bg-white dark:bg-gray-900">
         <div className="flex items-end gap-3">
           <div className="flex-1 relative">
             <textarea
@@ -331,7 +388,7 @@ const ChatWindow = ({ chatId, onMessageCountChange }) => {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Type your message here..."
-              className="w-full border border-gray-300 rounded-xl p-3 pr-12 resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-black"
+              className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-xl p-3 pr-12 resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-black dark:text-white"
               rows="1"
               style={{ minHeight: "44px", maxHeight: "120px" }}
             />
@@ -380,7 +437,7 @@ const ChatWindow = ({ chatId, onMessageCountChange }) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setInput(action)}
-              className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full transition-colors"
+              className="text-xs bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 px-3 py-1 rounded-full transition-colors"
             >
               {action}
             </motion.button>

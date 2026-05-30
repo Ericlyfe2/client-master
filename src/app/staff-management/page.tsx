@@ -433,17 +433,17 @@ export default function StaffManagementPage() {
                     key={member.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white p-6 rounded-lg shadow-md border"
+                    className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border dark:border-gray-700"
                   >
                     <div className="flex justify-between items-start">
                       <div>
                         <h3 className="text-lg font-semibold">
                           {member.user.firstName} {member.user.lastName}
                         </h3>
-                        <p className="text-gray-600">ID: {member.employeeId}</p>
-                        <p className="text-gray-600">Position: {member.position}</p>
-                        <p className="text-gray-600">Department: {member.department}</p>
-                        <p className="text-gray-600">
+                        <p className="text-gray-600 dark:text-gray-300">ID: {member.employeeId}</p>
+                        <p className="text-gray-600 dark:text-gray-300">Position: {member.position}</p>
+                        <p className="text-gray-600 dark:text-gray-300">Department: {member.department}</p>
+                        <p className="text-gray-600 dark:text-gray-300">
                           Status:{" "}
                           <span
                             className={`px-2 py-1 rounded-full text-xs ${
@@ -501,23 +501,23 @@ export default function StaffManagementPage() {
                     key={schedule.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white p-6 rounded-lg shadow-md border"
+                    className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border dark:border-gray-700"
                   >
                     <div className="flex justify-between items-center">
                       <div>
                         <h3 className="text-lg font-semibold">
                           {dayNames[schedule.dayOfWeek]}
                         </h3>
-                        <p className="text-gray-600">
+                        <p className="text-gray-600 dark:text-gray-300">
                           {schedule.startTime} - {schedule.endTime}
                         </p>
                         {schedule.breakStart && schedule.breakEnd && (
-                          <p className="text-gray-500 text-sm">
+                          <p className="text-gray-500 dark:text-gray-400 text-sm">
                             Break: {schedule.breakStart} - {schedule.breakEnd}
                           </p>
                         )}
                         <p className="text-gray-600">
-                          Status:{" "}
+                          Status:{" "}STATUSSCHED
                           <span
                             className={`px-2 py-1 rounded-full text-xs ${
                               schedule.isActive
@@ -568,7 +568,7 @@ export default function StaffManagementPage() {
                     key={shift.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white p-6 rounded-lg shadow-md border"
+                    className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border dark:border-gray-700"
                   >
                     <div className="flex justify-between items-center">
                       <div>
@@ -636,7 +636,7 @@ export default function StaffManagementPage() {
                     key={request.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white p-6 rounded-lg shadow-md border"
+                    className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border dark:border-gray-700"
                   >
                     <div className="flex justify-between items-center">
                       <div>
@@ -694,10 +694,10 @@ export default function StaffManagementPage() {
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading...</p>
         </div>
       </div>
     );
@@ -705,28 +705,28 @@ export default function StaffManagementPage() {
 
   if (!session?.user) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <AlertCircle className="h-16 w-16 text-red-500 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
-          <p className="text-gray-600">Please log in to access staff management.</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Access Denied</h1>
+          <p className="text-gray-600 dark:text-gray-300">Please log in to access staff management.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Staff Management</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Staff Management</h1>
+          <p className="text-gray-600 dark:text-gray-300 mt-2">
             Manage pharmacy staff, schedules, shifts, and time-off requests
           </p>
         </div>
 
         {/* Tab Navigation */}
-        <div className="bg-white rounded-lg shadow-sm border mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 mb-6">
           <div className="flex space-x-1 p-1">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -737,7 +737,7 @@ export default function StaffManagementPage() {
                   className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                     activeTab === tab.id
                       ? "bg-blue-100 text-blue-700"
-                      : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                      : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700"
                   }`}
                 >
                   <Icon size={16} />
@@ -761,18 +761,18 @@ export default function StaffManagementPage() {
         )}
 
         {/* Tab Content */}
-        <div className="bg-white rounded-lg shadow-sm border p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-6">
           {renderTabComponent()}
         </div>
 
         {/* Staff Form Modal */}
         {showStaffForm && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 w-full max-w-md">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">
               <h3 className="text-lg font-semibold mb-4">Add Staff Member</h3>
               <form onSubmit={handleStaffSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     User ID
                   </label>
                   <input
@@ -781,12 +781,12 @@ export default function StaffManagementPage() {
                     onChange={(e) =>
                       setStaffForm({ ...staffForm, userId: e.target.value })
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Employee ID
                   </label>
                   <input
@@ -795,12 +795,12 @@ export default function StaffManagementPage() {
                     onChange={(e) =>
                       setStaffForm({ ...staffForm, employeeId: e.target.value })
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Position
                   </label>
                   <select
@@ -808,7 +808,7 @@ export default function StaffManagementPage() {
                     onChange={(e) =>
                       setStaffForm({ ...staffForm, position: e.target.value })
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   >
                     <option value="">Select position</option>
@@ -820,7 +820,7 @@ export default function StaffManagementPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Department
                   </label>
                   <input
@@ -829,12 +829,12 @@ export default function StaffManagementPage() {
                     onChange={(e) =>
                       setStaffForm({ ...staffForm, department: e.target.value })
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Hire Date
                   </label>
                   <input
@@ -843,7 +843,7 @@ export default function StaffManagementPage() {
                     onChange={(e) =>
                       setStaffForm({ ...staffForm, hireDate: e.target.value })
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   />
                 </div>
@@ -870,11 +870,11 @@ export default function StaffManagementPage() {
         {/* Schedule Form Modal */}
         {showScheduleForm && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 w-full max-w-md">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">
               <h3 className="text-lg font-semibold mb-4">Add Schedule</h3>
               <form onSubmit={handleScheduleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Staff Member
                   </label>
                   <select
@@ -882,7 +882,7 @@ export default function StaffManagementPage() {
                     onChange={(e) =>
                       setScheduleForm({ ...scheduleForm, staffId: e.target.value })
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   >
                     <option value="">Select staff member</option>
@@ -894,7 +894,7 @@ export default function StaffManagementPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Day of Week
                   </label>
                   <select
@@ -905,7 +905,7 @@ export default function StaffManagementPage() {
                         dayOfWeek: parseInt(e.target.value),
                       })
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   >
                     {dayNames.map((day, index) => (
@@ -917,7 +917,7 @@ export default function StaffManagementPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       Start Time
                     </label>
                     <input
@@ -929,12 +929,12 @@ export default function StaffManagementPage() {
                           startTime: e.target.value,
                         })
                       }
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       End Time
                     </label>
                     <input
@@ -946,7 +946,7 @@ export default function StaffManagementPage() {
                           endTime: e.target.value,
                         })
                       }
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       required
                     />
                   </div>
@@ -974,11 +974,11 @@ export default function StaffManagementPage() {
         {/* Shift Form Modal */}
         {showShiftForm && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 w-full max-w-md">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">
               <h3 className="text-lg font-semibold mb-4">Add Shift</h3>
               <form onSubmit={handleShiftSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Staff Member
                   </label>
                   <select
@@ -986,7 +986,7 @@ export default function StaffManagementPage() {
                     onChange={(e) =>
                       setShiftForm({ ...shiftForm, staffId: e.target.value })
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   >
                     <option value="">Select staff member</option>
@@ -998,7 +998,7 @@ export default function StaffManagementPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Date
                   </label>
                   <input
@@ -1007,13 +1007,13 @@ export default function StaffManagementPage() {
                     onChange={(e) =>
                       setShiftForm({ ...shiftForm, date: e.target.value })
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       Start Time
                     </label>
                     <input
@@ -1025,12 +1025,12 @@ export default function StaffManagementPage() {
                           startTime: e.target.value,
                         })
                       }
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       End Time
                     </label>
                     <input
@@ -1042,7 +1042,7 @@ export default function StaffManagementPage() {
                           endTime: e.target.value,
                         })
                       }
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       required
                     />
                   </div>
@@ -1070,11 +1070,11 @@ export default function StaffManagementPage() {
         {/* Time Off Form Modal */}
         {showTimeOffForm && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 w-full max-w-md">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md">
               <h3 className="text-lg font-semibold mb-4">Request Time Off</h3>
               <form onSubmit={handleTimeOffSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Staff Member
                   </label>
                   <select
@@ -1082,7 +1082,7 @@ export default function StaffManagementPage() {
                     onChange={(e) =>
                       setTimeOffForm({ ...timeOffForm, staffId: e.target.value })
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   >
                     <option value="">Select staff member</option>
@@ -1095,7 +1095,7 @@ export default function StaffManagementPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       Start Date
                     </label>
                     <input
@@ -1107,12 +1107,12 @@ export default function StaffManagementPage() {
                           startDate: e.target.value,
                         })
                       }
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                       End Date
                     </label>
                     <input
@@ -1124,13 +1124,13 @@ export default function StaffManagementPage() {
                           endDate: e.target.value,
                         })
                       }
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       required
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Type
                   </label>
                   <select
@@ -1138,7 +1138,7 @@ export default function StaffManagementPage() {
                     onChange={(e) =>
                       setTimeOffForm({ ...timeOffForm, type: e.target.value })
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     required
                   >
                     <option value="">Select type</option>
@@ -1150,7 +1150,7 @@ export default function StaffManagementPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Reason
                   </label>
                   <textarea
@@ -1158,7 +1158,7 @@ export default function StaffManagementPage() {
                     onChange={(e) =>
                       setTimeOffForm({ ...timeOffForm, reason: e.target.value })
                     }
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     rows={3}
                     required
                   />

@@ -341,8 +341,21 @@ export default function AuthPage() {
         {/* Privacy Notice */}
         <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
           <p className="text-sm text-blue-700 dark:text-blue-300">
-            🔒 Your privacy is our priority. All consultations and data are
-            encrypted and protected.
+            🔒 Your privacy is our priority. All data is encrypted (AES-256). Read our{" "}
+            <button
+              onClick={() => router.push("/legal?tab=terms")}
+              className="underline hover:text-blue-800 dark:hover:text-blue-200 font-semibold cursor-pointer"
+            >
+              Terms of Service
+            </button>{" "}
+            and{" "}
+            <button
+              onClick={() => router.push("/legal?tab=privacy")}
+              className="underline hover:text-blue-800 dark:hover:text-blue-200 font-semibold cursor-pointer"
+            >
+              Privacy Policy
+            </button>
+            .
             {userType === "PHARMACY" &&
               " License verification ensures only qualified pharmacists can provide consultations."}
           </p>

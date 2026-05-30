@@ -285,9 +285,23 @@ export default function Home() {
       <footer className="bg-gray-100 dark:bg-gray-900 py-8 mt-16">
         <div className="container mx-auto px-4 text-center">
           <p className="text-gray-600 dark:text-gray-300">
-            © 2024 SafeMeds. All rights reserved. | 
+            © 2026 SafeMeds. All rights reserved. | 
             <span className="ml-2">🔒 Your privacy is our priority</span>
           </p>
+          <div className="mt-4 flex justify-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
+            <button onClick={() => router.push("/legal?tab=terms")} className="hover:text-blue-500 underline cursor-pointer">
+              Terms of Service
+            </button>
+            <button onClick={() => router.push("/legal?tab=privacy")} className="hover:text-blue-500 underline cursor-pointer">
+              Privacy Policy
+            </button>
+            <button onClick={() => router.push("/legal?tab=hipaa")} className="hover:text-blue-500 underline cursor-pointer">
+              HIPAA & Security
+            </button>
+            <button onClick={() => router.push("/legal?tab=disclaimer")} className="hover:text-blue-500 underline cursor-pointer">
+              Medical Disclaimer
+            </button>
+          </div>
         </div>
       </footer>
     </div>

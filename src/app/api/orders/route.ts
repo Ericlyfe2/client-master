@@ -216,7 +216,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Calculate total amount
-    const totalAmount = prescription.medication.price * prescription.quantity;
+    const totalAmount = Number(prescription.medication.price) * prescription.quantity;
 
     // Generate order number
     const orderNumber = `ORD-${Date.now()}-${Math.random()

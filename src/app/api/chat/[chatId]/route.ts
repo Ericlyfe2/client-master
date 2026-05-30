@@ -6,7 +6,7 @@ interface ChatResponse {
   messages?: Array<{
     id: string;
     chatId: string;
-    userId: string;
+    userId: string | null;
     content: string;
     type: string;
     createdAt: string;
@@ -16,12 +16,12 @@ interface ChatResponse {
       lastName: string;
       email: string;
       role: string;
-    };
+    } | null;
   }>;
   message?: {
     id: string;
     chatId: string;
-    userId: string;
+    userId: string | null;
     content: string;
     type: string;
     createdAt: string;
@@ -31,14 +31,14 @@ interface ChatResponse {
       lastName: string;
       email: string;
       role: string;
-    };
+    } | null;
   };
   error?: string;
 }
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { chatId: string } }
+  { params }: { params: Promise<{ chatId: string }> }
 ): Promise<NextResponse<ChatResponse>> {
   const { chatId } = await params;
 
@@ -79,7 +79,7 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { chatId: string } }
+  { params }: { params: Promise<{ chatId: string }> }
 ): Promise<NextResponse<ChatResponse>> {
   const { chatId } = await params;
 

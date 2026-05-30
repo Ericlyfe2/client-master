@@ -13,7 +13,7 @@ vi.mock("@/lib/prisma", () => ({
   },
 }));
 
-vi.mock("bcryptjs", () => ({
+vi.mock("bcrypt", () => ({
   default: {
     hash: vi.fn(() => Promise.resolve("hashed-password")),
     compare: vi.fn(() => Promise.resolve(true)),
@@ -23,7 +23,7 @@ vi.mock("bcryptjs", () => ({
 }));
 
 import { prisma } from "@/lib/prisma";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 const mockUser = {
   id: "user-1",

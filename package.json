@@ -17,11 +17,10 @@
     "vercel-build": "prisma generate --no-engine && next build"
   },
   "dependencies": {
-    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "@prisma/client": "^6.16.1",
     "@prisma/extension-accelerate": "^2.0.2",
     "axios": "^1.11.0",
-    "bcryptjs": "^3.0.2",
+    "bcrypt": "^6.0.0",
     "firebase": "^12.0.0",
     "framer-motion": "^12.23.11",
     "lightningcss": "^1.30.1",
@@ -34,8 +33,9 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@next/bundle-analyzer": "^16.2.6",
     "@tailwindcss/postcss": "^4",
-    "@types/bcryptjs": "^2.4.6",
+    "@types/bcrypt": "^6.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

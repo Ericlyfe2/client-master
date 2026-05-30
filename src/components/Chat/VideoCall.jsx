@@ -51,7 +51,9 @@ export default function VideoCall({
 
   const localStreamRef = useRef(null); // camera + mic MediaStream
   const screenStreamRef = useRef(null); // getDisplayMedia MediaStream
+  const screenControllerRef = useRef(null); // CaptureController (progressive enhancement)
   const callHandleRef = useRef(null); // { pc, hangUp } from webrtcSignaling
+  const captureAttemptedRef = useRef(false); // guard to capture camera once
 
   // Stop and release every track we are holding. Safe to call multiple times.
   const stopAllMedia = () => {
@@ -97,10 +99,17 @@ export default function VideoCall({
   useEffect(() => {
     let cancelled = false;
     if (callState !== "connecting" && callState !== "connected") return;
-    if (localStreamRef.current) return; // already captured
+    if (captureAttemptedRef.current) return;
+    captureAttemptedRef.current = true;
+
+    if (!navigator.mediaDevices?.getUserMedia) {
+      setCameraError("Camera not available on this device/browser.");
+      setLocalReady(true);
+      return;
+    }
 
     navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
+      .getUserMedia({ video: { facingMode: "user" }, audio: true })
       .then((stream) => {
         if (cancelled) {
           stream.getTracks().forEach((t) => t.stop());
@@ -128,7 +137,11 @@ export default function VideoCall({
     return () => {
       cancelled = true;
     };
-  }, [callState]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Intentionally stable deps: camera capture must fire exactly once. The ref
+    // guard (captureAttemptedRef) prevents re-runs. Toggle state is applied to
+    // already-captured stream tracks.
+  }, [callState]);
 
   // Keep the local <video> bound to the stream whenever it remounts.
   useEffect(() => {
@@ -241,9 +254,14 @@ export default function VideoCall({
       return;
     }
     try {
+      // CaptureController — progressive enhancement, not supported everywhere yet.
+      const controller = typeof CaptureController !== "undefined" ? new CaptureController() : null;
+      screenControllerRef.current = controller;
+
       const stream = await navigator.mediaDevices.getDisplayMedia({
         video: true,
-        audio: false
+        audio: false,
+        controller,
       });
       screenStreamRef.current = stream;
       setIsScreenSharing(true);
@@ -264,6 +282,12 @@ export default function VideoCall({
   };
 
   const stopScreenShare = async () => {
+    // Use CaptureController if available, otherwise fall back to track.stop().
+    const ctrl = screenControllerRef.current;
+    if (ctrl) {
+      try { ctrl.stopCapture(); } catch { /* already stopped */ }
+      screenControllerRef.current = null;
+    }
     screenStreamRef.current?.getTracks().forEach((t) => t.stop());
     screenStreamRef.current = null;
     setIsScreenSharing(false);

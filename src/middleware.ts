@@ -9,7 +9,14 @@ export async function middleware(request: NextRequest) {
     '/auth',
     '/signin',
     '/signup',
-    '/verify'
+    '/verify',
+    '/about',
+    '/contact',
+    '/search',
+    '/legal',
+    '/consult',
+    '/track',
+    '/delivery'
   ]
  
   // Check if current path is a public route
@@ -18,6 +25,11 @@ export async function middleware(request: NextRequest) {
   )
  
   if (isPublicRoute) {
+    return NextResponse.next()
+  }
+
+  // API routes are authenticated by the route handlers themselves
+  if (pathname.startsWith('/api/')) {
     return NextResponse.next()
   }
  

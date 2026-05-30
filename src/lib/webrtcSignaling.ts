@@ -34,6 +34,11 @@ import { db } from "./firebase";
 const ICE_SERVERS: RTCConfiguration = {
   iceServers: [
     { urls: ["stun:stun.l.google.com:19302", "stun:stun1.l.google.com:19302"] },
+    {
+      urls: process.env.NEXT_PUBLIC_TURN_URL || "turn:turn.safemeds.com:3478",
+      username: process.env.NEXT_PUBLIC_TURN_USERNAME || "",
+      credential: process.env.NEXT_PUBLIC_TURN_CREDENTIAL || "",
+    },
   ],
   iceCandidatePoolSize: 10,
 };

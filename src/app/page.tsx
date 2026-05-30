@@ -2,9 +2,11 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import { motion } from "framer-motion";
 import ThemeToggle from "@/components/Common/ThemeToggle";
+import Footer from "@/components/Common/Footer";
 
 export default function Home() {
   const router = useRouter();
@@ -13,7 +15,6 @@ export default function Home() {
   useEffect(() => {
     if (!isLoading) {
       if (isAuthenticated && user) {
-        // Redirect authenticated users to their appropriate dashboard
         const dashboardPath =
           user.role === "CLIENT"
             ? "/client-dashboard"
@@ -27,7 +28,6 @@ export default function Home() {
     }
   }, [isAuthenticated, user, isLoading, router]);
 
-  // Show loading spinner while checking authentication
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center">
@@ -53,7 +53,6 @@ export default function Home() {
     );
   }
 
-  // Show redirect message while redirecting authenticated users
   if (isAuthenticated && user) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center">
@@ -81,48 +80,78 @@ export default function Home() {
     );
   }
 
-  // Show landing page for unauthenticated users
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      {/* Header */}
-      <header className="relative">
-        <div className="absolute top-4 right-4 z-10">
-          <ThemeToggle variant="icon" size="sm" />
+      {/* Public Navigation */}
+      <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+          <Link href="/" className="text-xl font-bold text-blue-600 dark:text-blue-400">
+            SafeMeds
+          </Link>
+          <div className="hidden md:flex items-center gap-6">
+            <Link href="/about" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              About
+            </Link>
+            <Link href="/consult" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              Consult
+            </Link>
+            <Link href="/track" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              Track
+            </Link>
+            <Link href="/contact" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              Contact
+            </Link>
+            <ThemeToggle variant="icon" size="sm" />
+            <Link
+              href="/signin"
+              className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              Sign In
+            </Link>
+            <Link
+              href="/signup"
+              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+            >
+              Get Started
+            </Link>
+          </div>
         </div>
-      </header>
+      </nav>
 
-      {/* Hero Section */}
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Hero */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-24"
         >
-          <h1 className="text-6xl font-bold text-gray-800 dark:text-white mb-6">
-            SafeMeds
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+            Healthcare,{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+              anonymized
+            </span>
+            .<br />
+            For students.
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-            Secure, anonymous healthcare consultations for students. Get professional 
-            medical advice from licensed pharmacists in a safe, confidential environment.
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
+            Secure, anonymous healthcare consultations for students. Get
+            professional medical advice from licensed pharmacists in a safe,
+            confidential environment — all from your phone.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => router.push("/auth")}
-              className="bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-600 transition-colors"
+            <Link
+              href="/signup"
+              className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-lg transition-all hover:shadow-lg"
             >
-              Get Started
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => router.push("/signup")}
-              className="bg-white dark:bg-gray-800 text-gray-800 dark:text-white px-8 py-4 rounded-lg font-semibold text-lg border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 transition-colors"
+              Create Free Account
+            </Link>
+            <Link
+              href="/consult"
+              className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-xl font-semibold text-lg border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 transition-colors"
             >
-              Create Account
-            </motion.button>
+              Start Anonymous Consult
+            </Link>
           </div>
         </motion.div>
 
@@ -131,7 +160,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid md:grid-cols-3 gap-8 mb-16"
+          className="grid md:grid-cols-3 gap-8 mb-24"
         >
           {[
             {
@@ -141,7 +170,7 @@ export default function Home() {
               description: "Get anonymous medical consultations and advice from licensed pharmacists.",
               features: ["Anonymous consultations", "Secure messaging", "Prescription delivery", "24/7 support"],
               color: "from-blue-500 to-blue-600",
-              action: () => router.push("/signup")
+              href: "/signup"
             },
             {
               type: "PHARMACY",
@@ -150,7 +179,7 @@ export default function Home() {
               description: "Provide professional medical advice and consultations to students.",
               features: ["License verification", "Professional dashboard", "Consultation management", "Secure payments"],
               color: "from-purple-500 to-purple-600",
-              action: () => router.push("/signup")
+              href: "/signup"
             },
             {
               type: "ADMIN",
@@ -159,7 +188,7 @@ export default function Home() {
               description: "Manage the platform and oversee all operations and user activities.",
               features: ["System management", "User oversight", "Analytics dashboard", "Platform control"],
               color: "from-red-500 to-red-600",
-              action: () => router.push("/auth")
+              href: "/auth"
             }
           ].map((card, index) => (
             <motion.div
@@ -187,27 +216,25 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={card.action}
-                className={`w-full bg-gradient-to-r ${card.color} text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300`}
+              <Link
+                href={card.href}
+                className={`block w-full text-center bg-gradient-to-r ${card.color} text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300`}
               >
                 {card.type === "ADMIN" ? "Admin Login" : "Get Started"}
-              </motion.button>
+              </Link>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Features Section */}
+        {/* Features Grid */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-center mb-16"
+          className="mb-24"
         >
-          <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-8">
-            Why Choose SafeMeds?
+          <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+            Everything you need
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -225,6 +252,21 @@ export default function Home() {
                 icon: "📱",
                 title: "Easy Access",
                 description: "Simple, intuitive interface accessible from any device, anywhere."
+              },
+              {
+                icon: "🚚",
+                title: "Delivery Tracking",
+                description: "Real-time GPS tracking for prescription deliveries straight to your location."
+              },
+              {
+                icon: "💬",
+                title: "Live Chat",
+                description: "Real-time messaging with pharmacists for immediate medical advice."
+              },
+              {
+                icon: "📊",
+                title: "Health Analytics",
+                description: "Track your consultations, medications, and health trends over time."
               }
             ].map((feature, index) => (
               <motion.div
@@ -232,13 +274,13 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="text-center"
+                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
               >
                 <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
@@ -246,64 +288,91 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* CTA Section */}
+        {/* Testimonials */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-12 text-center"
+          className="mb-24"
         >
-          <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+          <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+            Trusted by students
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                quote: "SafeMeds helped me get a prescription refill without leaving my dorm. The pharmacist was professional and the delivery was fast.",
+                author: "Sarah K.",
+                role: "Student, KNUST"
+              },
+              {
+                quote: "I was nervous about asking for help, but the anonymous consultation made it easy. Highly recommend for anyone on campus.",
+                author: "Michael O.",
+                role: "Student, University of Ghana"
+              },
+              {
+                quote: "As a pharmacist, SafeMeds lets me reach students who might otherwise avoid seeking care. The platform is intuitive and secure.",
+                author: "Dr. Amma B.",
+                role: "Licensed Pharmacist"
+              }
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 * index }}
+                className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg"
+              >
+                <div className="text-blue-500 mb-3">{"★".repeat(5)}</div>
+                <p className="text-gray-700 dark:text-gray-300 mb-4 italic leading-relaxed">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </p>
+                <div className="border-t border-gray-200 dark:border-gray-700 pt-3">
+                  <p className="font-semibold text-gray-900 dark:text-white text-sm">
+                    {testimonial.author}
+                  </p>
+                  <p className="text-gray-500 dark:text-gray-400 text-xs">
+                    {testimonial.role}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-xl p-12 text-center"
+        >
+          <h2 className="text-3xl font-bold text-white mb-4">
             Ready to Get Started?
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join thousands of students who trust SafeMeds for their healthcare needs. 
-            Get professional medical advice in a safe, anonymous environment.
+          <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+            Join thousands of students who trust SafeMeds for their healthcare
+            needs. Get professional medical advice in a safe, anonymous
+            environment.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => router.push("/signup")}
-              className="bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-600 transition-colors"
+            <Link
+              href="/signup"
+              className="px-8 py-4 bg-white text-blue-700 rounded-xl font-semibold text-lg hover:bg-blue-50 transition-colors"
             >
               Create Your Account
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => router.push("/auth")}
-              className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            </Link>
+            <Link
+              href="/signin"
+              className="px-8 py-4 bg-blue-500 text-white rounded-xl font-semibold text-lg hover:bg-blue-400 transition-colors"
             >
               Sign In
-            </motion.button>
+            </Link>
           </div>
         </motion.div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-gray-100 dark:bg-gray-900 py-8 mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-600 dark:text-gray-300">
-            © 2026 SafeMeds. All rights reserved. | 
-            <span className="ml-2">🔒 Your privacy is our priority</span>
-          </p>
-          <div className="mt-4 flex justify-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
-            <button onClick={() => router.push("/legal?tab=terms")} className="hover:text-blue-500 underline cursor-pointer">
-              Terms of Service
-            </button>
-            <button onClick={() => router.push("/legal?tab=privacy")} className="hover:text-blue-500 underline cursor-pointer">
-              Privacy Policy
-            </button>
-            <button onClick={() => router.push("/legal?tab=hipaa")} className="hover:text-blue-500 underline cursor-pointer">
-              HIPAA & Security
-            </button>
-            <button onClick={() => router.push("/legal?tab=disclaimer")} className="hover:text-blue-500 underline cursor-pointer">
-              Medical Disclaimer
-            </button>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

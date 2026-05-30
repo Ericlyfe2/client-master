@@ -3,6 +3,9 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import SessionProvider from "@/components/Auth/SessionProvider";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { NotificationProvider } from "@/context/NotificationContext";
+import { OnboardingProvider } from "@/context/OnboardingContext";
+import OnboardingWizard from "@/components/Common/OnboardingWizard";
 import NavButtons from "@/components/Common/NavButtons";
 
 const poppins = Poppins({
@@ -29,8 +32,13 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <ThemeProvider>
           <SessionProvider>
-            <NavButtons />
-            {children}
+            <NotificationProvider>
+              <OnboardingProvider>
+                <NavButtons />
+                {children}
+                <OnboardingWizard />
+              </OnboardingProvider>
+            </NotificationProvider>
           </SessionProvider>
         </ThemeProvider>
       </body>

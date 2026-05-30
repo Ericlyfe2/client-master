@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
 import ThemeToggle from "./ThemeToggle";
+import NotificationBell from "./NotificationBell";
 
 interface NavigationProps {
   title: string;
@@ -96,6 +97,9 @@ export default function Navigation({ title, userRole }: NavigationProps) {
 
           {/* User Menu */}
           <div className="flex items-center space-x-4">
+            {/* Notifications */}
+            <NotificationBell />
+
             {/* Theme Toggle */}
             <ThemeToggle variant="icon" size="sm" />
 

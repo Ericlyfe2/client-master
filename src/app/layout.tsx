@@ -15,9 +15,6 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "SafeMeds - Healthcare Management Platform",
-  icons: {
-    icon: "/favicon.ico",
-  },
   description:
     "Secure healthcare management platform with role-based access for clients and pharmacies",
 };

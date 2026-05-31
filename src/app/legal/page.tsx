@@ -3,7 +3,6 @@
 import { useState, useEffect, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import ThemeToggle from "@/components/Common/ThemeToggle";
 import { useSearchParams } from "next/navigation";
 import { LEGAL_VERSION, LEGAL_EFFECTIVE_DATE } from "@/lib/legal";
 
@@ -230,7 +229,6 @@ function LegalContent() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <ThemeToggle variant="icon" size="sm" />
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

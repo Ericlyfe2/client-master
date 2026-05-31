@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import ThemeToggle from "@/components/Common/ThemeToggle";
 import { LEGAL_VERSION } from "@/lib/legal";
 
 interface FormData {
@@ -344,9 +343,6 @@ export default function SignupPage() {
         className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 max-w-2xl w-full relative"
       >
         {/* Theme Toggle */}
-        <div className="absolute top-4 right-4">
-          <ThemeToggle variant="icon" size="sm" />
-        </div>
 
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-2">

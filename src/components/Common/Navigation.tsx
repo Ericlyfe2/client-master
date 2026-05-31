@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
-import ThemeToggle from "./ThemeToggle";
 import NotificationBell from "./NotificationBell";
 
 interface NavigationProps {
@@ -107,9 +106,6 @@ export default function Navigation({ title, userRole }: NavigationProps) {
           <div className="flex items-center space-x-4">
             {/* Notifications */}
             <NotificationBell />
-
-            {/* Theme Toggle */}
-            <ThemeToggle variant="icon" size="sm" />
 
             {/* User Info */}
             <div className="hidden md:block text-right">

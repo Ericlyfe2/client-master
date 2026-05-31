@@ -7,6 +7,7 @@ import { NotificationProvider } from "@/context/NotificationContext";
 import { OnboardingProvider } from "@/context/OnboardingContext";
 import OnboardingWizard from "@/components/Common/OnboardingWizard";
 import NavButtons from "@/components/Common/NavButtons";
+import ThemeToggle from "@/components/Common/ThemeToggle";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -32,6 +33,10 @@ export default function RootLayout({
             <NotificationProvider>
               <OnboardingProvider>
                 <NavButtons />
+                {/* Global theme toggle — available on every page */}
+                <div className="fixed top-3 right-3 z-[60] print:hidden">
+                  <ThemeToggle variant="icon" size="sm" />
+                </div>
                 {children}
                 <OnboardingWizard />
               </OnboardingProvider>

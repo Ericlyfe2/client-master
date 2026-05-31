@@ -252,7 +252,7 @@ export default function AdminPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: 0 }}
             className="mb-8"
           >
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
@@ -385,7 +385,7 @@ export default function AdminPage() {
                         key={feature.id}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 + index * 0.1 }}
+                        transition={{ delay: 0 + index * 0.1 }}
                         whileHover={{ scale: 1.02 }}
                         className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-red-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
                       >

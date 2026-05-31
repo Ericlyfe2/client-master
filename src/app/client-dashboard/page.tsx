@@ -22,7 +22,7 @@ export default function ClientDashboard() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0 }}
             className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-8 border border-blue-200 dark:border-gray-700"
           >
             <div className="flex items-center justify-between">
@@ -77,7 +77,7 @@ export default function ClientDashboard() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0 }}
               whileHover={{ scale: 1.02 }}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-blue-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
             >
@@ -100,7 +100,7 @@ export default function ClientDashboard() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0 }}
               whileHover={{ scale: 1.02 }}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-blue-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
             >
@@ -123,7 +123,7 @@ export default function ClientDashboard() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0 }}
               whileHover={{ scale: 1.02 }}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-blue-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
             >
@@ -146,7 +146,7 @@ export default function ClientDashboard() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0 }}
               whileHover={{ scale: 1.02 }}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-blue-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
             >

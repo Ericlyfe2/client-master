@@ -26,9 +26,6 @@ export default function ChatPage() {
     const initializeSession = async () => {
       setIsInitializing(true);
 
-      // Simulate initialization delay for better UX
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
       let id = localStorage.getItem("anonId");
       if (!id) {
         // Generate random ID
@@ -111,7 +108,7 @@ export default function ChatPage() {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0 }}
                 className="text-gray-600 text-lg font-medium"
               >
                 Initializing secure chat session...
@@ -153,7 +150,7 @@ export default function ChatPage() {
               <motion.h1
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+                transition={{ delay: 0, duration: 0.5 }}
                 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent mb-4"
               >
                 💬 Chat with Pharmacist
@@ -161,7 +158,7 @@ export default function ChatPage() {
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
+                transition={{ delay: 0, duration: 0.5 }}
                 className="text-gray-600 text-lg max-w-2xl mx-auto"
               >
                 Get instant consultation and medication advice from licensed
@@ -173,7 +170,7 @@ export default function ChatPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
+              transition={{ delay: 0, duration: 0.5 }}
               className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg p-4 mb-6 border border-gray-200 dark:border-gray-700"
             >
               <div className="flex flex-wrap items-center justify-between gap-4 text-sm">
@@ -210,7 +207,7 @@ export default function ChatPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
+              transition={{ delay: 0, duration: 0.5 }}
               className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden"
             >
               <ChatWindow

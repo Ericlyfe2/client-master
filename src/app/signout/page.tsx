@@ -111,7 +111,7 @@ export default function SignOutPage() {
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: "spring" }}
+                transition={{ delay: 0, type: "spring" }}
                 className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
               >
                 <span className="text-2xl">✅</span>
@@ -119,7 +119,7 @@ export default function SignOutPage() {
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0 }}
                 className="text-2xl font-bold text-gray-800 dark:text-white mb-4"
               >
                 Successfully Signed Out
@@ -127,7 +127,7 @@ export default function SignOutPage() {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
+                transition={{ delay: 0 }}
                 className="text-gray-600 dark:text-gray-300 mb-6"
               >
                 You have been securely signed out of your SafeMeds account.
@@ -136,7 +136,7 @@ export default function SignOutPage() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0 }}
                 className="flex items-center justify-center gap-2 text-sm text-gray-500"
               >
                 <motion.div

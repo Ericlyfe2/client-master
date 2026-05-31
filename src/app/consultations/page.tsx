@@ -110,7 +110,7 @@ export default function ConsultationsPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            transition={{ delay: 0 }}
             className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8"
           >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -170,7 +170,7 @@ export default function ConsultationsPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0 }}
             className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden"
           >
             {loading ? (

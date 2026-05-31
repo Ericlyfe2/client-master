@@ -110,7 +110,7 @@ export default function AnalyticsPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
+                transition={{ delay: 0 }}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
               >
                 <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
@@ -184,7 +184,7 @@ export default function AnalyticsPage() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+                  transition={{ delay: 0 }}
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
                 >
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
@@ -214,7 +214,7 @@ export default function AnalyticsPage() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ delay: 0 }}
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
                 >
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
@@ -249,7 +249,7 @@ export default function AnalyticsPage() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ delay: 0 }}
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
                 >
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
@@ -273,7 +273,7 @@ export default function AnalyticsPage() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
+                  transition={{ delay: 0 }}
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
                 >
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
@@ -297,7 +297,7 @@ export default function AnalyticsPage() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
+                  transition={{ delay: 0 }}
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
                 >
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
@@ -330,7 +330,7 @@ export default function AnalyticsPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
+                transition={{ delay: 0 }}
                 className="mt-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6"
               >
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">

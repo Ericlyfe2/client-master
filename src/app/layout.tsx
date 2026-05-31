@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   title: "SafeMeds - Healthcare Management Platform",
   description:
     "Secure healthcare management platform with role-based access for clients and pharmacies",
+  icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
 export default function RootLayout({

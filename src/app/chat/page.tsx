@@ -215,6 +215,8 @@ export default function ChatPage() {
             >
               <ChatWindow
                 chatId={anonId?.slice(0, 8) || "default"}
+                sender={user?.role === "PHARMACY" ? "pharmacist" : "user"}
+                senderName={user?.name}
                 onMessageCountChange={(count: number) =>
                   setSessionInfo((prev) => ({ ...prev, messageCount: count }))
                 }

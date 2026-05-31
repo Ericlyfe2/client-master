@@ -1,7 +1,5 @@
-import { PrismaClient } from "@/lib/prisma-client";
+import { prisma } from "@/lib/prisma";
 import type { StaffPosition, ShiftStatus, TimeOffType, TimeOffStatus } from "@/lib/prisma-client";
-
-const prisma = new PrismaClient();
 
 export interface StaffMember {
   id: string;

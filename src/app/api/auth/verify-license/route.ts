@@ -1,9 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@/lib/prisma-client";
+import { prisma } from "@/lib/prisma";
+import { rateLimit } from "@/lib/rateLimit";
 
-const prisma = new PrismaClient();
+// Validate pharmacist license format
+function validateLicenseFormat(licenseNumber: string): boolean {
+  // Supports common US license formats: 2 letters + 6 digits, or 1 letter + 7 digits
+  const licenseRegex = /^[A-Za-z]{1,2}\d{6,7}$/;
+  return licenseRegex.test(licenseNumber);
+}
 
-// Simplified license verification function that accepts any license
+// External license verification via NABP (National Association of Boards of Pharmacy)
+// Falls back to format validation if external API is unavailable
 async function verifyPharmacistLicense(
   licenseNumber: string,
   state?: string
@@ -17,23 +24,70 @@ async function verifyPharmacistLicense(
   };
   error?: string;
 }> {
-  // Simulate API call delay
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  if (!validateLicenseFormat(licenseNumber)) {
+    return {
+      isValid: false,
+      error: "Invalid license number format",
+    };
+  }
 
-  // Always return valid for any license number
-  return {
-    isValid: true,
-    details: {
-      name: `Dr. ${licenseNumber}`, // Use license number as name for demo
-      state: state || "CA",
-      expirationDate: "2025-12-31",
-      status: "ACTIVE",
-    },
-  };
+  try {
+    const apiUrl = process.env.LICENSE_VERIFICATION_API_URL;
+    const apiKey = process.env.LICENSE_VERIFICATION_API_KEY;
+
+    if (apiUrl && apiKey) {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          licenseNumber: licenseNumber.toUpperCase(),
+          state: state || "NY",
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return {
+          isValid: data.isValid === true,
+          details: data.details,
+        };
+      }
+    }
+
+    // Fallback: validate format only if external API not configured
+    return {
+      isValid: true,
+      details: {
+        state: state || "NY",
+        status: "PENDING_VERIFICATION",
+      },
+    };
+  } catch (error) {
+    console.error("License verification API error:", error);
+    return {
+      isValid: true,
+      details: {
+        state: state || "NY",
+        status: "PENDING_VERIFICATION",
+      },
+    };
+  }
 }
 
 export async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown";
+    const rl = rateLimit(`verify-license:${ip}`, 10, 60000);
+    if (!rl.allowed) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const { licenseNumber, email, state, isSignIn = false } = body;
 
@@ -87,13 +141,19 @@ export async function POST(request: NextRequest) {
       state
     );
 
+    if (!verificationResult.isValid) {
+      return NextResponse.json(
+        { isValid: false, error: verificationResult.error || "Invalid license number" },
+        { status: 400 }
+      );
+    }
+
     return NextResponse.json({
       isValid: true,
       message: "License verified successfully",
       details: verificationResult.details,
     });
   } catch (error) {
-    console.error("License verification error:", error);
     return NextResponse.json(
       { error: "Unable to verify license. Please try again later." },
       { status: 500 }
@@ -130,7 +190,14 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // Always return valid for any license number
+    if (!validateLicenseFormat(licenseNumber)) {
+      return NextResponse.json({
+        isValid: false,
+        available: false,
+        error: "Invalid license number format",
+      });
+    }
+
     return NextResponse.json({
       isValid: true,
       available: true,

@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { MapPin, Navigation as NavIcon, Square } from "lucide-react";
 import { publishLocation, stopSharing } from "@/lib/locationTracking";
+import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 
 // Courier-facing page. Opened on the runner's phone for a specific delivery.
 // Streams the device's real GPS to Firestore so the student's tracking map
@@ -72,6 +73,7 @@ export default function CourierSharePage() {
   }, []);
 
   return (
+    <ProtectedRoute allowedRoles={["PHARMACY", "ADMIN"]}>
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-orange-50 to-red-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -136,5 +138,6 @@ export default function CourierSharePage() {
         )}
       </motion.div>
     </div>
+    </ProtectedRoute>
   );
 }

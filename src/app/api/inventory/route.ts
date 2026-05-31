@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@/lib/prisma-client";
+import { prisma } from "@/lib/prisma";
 import { auth } from "@/app/auth";
-
-const prisma = new PrismaClient();
 
 // GET - Fetch pharmacy inventory with statistics
 export async function GET(request: NextRequest) {
@@ -38,7 +36,7 @@ export async function GET(request: NextRequest) {
 
     if (lowStock === "true") {
       where.quantity = {
-        lte: prisma.inventoryItem.fields.minQuantity,
+        lte: 10,
       };
     }
 
@@ -91,7 +89,7 @@ export async function GET(request: NextRequest) {
         pharmacyId: session.user.id,
         isActive: true,
         quantity: {
-          lte: prisma.inventoryItem.fields.minQuantity,
+          lte: 10,
         },
       },
     });

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@/lib/prisma-client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
+import { auth } from "@/app/auth";
 
 interface ProfileResponse {
   success: boolean;
@@ -32,18 +31,15 @@ export async function GET(
   request: NextRequest
 ): Promise<NextResponse<ProfileResponse>> {
   try {
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get("userId");
-
-    if (!userId) {
+    const session = await auth();
+    if (!session?.user) {
       return NextResponse.json(
-        {
-          success: false,
-          error: "User ID is required",
-        },
-        { status: 400 }
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
       );
     }
+
+    const userId = session.user.id;
 
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -98,21 +94,27 @@ export async function PUT(
   request: NextRequest
 ): Promise<NextResponse<ProfileResponse>> {
   try {
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get("userId");
-
-    if (!userId) {
+    const session = await auth();
+    if (!session?.user) {
       return NextResponse.json(
-        {
-          success: false,
-          error: "User ID is required",
-        },
-        { status: 400 }
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
       );
     }
 
+    const userId = session.user.id;
+
     const body = await request.json();
-    const updates = body;
+    const allowedFields = [
+      "firstName", "lastName", "phone", "address", "city", "state", "zipCode",
+      "pharmacyName", "organization",
+    ];
+    const updates: Record<string, unknown> = {};
+    for (const field of allowedFields) {
+      if (body[field] !== undefined) {
+        updates[field] = body[field];
+      }
+    }
 
     const updatedUser = await prisma.user.update({
       where: { id: userId },

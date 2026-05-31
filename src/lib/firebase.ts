@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, signInAnonymously, onAuthStateChanged, type User } from "firebase/auth";
 import {
   getFirestore,
   enableNetwork,
@@ -48,6 +48,31 @@ export const auth = getAuth(app);
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
+
+// Anonymous Firebase Auth. The app authenticates users via NextAuth, but
+// Firestore security rules need a Firebase identity (`request.auth != null`).
+// We sign each browser in anonymously so chat / video signaling / live GPS
+// pass the rules. Idempotent + memoized — safe to await before any Firestore op.
+let authReady: Promise<User | null> | null = null;
+export function ensureAuth(): Promise<User | null> {
+  if (typeof window === "undefined") return Promise.resolve(null); // server: skip
+  if (authReady) return authReady;
+  authReady = new Promise((resolve, reject) => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        unsub();
+        resolve(user);
+      }
+    });
+    if (!auth.currentUser) {
+      signInAnonymously(auth).catch((err) => {
+        unsub();
+        reject(err);
+      });
+    }
+  });
+  return authReady;
+}
 
 // Enable offline persistence for Firestore
 // This allows the app to work offline and sync when connection is restored

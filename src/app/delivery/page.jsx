@@ -4,10 +4,6 @@ import { useState, useEffect } from "react";
 import DeliveryTracker from "@/components/Delivery/DeliveryTracker";
 import DeliveryMap from "@/components/Delivery/DeliveryMap";
 import OrderStatus from "@/components/Delivery/OrderStatus";
-import {
-  getDeliveryStatus,
-  getDeliveryLocation,
-} from "@/services/deliveryService";
 import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 import Navigation from "@/components/Common/Navigation";
 import { useAuth } from "@/hooks/useAuth";
@@ -34,22 +30,30 @@ export default function DeliveryPage() {
     }
     setAnonId(id);
 
-    // Fetch delivery data
+    // Fetch the user's real delivery record from the DB.
     const fetchDeliveryData = async () => {
       try {
         setLoading(true);
-        const status = await getDeliveryStatus(id);
-        const location = await getDeliveryLocation(id);
-
-        setDeliveryData({
-          status,
-          location,
-          orderId: `SM-${id.slice(0, 8).toUpperCase()}`,
-          estimatedDelivery: new Date(Date.now() + 2 * 60 * 60 * 1000), // 2 hours from now
-          dropPoint: "Campus Library - North Entrance",
-          packageType: "Discreet Packaging",
-          trackingCode: `TRK-${id.slice(0, 6).toUpperCase()}`,
-        });
+        const res = await fetch("/api/delivery/me");
+        const data = await res.json();
+        const d = data?.delivery;
+        if (d) {
+          setDeliveryData({
+            // DB enum (ORDER_CONFIRMED) -> tracker stage id (order_confirmed)
+            status: String(d.status || "ORDER_CONFIRMED").toLowerCase(),
+            orderId: d.order?.orderNumber || d.trackingNumber,
+            estimatedDelivery: d.estimatedDelivery,
+            dropPoint: d.dropPoint || "Campus Library - North Entrance",
+            dropLat: d.dropLat,
+            dropLng: d.dropLng,
+            packageType: d.packageType || "Discreet Packaging",
+            trackingCode: d.trackingNumber,
+            deliveryId: d.id,
+            medication: d.order?.prescription?.medication?.name,
+          });
+        } else {
+          setDeliveryData(null); // no active delivery
+        }
       } catch (err) {
         setError("Unable to fetch delivery information");
         console.error("Delivery fetch error:", err);
@@ -137,7 +141,15 @@ export default function DeliveryPage() {
                     </p>
                   </div>
                   <div className="p-4">
-                    <DeliveryMap deliveryId={anonId} dropPoint={deliveryData?.dropPoint} />
+                    <DeliveryMap
+                      deliveryId={anonId}
+                      dropPoint={deliveryData?.dropPoint}
+                      dropCoords={
+                        deliveryData?.dropLat != null && deliveryData?.dropLng != null
+                          ? { lat: deliveryData.dropLat, lng: deliveryData.dropLng }
+                          : undefined
+                      }
+                    />
                     <a
                       href={`/deliver/${anonId}`}
                       target="_blank"

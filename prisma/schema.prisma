@@ -100,6 +100,8 @@ model Delivery {
   updatedAt         DateTime       @updatedAt
   anonymousId       String?
   dropPoint         String?
+  dropLat           Float?
+  dropLng           Float?
   isAnonymous       Boolean        @default(false)
   orderId           String?        @unique
   packageType       String         @default("DISCREET")

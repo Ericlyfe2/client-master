@@ -78,7 +78,7 @@ export const signUp = async (data: SignUpData): Promise<UserProfile> => {
     });
 
     if (existingUser) {
-      throw new Error("An account with this email already exists");
+      throw new Error("Unable to create account. Please check your information and try again.");
     }
 
     // Validate required fields based on role
@@ -158,18 +158,17 @@ export const signIn = async (data: SignInData): Promise<UserProfile> => {
     });
 
     if (!user) {
-      throw new Error("No account found with this email");
+      throw new Error("Invalid email or password");
     }
 
-    // Check if user is verified (optional - you might want to allow unverified users to sign in)
     if (!user.isVerified) {
-      throw new Error("Please verify your email address before signing in");
+      throw new Error("Invalid email or password");
     }
 
     // Verify password
     const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
     if (!isPasswordValid) {
-      throw new Error("Incorrect password");
+      throw new Error("Invalid email or password");
     }
 
     // Return user profile without password

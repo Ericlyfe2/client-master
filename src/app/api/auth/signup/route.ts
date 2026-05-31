@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { hashPassword } from "@/utils/password";
 import { prisma } from "@/lib/prisma";
 import { LEGAL_VERSION } from "@/lib/legal";
+import { rateLimit } from "@/lib/rateLimit";
 
 // Import the license verification function from the dedicated API
 async function verifyPharmacistLicense(
@@ -32,6 +33,15 @@ async function verifyPharmacistLicense(
 
 export async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown";
+    const rl = rateLimit(`signup:${ip}`, 5, 60000);
+    if (!rl.allowed) {
+      return NextResponse.json(
+        { error: "Too many signup attempts. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const {
       username,
@@ -51,19 +61,8 @@ export async function POST(request: NextRequest) {
       termsVersion,
     } = body;
 
-    console.log("🚀 Signup request received:", {
-      role,
-      username,
-      email,
-      hasPassword: !!password,
-      hasLicense: !!licenseNumber,
-      firstName,
-      lastName
-    });
-
     // Validate required fields
     if (!username || !email || !password || !firstName || !lastName || !role) {
-      console.error("❌ Missing required fields:", { username: !!username, email: !!email, password: !!password, firstName: !!firstName, lastName: !!lastName, role: !!role });
       return NextResponse.json(
         { error: "All required fields must be provided" },
         { status: 400 }
@@ -84,7 +83,6 @@ export async function POST(request: NextRequest) {
     // Additional validation for pharmacists
     if (role === "PHARMACY") {
       if (!licenseNumber || !pharmacyName || !phone) {
-        console.error("❌ Missing pharmacy fields:", { licenseNumber: !!licenseNumber, pharmacyName: !!pharmacyName, phone: !!phone });
         return NextResponse.json(
           {
             error:
@@ -96,7 +94,6 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already exists
-    console.log("🔍 Checking for existing user...");
     const existingUser = await prisma.user.findFirst({
       where: {
         OR: [{ username }, { email }],
@@ -104,7 +101,6 @@ export async function POST(request: NextRequest) {
     });
 
     if (existingUser) {
-      console.error("❌ User already exists:", { username: existingUser.username, email: existingUser.email });
       return NextResponse.json(
         { error: "Username or email already exists" },
         { status: 409 }
@@ -141,11 +137,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Hash password
-    console.log("🔐 Hashing password...");
     const hashedPassword = await hashPassword(password);
 
     // Create user
-    console.log("👤 Creating user in database...");
     const user = await prisma.user.create({
       data: {
         username,
@@ -182,8 +176,6 @@ export async function POST(request: NextRequest) {
         isVerified: true,
       },
     });
-
-    console.log("✅ User created successfully:", { id: user.id, username: user.username, role: user.role });
 
     return NextResponse.json(
       {

@@ -27,19 +27,25 @@ import {
   where,
   type DocumentData,
 } from "firebase/firestore";
-import { db } from "./firebase";
+import { db, ensureAuth } from "./firebase";
 
 // Public STUN servers are enough for NAT traversal on most networks.
 // For symmetric NATs a TURN server is required — add one here in production.
+const iceServers: RTCIceServer[] = [
+  { urls: ["stun:stun.l.google.com:19302", "stun:stun1.l.google.com:19302"] },
+];
+
+// Only add a TURN server when it's fully configured. An entry with an empty
+// username/credential makes RTCPeerConnection throw InvalidAccessError.
+const turnUrl = process.env.NEXT_PUBLIC_TURN_URL;
+const turnUser = process.env.NEXT_PUBLIC_TURN_USERNAME;
+const turnCred = process.env.NEXT_PUBLIC_TURN_CREDENTIAL;
+if (turnUrl && turnUser && turnCred) {
+  iceServers.push({ urls: turnUrl, username: turnUser, credential: turnCred });
+}
+
 const ICE_SERVERS: RTCConfiguration = {
-  iceServers: [
-    { urls: ["stun:stun.l.google.com:19302", "stun:stun1.l.google.com:19302"] },
-    {
-      urls: process.env.NEXT_PUBLIC_TURN_URL || "turn:turn.safemeds.com:3478",
-      username: process.env.NEXT_PUBLIC_TURN_USERNAME || "",
-      credential: process.env.NEXT_PUBLIC_TURN_CREDENTIAL || "",
-    },
-  ],
+  iceServers,
   iceCandidatePoolSize: 10,
 };
 
@@ -68,6 +74,7 @@ export async function createCall({
   onRemoteStream,
   onConnectionStateChange,
 }: CreateCallOptions): Promise<CallHandle> {
+  await ensureAuth();
   const pc = new RTCPeerConnection(ICE_SERVERS);
   const unsubscribers: Array<() => void> = [];
 
@@ -147,21 +154,31 @@ export interface IncomingCall {
 export function listenForIncomingCalls(
   onCall: (call: IncomingCall) => void
 ): () => void {
-  const roomsRef = collection(db, "videoRooms");
-  const ringingQuery = query(roomsRef, where("status", "==", "ringing"));
-
-  return onSnapshot(ringingQuery, (snapshot) => {
-    snapshot.docChanges().forEach((change) => {
-      if (change.type === "added") {
-        const data = change.doc.data();
-        onCall({
-          roomId: change.doc.id,
-          callerName: data.callerName || "Patient",
-          createdAt: data.createdAt || Date.now(),
+  let unsub = () => {};
+  let cancelled = false;
+  ensureAuth()
+    .then(() => {
+      if (cancelled) return;
+      const roomsRef = collection(db, "videoRooms");
+      const ringingQuery = query(roomsRef, where("status", "==", "ringing"));
+      unsub = onSnapshot(ringingQuery, (snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === "added") {
+            const data = change.doc.data();
+            onCall({
+              roomId: change.doc.id,
+              callerName: data.callerName || "Patient",
+              createdAt: data.createdAt || Date.now(),
+            });
+          }
         });
-      }
-    });
-  });
+      });
+    })
+    .catch((e) => console.error("call listener auth failed:", e));
+  return () => {
+    cancelled = true;
+    unsub();
+  };
 }
 
 export type JoinCallOptions = CreateCallOptions;
@@ -175,6 +192,7 @@ export async function joinCall({
   onRemoteStream,
   onConnectionStateChange,
 }: JoinCallOptions): Promise<CallHandle | null> {
+  await ensureAuth();
   const roomRef = doc(db, "videoRooms", roomId);
   const roomSnap = await getDoc(roomRef);
   if (!roomSnap.exists() || !roomSnap.data()?.offer) {

@@ -8,7 +8,7 @@
 // Doc: deliveryLocations/{deliveryId} -> { lat, lng, accuracy, heading, speed, updatedAt, active }
 
 import { doc, setDoc, onSnapshot } from "firebase/firestore";
-import { db } from "./firebase";
+import { db, ensureAuth } from "./firebase";
 
 export interface CourierLocation {
   lat: number;
@@ -26,6 +26,7 @@ export async function publishLocation(
   pos: GeolocationPosition,
   active = true
 ): Promise<void> {
+  await ensureAuth();
   const ref = doc(db, "deliveryLocations", deliveryId);
   await setDoc(
     ref,
@@ -44,6 +45,7 @@ export async function publishLocation(
 
 // Courier side: mark the session ended (keeps last position, flips active off).
 export async function stopSharing(deliveryId: string): Promise<void> {
+  await ensureAuth();
   const ref = doc(db, "deliveryLocations", deliveryId);
   await setDoc(ref, { active: false, updatedAt: Date.now() }, { merge: true });
 }
@@ -53,8 +55,19 @@ export function watchLocation(
   deliveryId: string,
   onUpdate: (loc: CourierLocation | null) => void
 ): () => void {
-  const ref = doc(db, "deliveryLocations", deliveryId);
-  return onSnapshot(ref, (snap) => {
-    onUpdate(snap.exists() ? (snap.data() as CourierLocation) : null);
-  });
+  let unsub = () => {};
+  let cancelled = false;
+  ensureAuth()
+    .then(() => {
+      if (cancelled) return;
+      const ref = doc(db, "deliveryLocations", deliveryId);
+      unsub = onSnapshot(ref, (snap) => {
+        onUpdate(snap.exists() ? (snap.data() as CourierLocation) : null);
+      });
+    })
+    .catch((e) => console.error("location auth failed:", e));
+  return () => {
+    cancelled = true;
+    unsub();
+  };
 }

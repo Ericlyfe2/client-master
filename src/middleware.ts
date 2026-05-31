@@ -28,11 +28,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // API routes are authenticated by the route handlers themselves
-  if (pathname.startsWith('/api/')) {
-    return NextResponse.next()
-  }
- 
+  
   // Get the session token from cookies
   const sessionToken = request.cookies.get('authjs.session-token')?.value ||
                       request.cookies.get('__Secure-authjs.session-token')?.value

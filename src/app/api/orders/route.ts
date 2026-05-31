@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@/lib/prisma-client";
+import { prisma } from "@/lib/prisma";
 import { auth } from "@/app/auth";
-
-const prisma = new PrismaClient();
 
 // GET - Fetch orders with comprehensive details
 export async function GET(request: NextRequest) {
@@ -219,10 +217,8 @@ export async function POST(request: NextRequest) {
     const totalAmount = Number(prescription.medication.price) * prescription.quantity;
 
     // Generate order number
-    const orderNumber = `ORD-${Date.now()}-${Math.random()
-      .toString(36)
-      .substr(2, 5)
-      .toUpperCase()}`;
+    const { randomUUID } = await import("crypto");
+    const orderNumber = `ORD-${Date.now()}-${randomUUID().slice(0, 7).toUpperCase()}`;
 
     // Create order
     const order = await prisma.order.create({
@@ -258,6 +254,34 @@ export async function POST(request: NextRequest) {
         },
       },
     });
+
+    // Create the delivery record for this order so it enters the tracking
+    // pipeline. Non-fatal: if it fails, the order still succeeds.
+    try {
+      const trackingNumber = `TRK-${Date.now().toString().slice(-6)}-${randomUUID()
+        .slice(0, 4)
+        .toUpperCase()}`;
+      await prisma.delivery.create({
+        data: {
+          userId: order.userId,
+          anonymousId: order.anonymousId,
+          orderId: order.id,
+          status: "ORDER_CONFIRMED",
+          trackingNumber,
+          address: body.address || "",
+          city: body.city || "",
+          state: body.state || "",
+          zipCode: body.zipCode || "",
+          dropPoint: body.dropPoint || "Campus Library - North Entrance",
+          dropLat: body.dropLat ?? null,
+          dropLng: body.dropLng ?? null,
+          isAnonymous: order.isAnonymous,
+          estimatedDelivery: new Date(Date.now() + 2 * 60 * 60 * 1000),
+        },
+      });
+    } catch (deliveryError) {
+      console.error("Order created but delivery creation failed:", deliveryError);
+    }
 
     return NextResponse.json({
       order,

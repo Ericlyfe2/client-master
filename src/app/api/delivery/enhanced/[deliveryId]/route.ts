@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@/lib/prisma-client";
+import { prisma } from "@/lib/prisma";
 import { auth } from "@/app/auth";
-
-const prisma = new PrismaClient();
 
 // GET - Fetch delivery details and tracking information
 export async function GET(

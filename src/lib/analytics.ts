@@ -13,7 +13,6 @@ let analytics: Analytics | null = null;
 if (typeof window !== "undefined") {
   try {
     analytics = getAnalytics(app);
-    console.log("Firebase Analytics initialized");
   } catch (error) {
     console.warn("Firebase Analytics initialization failed:", error);
   }
@@ -31,7 +30,6 @@ export const trackEvent = (
 
   try {
     logEvent(analytics, eventName, parameters);
-    console.log(`Analytics event tracked: ${eventName}`, parameters);
   } catch (error) {
     console.error("Failed to track analytics event:", error);
   }
@@ -51,7 +49,7 @@ export const setUserAnalytics = (
     if (userProperties) {
       setUserProperties(analytics, userProperties);
     }
-    console.log("User analytics set:", userId, userProperties);
+    // User analytics set
   } catch (error) {
     console.error("Failed to set user analytics:", error);
   }
@@ -238,12 +236,10 @@ export const trackFeatureLoadTime = (
 };
 
 export const trackPharmacyRegistration = (
-  pharmacyName: string,
-  licenseNumber: string
+  pharmacyName: string
 ) => {
   trackEvent(AnalyticsEvents.PHARMACY_REGISTRATION, {
     pharmacy_name: pharmacyName,
-    license_number: licenseNumber,
     timestamp: new Date().toISOString(),
   });
 };

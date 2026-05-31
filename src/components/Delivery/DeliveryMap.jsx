@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { watchLocation } from "@/lib/locationTracking";
+import { resolveDropCoords } from "@/lib/dropPoints";
 
 // Straight-line distance (metres) between two coords — Haversine.
 const haversine = (a, b) => {
@@ -21,9 +22,9 @@ const haversine = (a, b) => {
 // device) on an OpenStreetMap embed — no Google Maps API key required.
 // ETA comes from OSRM's free routing API (real road distance + duration).
 const DeliveryMap = ({ deliveryId, dropPoint, dropCoords }) => {
-  // Drop-point coordinates. Defaults to KNUST main campus; pass `dropCoords`
-  // per delivery once drop points carry real lat/lng.
-  const drop = dropCoords || { lat: 6.6745, lng: -1.5716 };
+  // Drop-point coordinates: explicit dropCoords win, else resolve from the
+  // drop-point name, else KNUST campus default.
+  const drop = dropCoords || resolveDropCoords(dropPoint);
 
   const [location, setLocation] = useState(null);
   const [staleSeconds, setStaleSeconds] = useState(0);
@@ -48,6 +49,54 @@ const DeliveryMap = ({ deliveryId, dropPoint, dropCoords }) => {
 
   const hasFix = location && typeof location.lat === "number";
   const isLive = hasFix && location.active && staleSeconds < 30;
+
+  // Compute ETA from courier -> drop point using OSRM's free routing API
+  // (real road distance + duration). Falls back to straight-line + assumed
+  // speed if the routing service is unreachable.
+  useEffect(() => {
+    if (!hasFix) return;
+    let cancelled = false;
+    const from = { lat: location.lat, lng: location.lng };
+
+    const fallback = () => {
+      const distanceM = haversine(from, drop);
+      const speed = location.speed && location.speed > 0.5 ? location.speed : 6; // m/s
+      return { distanceM, durationS: distanceM / speed, source: "estimate" };
+    };
+
+    const url = `https://router.project-osrm.org/route/v1/driving/${from.lng},${from.lat};${drop.lng},${drop.lat}?overview=false`;
+    fetch(url)
+      .then((r) => r.json())
+      .then((d) => {
+        if (cancelled) return;
+        const route = d?.routes?.[0];
+        setEta(
+          route
+            ? { distanceM: route.distance, durationS: route.duration, source: "route" }
+            : fallback()
+        );
+      })
+      .catch(() => {
+        if (!cancelled) setEta(fallback());
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [location?.lat, location?.lng]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const formatEta = () => {
+    if (!eta) return null;
+    const mins = Math.max(1, Math.round(eta.durationS / 60));
+    const km = (eta.distanceM / 1000).toFixed(km1(eta.distanceM));
+    const arrival = new Date(Date.now() + eta.durationS * 1000).toLocaleTimeString(
+      [],
+      { hour: "2-digit", minute: "2-digit" }
+    );
+    return { mins, km, arrival, approx: eta.source === "estimate" };
+  };
+  const km1 = (m) => (m < 10000 ? 1 : 0);
+  const etaInfo = formatEta();
 
   // Small bounding box around the courier for the OSM embed.
   const osmSrc = hasFix
@@ -94,6 +143,18 @@ const DeliveryMap = ({ deliveryId, dropPoint, dropCoords }) => {
             : "Offline"}
         </span>
       </div>
+
+      {/* ETA badge */}
+      {hasFix && etaInfo && (
+        <div className="absolute top-3 right-3 z-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg px-3 py-1.5 shadow-lg text-right">
+          <div className="text-xs text-gray-500 dark:text-gray-400">
+            ETA {etaInfo.approx ? "~" : ""}{etaInfo.arrival}
+          </div>
+          <div className="text-sm font-semibold text-green-600 dark:text-green-400">
+            {etaInfo.mins} min · {etaInfo.km} km
+          </div>
+        </div>
+      )}
 
       {/* Precision + coordinates readout */}
       {hasFix && (

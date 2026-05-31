@@ -57,10 +57,10 @@ export const signUp = async (data: SignUpData): Promise<UserCredential> => {
   try {
     const { email, password } = data;
 
-    // Create user with Firebase Auth
+    // Create user with Firebase Auth (normalize email to lowercase)
     const userCredential = await createUserWithEmailAndPassword(
       auth,
-      email,
+      email.toLowerCase(),
       password
     );
     const user = userCredential.user;

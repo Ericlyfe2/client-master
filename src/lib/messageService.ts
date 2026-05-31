@@ -24,6 +24,16 @@ export interface Message {
   } | null;
 }
 
+// Sanitize user input to prevent XSS
+function sanitizeInput(input: string): string {
+  return input
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
+}
+
 // Create a new message
 export const createMessage = async (
   data: CreateMessageData
@@ -33,7 +43,7 @@ export const createMessage = async (
       data: {
         chatId: data.chatId,
         userId: data.userId,
-        content: data.content,
+        content: sanitizeInput(data.content),
         type: data.type || "TEXT",
       },
       include: {

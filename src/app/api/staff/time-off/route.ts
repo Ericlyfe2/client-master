@@ -5,18 +5,11 @@ import {
   CreateTimeOffRequestData,
 } from "@/services/staffService";
 
-// Helper function to get user ID from session
-async function getUserIdFromSession(): Promise<string | null> {
-  const session = await auth();
-  return session?.user?.id || null;
-}
-
 // GET endpoint to retrieve time off requests
 export async function GET(request: NextRequest) {
   try {
-    const userId = await getUserIdFromSession();
-    
-    if (!userId) {
+    const session = await auth();
+    if (!session?.user || !["ADMIN", "PHARMACY"].includes(session.user.role)) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }
@@ -45,9 +38,8 @@ export async function GET(request: NextRequest) {
 // POST endpoint to create a time off request
 export async function POST(request: NextRequest) {
   try {
-    const userId = await getUserIdFromSession();
-    
-    if (!userId) {
+    const session = await auth();
+    if (!session?.user || !["ADMIN", "PHARMACY"].includes(session.user.role)) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 401 }

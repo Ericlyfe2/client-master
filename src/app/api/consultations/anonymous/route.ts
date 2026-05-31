@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@/lib/prisma-client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 // POST - Create anonymous consultation
 export async function POST(request: NextRequest) {
@@ -19,12 +17,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Generate anonymous ID and session ID
-    const anonymousId = `anon_${Date.now()}_${Math.random()
-      .toString(36)
-      .substr(2, 9)}`;
-    const sessionId = `session_${Date.now()}_${Math.random()
-      .toString(36)
-      .substr(2, 9)}`;
+    const { randomUUID } = await import("crypto");
+    const anonymousId = `anon_${Date.now()}_${randomUUID().slice(0, 9)}`;
+    const sessionId = `session_${Date.now()}_${randomUUID().slice(0, 9)}`;
 
     // Create consultation
     const consultation = await prisma.consultation.create({

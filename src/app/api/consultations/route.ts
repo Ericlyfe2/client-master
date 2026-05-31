@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@/lib/prisma-client";
+import { prisma } from "@/lib/prisma";
 import { auth } from "@/app/auth";
-
-const prisma = new PrismaClient();
 
 // GET - Fetch consultations (for pharmacists and admins)
 export async function GET(request: NextRequest) {

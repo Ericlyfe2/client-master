@@ -98,7 +98,7 @@ describe("Auth Service - SignUp validation", () => {
     };
 
     await expect(signUp(data)).rejects.toThrow(
-      "An account with this email already exists"
+      "Unable to create account"
     );
   });
 
@@ -173,7 +173,7 @@ describe("Auth Service - SignIn validation", () => {
 
     await expect(
       signIn({ email: "test@example.com", password: "StrongPass1" })
-    ).rejects.toThrow("Please verify your email");
+    ).rejects.toThrow("Invalid email or password");
   });
 
   it("should reject incorrect password", async () => {
@@ -187,7 +187,7 @@ describe("Auth Service - SignIn validation", () => {
 
     await expect(
       signIn({ email: "test@example.com", password: "WrongPass1" })
-    ).rejects.toThrow("Incorrect password");
+    ).rejects.toThrow("Invalid email or password");
   });
 
   it("should sign in with valid credentials", async () => {

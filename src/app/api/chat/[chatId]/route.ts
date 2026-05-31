@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/app/auth";
 import { getMessagesByChatId, createMessage } from "@/lib/messageService";
 
 interface ChatResponse {
@@ -84,14 +85,22 @@ export async function POST(
   const { chatId } = await params;
 
   try {
-    const body = await request.json();
-    const { content, userId, type } = body;
+    const session = await auth();
+    if (!session?.user) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
 
-    if (!content?.trim() || !userId) {
+    const body = await request.json();
+    const { content, type } = body;
+
+    if (!content?.trim()) {
       return NextResponse.json(
         {
           success: false,
-          error: "Content and userId are required",
+          error: "Content is required",
         },
         { status: 400 }
       );
@@ -100,7 +109,7 @@ export async function POST(
     // Create new message
     const newMessage = await createMessage({
       chatId,
-      userId,
+      userId: session.user.id,
       content: content.trim(),
       type: type || "TEXT",
     });

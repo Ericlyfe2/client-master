@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@/lib/prisma-client";
+import { prisma } from "@/lib/prisma";
 import { auth } from "@/app/auth";
-
-const prisma = new PrismaClient();
 
 // GET - Fetch specific consultation
 export async function GET(
@@ -54,6 +52,14 @@ export async function GET(
       );
     }
 
+    // Verify access
+    if (session.user.role === "CLIENT" && consultation.userId !== session.user.id) {
+      return NextResponse.json({ error: "Access denied" }, { status: 403 });
+    }
+    if (session.user.role === "PHARMACY" && consultation.assignedPharmacistId && consultation.assignedPharmacistId !== session.user.id) {
+      return NextResponse.json({ error: "Access denied" }, { status: 403 });
+    }
+
     return NextResponse.json({ consultation });
   } catch (error) {
     console.error("Error fetching consultation:", error);
@@ -97,6 +103,19 @@ export async function PUT(
         { error: "Consultation not found" },
         { status: 404 }
       );
+    }
+
+    // Verify access - PHARMACY can only update their assigned consultations
+    if (session.user.role === "PHARMACY") {
+      if (existingConsultation.assignedPharmacistId && existingConsultation.assignedPharmacistId !== session.user.id) {
+        return NextResponse.json({ error: "Access denied" }, { status: 403 });
+      }
+      if (assignedPharmacistId && assignedPharmacistId !== session.user.id) {
+        return NextResponse.json({ error: "Cannot reassign to another pharmacist" }, { status: 403 });
+      }
+    }
+    if (session.user.role === "CLIENT" && existingConsultation.userId !== session.user.id) {
+      return NextResponse.json({ error: "Access denied" }, { status: 403 });
     }
 
     // Update consultation

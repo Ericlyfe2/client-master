@@ -2,128 +2,36 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import axios from "axios";
 import WelcomeMessage from "./WelcomeMessage";
 import VideoCall from "./VideoCall";
+import { subscribeChatMessages, sendChatMessage } from "@/lib/chatService";
 
-const ChatWindow = ({ chatId, onMessageCountChange }) => {
+// `sender` = who this client is in the conversation ("user" = student,
+// "pharmacist" = pharmacist). Both sides share the room by chatId.
+const ChatWindow = ({
+  chatId,
+  onMessageCountChange,
+  sender = "user",
+  senderName,
+}) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isVideoCallActive, setIsVideoCallActive] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [pharmacistTyping, setPharmacistTyping] = useState(false);
+  const [pharmacistTyping] = useState(false);
   const chatRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Mock pharmacist responses for demo
-  const pharmacistResponses = [
-    "Thank you for your question. I understand your concern about this medication. Let me provide you with some information...",
-    "That's a great question! Based on what you've described, I would recommend...",
-    "I appreciate you reaching out about this. It's important to discuss any concerns you have about your medication.",
-    "Let me help clarify that for you. The medication you're asking about typically...",
-    "Your safety is our top priority. I'd be happy to discuss any side effects or concerns you may have.",
-    "That's a common question. Let me explain how this medication works and what you can expect...",
-    "I'm here to help! Can you tell me a bit more about your specific situation?",
-    "Thank you for being proactive about your health. This is exactly the kind of question we're here to answer.",
-  ];
-
-  const fetchMessages = async () => {
-    try {
-      const res = await axios.get(`/api/chat/${chatId}`);
-      const fetchedMessages = res.data?.messages || [];
-
-      // Transform API messages to match local format
-      const transformedMessages = fetchedMessages.map((msg) => ({
-        text: msg.content,
-        sender: msg.type === "user" ? "user" : "pharmacist",
-        timestamp: msg.createdAt,
-      }));
-
-      setMessages(transformedMessages);
-      if (onMessageCountChange) {
-        onMessageCountChange(transformedMessages.length);
-      }
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-      // Don't clear existing messages on error, just log the error
-    }
-  };
-
-  const simulatePharmacistResponse = async () => {
-    setPharmacistTyping(true);
-
-    // Simulate typing delay
-    await new Promise((resolve) =>
-      setTimeout(resolve, 2000 + Math.random() * 3000)
-    );
-
-    const randomResponse =
-      pharmacistResponses[
-        Math.floor(Math.random() * pharmacistResponses.length)
-      ];
-    const pharmacistMessage = {
-      text: randomResponse,
-      sender: "pharmacist",
-      timestamp: new Date().toISOString(),
-    };
-
-    // Add pharmacist message to local state
-    setMessages((prev) => [...prev, pharmacistMessage]);
-
-    // Also save to API for persistence
-    try {
-      const apiPharmacistMessage = {
-        content: pharmacistMessage.text,
-        type: "pharmacist",
-        userId: "pharmacist",
-      };
-      await axios.post(`/api/chat/${chatId}`, apiPharmacistMessage);
-    } catch (error) {
-      console.error("Error saving pharmacist message:", error);
-    }
-
-    setPharmacistTyping(false);
-
-    if (onMessageCountChange) {
-      onMessageCountChange((messages.length || 0) + 1);
-    }
-  };
-
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
-
-    setIsLoading(true);
-    const newMsg = {
-      text: input,
-      sender: "user",
-      timestamp: new Date().toISOString(),
-    };
-
-    setMessages((prev) => [...prev, newMsg]);
+    const text = input;
     setInput("");
-
-    if (onMessageCountChange) {
-      onMessageCountChange((messages.length || 0) + 1);
-    }
-
+    setIsLoading(true);
     try {
-      // Transform message to API format
-      const apiMessage = {
-        content: newMsg.text,
-        type: "user",
-        userId: "anonymous", // You might want to get this from auth context
-      };
-
-      await axios.post(`/api/chat/${chatId}`, apiMessage);
-      await fetchMessages();
-
-      // Simulate pharmacist response
-      setTimeout(() => {
-        simulatePharmacistResponse();
-      }, 1000);
+      await sendChatMessage(chatId, { text, sender, senderName });
     } catch (error) {
       console.error("Error sending message:", error);
+      setInput(text); // restore on failure
     } finally {
       setIsLoading(false);
     }
@@ -136,38 +44,24 @@ const ChatWindow = ({ chatId, onMessageCountChange }) => {
     }
   };
 
+  // Live subscription to the shared room — real two-way messaging, no polling.
   useEffect(() => {
-    // Load messages from localStorage first as backup
-    const savedMessages = localStorage.getItem(`chatMessages_${chatId}`);
-    if (savedMessages) {
-      try {
-        const parsedMessages = JSON.parse(savedMessages);
-        // Ensure parsedMessages is an array
-        if (Array.isArray(parsedMessages)) {
-          setMessages(parsedMessages);
-          if (onMessageCountChange) {
-            onMessageCountChange(parsedMessages.length);
-          }
-        }
-      } catch (error) {
-        console.error("Error parsing saved messages:", error);
-      }
-    }
-
-    // Then fetch from API
-    fetchMessages();
-    const interval = setInterval(fetchMessages, 10000); // Polling every 10 seconds
-    return () => clearInterval(interval);
-  }, [chatId]);
+    if (!chatId) return;
+    const unsubscribe = subscribeChatMessages(chatId, (msgs) => {
+      const transformed = msgs.map((m) => ({
+        text: m.text,
+        sender: m.sender,
+        timestamp: m.createdAt,
+      }));
+      setMessages(transformed);
+      if (onMessageCountChange) onMessageCountChange(transformed.length);
+    });
+    return () => unsubscribe();
+  }, [chatId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     chatRef.current?.scrollTo(0, chatRef.current.scrollHeight);
-
-    // Save messages to localStorage for persistence
-    if (Array.isArray(messages) && messages.length > 0) {
-      localStorage.setItem(`chatMessages_${chatId}`, JSON.stringify(messages));
-    }
-  }, [messages, pharmacistTyping, chatId]);
+  }, [messages, pharmacistTyping]);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -194,17 +88,10 @@ const ChatWindow = ({ chatId, onMessageCountChange }) => {
             callerName="Student (Patient)"
             onEndCall={async (duration) => {
               setIsVideoCallActive(false);
-              const systemMsg = {
-                text: `System: Video consultation with Dr. Sarah Johnson ended. Duration: ${duration}.`,
-                sender: "system",
-                timestamp: new Date().toISOString(),
-              };
-              setMessages((prev) => [...prev, systemMsg]);
               try {
-                await axios.post(`/api/chat/${chatId}`, {
-                  content: systemMsg.text,
-                  type: "system",
-                  userId: "system",
+                await sendChatMessage(chatId, {
+                  text: `Video consultation ended. Duration: ${duration}.`,
+                  sender: "system",
                 });
               } catch (err) {
                 console.error("Error saving system call message:", err);
